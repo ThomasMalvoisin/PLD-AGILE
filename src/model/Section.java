@@ -5,9 +5,9 @@ public class Section {
 	private Intersection origin;
 	private Intersection destination;
 	private String name;
-	private float length;
+	private double length;
 	
-	public Section(Intersection origin, Intersection destination, String name, float length) {
+	public Section(Intersection origin, Intersection destination, String name, double length) {
 		super();
 		this.origin = origin;
 		this.destination = destination;
@@ -27,7 +27,7 @@ public class Section {
 		return destination;
 	}
 
-	public float getLength() {
+	public double getLength() {
 		return length;
 	}
 

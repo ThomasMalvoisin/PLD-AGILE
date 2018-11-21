@@ -1,4 +1,5 @@
 package xml;
+import model.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class MapDeserializer {
     	double lat =  Double.parseDouble(element.getAttribute("latitude"));
     	double longitude =  Double.parseDouble(element.getAttribute("longitude"));
     	long id  = Long.parseLong(element.getAttribute("id"));
-    	return new Intersection(lat,long,id);
+    	return new Intersection(lat,longitude,id);
 
     }
     
@@ -55,11 +56,11 @@ public class MapDeserializer {
     		throw new ExceptionXML("XML load error : Negative section length");
     	}
     	String name = element.getAttribute("nomRue");
-    	Intersection intersectionDest map.getIntersectionById(idDest);
-    	Intersection intersectionOrigine map.getIntersectionById(idOrigine);
+    	Intersection intersectionDest = map.getIntersectionById(idDest);
+    	Intersection intersectionOrigine = map.getIntersectionById(idOrigine);
     	if(intersectionDest == null || intersectionOrigine == null ) {
     		throw new ExceptionXML("XML load error : Missing intersection in XML file ");
     	}
-    	return new Section(name,intersectionDest,intersectionOrigine,longueur);
+    	return new Section(intersectionOrigine,intersectionDest,name,longueur);
     }
 }
