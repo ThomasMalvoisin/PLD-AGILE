@@ -1,4 +1,4 @@
-package deliveryApp;
+package controller;
 
 public class SampleController {
 	
