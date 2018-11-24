@@ -4,7 +4,6 @@ import model.*;
 import java.io.File;
 import java.io.IOException;
 
-import javax.lang.model.type.IntersectionType;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;

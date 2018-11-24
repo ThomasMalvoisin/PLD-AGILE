@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -61,8 +62,14 @@ public class CityMap {
 			listSection.add(s);
 			sections.put(s.getDestination(), listSection);		
 		}
-		
 		return true;
 	}
 
+	public Collection<List<Section>> getSections(){
+		
+		Collection<List<Section>> listSections = sections.values();
+		
+		return listSections;
+	}
+	
 }
