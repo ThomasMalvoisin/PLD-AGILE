@@ -15,10 +15,4 @@ public class StateDefault implements State{
 	public void loadDeliveryRequest(Canvas canvas) {
 		
 	}
-
-	@Override
-	public void clicFile(Canvas canvas, File file) {
-		
-	}
-
 }

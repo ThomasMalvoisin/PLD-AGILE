@@ -1,31 +1,50 @@
 package controller;
 
-public class Controller {
-	
-	//ajouter canvas du fxml
-	
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import model.CityMap;
+import xml.ExceptionXML;
+import xml.MapDeserializer;
+
+public class Controller implements Initializable{
+
+	@FXML
+	Canvas canvas;
+
 	protected static State currentState;
 	protected static final StateInit stateInit = new StateInit();
-	protected static final StateLoadingMap stateLoadingMap = new StateLoadingMap();
-	protected static final StateLoadingMapEnd stateLoadingMapEnd = new StateLoadingMapEnd();
-	
+	protected static final StateMapLoaded stateMapLoaded = new StateMapLoaded();
+
 	protected static void setCurrentState(State state) {
 		currentState = state;
 	}
-	
-	
-	//Clic sur un bouton -> à relier au fxml
-	public void LoadMap() {
-		
+
+	public void loadMap() {
+		currentState.loadMap(canvas);
 	}
-	
-	//Clic sur un bouton -> à relier au fxml
-	public void LoadDeliveryRequest() {
-		
+
+	// Clic sur un bouton -> à relier au fxml
+	public void loadDeliveryRequest() {
+
 	}
-	
-	//Clic sur un fichier -> à relier au fxml (voir quel paramètre passer)
-	public void clicFile( ) {
-		
+
+	public void drawRandomLine() {
+
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		//TODO A modifier pour stateInit
+		this.setCurrentState(stateInit);
 	}
 }

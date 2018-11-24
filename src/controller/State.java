@@ -10,7 +10,5 @@ public interface State {
 	
 	public void loadDeliveryRequest(Canvas canvas);
 	
-	public void clicFile(Canvas canvas, File file);
-	
 //	public void roundsComputation(Canvas canvas, )
 }
