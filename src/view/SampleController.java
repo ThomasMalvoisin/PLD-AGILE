@@ -10,10 +10,8 @@ import org.xml.sax.SAXException;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.AnchorPane;
 import model.CityMap;
 import xml.ExceptionXML;
 import xml.MapDeserializer;
@@ -24,7 +22,7 @@ public class SampleController {
 	Canvas canvas;
 	
 	public void loadMap() {
-		URL url = getClass().getResource("/xml/petitPlan.xml");
+		URL url = getClass().getResource("/xml/grandPlan.xml");
 		File xml = new File(url.getPath());
 		CityMap map = new CityMap();
 		
@@ -59,7 +57,7 @@ public class SampleController {
 		
 	}
 	
-	public void drawLine(double xD, double yD,double xA,double yA) {
+	private void drawLine(double xD, double yD,double xA,double yA) {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.strokeLine(xD, yD, xA, yA);
 	}

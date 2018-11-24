@@ -33,10 +33,6 @@ public class MapViewBuilder {
 	private double[] geoToCoord(Intersection i) {
 		double[] result = new double[2];
 		Bounds bounds = canvas.getBoundsInLocal();
-		double latMax = Intersection.latitudeMax;
-		double longiMax = Intersection.longitudeMax;
-		double latMin = Intersection.latitudeMin;
-		double longiMin = Intersection.longitudeMin;
 		result[0] = ((i.getLongitude() - Intersection.longitudeMin) * bounds.getMaxX())/(Intersection.longitudeMax-Intersection.longitudeMin);
 		result[1] = ((i.getLatitude() - Intersection.latitudeMin) * bounds.getMaxY())/(Intersection.latitudeMax-Intersection.latitudeMin);
 		return result;
