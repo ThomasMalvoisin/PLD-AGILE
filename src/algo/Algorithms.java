@@ -112,6 +112,4 @@ public class Algorithms {
 	public void setRequest(DeliveryRequest request) {
 		this.request = request;
 	}
-	
-	
 }
