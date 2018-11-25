@@ -30,6 +30,7 @@ public class MapViewBuilder {
 		drawLine(geoToCoord(sec.getOrigin()),geoToCoord(sec.getDestination()));
 		
 	}
+	
 	private double[] geoToCoord(Intersection i) {
 		double[] result = new double[2];
 		Bounds bounds = canvas.getBoundsInLocal();
@@ -37,6 +38,7 @@ public class MapViewBuilder {
 		result[1] = ((i.getLatitude() - Intersection.latitudeMin) * bounds.getMaxY())/(Intersection.latitudeMax-Intersection.latitudeMin);
 		return result;
 	}
+	
 	private void drawLine(double[] departure,double[] arrival) {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.strokeLine(departure[0], departure[1], arrival[0], arrival[1]);
