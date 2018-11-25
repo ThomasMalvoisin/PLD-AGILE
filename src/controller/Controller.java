@@ -49,7 +49,9 @@ public class Controller implements Initializable, Observer, VisitorElement{
 	}
 
 	public void drawRandomLine() {
-
+		
+		double[] p = {100,45};
+		mvb.drawPoint(p);
 	}
 
 	@Override
@@ -58,6 +60,7 @@ public class Controller implements Initializable, Observer, VisitorElement{
 		map = new CityMap();
 		delivReq = new DeliveryRequest();
 		map.addObserver(this);
+		delivReq.addObserver(this);
 		currentState=stateInit;
 	}
 
@@ -76,7 +79,6 @@ public class Controller implements Initializable, Observer, VisitorElement{
 
 	@Override
 	public void visiteElement(Intersection i) {
-		// TODO Affichage des points de livraison
-		
+		mvb.drawDeliveryPoint(i);
 	}
 }

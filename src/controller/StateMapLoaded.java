@@ -37,7 +37,6 @@ public class StateMapLoaded extends StateDefault{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			//TODO Affichage sur la map
 			
 			Controller.setCurrentState(Controller.stateDeliveryLoaded);
 		}

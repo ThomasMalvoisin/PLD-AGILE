@@ -4,8 +4,13 @@ import java.util.Collection;
 import java.util.List;
 
 import javafx.geometry.Bounds;
+import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import model.CityMap;
 import model.Intersection;
 import model.Section;
@@ -29,8 +34,7 @@ public class MapViewBuilder {
 	
 	public void drawSection(Section sec) {
 		
-		drawLine(geoToCoord(sec.getOrigin()),geoToCoord(sec.getDestination()));
-		
+		drawLine(geoToCoord(sec.getOrigin()),geoToCoord(sec.getDestination()));		
 	}
 	
 	private double[] geoToCoord(Intersection i) {
@@ -48,5 +52,22 @@ public class MapViewBuilder {
 	
 	public void clearCanevas () {
 		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+	}
+	
+	public void drawDeliveryPoint(Intersection i) {
+		
+		drawPoint(geoToCoord(i));
+	}
+	
+	public void drawPoint(double[] point) {		
+		Circle c = new Circle(point[0],point[1],5.0);
+		c.setFill(Color.RED);
+		c.getOnMouseClicked();
+		c.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            System.out.println("Point cliqu�");
+        });
+		
+		AnchorPane ap = (AnchorPane) canvas.getParent();
+		ap.getChildren().add(c);
 	}
 }
