@@ -15,18 +15,18 @@ import org.xml.sax.SAXException;
 
 public class MapDeserializer {
 	
-	public static void charger(CityMap map, File xml) throws ParserConfigurationException, SAXException, IOException, ExceptionXML{
+	public static void load(CityMap map, File xml) throws ParserConfigurationException, SAXException, IOException, ExceptionXML{
 		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();	
         Document document = docBuilder.parse(xml);
         Element racine = document.getDocumentElement();
         if (racine.getNodeName().equals("reseau")) {
-           construireAPartirDeDOMXML(racine, map);
+        	buildFromDOMXML(racine, map);
         }
         else
         	throw new ExceptionXML("Document non conforme");
 	}
 
-    private static void construireAPartirDeDOMXML(Element noeudDOMRacine, CityMap map) throws ExceptionXML, NumberFormatException{
+    private static void buildFromDOMXML(Element noeudDOMRacine, CityMap map) throws ExceptionXML, NumberFormatException{
        	NodeList intersectionList = noeudDOMRacine.getElementsByTagName("noeud");
        	for (int i = 0; i < intersectionList.getLength(); i++) {
         	map.addIntersection(createInteresection((Element) intersectionList.item(i)));

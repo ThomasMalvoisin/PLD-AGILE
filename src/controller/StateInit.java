@@ -27,7 +27,7 @@ public class StateInit extends StateDefault{
 			CityMap map = new CityMap();
 			
 			try {
-				MapDeserializer.charger(map, file);
+				MapDeserializer.load(map, file);
 			} catch (ExceptionXML e) {
 				e.printStackTrace();
 			} catch (ParserConfigurationException e) {

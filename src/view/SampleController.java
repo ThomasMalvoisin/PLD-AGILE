@@ -27,7 +27,7 @@ public class SampleController {
 		CityMap map = new CityMap();
 		
 			try {
-				MapDeserializer.charger(map, xml);
+				MapDeserializer.load(map, xml);
 			} catch (ExceptionXML e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

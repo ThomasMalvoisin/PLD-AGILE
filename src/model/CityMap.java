@@ -9,12 +9,12 @@ import java.util.List;
 public class CityMap {
 
 	private Map<Long,Intersection> intersections;
-	private Map<Intersection,List<Section>> sections;
+	private Map<Intersection,List<Section>> cityMapSections;
 
 	public CityMap() {
 		
 		intersections = new HashMap<Long,Intersection>();
-		sections = new HashMap<Intersection,List<Section>>();
+		cityMapSections = new HashMap<Intersection,List<Section>>();
 	}
 	
 	public Intersection getIntersectionById(long id) {
@@ -35,10 +35,10 @@ public class CityMap {
 	
 	public boolean addSection(Section s) {
 		
-		if(sections.containsKey(s.getOrigin())) {
+		if(cityMapSections.containsKey(s.getOrigin())) {
 			
-			if(!sections.get(s.getOrigin()).contains(s)) {
-				sections.get(s.getOrigin()).add(s);
+			if(!cityMapSections.get(s.getOrigin()).contains(s)) {
+				cityMapSections.get(s.getOrigin()).add(s);
 			}else {
 				return false;
 			}
@@ -46,13 +46,13 @@ public class CityMap {
 		}else {
 			List<Section> listSection = new LinkedList<Section>();
 			listSection.add(s);
-			sections.put(s.getOrigin(), listSection);		
+			cityMapSections.put(s.getOrigin(), listSection);		
 		}
 
-		if(sections.containsKey(s.getDestination())) {
+		if(cityMapSections.containsKey(s.getDestination())) {
 
-			if(!sections.get(s.getDestination()).contains(s)) {
-				sections.get(s.getDestination()).add(s);
+			if(!cityMapSections.get(s.getDestination()).contains(s)) {
+				cityMapSections.get(s.getDestination()).add(s);
 			}else {
 				return false;
 			}
@@ -60,14 +60,14 @@ public class CityMap {
 		}else {
 			List<Section> listSection = new LinkedList<Section>();
 			listSection.add(s);
-			sections.put(s.getDestination(), listSection);		
+			cityMapSections.put(s.getDestination(), listSection);		
 		}
 		return true;
 	}
 
 	public Collection<List<Section>> getSections(){
 		
-		Collection<List<Section>> listSections = sections.values();
+		Collection<List<Section>> listSections = cityMapSections.values();
 		
 		return listSections;
 	}
