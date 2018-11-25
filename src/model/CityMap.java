@@ -30,6 +30,7 @@ public class CityMap {
 		} else {
 			
 			intersections.put(i.getId(), i);
+			cityMapSections.put(i, new LinkedList<Section>());
 			return true;
 		}		
 	}

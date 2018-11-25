@@ -28,14 +28,14 @@ public class Algorithms {
 	}
 	
 	public Map<Long, List<Section>> dijkstraOneToN (Intersection start, ArrayList<Intersection> ends) {
-		//Intersection car le warehouse n'est pas une delivery
-		
+		// Intersections car le warehouse n'est pas une delivery
+		// Warehous DOIT etre dans ends
 		Map<Long, List<Section>> result = new HashMap<Long, List<Section>>();
 		Map<Long, Boolean> reached = new HashMap<Long, Boolean>();
 		Map<Long, Double> currentCosts = new HashMap<Long, Double>();
-		PriorityQueue<Intersection> pQueue = new PriorityQueue<Intersection>(0, new Comparator<Intersection>() {
-		    public int compare(Intersection i1, Intersection i2) {
-		    	Double comp = currentCosts.get(i1.getId()) - currentCosts.get(i2.getId());
+		PriorityQueue<Long> pQueue = new PriorityQueue<Long>(1, new Comparator<Long>() {
+		    public int compare(Long i1, Long i2) {
+		    	Double comp = currentCosts.get(i1) - currentCosts.get(i2);
 		    	if (comp < 0) return -1;
 		    	else if (comp == 0) return 0;
 		    	else return 1;
@@ -43,30 +43,55 @@ public class Algorithms {
 		});
 		ArrayList<Intersection> unreachedTargetPoints = new ArrayList<Intersection>(ends);
 		
-		for (Intersection d : map.getIntersections().values()) {
-			reached.put(d.getId(), false);
-			currentCosts.put(d.getId(), Double.MAX_VALUE);
-			result.put(d.getId(), new ArrayList<Section>());
+		for (Intersection i : map.getIntersections().values()) {
+			reached.put(i.getId(), false);
+			currentCosts.put(i.getId(), Double.MAX_VALUE);
+			result.put(i.getId(), new ArrayList<Section>());
 		}
-		
+
 		Long startId = start.getId();
 		reached.remove(startId);
 		reached.put(startId, true);
 		currentCosts.remove(startId);
 		currentCosts.put(startId, 0.0);
-		result.remove(startId);
+		pQueue.add(startId);
 		
 		while (!unreachedTargetPoints.isEmpty()) {
 			// On part du principe qu'aucun point n'est pas relié à d'autres, et donc qu'on finira 
 			// toujours par trouver les plus courts chemins vers les intersections ends avant de parcourir
 			// toute une composante connexe
-			/*Intersection currentIntersection = pQueue.poll();
+			Long currStartId = pQueue.poll();
+			Intersection currentIntersection = map.getIntersectionById(currStartId);
+			unreachedTargetPoints.remove(currentIntersection);
+			
 			for (Section s : map.getCityMapSections().get(currentIntersection)) {
+				
 				Intersection arrival = s.getDestination();
+				Long arrivalId = arrival.getId();
 				Double cost = s.getLength();
-			}*/
+				
+				if (currentCosts.get(currStartId) + cost < currentCosts.get(arrivalId)) {
+					
+					currentCosts.remove(arrivalId);
+					currentCosts.put(arrivalId, currentCosts.get(currStartId) + cost);
+					
+					result.remove(arrivalId);
+					List<Section> newWay = new ArrayList<Section>(result.get(currStartId));
+					newWay.add(s);
+					result.put(arrivalId, newWay);
+					
+					pQueue.remove(arrivalId);
+					if (!reached.get(arrivalId))
+						pQueue.add(arrivalId);
+				}
+				
+				if (!reached.get(arrivalId)) {
+					reached.remove(arrivalId);
+					reached.put(arrivalId, true);
+				}
+			}
 		}
-		return null;
+		return result;
 	}
 	
 	public CityMap getMap() {
