@@ -27,44 +27,42 @@ public class CityMap {
 		if(intersections.containsKey(i.getId())) {
 			
 			return false;
-		}else {
+		} else {
+			
 			intersections.put(i.getId(), i);
 			return true;
 		}		
 	}
-	
+
 	public boolean addSection(Section s) {
 		
 		if(cityMapSections.containsKey(s.getOrigin())) {
 			
 			if(!cityMapSections.get(s.getOrigin()).contains(s)) {
+				
 				cityMapSections.get(s.getOrigin()).add(s);
-			}else {
+			} else {
+				
 				return false;
 			}
-
-		}else {
+		} else {
+			
 			List<Section> listSection = new LinkedList<Section>();
 			listSection.add(s);
 			cityMapSections.put(s.getOrigin(), listSection);		
 		}
 
-		if(cityMapSections.containsKey(s.getDestination())) {
-
-			if(!cityMapSections.get(s.getDestination()).contains(s)) {
-				cityMapSections.get(s.getDestination()).add(s);
-			}else {
-				return false;
-			}
-
-		}else {
-			List<Section> listSection = new LinkedList<Section>();
-			listSection.add(s);
-			cityMapSections.put(s.getDestination(), listSection);		
-		}
 		return true;
 	}
 
+	public Map<Long, Intersection> getIntersections() {
+		return intersections;
+	}
+
+	public Map<Intersection, List<Section>> getCityMapSections() {
+		return cityMapSections;
+	}
+	
 	public Collection<List<Section>> getSections(){
 		
 		Collection<List<Section>> listSections = cityMapSections.values();
