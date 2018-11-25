@@ -19,12 +19,14 @@ import xml.MapDeserializer;
 public class StateDefault implements State{
 
 	@Override
-	public void loadMap(MapViewBuilder mvb, CityMap map) {		
+	public void loadMap(MapViewBuilder mvb, CityMap map) {	
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Charger un plan");
+		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
 		File file = fileChooser.showOpenDialog(new Stage());
 		
 		if(file != null) {
+			mvb.clearCanevas();
 			try {
 				MapDeserializer.load(map, file);
 			} catch (ExceptionXML e) {
@@ -36,8 +38,7 @@ public class StateDefault implements State{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			mvb.clearCanevas();
-			mvb.build(map);
+//			mvb.build(map);
 			
 			Controller.setCurrentState(Controller.stateMapLoaded);
 		}

@@ -1,6 +1,6 @@
 package model;
 
-public class Section {
+public class Section extends CityMapElement{
 
 	private Intersection origin;
 	private Intersection destination;
@@ -53,7 +53,10 @@ public class Section {
 		}else {
 			return false;
 		}
-	}	
-	
-	
+	}
+
+	@Override
+	public void printElement(VisitorElement v) {
+		v.visiteElement(this);
+	}		
 }

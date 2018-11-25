@@ -27,7 +27,7 @@ public class MapViewBuilder {
 		}
 	}
 	
-	private void drawSection(Section sec) {
+	public void drawSection(Section sec) {
 		
 		drawLine(geoToCoord(sec.getOrigin()),geoToCoord(sec.getDestination()));
 		

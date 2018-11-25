@@ -3,6 +3,8 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,12 +15,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import model.CityMap;
+import model.CityMapElement;
 import model.DeliveryRequest;
+import model.Intersection;
+import model.Section;
+import model.VisitorElement;
 import view.MapViewBuilder;
 import xml.ExceptionXML;
 import xml.MapDeserializer;
 
-public class Controller implements Initializable{
+public class Controller implements Initializable, Observer, VisitorElement{
 
 	@FXML
 	Canvas canvas;
@@ -38,7 +44,6 @@ public class Controller implements Initializable{
 		currentState.loadMap(mvb, map);
 	}
 
-	// Clic sur un bouton -> à relier au fxml
 	public void loadDeliveryRequest() {
 		currentState.loadDeliveryRequest(mvb, map, delivReq);
 	}
@@ -52,6 +57,26 @@ public class Controller implements Initializable{
 		mvb = new MapViewBuilder(canvas);
 		map = new CityMap();
 		delivReq = new DeliveryRequest();
+		map.addObserver(this);
 		currentState=stateInit;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if(arg != null) {
+			CityMapElement element = (CityMapElement) arg;
+			element.printElement(this);
+		}
+	}
+
+	@Override
+	public void visiteElement(Section s) {
+		mvb.drawSection(s);
+	}
+
+	@Override
+	public void visiteElement(Intersection i) {
+		// TODO Affichage des points de livraison
+		
 	}
 }
