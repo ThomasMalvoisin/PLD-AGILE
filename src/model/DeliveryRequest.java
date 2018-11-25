@@ -9,6 +9,10 @@ public class DeliveryRequest {
 	private ArrayList<Delivery>  requestDeliveries;
 	private Intersection warehouse;
 	
+	public DeliveryRequest() {
+		requestDeliveries = new ArrayList<>();
+	}
+	
 	public DeliveryRequest(Date startTime, ArrayList<Delivery> requestDeliveries, Intersection warehouse) {
 		super();
 		this.startTime= startTime;
@@ -32,8 +36,17 @@ public class DeliveryRequest {
 		this.warehouse = warehouse;
 	}
 	
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+	
 	public void addDelivery(Delivery delivery) {
 		requestDeliveries.add(delivery);
 	}
-
+	
+	public void reset() {
+		requestDeliveries.clear();
+		warehouse = null ;
+		startTime = null ;
+	}
 }

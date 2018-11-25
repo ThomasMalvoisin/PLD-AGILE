@@ -13,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import model.CityMap;
+import model.DeliveryRequest;
+import view.MapViewBuilder;
 import xml.ExceptionXML;
 import xml.MapDeserializer;
 
@@ -20,22 +22,25 @@ public class Controller implements Initializable{
 
 	@FXML
 	Canvas canvas;
-
+	MapViewBuilder mvb;
+	CityMap map;
+	DeliveryRequest delivReq;
 	protected static State currentState;
 	protected static final StateInit stateInit = new StateInit();
 	protected static final StateMapLoaded stateMapLoaded = new StateMapLoaded();
+	protected static final StateDeliveryLoaded stateDeliveryLoaded = new StateDeliveryLoaded();
 
 	protected static void setCurrentState(State state) {
 		currentState = state;
 	}
 
 	public void loadMap() {
-		currentState.loadMap(canvas);
+		currentState.loadMap(mvb, map);
 	}
 
 	// Clic sur un bouton -> à relier au fxml
 	public void loadDeliveryRequest() {
-
+		currentState.loadDeliveryRequest(mvb, map, delivReq);
 	}
 
 	public void drawRandomLine() {
@@ -44,7 +49,9 @@ public class Controller implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//TODO A modifier pour stateInit
-		this.setCurrentState(stateInit);
+		mvb = new MapViewBuilder(canvas);
+		map = new CityMap();
+		delivReq = new DeliveryRequest();
+		currentState=stateInit;
 	}
 }

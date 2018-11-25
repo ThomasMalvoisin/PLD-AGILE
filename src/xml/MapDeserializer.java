@@ -16,6 +16,7 @@ import org.xml.sax.SAXException;
 public class MapDeserializer {
 	
 	public static void load(CityMap map, File xml) throws ParserConfigurationException, SAXException, IOException, ExceptionXML{
+		map.reset();
 		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();	
         Document document = docBuilder.parse(xml);
         Element racine = document.getDocumentElement();
