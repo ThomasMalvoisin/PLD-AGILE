@@ -12,7 +12,6 @@ public class CityMap {
 	private Map<Intersection,List<Section>> cityMapSections;
 
 	public CityMap() {
-		
 		intersections = new HashMap<Long,Intersection>();
 		cityMapSections = new HashMap<Intersection,List<Section>>();
 	}
@@ -71,4 +70,9 @@ public class CityMap {
 		return listSections;
 	}
 	
+	public void reset() {
+		intersections.clear();
+		cityMapSections.clear();
+		
+	}
 }

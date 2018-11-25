@@ -14,8 +14,10 @@ public class MapViewBuilder {
 
 	Canvas canvas;
 	
-	public void build(Canvas c, CityMap map) {
+	public MapViewBuilder(Canvas c) {
 		this.canvas = c;
+	}
+	public void build(CityMap map) {
 		Collection<List<Section>> listSections = map.getSections();
 
 		for(List<Section> secs : listSections) {
@@ -42,5 +44,9 @@ public class MapViewBuilder {
 	private void drawLine(double[] departure,double[] arrival) {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.strokeLine(departure[0], departure[1], arrival[0], arrival[1]);
+	}
+	
+	public void clearCanevas () {
+		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 	}
 }
