@@ -55,7 +55,7 @@ public class Controller implements Initializable{
 	public void loadDeliveryRequest() {
 		try {
 			delivReq = currentState.loadDeliveryRequest(map);
-			//TODO : gv.drawDeliveryRequest(delivReq);
+			gv.drawDeliveryRequest(delivReq);
 			//TODO : delivReq.addObserver(gv);
 		} catch (Exception e) {
 			//TODO : informer l'utilisateur que le fichier n'a pas pu être chargé

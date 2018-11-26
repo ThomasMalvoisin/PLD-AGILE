@@ -7,29 +7,42 @@ import java.util.Observer;
 
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
+import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import model.CityMap;
+import model.Delivery;
 import model.DeliveryRequest;
 import model.Intersection;
 import model.Section;
 
 public class GraphicView {
-	//Implémentera le design pattern observer pour : deliveryRequest, peut être autre chose ?
+	// Implémentera le design pattern observer pour : deliveryRequest, peut être
+	// autre chose ?
 
 	Pane pane;
 	CityMap map = null;
+	
+	Group deliveries = null;
 
 	public GraphicView(Pane pane) {
 		this.pane = pane;
+		this.deliveries = new Group();
 	}
-	
+
 	public void clear() {
 //		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		pane.getChildren().clear();	
+		pane.getChildren().clear();
+	}
+
+	public void clearDeliveryRequest() {
+		deliveries.getChildren().clear();
 	}
 
 	public void drawCityMap(CityMap cityMap) {
@@ -44,27 +57,60 @@ public class GraphicView {
 		}
 	}
 
+	public void drawDeliveryRequest(DeliveryRequest deliveryRequest) {
+		clearDeliveryRequest();
+		drawWarehousePoint(deliveryRequest.getWarehouse());
+
+		for(Delivery d : deliveryRequest.getRequestDeliveries()) {
+			drawDeliveryPoint(d.getAdress());
+		}
+		pane.getChildren().add(deliveries);
+	}
+
 	private void drawSection(Section sec) {
 		drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()));
 	}
-	
+
 	private double[] geoToCoord(Intersection i) {
 		double[] result = new double[2];
 		Bounds bounds = pane.getBoundsInLocal();
-		result[0] = ((i.getLongitude() - map.getLongitudeMin()) * bounds.getMaxX())/(map.getLongitudeMax()-map.getLongitudeMin());
-		//result[1] = ((i.getLatitude() - map.latitudeMin) * bounds.getMaxY())/(map.latitudeMax-map.latitudeMin);
-		result[1] = ((-i.getLatitude() + map.getLatitudeMax()) * bounds.getMaxY())/(map.getLatitudeMax()-map.getLatitudeMin());
+		result[0] = ((i.getLongitude() - map.getLongitudeMin()) * bounds.getMaxX())
+				/ (map.getLongitudeMax() - map.getLongitudeMin());
+		// result[1] = ((i.getLatitude() - map.latitudeMin) *
+		// bounds.getMaxY())/(map.latitudeMax-map.latitudeMin);
+		result[1] = ((-i.getLatitude() + map.getLatitudeMax()) * bounds.getMaxY())
+				/ (map.getLatitudeMax() - map.getLatitudeMin());
 		return result;
 	}
-	
-	private void drawLine(double[] departure,double[] arrival) {
-		//GraphicsContext gc = canvas.getGraphicsContext2D();
-		//gc.strokeLine(departure[0], departure[1], arrival[0], arrival[1]);
-		
-		Line l = new Line(departure[0],departure[1],arrival[0],arrival[1]);
+
+	private void drawLine(double[] departure, double[] arrival) {
+		// GraphicsContext gc = canvas.getGraphicsContext2D();
+		// gc.strokeLine(departure[0], departure[1], arrival[0], arrival[1]);
+
+		Line l = new Line(departure[0], departure[1], arrival[0], arrival[1]);
 		l.setFill(Color.BLACK);
-		
+
 		pane.getChildren().add(l);
+	}
+
+	public void drawDeliveryPoint(Intersection i) {
+		drawPoint(geoToCoord(i), Color.RED);
+	}
+
+	public void drawWarehousePoint(Intersection i) {
+		drawPoint(geoToCoord(i), Color.FORESTGREEN);
+	}
+
+	public void drawPoint(double[] point, Paint p) {
+		Circle c = new Circle(point[0], point[1], 5.0);
+		c.setFill(p);
+		c.getOnMouseClicked();
+		c.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+			System.out.println("Point cliqu�");
+			//TODO : comment faire : intégrer les écouteurs ?
+		});
+		
+		deliveries.getChildren().add(c);
 	}
 
 }
