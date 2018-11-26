@@ -20,17 +20,19 @@ import model.DeliveryRequest;
 import model.Intersection;
 import model.Section;
 import model.VisitorElement;
+import view.GraphicView;
 import view.MapViewBuilder;
 import xml.ExceptionXML;
 import xml.MapDeserializer;
 
-public class Controller implements Initializable, Observer, VisitorElement{
+public class Controller implements Initializable{
 
 	@FXML
 	Canvas canvas;
 	MapViewBuilder mvb;
 	CityMap map;
 	DeliveryRequest delivReq;
+	GraphicView gv;
 	protected static State currentState;
 	protected static final StateInit stateInit = new StateInit();
 	protected static final StateMapLoaded stateMapLoaded = new StateMapLoaded();
@@ -59,26 +61,8 @@ public class Controller implements Initializable, Observer, VisitorElement{
 		mvb = new MapViewBuilder(canvas);
 		map = new CityMap();
 		delivReq = new DeliveryRequest();
-		map.addObserver(this);
-		delivReq.addObserver(this);
+		gv = new GraphicView(mvb, map, delivReq);
 		currentState=stateInit;
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		if(arg != null) {
-			CityMapElement element = (CityMapElement) arg;
-			element.printElement(this);
-		}
-	}
-
-	@Override
-	public void visiteElement(Section s) {
-		mvb.drawSection(s);
-	}
-
-	@Override
-	public void visiteElement(Intersection i) {
-		mvb.drawDeliveryPoint(i);
-	}
 }
