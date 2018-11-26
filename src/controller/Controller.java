@@ -13,7 +13,9 @@ import org.xml.sax.SAXException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.layout.Pane;
 import model.CityMap;
 import model.DeliveryRequest;
 import model.Intersection;
@@ -26,7 +28,8 @@ import xml.MapDeserializer;
 public class Controller implements Initializable{
 
 	@FXML
-	Canvas canvas;
+	Pane pane;
+	
 	MapViewBuilder mvb;
 	CityMap map;
 	DeliveryRequest delivReq;
@@ -60,13 +63,6 @@ public class Controller implements Initializable{
 			e.printStackTrace();
 		}
 	}
-
-	public void drawRandomLine() {
-		
-		double[] p = {100,45};
-		mvb.drawPoint(p);
-	}
-
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -74,5 +70,4 @@ public class Controller implements Initializable{
 		//TODO : TextView
 		currentState=stateInit;
 	}
-
 }

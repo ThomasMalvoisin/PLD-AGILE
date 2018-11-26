@@ -26,12 +26,11 @@ public class StateMapLoaded extends StateDefault {
 		File file = fileChooser.showOpenDialog(new Stage());
 
 		DeliveryRequest dr = null;
-		
+
 		if (file != null) {
 			dr = DeliveryRequestDeserializer.Load(map, file);
 			Controller.setCurrentState(Controller.stateDeliveryLoaded);
 		}
-		
 		return dr;
 	}
 

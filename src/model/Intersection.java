@@ -7,10 +7,7 @@ public class Intersection{
 	
 	private long id;
 	
-	public static double latitudeMin = Double.MAX_VALUE;
-	public static double longitudeMin = Double.MAX_VALUE;
-	public static double latitudeMax = Double.MIN_VALUE;
-	public static double longitudeMax = Double.MIN_VALUE;
+	
 
 	public Intersection(double latitude, double longitude, long id) {
 		super();
@@ -18,18 +15,6 @@ public class Intersection{
 		this.longitude = longitude;
 		this.id = id;
 		
-		if(latitude > latitudeMax) {
-			latitudeMax = latitude;
-		}
-		if(latitude < latitudeMin) {
-			latitudeMin = latitude;
-		}
-		if(longitude > longitudeMax) {
-			longitudeMax = longitude;
-		}
-		if(longitude < longitudeMin) {
-			longitudeMin = longitude;
-		}
 	}
 
 	public double getLatitude() {
