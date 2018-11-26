@@ -15,19 +15,19 @@ import org.xml.sax.SAXException;
 
 public class MapDeserializer {
 	
-	public static void load(CityMap map, File xml) throws ParserConfigurationException, SAXException, IOException, ExceptionXML{
-		map.reset();
+	public static CityMap load(File xml) throws ParserConfigurationException, SAXException, IOException, ExceptionXML{
 		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();	
         Document document = docBuilder.parse(xml);
         Element racine = document.getDocumentElement();
         if (racine.getNodeName().equals("reseau")) {
-        	buildFromDOMXML(racine, map);
+        	return buildFromDOMXML(racine);
         }
         else
-        	throw new ExceptionXML("Document non conforme");
+        	throw new ExceptionXML("Illegal XML File");
 	}
 
-    private static void buildFromDOMXML(Element noeudDOMRacine, CityMap map) throws ExceptionXML, NumberFormatException{
+    private static CityMap buildFromDOMXML(Element noeudDOMRacine) throws ExceptionXML, NumberFormatException{
+    	CityMap map = new CityMap();
        	NodeList intersectionList = noeudDOMRacine.getElementsByTagName("noeud");
        	for (int i = 0; i < intersectionList.getLength(); i++) {
         	map.addIntersection(createInteresection((Element) intersectionList.item(i)));
@@ -36,6 +36,7 @@ public class MapDeserializer {
        	for (int i = 0; i < sectionListe.getLength(); i++) {
           	map.addSection(createSection((Element) sectionListe.item(i),map));
        	}
+       	return map;
     }
     
     //verification a faire . conforme ???
