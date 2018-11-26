@@ -2,8 +2,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+import java.util.Observable;
 
-public class DeliveryRequest {
+public class DeliveryRequest extends Observable{
 
 	private Date startTime;
 	private ArrayList<Delivery>  requestDeliveries;
@@ -34,6 +35,8 @@ public class DeliveryRequest {
 	
 	public void setWarehouse(Intersection warehouse) {
 		this.warehouse = warehouse;
+		setChanged();
+		notifyObservers(warehouse);
 	}
 	
 	public void setStartTime(Date startTime) {
@@ -42,11 +45,15 @@ public class DeliveryRequest {
 	
 	public void addDelivery(Delivery delivery) {
 		requestDeliveries.add(delivery);
+		setChanged();
+		notifyObservers(delivery.getAdress());
 	}
 	
 	public void reset() {
 		requestDeliveries.clear();
 		warehouse = null ;
 		startTime = null ;
+		setChanged();
+		notifyObservers();
 	}
 }

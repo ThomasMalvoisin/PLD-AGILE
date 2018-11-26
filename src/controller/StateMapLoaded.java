@@ -22,6 +22,7 @@ public class StateMapLoaded extends StateDefault{
 	public void loadDeliveryRequest(MapViewBuilder mvb, CityMap map, DeliveryRequest delivReq) {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Charger une demande de livraison");
+		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
 		File file = fileChooser.showOpenDialog(new Stage());
 		
 		if(file != null) {
@@ -36,7 +37,6 @@ public class StateMapLoaded extends StateDefault{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			//TODO Affichage sur la map
 			
 			Controller.setCurrentState(Controller.stateDeliveryLoaded);
 		}
