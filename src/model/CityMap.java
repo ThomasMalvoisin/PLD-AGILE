@@ -26,25 +26,28 @@ public class CityMap extends Observable{
 		
 		if(intersections.containsKey(i.getId())) {
 			return false;
-		}else {
+		} else {
+			
 			intersections.put(i.getId(), i);
+			cityMapSections.put(i, new LinkedList<Section>());
 			return true;
 		}		
 	}
-	
+
 	public boolean addSection(Section s) {
 		
 		if(cityMapSections.containsKey(s.getOrigin())) {
 			
 			if(!cityMapSections.get(s.getOrigin()).contains(s)) {
+				
 				cityMapSections.get(s.getOrigin()).add(s);
 				setChanged();
 				notifyObservers(s);
-			}else {
+			} else {
 				return false;
 			}
-
-		}else {
+		} else {
+			
 			List<Section> listSection = new LinkedList<Section>();
 			listSection.add(s);
 			cityMapSections.put(s.getOrigin(), listSection);	
@@ -52,26 +55,17 @@ public class CityMap extends Observable{
 			notifyObservers(s);
 		}
 
-		if(cityMapSections.containsKey(s.getDestination())) {
-
-			if(!cityMapSections.get(s.getDestination()).contains(s)) {
-				cityMapSections.get(s.getDestination()).add(s);
-				setChanged();
-				notifyObservers(s);
-			}else {
-				return false;
-			}
-
-		}else {
-			List<Section> listSection = new LinkedList<Section>();
-			listSection.add(s);
-			cityMapSections.put(s.getDestination(), listSection);
-			setChanged();
-			notifyObservers(s);
-		}
 		return true;
 	}
 
+	public Map<Long, Intersection> getIntersections() {
+		return intersections;
+	}
+
+	public Map<Intersection, List<Section>> getCityMapSections() {
+		return cityMapSections;
+	}
+	
 	public Collection<List<Section>> getSections(){
 		
 		Collection<List<Section>> listSections = cityMapSections.values();

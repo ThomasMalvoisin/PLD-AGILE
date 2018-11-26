@@ -16,13 +16,13 @@ public class Delivery {
 		this.departureTime = departureTime;
 		this.adress = adress;
 	}
+	
 	public Delivery(int duration, Intersection adress) {
 		super();
 		this.duration = duration;
 		this.adress = adress;
 	}
 
-	
 	public int getDuration() {
 		return duration;
 	}
@@ -38,6 +38,12 @@ public class Delivery {
 	public Intersection getAdress() {
 		return adress;
 	}
-
-
+	
+	public void setArrivalTime(Date arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+	
+	public void setDepartureTime(Date departureTime) {
+		this.departureTime = departureTime;
+	}
 }
