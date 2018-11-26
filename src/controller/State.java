@@ -9,9 +9,9 @@ import view.MapViewBuilder;
 
 public interface State {
 	
-	public void loadMap(MapViewBuilder mvb, CityMap map);
+	public CityMap loadMap() throws Exception;
 	
-	public void loadDeliveryRequest(MapViewBuilder mvb, CityMap map, DeliveryRequest delivReq);
+	public DeliveryRequest loadDeliveryRequest(CityMap map) throws Exception;
 	
 //	public void roundsComputation(Canvas canvas, )
 }

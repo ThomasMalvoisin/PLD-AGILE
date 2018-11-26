@@ -1,6 +1,6 @@
 package model;
 
-public class Intersection extends CityMapElement{
+public class Intersection{
 
 	private double latitude;
 	private double longitude;
@@ -62,12 +62,5 @@ public class Intersection extends CityMapElement{
 		}else {
 			return false;
 		}
-	}
-
-	@Override
-	public void printElement(VisitorElement v) {
-		v.visiteElement(this);
-	}
-	
-	
+	}	
 }

@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.List;
 
-public class CityMap extends Observable{
+public class CityMap{
 
 	private Map<Long,Intersection> intersections;
 	private Map<Intersection,List<Section>> cityMapSections;
@@ -39,10 +39,7 @@ public class CityMap extends Observable{
 		if(cityMapSections.containsKey(s.getOrigin())) {
 			
 			if(!cityMapSections.get(s.getOrigin()).contains(s)) {
-				
 				cityMapSections.get(s.getOrigin()).add(s);
-				setChanged();
-				notifyObservers(s);
 			} else {
 				return false;
 			}
@@ -51,8 +48,6 @@ public class CityMap extends Observable{
 			List<Section> listSection = new LinkedList<Section>();
 			listSection.add(s);
 			cityMapSections.put(s.getOrigin(), listSection);	
-			setChanged();
-			notifyObservers(s);
 		}
 
 		return true;
@@ -76,7 +71,5 @@ public class CityMap extends Observable{
 	public void reset() {
 		intersections.clear();
 		cityMapSections.clear();
-		setChanged();
-		notifyObservers();
 	}
 }

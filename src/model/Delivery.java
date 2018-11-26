@@ -1,6 +1,7 @@
 package model;
 import java.util.Date;
 
+//TODO : devra être observable
 public class Delivery {
 
 	private int duration;

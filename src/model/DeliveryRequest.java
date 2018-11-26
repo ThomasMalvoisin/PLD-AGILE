@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Observable;
 
-public class DeliveryRequest extends Observable{
+public class DeliveryRequest{
 
 	private Date startTime;
 	private ArrayList<Delivery>  requestDeliveries;
@@ -35,8 +35,6 @@ public class DeliveryRequest extends Observable{
 	
 	public void setWarehouse(Intersection warehouse) {
 		this.warehouse = warehouse;
-		setChanged();
-		notifyObservers(warehouse);
 	}
 	
 	public void setStartTime(Date startTime) {
@@ -45,15 +43,11 @@ public class DeliveryRequest extends Observable{
 	
 	public void addDelivery(Delivery delivery) {
 		requestDeliveries.add(delivery);
-		setChanged();
-		notifyObservers(delivery.getAdress());
 	}
 	
 	public void reset() {
 		requestDeliveries.clear();
 		warehouse = null ;
 		startTime = null ;
-		setChanged();
-		notifyObservers();
 	}
 }

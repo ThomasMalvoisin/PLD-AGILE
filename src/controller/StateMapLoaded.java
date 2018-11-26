@@ -16,31 +16,23 @@ import view.MapViewBuilder;
 import xml.DeliveryRequestDeserializer;
 import xml.ExceptionXML;
 
-public class StateMapLoaded extends StateDefault{
+public class StateMapLoaded extends StateDefault {
 
 	@Override
-	public void loadDeliveryRequest(MapViewBuilder mvb, CityMap map, DeliveryRequest delivReq) {
+	public DeliveryRequest loadDeliveryRequest(CityMap map) throws Exception {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Charger une demande de livraison");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
 		File file = fileChooser.showOpenDialog(new Stage());
+
+		DeliveryRequest dr = null;
 		
-		if(file != null) {
-			try {
-				DeliveryRequestDeserializer.Load(delivReq, map, file);
-			} catch (ExceptionXML e) {
-				e.printStackTrace();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
+		if (file != null) {
+			dr = DeliveryRequestDeserializer.Load(map, file);
 			Controller.setCurrentState(Controller.stateDeliveryLoaded);
 		}
+		
+		return dr;
 	}
 
-	
 }

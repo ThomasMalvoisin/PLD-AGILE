@@ -22,6 +22,7 @@ public class MapViewBuilder {
 	public MapViewBuilder(Canvas c) {
 		this.canvas = c;
 	}
+	
 	public void build(CityMap map) {
 		Collection<List<Section>> listSections = map.getSections();
 

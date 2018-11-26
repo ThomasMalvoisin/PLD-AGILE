@@ -16,35 +16,27 @@ import view.MapViewBuilder;
 import xml.ExceptionXML;
 import xml.MapDeserializer;
 
-public class StateDefault implements State{
+public class StateDefault implements State {
 
 	@Override
-	public void loadMap(MapViewBuilder mvb, CityMap map) {	
+	public CityMap loadMap() throws Exception {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Charger un plan");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
 		File file = fileChooser.showOpenDialog(new Stage());
-		
-		if(file != null) {
-			mvb.clearCanevas();
-			try {
-				MapDeserializer.load(map, file);
-			} catch (ExceptionXML e) {
-				e.printStackTrace();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-//			mvb.build(map);
-			
+
+		CityMap map = null;
+
+		if (file != null) {
+			map = MapDeserializer.load(file);
 			Controller.setCurrentState(Controller.stateMapLoaded);
 		}
+
+		return map;
 	}
 
 	@Override
-	public void loadDeliveryRequest(MapViewBuilder mvb, CityMap map, DeliveryRequest delivReq) {
+	public DeliveryRequest loadDeliveryRequest(CityMap map) throws Exception{
+		return null;
 	}
 }

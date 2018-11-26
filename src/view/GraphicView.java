@@ -1,45 +1,61 @@
 package view;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import model.CityMap;
 import model.CityMapElement;
 import model.DeliveryRequest;
 import model.Intersection;
 import model.Section;
-import model.VisitorElement;
 
-public class GraphicView implements Observer, VisitorElement {
-	CityMap map;
-	MapViewBuilder mvb;
-	DeliveryRequest delivReq;
-	
-	public GraphicView(MapViewBuilder mvb, CityMap map, DeliveryRequest delivReq)
-	{
-		this.map = map;
-		this.mvb = mvb;
-		map.addObserver(this);
-		delivReq.addObserver(this);
+public class GraphicView {
+	//Implémentera le design pattern observer pour : deliveryRequest, peut être autre chose ?
+
+	Canvas canvas;
+
+	public GraphicView(Canvas canvas) {
+		this.canvas = canvas;
 	}
 	
-	@Override
-	public void visiteElement(Section s) {
-		mvb.drawSection(s);
+	public void clearCanevas () {
+		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 	}
 
-	@Override
-	public void visiteElement(Intersection i) {
-		mvb.drawDeliveryPoint(i);
-	}
+	public void drawCityMap(CityMap cityMap) {
+		//Remplacer le contenu de la fonction par la nouvelle de TITI
+		clearCanevas();
+		Collection<List<Section>> listSections = cityMap.getSections();
 
-	@Override
-	public void update(Observable o, Object arg) {
-		if(arg != null) {
-			CityMapElement element = (CityMapElement) arg;
-			element.printElement(this);
+		for (List<Section> secs : listSections) {
+			for (Section sec : secs) {
+				drawSection(sec);
+			}
 		}
+	}
+
+	private void drawSection(Section sec) {
+
+		drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()));
+	}
+	
+	private double[] geoToCoord(Intersection i) {
+		double[] result = new double[2];
+		Bounds bounds = canvas.getBoundsInLocal();
+		result[0] = ((i.getLongitude() - Intersection.longitudeMin) * bounds.getMaxX())/(Intersection.longitudeMax-Intersection.longitudeMin);
+		result[1] = ((i.getLatitude() - Intersection.latitudeMin) * bounds.getMaxY())/(Intersection.latitudeMax-Intersection.latitudeMin);
+		return result;
+	}
+	
+	private void drawLine(double[] departure,double[] arrival) {
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		gc.strokeLine(departure[0], departure[1], arrival[0], arrival[1]);
 	}
 
 }

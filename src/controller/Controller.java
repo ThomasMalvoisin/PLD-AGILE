@@ -19,7 +19,6 @@ import model.CityMapElement;
 import model.DeliveryRequest;
 import model.Intersection;
 import model.Section;
-import model.VisitorElement;
 import view.GraphicView;
 import view.MapViewBuilder;
 import xml.ExceptionXML;
@@ -43,11 +42,24 @@ public class Controller implements Initializable{
 	}
 
 	public void loadMap() {
-		currentState.loadMap(mvb, map);
+		try {
+			map = currentState.loadMap();
+			gv.drawCityMap(map);
+		} catch (Exception e) {
+			//TODO : informer l'utilisateur que le fichier n'a pas pu être chargé
+			e.printStackTrace();
+		}
 	}
 
 	public void loadDeliveryRequest() {
-		currentState.loadDeliveryRequest(mvb, map, delivReq);
+		try {
+			delivReq = currentState.loadDeliveryRequest(map);
+			//TODO : gv.drawDeliveryRequest(delivReq);
+			//TODO : delivReq.addObserver(gv);
+		} catch (Exception e) {
+			//TODO : informer l'utilisateur que le fichier n'a pas pu être chargé
+			e.printStackTrace();
+		}
 	}
 
 	public void drawRandomLine() {
@@ -56,12 +68,11 @@ public class Controller implements Initializable{
 		mvb.drawPoint(p);
 	}
 
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		mvb = new MapViewBuilder(canvas);
-		map = new CityMap();
-		delivReq = new DeliveryRequest();
-		gv = new GraphicView(mvb, map, delivReq);
+		gv = new GraphicView(canvas);
+		//TODO : TextView
 		currentState=stateInit;
 	}
 
