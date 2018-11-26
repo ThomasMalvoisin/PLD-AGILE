@@ -10,7 +10,6 @@ import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import model.CityMap;
-import model.CityMapElement;
 import model.DeliveryRequest;
 import model.Intersection;
 import model.Section;

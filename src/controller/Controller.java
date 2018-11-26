@@ -15,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import model.CityMap;
-import model.CityMapElement;
 import model.DeliveryRequest;
 import model.Intersection;
 import model.Section;
