@@ -89,20 +89,4 @@ public class MapViewBuilder {
 		pane.getChildren().add(c);
 	}
 	
-	public void drawDeliveryPoint(Intersection i) {
-		
-		drawPoint(geoToCoord(i));
-	}
-	
-	public void drawPoint(double[] point) {		
-		Circle c = new Circle(point[0],point[1],5.0);
-		c.setFill(Color.RED);
-		c.getOnMouseClicked();
-		c.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            System.out.println("Point cliqu�");
-        });
-		
-		AnchorPane ap = (AnchorPane) canvas.getParent();
-		ap.getChildren().add(c);
-	}
 }

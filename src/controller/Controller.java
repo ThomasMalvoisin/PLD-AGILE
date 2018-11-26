@@ -30,7 +30,6 @@ public class Controller implements Initializable{
 	@FXML
 	Pane pane;
 	
-	MapViewBuilder mvb;
 	CityMap map;
 	DeliveryRequest delivReq;
 	GraphicView gv;
@@ -66,7 +65,7 @@ public class Controller implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		gv = new GraphicView(canvas);
+		gv = new GraphicView(pane);
 		//TODO : TextView
 		currentState=stateInit;
 	}
