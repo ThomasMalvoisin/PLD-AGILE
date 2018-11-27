@@ -31,7 +31,7 @@
               </Menu>
                   <Menu mnemonicParsing="false" text="Tools">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#loadMap" text="Compute Round Set" />
+                        <MenuItem mnemonicParsing="false" onAction="#roundsCompute" text="Compute Round Set" />
                      </items>
                   </Menu>
               <Menu mnemonicParsing="false" text="Draw">
@@ -81,7 +81,7 @@
                      <children>
                         <HBox alignment="CENTER">
                            <children>
-                              <VBox alignment="CENTER" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                              <VBox alignment="CENTER" style="-fx-cursor: hand;" onMouseClicked="#roundsCompute" styleClass="toolbar-card">
                                  <children>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

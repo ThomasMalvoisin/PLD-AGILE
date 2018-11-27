@@ -12,6 +12,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.CityMap;
 import model.DeliveryRequest;
+import model.RoundSet;
 import view.MapViewBuilder;
 import xml.ExceptionXML;
 import xml.MapDeserializer;
@@ -37,6 +38,11 @@ public class StateDefault implements State {
 
 	@Override
 	public DeliveryRequest loadDeliveryRequest(CityMap map) throws Exception{
+		return null;
+	}
+	
+	@Override
+	public RoundSet roundsCompute(CityMap map, DeliveryRequest delivReq) throws Exception{
 		return null;
 	}
 }

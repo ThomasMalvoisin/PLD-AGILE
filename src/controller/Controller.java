@@ -21,6 +21,7 @@ import javafx.scene.text.TextFlow;
 import model.CityMap;
 import model.DeliveryRequest;
 import model.Intersection;
+import model.RoundSet;
 import model.Section;
 import view.GraphicView;
 import view.MapViewBuilder;
@@ -44,6 +45,7 @@ public class Controller implements Initializable{
 	protected static final StateInit stateInit = new StateInit();
 	protected static final StateMapLoaded stateMapLoaded = new StateMapLoaded();
 	protected static final StateDeliveryLoaded stateDeliveryLoaded = new StateDeliveryLoaded();
+	protected static final StateRoundCalculated stateRoundCalculated = new StateRoundCalculated();
 
 	protected static void setCurrentState(State state) {
 		currentState = state;
@@ -75,6 +77,16 @@ public class Controller implements Initializable{
 			//TODO : delivReq.addObserver(gv);
 		} catch (Exception e) {
 			//TODO : informer l'utilisateur que le fichier n'a pas pu être chargé
+			e.printStackTrace();
+		}
+	}
+	
+	public void roundsCompute() {
+		try {
+			System.out.println(delivReq.getStartTime());
+			RoundSet result = currentState.roundsCompute(map, delivReq);
+			System.out.println(result.getRounds().get(0).getDuration());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

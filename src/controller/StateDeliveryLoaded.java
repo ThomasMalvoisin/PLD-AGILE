@@ -2,10 +2,12 @@ package controller;
 
 import java.io.File;
 
+import algo.Algorithms;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.CityMap;
 import model.DeliveryRequest;
+import model.RoundSet;
 import xml.DeliveryRequestDeserializer;
 
 public class StateDeliveryLoaded extends StateDefault{
@@ -25,5 +27,14 @@ public class StateDeliveryLoaded extends StateDefault{
 			Controller.setCurrentState(Controller.stateDeliveryLoaded);
 		}
 		return dr;
+	}
+	
+	@Override
+	public RoundSet roundsCompute(CityMap map, DeliveryRequest delivReq) throws Exception{
+		Algorithms algoUtil = new Algorithms(map);
+		algoUtil.dijkstraDeliveryRequest(delivReq);
+		RoundSet result = algoUtil.solveTSP(delivReq, 1);
+		Controller.setCurrentState(Controller.stateRoundCalculated);
+		return result;
 	}
 }

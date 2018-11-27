@@ -47,7 +47,7 @@ public class CityMap{
 			return false;
 		}else {
 			intersections.put(i.getId(), i);
-			
+			cityMapSections.put(i,  new LinkedList<Section>());
 			if(i.getLatitude() > latitudeMax) {
 				latitudeMax = i.getLatitude();
 			}
@@ -61,7 +61,7 @@ public class CityMap{
 				longitudeMin = i.getLongitude();
 			}
 			return true;
-		}		
+		}	
 	}
 	
 	public boolean addSection(Section s) {
