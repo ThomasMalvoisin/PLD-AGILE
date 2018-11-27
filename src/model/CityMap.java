@@ -4,6 +4,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
+
+import java.util.Iterator;
+
 import java.util.List;
 
 public class CityMap{
@@ -108,5 +112,41 @@ public class CityMap{
 	public Map<Intersection, List<Section>> getCityMapSections() {
 		return cityMapSections;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		CityMap cityMap = (CityMap)obj;
+		if (intersections.size() != cityMap.intersections.size() ||  cityMap.cityMapSections.size() != cityMapSections.size())
+		{
+			return false;
+		}
+		
+		Set keysIntersections = intersections.keySet();
+		Iterator it_inter = keysIntersections.iterator();
+		while (it_inter.hasNext()){
+		   Object key = it_inter.next(); 
+		   if(!intersections.get(key).equals(cityMap.intersections.get(key))) {
+			   return false;
+		   }
+		}
+		
+		Set keysSections = cityMapSections.keySet();
+		Iterator it_sec = keysSections.iterator();
+		while (it_sec.hasNext()){
+		   Object key = it_sec.next(); 
+		   if(cityMapSections.get(key).size() != cityMap.cityMapSections.get(key).size()) {
+			   return false;
+		   }
+		   List<Section> list_sec = cityMapSections.get(key);
+		   for(Section s : list_sec) {
+			   if(cityMap.cityMapSections.get(key).indexOf(s)==-1) {
+				   return false;
+			   }
+		   }
+		}
+		
+		
+		return true;
+	}
 }
