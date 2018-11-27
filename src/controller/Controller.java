@@ -44,8 +44,12 @@ public class Controller implements Initializable{
 
 	public void loadMap() {
 		try {
-			map = currentState.loadMap();
-			gv.drawCityMap(map);
+			CityMap mapTemp=currentState.loadMap();
+			if(mapTemp!=null) {
+				delivReq = null;
+				map = mapTemp;
+				gv.drawCityMap(map);
+			}
 		} catch (Exception e) {
 			//TODO : informer l'utilisateur que le fichier n'a pas pu être chargé
 			e.printStackTrace();
@@ -54,8 +58,12 @@ public class Controller implements Initializable{
 
 	public void loadDeliveryRequest() {
 		try {
-			delivReq = currentState.loadDeliveryRequest(map);
-			gv.drawDeliveryRequest(delivReq);
+			DeliveryRequest delivReqTemp = currentState.loadDeliveryRequest(map);
+			if(delivReqTemp!=null) {
+				delivReq=delivReqTemp;
+				gv.drawDeliveryRequest(delivReq);
+			}
+			
 			//TODO : delivReq.addObserver(gv);
 		} catch (Exception e) {
 			//TODO : informer l'utilisateur que le fichier n'a pas pu être chargé
@@ -66,6 +74,28 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		gv = new GraphicView(pane);
+		pane.widthProperty().addListener( 
+	            (observable, oldvalue, newvalue) -> 
+	            {
+		            if(map!=null) {
+		            	gv.drawCityMap(map);
+		            	if(delivReq!=null) {
+		            		gv.drawDeliveryRequest(delivReq);
+		            	}
+		            }
+	            }
+        );
+        pane.heightProperty().addListener(   
+	            (observable, oldvalue, newvalue) -> 
+	            {
+	            	if(map!=null) {
+		            	gv.drawCityMap(map);
+		            	if(delivReq!=null) {
+		            		gv.drawDeliveryRequest(delivReq);
+		            	}
+		            }
+            	}
+	            );
 		//TODO : TextView
 		currentState=stateInit;
 	}
