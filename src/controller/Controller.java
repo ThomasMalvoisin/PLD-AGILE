@@ -15,13 +15,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.TextFlow;
 import model.CityMap;
 import model.DeliveryRequest;
 import model.Intersection;
 import model.Section;
 import view.GraphicView;
 import view.MapViewBuilder;
+import view.TextView;
 import xml.ExceptionXML;
 import xml.MapDeserializer;
 
@@ -30,9 +33,13 @@ public class Controller implements Initializable{
 	@FXML
 	Pane pane;
 	
+	@FXML
+	TextFlow txtArea;
+	
 	CityMap map;
 	DeliveryRequest delivReq;
 	GraphicView gv;
+	TextView tv;
 	protected static State currentState;
 	protected static final StateInit stateInit = new StateInit();
 	protected static final StateMapLoaded stateMapLoaded = new StateMapLoaded();
@@ -62,6 +69,7 @@ public class Controller implements Initializable{
 			if(delivReqTemp!=null) {
 				delivReq=delivReqTemp;
 				gv.drawDeliveryRequest(delivReq);
+				tv.printDeliveryRequest(delivReq);
 			}
 			
 			//TODO : delivReq.addObserver(gv);
@@ -74,6 +82,7 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		gv = new GraphicView(pane);
+		tv = new TextView(txtArea);
 		pane.widthProperty().addListener( 
 	            (observable, oldvalue, newvalue) -> 
 	            {
@@ -81,6 +90,7 @@ public class Controller implements Initializable{
 		            	gv.drawCityMap(map);
 		            	if(delivReq!=null) {
 		            		gv.drawDeliveryRequest(delivReq);
+		            		tv.printDeliveryRequest(delivReq);
 		            	}
 		            }
 	            }
@@ -92,6 +102,7 @@ public class Controller implements Initializable{
 		            	gv.drawCityMap(map);
 		            	if(delivReq!=null) {
 		            		gv.drawDeliveryRequest(delivReq);
+		            		tv.printDeliveryRequest(delivReq);
 		            	}
 		            }
             	}

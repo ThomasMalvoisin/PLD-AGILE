@@ -2,14 +2,8 @@ package view;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-
-import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -43,6 +37,7 @@ public class GraphicView {
 
 	public void clearDeliveryRequest() {
 		deliveries.getChildren().clear();
+		pane.getChildren().remove(deliveries);
 	}
 
 	public void drawCityMap(CityMap cityMap) {
