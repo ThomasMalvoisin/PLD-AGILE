@@ -86,6 +86,7 @@ public class Controller implements Initializable{
 			System.out.println(delivReq.getStartTime());
 			RoundSet result = currentState.roundsCompute(map, delivReq);
 			System.out.println(result.getRounds().get(0).getDuration());
+			gv.drawRoundSet(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

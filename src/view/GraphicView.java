@@ -14,6 +14,9 @@ import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
 import model.Intersection;
+import model.Journey;
+import model.Round;
+import model.RoundSet;
 import model.Section;
 
 public class GraphicView {
@@ -51,6 +54,18 @@ public class GraphicView {
 			}
 		}
 	}
+	
+	public void drawRoundSet(RoundSet rs) {
+		
+		for(Round r : rs.getRounds()) {
+			System.out.println("view : " + r.getJourneys().size());
+			for(Journey j : r.getJourneys()) {
+				for(Section s : j.getSectionList()) {
+					drawRoundSection(s);
+				}
+			}
+		}
+	}
 
 	public void drawDeliveryRequest(DeliveryRequest deliveryRequest) {
 		clearDeliveryRequest();
@@ -62,8 +77,13 @@ public class GraphicView {
 		pane.getChildren().add(deliveries);
 	}
 
+	private void drawRoundSection(Section sec) {
+		
+		drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),Color.GOLD);
+	}
+	
 	private void drawSection(Section sec) {
-		drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()));
+		drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),Color.BLACK);
 	}
 
 	private double[] geoToCoord(Intersection i) {
@@ -78,12 +98,12 @@ public class GraphicView {
 		return result;
 	}
 
-	private void drawLine(double[] departure, double[] arrival) {
+	private void drawLine(double[] departure, double[] arrival,Paint p) {
 		// GraphicsContext gc = canvas.getGraphicsContext2D();
 		// gc.strokeLine(departure[0], departure[1], arrival[0], arrival[1]);
 
 		Line l = new Line(departure[0], departure[1], arrival[0], arrival[1]);
-		l.setFill(Color.BLACK);
+		l.setStroke(p);
 
 		pane.getChildren().add(l);
 	}
