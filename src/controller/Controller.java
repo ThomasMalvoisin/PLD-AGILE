@@ -103,9 +103,11 @@ public class Controller implements Initializable{
 				result = tempResult;
 				 Platform.runLater(() -> {
 					 gv.drawRoundSet(result);
-					 loader.toBack();
 		            });
 			}
+			Platform.runLater(() -> {
+				 loader.toBack();
+	            });
 			//System.out.println(result.getRounds().get(0).getDuration());
 
 		} catch (Exception e) {
