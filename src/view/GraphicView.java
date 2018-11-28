@@ -58,13 +58,14 @@ public class GraphicView {
 	public void drawRoundSet(RoundSet rs) {
 		
 		for(Round r : rs.getRounds()) {
-			System.out.println("view : " + r.getJourneys().size());
 			for(Journey j : r.getJourneys()) {
 				for(Section s : j.getSectionList()) {
 					drawRoundSection(s);
 				}
 			}
 		}
+		pane.getChildren().remove(deliveries);
+		pane.getChildren().add(deliveries);
 	}
 
 	public void drawDeliveryRequest(DeliveryRequest deliveryRequest) {
@@ -79,11 +80,11 @@ public class GraphicView {
 
 	private void drawRoundSection(Section sec) {
 		
-		drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),Color.GOLD);
+		drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),3,Color.BLUEVIOLET);
 	}
 	
 	private void drawSection(Section sec) {
-		drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),Color.BLACK);
+		drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),1,Color.BLACK);
 	}
 
 	private double[] geoToCoord(Intersection i) {
@@ -98,12 +99,13 @@ public class GraphicView {
 		return result;
 	}
 
-	private void drawLine(double[] departure, double[] arrival,Paint p) {
+	private void drawLine(double[] departure, double[] arrival,double width, Paint p) {
 		// GraphicsContext gc = canvas.getGraphicsContext2D();
 		// gc.strokeLine(departure[0], departure[1], arrival[0], arrival[1]);
 
 		Line l = new Line(departure[0], departure[1], arrival[0], arrival[1]);
 		l.setStroke(p);
+		l.setStrokeWidth(width);
 
 		pane.getChildren().add(l);
 	}
@@ -122,7 +124,7 @@ public class GraphicView {
 		c.getOnMouseClicked();
 		c.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			System.out.println("Point cliqu�");
-			//TODO : comment faire : intégrer les écouteurs ?
+			
 		});
 		
 		deliveries.getChildren().add(c);

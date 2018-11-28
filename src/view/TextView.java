@@ -1,5 +1,6 @@
 package view;
 
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -31,6 +32,10 @@ public class TextView {
 		
 		Text t = new Text(dlvP);
 		t.setFill(Color.RED);
+		t.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+			System.out.println("("+address.getLatitude()+" , "+address.getLongitude()+")");
+			
+		});
 		txtArea.getChildren().add(t);
 		
 	}
