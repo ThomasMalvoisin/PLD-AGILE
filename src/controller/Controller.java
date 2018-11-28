@@ -39,6 +39,7 @@ public class Controller implements Initializable{
 	
 	CityMap map;
 	DeliveryRequest delivReq;
+	RoundSet result;
 	GraphicView gv;
 	TextView tv;
 	protected static State currentState;
@@ -56,6 +57,7 @@ public class Controller implements Initializable{
 			CityMap mapTemp=currentState.loadMap();
 			if(mapTemp!=null) {
 				delivReq = null;
+				result=null;
 				map = mapTemp;
 				gv.drawCityMap(map);
 			}
@@ -70,6 +72,7 @@ public class Controller implements Initializable{
 			DeliveryRequest delivReqTemp = currentState.loadDeliveryRequest(map);
 			if(delivReqTemp!=null) {
 				delivReq=delivReqTemp;
+				result=null;
 				gv.drawDeliveryRequest(delivReq);
 				tv.printDeliveryRequest(delivReq);
 			}
@@ -83,9 +86,9 @@ public class Controller implements Initializable{
 	
 	public void roundsCompute() {
 		try {
-			System.out.println(delivReq.getStartTime());
-			RoundSet result = currentState.roundsCompute(map, delivReq);
-			System.out.println(result.getRounds().get(0).getDuration());
+			//System.out.println(delivReq.getStartTime());
+			result = currentState.roundsCompute(map, delivReq);
+			//System.out.println(result.getRounds().get(0).getDuration());
 			gv.drawRoundSet(result);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,6 +107,9 @@ public class Controller implements Initializable{
 		            	if(delivReq!=null) {
 		            		gv.drawDeliveryRequest(delivReq);
 		            		tv.printDeliveryRequest(delivReq);
+		            		if(result!=null) {
+		            			gv.drawRoundSet(result);
+		            		}
 		            	}
 		            }
 	            }
@@ -116,6 +122,9 @@ public class Controller implements Initializable{
 		            	if(delivReq!=null) {
 		            		gv.drawDeliveryRequest(delivReq);
 		            		tv.printDeliveryRequest(delivReq);
+		            		if(result!=null) {
+		            			gv.drawRoundSet(result);
+		            		}
 		            	}
 		            }
             	}

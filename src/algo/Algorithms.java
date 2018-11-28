@@ -41,7 +41,7 @@ public class Algorithms {
 		intersectionList.add(request.getWarehouse());
 		
 		for (Intersection i : intersectionList) {
-			System.out.println(i.getId());
+			//System.out.println(i.getId());
 			reducedMap.put(i.getId(), dijkstraOneToN(i, intersectionList));
 		}
 			
@@ -80,9 +80,9 @@ public class Algorithms {
 			// toujours par trouver les plus courts chemins vers les intersections ends avant de parcourir
 			// toute une composante connexe
 			Long currStartId = pQueue.poll();
-			System.out.println(currStartId);
+			//System.out.println(currStartId);
 			Intersection currentIntersection = map.getIntersectionById(currStartId);
-			System.out.println(currentIntersection);
+			//System.out.println(currentIntersection);
 			unreachedTargetPoints.remove(currentIntersection);
 			
 			for (Section s : map.getCityMapSections().get(currentIntersection)) {
@@ -160,16 +160,16 @@ public class Algorithms {
 	}
 	
 	public double bound (Delivery currentDelivery, ArrayList<Delivery> cand, Intersection warehouse) {
-		System.out.println("Current Delivery : " + currentDelivery.getAdress().getId());
+		//System.out.println("Current Delivery : " + currentDelivery.getAdress().getId());
 		for (Delivery d : cand) {
-			System.out.print(d.getAdress().getId() + " ");
+			//System.out.print(d.getAdress().getId() + " ");
 		}
-		System.out.println();
+		//System.out.println();
 		double result = 0.0;
 		double minToWarehouse = Double.MAX_VALUE, minToNextCand = Double.MAX_VALUE;
 		for (Delivery d : cand) {
-			System.out.println(currentDelivery.getAdress().getId());
-			System.out.println(d.getAdress().getId());
+			//System.out.println(currentDelivery.getAdress().getId());
+			//System.out.println(d.getAdress().getId());
 			double toThisCand = reducedMap.get(currentDelivery.getAdress().getId()).get(d.getAdress().getId()).getLength();
 			if (toThisCand < minToNextCand)
 				minToNextCand = toThisCand;
