@@ -1,6 +1,7 @@
 package algo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,12 +40,11 @@ public class Algorithms {
 			intersectionList.add(d.getAdress());
 		}
 		intersectionList.add(request.getWarehouse());
-		
+
 		for (Intersection i : intersectionList) {
 			//System.out.println(i.getId());
 			reducedMap.put(i.getId(), dijkstraOneToN(i, intersectionList));
-		}
-			
+		
 	}
 	
 	public Map<Long, Journey> dijkstraOneToN (Intersection start, ArrayList<Intersection> ends) {
@@ -80,6 +80,9 @@ public class Algorithms {
 			// toujours par trouver les plus courts chemins vers les intersections ends avant de parcourir
 			// toute une composante connexe
 			Long currStartId = pQueue.poll();
+
+			Intersection currentIntersection = map.getIntersectionById(currStartId);
+
 			//System.out.println(currStartId);
 			Intersection currentIntersection = map.getIntersectionById(currStartId);
 			//System.out.println(currentIntersection);
@@ -141,14 +144,27 @@ public class Algorithms {
 			if (t < bestSolution.getDuration()) {
 				bestSolution.setDuration(t);
 				bestSolution.setDeliveries(new ArrayList<Delivery>(visited));
+				System.out.println("New bestSolution : ");
 				ArrayList<Journey> newWay = new ArrayList<Journey> ();
 				for(int i = 0; i < visited.size()-1; i++) {
 					newWay.add(reducedMap.get(visited.get(i).getAdress().getId()).get(visited.get(i+1).getAdress().getId()));
+					System.out.print(visited.get(i).getAdress().getId() + " ");
 				}
+				System.out.println();
 				newWay.add(reducedMap.get(visited.get(visited.size()-1).getAdress().getId()).get(visited.get(0).getAdress().getId()));
 				bestSolution.setJourneys(newWay);
 			}
 		} else if (t + bound(visited.get(visited.size()-1), cand, warehouse) < bestSolution.getDuration()){
+			//System.out.println("Passage à la profondeur : " + visited.size());
+			//ArrayList<Delivery> sorted = new ArrayList<Delivery> (cand);
+			/*Arrays.sort(sorted, new Comparator<Delivery>() {
+			    public int compare(Delivery i1, Delivery i2) {
+			    	Double comp = reducedMap.get(i1.getAdress().getId()).get(shortestJourneys.get(i1).getLength() - shortestJourneys.get(i2).getLength();
+			    	if (comp < 0) return -1;
+			    	else if (comp == 0) return 0;
+			    	else return 1;
+			    }
+			});*/
 			for (int i = 0; i < cand.size(); i++) {
 				visited.add(cand.get(i));
 				cand.remove(i);
@@ -160,22 +176,21 @@ public class Algorithms {
 	}
 	
 	public double bound (Delivery currentDelivery, ArrayList<Delivery> cand, Intersection warehouse) {
+
 		//System.out.println("Current Delivery : " + currentDelivery.getAdress().getId());
 		for (Delivery d : cand) {
 			//System.out.print(d.getAdress().getId() + " ");
 		}
 		//System.out.println();
 		double result = 0.0;
-		double minToWarehouse = Double.MAX_VALUE, minToNextCand = Double.MAX_VALUE;
+		double minToNextCand = Double.MAX_VALUE;
 		for (Delivery d : cand) {
+
 			//System.out.println(currentDelivery.getAdress().getId());
 			//System.out.println(d.getAdress().getId());
 			double toThisCand = reducedMap.get(currentDelivery.getAdress().getId()).get(d.getAdress().getId()).getLength();
 			if (toThisCand < minToNextCand)
 				minToNextCand = toThisCand;
-			double toWarehouse = reducedMap.get(currentDelivery.getAdress().getId()).get(warehouse.getId()).getLength();
-			if (toWarehouse < minToWarehouse)
-				minToWarehouse = toWarehouse;
 			double minLength = Double.MAX_VALUE;
 			for (Delivery e : cand) {
 				if (e != d) {
@@ -184,10 +199,13 @@ public class Algorithms {
 						minLength = currentCost;
 				}
 			}
+			double toWarehouse = reducedMap.get(currentDelivery.getAdress().getId()).get(warehouse.getId()).getLength();
+			if (toWarehouse < minLength)
+				minLength = toWarehouse;
 			result += bikersSpeed * minLength;
 			result += d.getDuration();
 		}
-		return result + bikersSpeed * (minToWarehouse + minToNextCand);
+		return result + bikersSpeed * minToNextCand;
 	}
 	
 	public CityMap getMap() {
