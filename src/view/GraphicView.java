@@ -24,10 +24,9 @@ public class GraphicView {
 	// autre chose ?
 
 	Pane pane;
-	CityMap map = null;
-	
-	Group deliveries = null;
-	Group roundSet = null;
+	CityMap map;
+	Group deliveries;
+	Group roundSet;
 
 	public GraphicView(Pane pane) {
 		this.pane = pane;
