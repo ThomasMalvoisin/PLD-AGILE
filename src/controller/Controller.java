@@ -11,12 +11,15 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
 import model.CityMap;
 import model.DeliveryRequest;
@@ -36,6 +39,9 @@ public class Controller implements Initializable{
 	
 	@FXML
 	TextFlow txtArea;
+	
+	@FXML 
+	VBox loader;
 	
 	CityMap map;
 	DeliveryRequest delivReq;
@@ -85,14 +91,26 @@ public class Controller implements Initializable{
 	}
 	
 	public void roundsCompute() {
+		 new Thread(() -> {
 		try {
 			//System.out.println(delivReq.getStartTime());
-			result = currentState.roundsCompute(map, delivReq);
+			 Platform.runLater(() -> {
+				 loader.toFront();
+	            });
+			RoundSet tempResult = currentState.roundsCompute(map, delivReq);
+			if(tempResult != null) {
+				result = tempResult;
+				 Platform.runLater(() -> {
+					 gv.drawRoundSet(result);
+					 loader.toBack();
+		            });
+			}
 			//System.out.println(result.getRounds().get(0).getDuration());
-			gv.drawRoundSet(result);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		 }).start();
 	}
 	
 	@Override
