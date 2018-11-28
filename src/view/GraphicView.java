@@ -85,12 +85,12 @@ public class GraphicView {
 
 	private void drawRoundSection(Section sec) {
 		
-		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),3,Color.BLUEVIOLET);
+		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),3,Color.ROYALBLUE);
 		roundSet.getChildren().add(l);
 	}
 	
 	private void drawSection(Section sec) {
-		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),1,Color.BLACK);
+		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),1,Color.WHITE);
 		pane.getChildren().add(l);
 	}
 
@@ -118,15 +118,15 @@ public class GraphicView {
 	}
 
 	public void drawDeliveryPoint(Intersection i) {
-		drawPoint(geoToCoord(i), Color.RED);
+		drawPoint(geoToCoord(i),5, Color.RED);
 	}
 
 	public void drawWarehousePoint(Intersection i) {
-		drawPoint(geoToCoord(i), Color.FORESTGREEN);
+		drawPoint(geoToCoord(i),8, Color.FORESTGREEN);
 	}
 
-	public void drawPoint(double[] point, Paint p) {
-		Circle c = new Circle(point[0], point[1], 5.0);
+	public void drawPoint(double[] point,double radius, Paint p) {
+		Circle c = new Circle(point[0], point[1], radius);
 		c.setFill(p);
 		c.getOnMouseClicked();
 		c.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {

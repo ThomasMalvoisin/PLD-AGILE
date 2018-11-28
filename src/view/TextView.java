@@ -49,7 +49,7 @@ public class TextView {
 		
 	}
 
-	private void clearDeliveryRequest() {
+	public void clearDeliveryRequest() {
 		
 		txtArea.getChildren().clear();
 	}

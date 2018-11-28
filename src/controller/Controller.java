@@ -65,6 +65,7 @@ public class Controller implements Initializable{
 				delivReq = null;
 				result=null;
 				map = mapTemp;
+				tv.clearDeliveryRequest();
 				gv.drawCityMap(map);
 			}
 		} catch (Exception e) {
