@@ -44,7 +44,7 @@ public class Algorithms {
 		for (Intersection i : intersectionList) {
 			//System.out.println(i.getId());
 			reducedMap.put(i.getId(), dijkstraOneToN(i, intersectionList));
-		
+		}
 	}
 	
 	public Map<Long, Journey> dijkstraOneToN (Intersection start, ArrayList<Intersection> ends) {
@@ -80,8 +80,6 @@ public class Algorithms {
 			// toujours par trouver les plus courts chemins vers les intersections ends avant de parcourir
 			// toute une composante connexe
 			Long currStartId = pQueue.poll();
-
-			Intersection currentIntersection = map.getIntersectionById(currStartId);
 
 			//System.out.println(currStartId);
 			Intersection currentIntersection = map.getIntersectionById(currStartId);
