@@ -20,126 +20,122 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <center>
-      <VBox BorderPane.alignment="CENTER">
+      <StackPane>
          <children>
-            <StackPane>
+            <VBox fx:id="loader" alignment="CENTER" styleClass="loader-pane">
                <children>
-                  <VBox fx:id="loader" alignment="CENTER" styleClass="loader-pane">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/c3c4d331234507.564a1d23db8f9.gif" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="400.0" prefWidth="640.0">
-                    <children>
-                      <MenuBar VBox.vgrow="NEVER">
-                        <menus>
-                          <Menu mnemonicParsing="false" text="File">
-                            <items>
-                              <MenuItem mnemonicParsing="false" onAction="#loadMap" text="Load New Map" />
-                                    <MenuItem mnemonicParsing="false" onAction="#loadDeliveryRequest" text="Load New Delivery Request" />
-                            </items>
-                          </Menu>
-                              <Menu mnemonicParsing="false" text="Tools">
-                                 <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#loadMap" text="Compute Round Set" />
-                                 </items>
-                              </Menu>
-                          <Menu mnemonicParsing="false" text="Draw">
-                            <items>
-                              <MenuItem mnemonicParsing="false" text="test" />
-                            </items>
-                          </Menu>
-                        </menus>
-                      </MenuBar>
-                        <ToolBar prefHeight="101.0" prefWidth="640.0">
-                           <items>
-                              <VBox alignment="CENTER" spacing="5.0">
-                                 <children>
-                                    <HBox alignment="CENTER">
-                                       <children>
-                                          <VBox alignment="CENTER" onMouseClicked="#loadMap" style="-fx-cursor: hand;" styleClass="toolbar-card">
-                                             <children>
-                                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../images/placeholder.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Map" />
-                                             </children>
-                                          </VBox>
-                                          <VBox alignment="CENTER" onMouseClicked="#loadDeliveryRequest" style="-fx-cursor: hand;" styleClass="toolbar-card">
-                                             <children>
-                                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../images/map.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Delivery" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                    <Label alignment="CENTER" text="Upload Files">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <Separator orientation="VERTICAL" />
-                              <VBox alignment="CENTER" spacing="5.0">
-                                 <children>
-                                    <HBox alignment="CENTER">
-                                       <children>
-                                          <VBox alignment="CENTER" onMouseClicked="#roundsCompute" style="-fx-cursor: hand;" styleClass="toolbar-card">
-                                             <children>
-                                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../images/search.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Label alignment="CENTER" prefHeight="18.0" prefWidth="70.0" text="Compute" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                    <Label alignment="CENTER" text="Compute Rounds">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <Separator orientation="VERTICAL" />
-                           </items>
-                        </ToolBar>
-                        <AnchorPane prefHeight="80000.0" prefWidth="640.0">
-                           <children>
-                              <SplitPane dividerPositions="0.7241379310344828" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                       <children>
-                                          <Pane fx:id="pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                       </children>
-                                    </AnchorPane>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                       <children>
-                                          <TextFlow fx:id="txtArea" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                       </children>
-                                    </AnchorPane>
-                                </items>
-                              </SplitPane>
-                           </children>
-                        </AnchorPane>
-                    </children>
-                  </VBox>
+                  <ImageView fitHeight="317.0" fitWidth="264.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/c3c4d331234507.564a1d23db8f9.gif" />
+                     </image>
+                  </ImageView>
                </children>
-            </StackPane>
+            </VBox>
+            <VBox prefHeight="400.0" prefWidth="640.0">
+              <children>
+                <MenuBar VBox.vgrow="NEVER">
+                  <menus>
+                    <Menu mnemonicParsing="false" text="File">
+                      <items>
+                        <MenuItem mnemonicParsing="false" onAction="#loadMap" text="Load New Map" />
+                              <MenuItem mnemonicParsing="false" onAction="#loadDeliveryRequest" text="Load New Delivery Request" />
+                      </items>
+                    </Menu>
+                        <Menu mnemonicParsing="false" text="Tools">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#loadMap" text="Compute Round Set" />
+                           </items>
+                        </Menu>
+                    <Menu mnemonicParsing="false" text="Draw">
+                      <items>
+                        <MenuItem mnemonicParsing="false" text="test" />
+                      </items>
+                    </Menu>
+                  </menus>
+                </MenuBar>
+                  <ToolBar prefHeight="101.0" prefWidth="640.0">
+                     <items>
+                        <VBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <VBox alignment="CENTER" onMouseClicked="#loadMap" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                       <children>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/placeholder.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Map" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" onMouseClicked="#loadDeliveryRequest" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                       <children>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/map.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Delivery" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label alignment="CENTER" text="Upload Files">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <Separator orientation="VERTICAL" />
+                        <VBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <VBox alignment="CENTER" onMouseClicked="#roundsCompute" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                       <children>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/search.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="70.0" text="Compute" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label alignment="CENTER" text="Compute Rounds">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <Separator orientation="VERTICAL" />
+                     </items>
+                  </ToolBar>
+                  <AnchorPane prefHeight="80000.0" prefWidth="640.0">
+                     <children>
+                        <SplitPane dividerPositions="0.7241379310344828" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Pane fx:id="pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TextFlow fx:id="txtArea" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+              </children>
+            </VBox>
          </children>
-      </VBox>
+      </StackPane>
    </center>
 </BorderPane>
