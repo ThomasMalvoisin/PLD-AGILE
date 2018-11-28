@@ -27,10 +27,12 @@ public class GraphicView {
 	CityMap map = null;
 	
 	Group deliveries = null;
+	Group roundSet = null;
 
 	public GraphicView(Pane pane) {
 		this.pane = pane;
 		this.deliveries = new Group();
+		this.roundSet = new Group();
 	}
 
 	public void clear() {
@@ -41,6 +43,8 @@ public class GraphicView {
 	public void clearDeliveryRequest() {
 		deliveries.getChildren().clear();
 		pane.getChildren().remove(deliveries);
+		roundSet.getChildren().clear();
+		pane.getChildren().remove(roundSet);
 	}
 
 	public void drawCityMap(CityMap cityMap) {
@@ -64,6 +68,7 @@ public class GraphicView {
 				}
 			}
 		}
+		pane.getChildren().add(roundSet);
 		pane.getChildren().remove(deliveries);
 		pane.getChildren().add(deliveries);
 	}
@@ -80,11 +85,13 @@ public class GraphicView {
 
 	private void drawRoundSection(Section sec) {
 		
-		drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),3,Color.BLUEVIOLET);
+		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),3,Color.BLUEVIOLET);
+		roundSet.getChildren().add(l);
 	}
 	
 	private void drawSection(Section sec) {
-		drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),1,Color.BLACK);
+		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),1,Color.BLACK);
+		pane.getChildren().add(l);
 	}
 
 	private double[] geoToCoord(Intersection i) {
@@ -99,7 +106,7 @@ public class GraphicView {
 		return result;
 	}
 
-	private void drawLine(double[] departure, double[] arrival,double width, Paint p) {
+	private Line drawLine(double[] departure, double[] arrival,double width, Paint p) {
 		// GraphicsContext gc = canvas.getGraphicsContext2D();
 		// gc.strokeLine(departure[0], departure[1], arrival[0], arrival[1]);
 
@@ -107,7 +114,7 @@ public class GraphicView {
 		l.setStroke(p);
 		l.setStrokeWidth(width);
 
-		pane.getChildren().add(l);
+		return l;
 	}
 
 	public void drawDeliveryPoint(Intersection i) {
