@@ -28,6 +28,8 @@ public class GraphicView {
 	Group deliveries;
 	Group roundSet;
 
+	DeliveryPointsListener dpl;
+
 	public GraphicView(Pane pane) {
 		this.pane = pane;
 		this.deliveries = new Group();
@@ -57,12 +59,12 @@ public class GraphicView {
 			}
 		}
 	}
-	
+
 	public void drawRoundSet(RoundSet rs) {
-		
-		for(Round r : rs.getRounds()) {
-			for(Journey j : r.getJourneys()) {
-				for(Section s : j.getSectionList()) {
+
+		for (Round r : rs.getRounds()) {
+			for (Journey j : r.getJourneys()) {
+				for (Section s : j.getSectionList()) {
 					drawRoundSection(s);
 				}
 			}
@@ -76,20 +78,20 @@ public class GraphicView {
 		clearDeliveryRequest();
 		drawWarehousePoint(deliveryRequest.getWarehouse());
 
-		for(Delivery d : deliveryRequest.getRequestDeliveries()) {
-			drawDeliveryPoint(d.getAdress());
+		for (Delivery d : deliveryRequest.getRequestDeliveries()) {
+			drawDeliveryPoint(d);
 		}
 		pane.getChildren().add(deliveries);
 	}
 
 	private void drawRoundSection(Section sec) {
-		
-		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),3,Color.ROYALBLUE);
+
+		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()), 3, Color.ROYALBLUE);
 		roundSet.getChildren().add(l);
 	}
-	
+
 	private void drawSection(Section sec) {
-		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()),1,Color.WHITE);
+		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()), 1, Color.WHITE);
 		pane.getChildren().add(l);
 	}
 
@@ -105,7 +107,7 @@ public class GraphicView {
 		return result;
 	}
 
-	private Line drawLine(double[] departure, double[] arrival,double width, Paint p) {
+	private Line drawLine(double[] departure, double[] arrival, double width, Paint p) {
 		// GraphicsContext gc = canvas.getGraphicsContext2D();
 		// gc.strokeLine(departure[0], departure[1], arrival[0], arrival[1]);
 
@@ -116,24 +118,36 @@ public class GraphicView {
 		return l;
 	}
 
-	public void drawDeliveryPoint(Intersection i) {
-		drawPoint(geoToCoord(i),5, Color.RED);
+	public void drawDeliveryPoint(Delivery d) {
+//		drawPoint(geoToCoord(d.getAdress()),5, Color.RED, d);
+		Circle c = makePoint(geoToCoord(d.getAdress()), 5, Color.RED);
+
+		c.getProperties().put("DELIVERY", d);
+		c.addEventHandler(MouseEvent.ANY, dpl);
 	}
 
 	public void drawWarehousePoint(Intersection i) {
-		drawPoint(geoToCoord(i),8, Color.FORESTGREEN);
+//		drawPoint(geoToCoord(i),8, Color.FORESTGREEN, null);
+		Circle c = makePoint(geoToCoord(i), 5, Color.FORESTGREEN);
 	}
 
-	public void drawPoint(double[] point,double radius, Paint p) {
+	private Circle makePoint(double[] point, double radius, Paint p) {
 		Circle c = new Circle(point[0], point[1], radius);
 		c.setFill(p);
-		c.getOnMouseClicked();
-		c.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-			System.out.println("Point cliqu�");
-			
-		});
-		
 		deliveries.getChildren().add(c);
+		return c;
+	}
+
+//	public void drawPoint(double[] point,double radius, Paint p, Delivery d) {
+//		c.getProperties().put("INTERSECTION", i);
+//		
+//		c.addEventHandler(MouseEvent.ANY, dpl);
+//		
+//		deliveries.getChildren().add(c);
+//	}
+
+	public void setDeliveryPointsListener(DeliveryPointsListener dpl) {
+		this.dpl = dpl;
 	}
 
 }

@@ -27,6 +27,8 @@ public class MainView implements Initializable{
 	
 	Controller controller;
 	ResizeListener rl;
+	DeliveryPointsListener dpl;
+	
 	GraphicView gv;
 	TextView tv;
 	
@@ -35,7 +37,13 @@ public class MainView implements Initializable{
 		controller = new Controller(this);
 		gv = new GraphicView(pane);
 		tv = new TextView(txtArea);
+		
 		rl = new ResizeListener(controller);
+		dpl = new DeliveryPointsListener(controller);
+		
+		gv.setDeliveryPointsListener(dpl);
+		tv.setDeliveryPointsListener(dpl);
+		
 		pane.widthProperty().addListener(rl);
 		pane.heightProperty().addListener(rl);
 		

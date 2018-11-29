@@ -10,6 +10,8 @@ import model.Intersection;
 
 public class TextView {
 	
+	DeliveryPointsListener dpl;
+	
 	private TextFlow txtArea;
 	
 	public TextView(TextFlow txtArea) {
@@ -22,20 +24,19 @@ public class TextView {
 		printWarehouse(deliveryRequest.getWarehouse());
 		
 		for(Delivery d : deliveryRequest.getRequestDeliveries()) {
-			printDeliveryPoint(d.getAdress());
+			printDeliveryPoint(d);
 		}
 		
 	}
 
-	private void printDeliveryPoint(Intersection address) {
-		String dlvP = "Delivery at (" + address.getLatitude() + " , " + address.getLongitude() + ")\n";
+	private void printDeliveryPoint(Delivery d) {
+		String dlvP = "Delivery at (" + d.getAdress().getLatitude() + " , " + d.getAdress().getLongitude() + ")\n";
 		
 		Text t = new Text(dlvP);
 		t.setFill(Color.RED);
-		t.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-			System.out.println("("+address.getLatitude()+" , "+address.getLongitude()+")");
-			
-		});
+		t.getProperties().put("DELIVERY", d);
+		
+		t.addEventHandler(MouseEvent.ANY, dpl);
 		txtArea.getChildren().add(t);
 		
 	}
@@ -50,8 +51,11 @@ public class TextView {
 	}
 
 	public void clearDeliveryRequest() {
-		
 		txtArea.getChildren().clear();
+	}
+	
+	public void setDeliveryPointsListener(DeliveryPointsListener dpl) {
+		this.dpl = dpl;
 	}
 	
 }
