@@ -50,4 +50,12 @@ public class DeliveryRequest{
 		warehouse = null ;
 		startTime = null ;
 	}
+	
+	public void copy(DeliveryRequest deliveryRequest) {
+		requestDeliveries = new ArrayList<Delivery>(deliveryRequest.requestDeliveries);
+		startTime = new Date(deliveryRequest.startTime.getTime());
+		warehouse = new Intersection(deliveryRequest.getWarehouse().getLatitude(),
+				deliveryRequest.getWarehouse().getLongitude() ,
+				deliveryRequest.getWarehouse().getId());
+	}
 }

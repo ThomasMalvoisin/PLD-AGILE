@@ -8,6 +8,10 @@ public class RoundSet {
 	protected double totalLength;
 	protected double duration;
 	
+	
+	public RoundSet() {
+		rounds = new ArrayList<Round>();
+	}
 	public RoundSet(int deliveryManNb, ArrayList<Round> rounds, double totalLength) {
 		super();
 		this.deliveryManNb = deliveryManNb;
@@ -45,5 +49,12 @@ public class RoundSet {
 
 	public void setDuration(double duration) {
 		this.duration = duration;
+	}
+	
+	public void copy(RoundSet roundSet) {
+		rounds = new ArrayList<Round>(roundSet.rounds);
+		deliveryManNb = roundSet.deliveryManNb;
+		duration = roundSet.duration;
+		totalLength = roundSet.totalLength;
 	}
 }

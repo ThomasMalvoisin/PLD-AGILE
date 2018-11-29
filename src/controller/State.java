@@ -1,18 +1,17 @@
 package controller;
 
-import java.io.File;
-
-import javafx.scene.canvas.Canvas;
 import model.CityMap;
 import model.DeliveryRequest;
 import model.RoundSet;
-import view.MapViewBuilder;
+import view.MainView;
 
 public interface State {
 	
-	public CityMap loadMap() throws Exception;
+	public void loadMap(MainView mainView, CityMap cityMap);
 	
-	public DeliveryRequest loadDeliveryRequest(CityMap map) throws Exception;
+	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest);
 	
-	public RoundSet roundsCompute(CityMap map, DeliveryRequest delivReq ) throws Exception;
+	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, RoundSet roundSet);
+
+	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet);
 }

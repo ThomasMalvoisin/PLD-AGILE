@@ -149,4 +149,13 @@ public class CityMap{
 		
 		return true;
 	}
+	
+	public void copy(CityMap map) {
+		intersections = new HashMap<Long,Intersection>(map.intersections);
+		cityMapSections = new HashMap<Intersection,List<Section>>(map.cityMapSections);
+		latitudeMin = map.latitudeMin;
+		longitudeMin = map.longitudeMin;
+		latitudeMax = map.latitudeMax;
+		longitudeMax = map.longitudeMax;
+	}
 }

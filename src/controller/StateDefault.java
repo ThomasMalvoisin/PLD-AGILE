@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import model.CityMap;
 import model.DeliveryRequest;
 import model.RoundSet;
+import view.MainView;
 import view.MapViewBuilder;
 import xml.ExceptionXML;
 import xml.MapDeserializer;
@@ -20,29 +21,35 @@ import xml.MapDeserializer;
 public class StateDefault implements State {
 
 	@Override
-	public CityMap loadMap() throws Exception {
+	public void loadMap(MainView mainView, CityMap cityMap){
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Charger un plan");
-		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
+		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(" MAP XML", "*.xml"));
 		File file = fileChooser.showOpenDialog(new Stage());
 
-		CityMap map = null;
-
 		if (file != null) {
-			map = MapDeserializer.load(file);
-			Controller.setCurrentState(Controller.stateMapLoaded);
+			try {
+				cityMap.copy(MapDeserializer.load(file));
+				mainView.printCityMap(cityMap);
+				Controller.setCurrentState(Controller.stateMapLoaded);
+			} catch (ParserConfigurationException | SAXException | IOException | ExceptionXML e) {
+				//TODO : mv.printMessage("Unable to open the selected file"); pour prévenir l'utilisateur
+				e.printStackTrace();
+			}
 		}
-
-		return map;
 	}
 
 	@Override
-	public DeliveryRequest loadDeliveryRequest(CityMap map) throws Exception{
-		return null;
+	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest){
+	}
+
+	@Override
+	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, RoundSet roundSet) {
+	}
+
+	@Override
+	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
+		
 	}
 	
-	@Override
-	public RoundSet roundsCompute(CityMap map, DeliveryRequest delivReq) throws Exception{
-		return null;
-	}
 }
