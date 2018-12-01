@@ -1,11 +1,16 @@
 package view;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 import controller.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
@@ -24,6 +29,9 @@ public class MainView implements Initializable{
 	
 	@FXML 
 	VBox loader;
+	
+	@FXML
+	ComboBox<Integer> deliveryManCombo;
 	
 	Controller controller;
 	ResizeListener rl;
@@ -47,6 +55,13 @@ public class MainView implements Initializable{
 		pane.widthProperty().addListener(rl);
 		pane.heightProperty().addListener(rl);
 		
+		Collection<Integer> values = new ArrayList<Integer>(10);
+		for(int i = 1 ; i < 11 ; i++) {
+			values.add(i);
+		}
+		deliveryManCombo.getItems().addAll(values);
+		deliveryManCombo.setValue(1);
+		
 	}
 	
 	public void clickLoadMap(){
@@ -58,6 +73,8 @@ public class MainView implements Initializable{
 	}
 	
 	public void clickRoundsCompute(){
+		//send delivery request with certain amount of delivery man
+		int nbDeliveryMan = deliveryManCombo.getValue();
 		controller.roundsCompute();
 	}
 
@@ -77,5 +94,15 @@ public class MainView implements Initializable{
 	public void setLoader(boolean toBePrinted) {
 		if(toBePrinted) loader.toFront();
 		else loader.toBack();
+	}
+
+	public void displayMessage(String header,String content) {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Warning");
+		alert.setHeaderText(header);
+		alert.setContentText(content);
+
+		alert.showAndWait();
+		
 	}
 }

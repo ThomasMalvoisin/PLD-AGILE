@@ -33,7 +33,8 @@ public class StateDefault implements State {
 				mainView.printCityMap(cityMap);
 				Controller.setCurrentState(Controller.stateMapLoaded);
 			} catch (ParserConfigurationException | SAXException | IOException | ExceptionXML e) {
-				//TODO : mv.printMessage("Unable to open the selected file"); pour prévenir l'utilisateur
+				
+				mainView.displayMessage("Cannot load this map file","Please select a valid file");
 				e.printStackTrace();
 			}
 		}

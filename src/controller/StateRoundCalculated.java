@@ -32,7 +32,7 @@ public class StateRoundCalculated extends StateDefault {
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
 					| ParseException e) {
-				//TODO : mv.printMessage("Unable to open the selected file"); pour prévenir l'utilisateur
+				mainView.displayMessage("Unable to load delivery request", "Please choose a valid delivery request file. Make sure that all the delivery point's locations are available in the current loaded map !");
 				e.printStackTrace();
 			}
 		}
