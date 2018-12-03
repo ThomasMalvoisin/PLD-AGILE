@@ -160,22 +160,28 @@ public class Algorithms {
 				
 				Round currentRound = null;
 				ArrayList<Journey> currentWay = null;
+				ArrayList<Delivery> currentDeliveries = null;
 				bestSolution.getRounds().clear();
 				for(int i = 0; i < visited.size()-1; i++) {
 					if (visited.get(i).getAdress() == warehouse) {
 						if (i != 0) {
 							currentRound.setJourneys(currentWay);
+							currentRound.setDeliveries(currentDeliveries);
 							bestSolution.getRounds().add(currentRound);
 						}
 						currentRound = new Round();
 						currentWay = new ArrayList<Journey>();
+						currentDeliveries = new ArrayList<Delivery>();
 					}
 					currentWay.add(reducedMap.get(visited.get(i).getAdress().getId()).get(visited.get(i+1).getAdress().getId()));
+					currentDeliveries.add(visited.get(i));
 					System.out.print(visited.get(i).getAdress().getId() + " ");
 				}
 				System.out.println(visited.get(visited.size()-1).getAdress().getId());
 				currentWay.add(reducedMap.get(visited.get(visited.size()-1).getAdress().getId()).get(warehouse.getId()));
+				currentDeliveries.add(visited.get(visited.size()-1));
 				currentRound.setJourneys(currentWay);
+				currentRound.setDeliveries(currentDeliveries);
 				bestSolution.getRounds().add(currentRound);
 				visited.remove(visited.size()-1);
 			}
