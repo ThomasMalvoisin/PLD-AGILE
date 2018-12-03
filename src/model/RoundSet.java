@@ -19,10 +19,6 @@ public class RoundSet extends Observable{
 		this.rounds = rounds;
 		this.totalLength = totalLength;
 	}
-
-	public RoundSet() {
-		this.rounds = new ArrayList<Round>();
-	}
 	
 	public int getDeliveryManNb() {
 		return deliveryManNb;
