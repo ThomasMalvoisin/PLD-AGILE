@@ -30,6 +30,10 @@ public class Section{
 	public double getLength() {
 		return length;
 	}
+	
+	public String toString() {
+		   return "nom : "+name +" origine : "+origin+" destination : "+destination;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

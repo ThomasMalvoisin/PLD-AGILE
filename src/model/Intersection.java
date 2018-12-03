@@ -28,6 +28,10 @@ public class Intersection{
 	public long getId() {
 		return id;
 	}
+	
+	public String toString() {
+		   return "inter : lat : "+latitude+" long : "+longitude;
+		}
 
 	@Override
 	public boolean equals(Object obj) {
