@@ -3,7 +3,10 @@ import model.CityMap;
 import model.Intersection;
 import model.Journey;
 import model.Section;
+import xml.ExceptionXML;
 import algo.Algorithms;
+import algo.ExceptionAlgo;
+
 import java.lang.Long;
 
 import static org.junit.Assert.fail;
@@ -26,7 +29,6 @@ import org.xml.sax.SAXException;
 
 public class AlgoTest {
 	
-	//Point isolé
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
@@ -113,9 +115,96 @@ public class AlgoTest {
 		}
 		return;
 	}
-
 	
 	
-
+	@Test 	//Point isolé dans la liste d'intersection
+	public void DijkstraOneToNTestIsole1 () {
+		CityMap map =new CityMap();
+		Intersection inter1 = new Intersection (41, 51.51, 1);
+		Intersection inter2 = new Intersection (42, 52.51, 2);
+		Intersection inter3 = new Intersection (43, 53.51, 3);
+		Intersection inter4 = new Intersection (44, 54.51, 4);
+		Intersection inter5 = new Intersection (44, 54.51, 5);
+		Intersection inter6 = new Intersection (44, 54.51, 6);
+		Intersection interIsole = new Intersection (44, 57.51, 7);
+		map.addIntersection(inter1);
+		map.addIntersection(inter2);
+		map.addIntersection(inter3);
+		map.addIntersection(inter4);
+		map.addIntersection(inter5);
+		map.addIntersection(inter6);
+		map.addIntersection(interIsole);
+		Section section12=new Section (inter1, inter2, "Rue Danton", 1);
+		Section section13=new Section (inter1, inter3, "Rue de l'Abondance" , 2);
+		Section section25=new Section (inter2, inter5, "Rue25",4);
+		Section section35=new Section (inter3, inter5, "Avenue Lacassagne",2);
+		Section section34=new Section (inter3, inter4, "Rue Sainte-Anne de Baraban", 3);
+		Section section46=new Section (inter4, inter6, "Rue46", 3);
+		Section section56=new Section (inter5, inter6, "Rue56", 5);
+		
+		map.addSection(section12);
+		map.addSection(section13);
+		map.addSection(section25);
+		map.addSection(section35);
+		map.addSection(section34);
+		map.addSection(section46);
+		map.addSection(section13);
+		
+		ArrayList<Intersection> intersectionList = new ArrayList<Intersection>();
+		intersectionList.add(inter1);
+		intersectionList.add(inter5);
+		intersectionList.add(interIsole);
+		Algorithms algo = new Algorithms (map);
+		
+		thrown.expect(ExceptionAlgo.class);
+		Map<Long, Journey> dijkstra = algo.dijkstraOneToN (inter1, intersectionList);
+	}
+	
+	
+	@Test 	//Point de départ isolé
+	public void DijkstraOneToNTestIsole2 () {
+		CityMap map =new CityMap();
+		Intersection inter1 = new Intersection (41, 51.51, 1);
+		Intersection inter2 = new Intersection (42, 52.51, 2);
+		Intersection inter3 = new Intersection (43, 53.51, 3);
+		Intersection inter4 = new Intersection (44, 54.51, 4);
+		Intersection inter5 = new Intersection (44, 54.51, 5);
+		Intersection inter6 = new Intersection (44, 54.51, 6);
+		Intersection interIsole = new Intersection (44, 57.51, 7);
+		map.addIntersection(inter1);
+		map.addIntersection(inter2);
+		map.addIntersection(inter3);
+		map.addIntersection(inter4);
+		map.addIntersection(inter5);
+		map.addIntersection(inter6);
+		map.addIntersection(interIsole);
+		Section section12=new Section (inter1, inter2, "Rue Danton", 1);
+		Section section13=new Section (inter1, inter3, "Rue de l'Abondance" , 2);
+		Section section25=new Section (inter2, inter5, "Rue25",4);
+		Section section35=new Section (inter3, inter5, "Avenue Lacassagne",2);
+		Section section34=new Section (inter3, inter4, "Rue Sainte-Anne de Baraban", 3);
+		Section section46=new Section (inter4, inter6, "Rue46", 3);
+		Section section56=new Section (inter5, inter6, "Rue56", 5);
+		
+		map.addSection(section12);
+		map.addSection(section13);
+		map.addSection(section25);
+		map.addSection(section35);
+		map.addSection(section34);
+		map.addSection(section46);
+		map.addSection(section13);
+		
+		ArrayList<Intersection> intersectionList = new ArrayList<Intersection>();
+		intersectionList.add(inter1);
+		intersectionList.add(inter5);
+		intersectionList.add(inter6);
+		Algorithms algo = new Algorithms (map);
+		
+		thrown.expect(ExceptionAlgo.class);
+		Map<Long, Journey> dijkstra = algo.dijkstraOneToN (interIsole, intersectionList);
+	}
+	
+	
+	
 	
 }
