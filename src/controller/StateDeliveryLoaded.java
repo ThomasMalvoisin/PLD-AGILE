@@ -44,6 +44,7 @@ public class StateDeliveryLoaded extends StateDefault {
 	@Override
 	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, RoundSet roundSet) {
 		Algorithms algoUtil = new Algorithms(map);
+
 		new Thread(() -> {
 			Platform.runLater(() -> {
 				mainView.setLoader(true);
@@ -73,5 +74,6 @@ public class StateDeliveryLoaded extends StateDefault {
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 			mainView.printCityMap(cityMap);
 			mainView.printDeliveryRequest(deliveryRequest);
+
 	}
 }

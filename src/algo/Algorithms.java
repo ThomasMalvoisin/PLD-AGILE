@@ -2,6 +2,7 @@ package algo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+import javafx.util.Pair;
 import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
@@ -121,71 +123,103 @@ public class Algorithms {
 		// Pour l'instant, nbDeliveryMan = 1 forcément
 		
 		ArrayList<Delivery> visited = new ArrayList<Delivery>();
-		visited.add(new Delivery(0, new Date(0L), new Date(0L), request.getWarehouse()));
+		visited.add(new Delivery(0, request.getWarehouse()));
 		ArrayList<Delivery> cand = new ArrayList<Delivery> (request.getRequestDeliveries());
 		
-		Round round = new Round();
-		round.setDuration(Double.MAX_VALUE);	// Modifier branchAndBound pour construire un roundSet, et ajouter le numero de Round en cours de remplissage
+		RoundSet rounds = new RoundSet();
+		rounds.setDuration(Double.MAX_VALUE);	// Modifier branchAndBound pour construire un roundSet, et ajouter le numero de Round en cours de remplissage
 		
-		branchAndBound(visited, cand, 0.0, round, request.getWarehouse());
+		ArrayList<Integer> nbCandWhenChangingRound = new ArrayList<Integer>();
+		int nbDelivery = request.getRequestDeliveries().size();
+		for (int i = nbDeliveryMan; i > 0; i--) {
+			nbDelivery -= nbDelivery/i;
+			nbCandWhenChangingRound.add(nbDelivery);
+		}
+		for (Integer i : nbCandWhenChangingRound) System.out.print(i + "  ");
+		System.out.println();
+		branchAndBound(visited, cand, 0.0, rounds, nbCandWhenChangingRound, request.getWarehouse());
 		
-		ArrayList<Round> rounds = new ArrayList<Round>();
-		rounds.add(round);
-		RoundSet result = new RoundSet (1, rounds, round.getTotalLength());
-		
-		return result;
+		return rounds;
 	}
 	
-	public void branchAndBound (ArrayList<Delivery> visited, ArrayList<Delivery> cand, double t, Round bestSolution, Intersection warehouse) {
-		if (cand.isEmpty()) {
-			t += bikersSpeed * reducedMap.get(visited.get(visited.size()-1).getAdress().getId()).get(visited.get(0).getAdress().getId()).getLength();
+	public void branchAndBound (ArrayList<Delivery> visited, ArrayList<Delivery> cand, double t, RoundSet bestSolution, ArrayList<Integer> nbCandWhenChangingRound, Intersection warehouse) {
+		
+		boolean newRound = (nbCandWhenChangingRound.indexOf(cand.size()) != -1);
+		if (newRound) {
+			Delivery returnToWarehouse = new Delivery(0, warehouse);
+			visited.add(returnToWarehouse);
+			t += bikersSpeed * reducedMap.get(visited.get(visited.size()-2).getAdress().getId()).get(warehouse.getId()).getLength();
+		}
+		if (cand.size() == 1) {
+			t += bikersSpeed * reducedMap.get(visited.get(visited.size()-1).getAdress().getId()).get(cand.get(0).getAdress().getId()).getLength() + cand.get(0).getDuration();
+			t += bikersSpeed * reducedMap.get(cand.get(0).getAdress().getId()).get(visited.get(0).getAdress().getId()).getLength();
 			if (t < bestSolution.getDuration()) {
+				visited.add(cand.get(0));
 				bestSolution.setDuration(t);
-				bestSolution.setDeliveries(new ArrayList<Delivery>(visited));
 				System.out.println("New bestSolution : ");
-				ArrayList<Journey> newWay = new ArrayList<Journey> ();
+				
+				Round currentRound = null;
+				ArrayList<Journey> currentWay = null;
+				bestSolution.getRounds().clear();
 				for(int i = 0; i < visited.size()-1; i++) {
-					newWay.add(reducedMap.get(visited.get(i).getAdress().getId()).get(visited.get(i+1).getAdress().getId()));
+					if (visited.get(i).getAdress() == warehouse) {
+						if (i != 0) {
+							currentRound.setJourneys(currentWay);
+							bestSolution.getRounds().add(currentRound);
+						}
+						currentRound = new Round();
+						currentWay = new ArrayList<Journey>();
+					}
+					currentWay.add(reducedMap.get(visited.get(i).getAdress().getId()).get(visited.get(i+1).getAdress().getId()));
 					System.out.print(visited.get(i).getAdress().getId() + " ");
 				}
-				System.out.println();
-				newWay.add(reducedMap.get(visited.get(visited.size()-1).getAdress().getId()).get(visited.get(0).getAdress().getId()));
-				bestSolution.setJourneys(newWay);
+				System.out.println(visited.get(visited.size()-1).getAdress().getId());
+				currentWay.add(reducedMap.get(visited.get(visited.size()-1).getAdress().getId()).get(warehouse.getId()));
+				currentRound.setJourneys(currentWay);
+				bestSolution.getRounds().add(currentRound);
+				visited.remove(visited.size()-1);
 			}
-		} else if (t + bound(visited.get(visited.size()-1), cand, warehouse) < bestSolution.getDuration()){
-			//System.out.println("Passage à la profondeur : " + visited.size());
-			//ArrayList<Delivery> sorted = new ArrayList<Delivery> (cand);
-			/*Arrays.sort(sorted, new Comparator<Delivery>() {
-			    public int compare(Delivery i1, Delivery i2) {
-			    	Double comp = reducedMap.get(i1.getAdress().getId()).get(shortestJourneys.get(i1).getLength() - shortestJourneys.get(i2).getLength();
+		} else {
+			
+			ArrayList<Pair<Double, Integer>> sorted = new ArrayList<Pair<Double, Integer>> ();
+			for (int i = 0; i < cand.size(); i++) {
+				Delivery d = cand.get(i);
+				cand.remove(i);
+				Double estimatedDuration = new Double(bound(d, cand, warehouse));
+				sorted.add(new Pair<Double, Integer>(estimatedDuration, new Integer(i)));
+				cand.add(i, d);
+			}
+			Collections.sort(sorted, new Comparator<Pair<Double, Integer>>() {
+			    public int compare(Pair<Double, Integer> i1, Pair<Double, Integer> i2) {
+			    	Double comp = i1.getKey() - i2.getKey();
 			    	if (comp < 0) return -1;
 			    	else if (comp == 0) return 0;
 			    	else return 1;
 			    }
-			});*/
-			for (int i = 0; i < cand.size(); i++) {
-				visited.add(cand.get(i));
-				cand.remove(i);
-				branchAndBound(visited, cand, t + bikersSpeed * reducedMap.get(visited.get(visited.size()-2).getAdress().getId()).get(visited.get(visited.size()-1).getAdress().getId()).getLength() + visited.get(visited.size()-1).getDuration(), bestSolution, warehouse);
-				cand.add(i, visited.get(visited.size()-1));
-				visited.remove(visited.size()-1);
+			});		
+			
+			for (int i = 0; i < sorted.size(); i++) {
+				double addCost = bikersSpeed * reducedMap.get(visited.get(visited.size()-1).getAdress().getId()).get(cand.get(sorted.get(i).getValue()).getAdress().getId()).getLength() + cand.get(sorted.get(i).getValue()).getDuration();
+				if (t + addCost + sorted.get(i).getKey() < bestSolution.getDuration()) {
+					int j = sorted.get(i).getValue();
+					visited.add(cand.get(j));
+					cand.remove(j);
+					branchAndBound(visited, cand, t + bikersSpeed * reducedMap.get(visited.get(visited.size()-2).getAdress().getId()).get(visited.get(visited.size()-1).getAdress().getId()).getLength() + visited.get(visited.size()-1).getDuration(), bestSolution, nbCandWhenChangingRound, warehouse);
+					cand.add(j, visited.get(visited.size()-1));
+					visited.remove(visited.size()-1);
+				}
+				else break;
 			}
 		}
+		if (newRound) 
+			visited.remove(visited.size()-1);
 	}
 	
-	public double bound (Delivery currentDelivery, ArrayList<Delivery> cand, Intersection warehouse) {
-
-		//System.out.println("Current Delivery : " + currentDelivery.getAdress().getId());
-		for (Delivery d : cand) {
-			//System.out.print(d.getAdress().getId() + " ");
-		}
-		//System.out.println();
+	public double bound (Delivery currentDelivery, ArrayList<Delivery> cand, Intersection warehouse) {	
+		//Les retours au warehouse des livreurs ne sont pas encore pris en compte
 		double result = 0.0;
 		double minToNextCand = Double.MAX_VALUE;
 		for (Delivery d : cand) {
-
-			//System.out.println(currentDelivery.getAdress().getId());
-			//System.out.println(d.getAdress().getId());
 			double toThisCand = reducedMap.get(currentDelivery.getAdress().getId()).get(d.getAdress().getId()).getLength();
 			if (toThisCand < minToNextCand)
 				minToNextCand = toThisCand;

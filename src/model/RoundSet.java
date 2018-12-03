@@ -20,6 +20,10 @@ public class RoundSet extends Observable{
 		this.totalLength = totalLength;
 	}
 
+	public RoundSet() {
+		this.rounds = new ArrayList<Round>();
+	}
+	
 	public int getDeliveryManNb() {
 		return deliveryManNb;
 	}
