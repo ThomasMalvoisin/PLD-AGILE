@@ -57,6 +57,7 @@ public class StateDeliveryLoaded extends StateDefault {
 			if (roundSet != null) {
 				Platform.runLater(() -> {
 					mainView.printRoundSet(roundSet);
+					mainView.printPotentielDeliveries(map, delivReq);
 					Controller.setCurrentState(Controller.stateRoundCalculated);
 				});
 			}

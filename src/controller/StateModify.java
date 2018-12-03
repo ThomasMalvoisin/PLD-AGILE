@@ -3,22 +3,29 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import algo.Algorithms;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
+import model.Intersection;
 import model.RoundSet;
 import view.MainView;
 import xml.DeliveryRequestDeserializer;
 import xml.ExceptionXML;
 
-public class StateRoundCalculated extends StateDefault {
+public class StateModify extends StateDefault {
+
+	private Delivery deliverySelected;
+
 	@Override
 	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest) {
 		FileChooser fileChooser = new FileChooser();
@@ -33,7 +40,8 @@ public class StateRoundCalculated extends StateDefault {
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
 					| ParseException e) {
-				mainView.displayMessage("Unable to load delivery request", "Please choose a valid delivery request file. Make sure that all the delivery point's locations are available in the current loaded map !");
+				// TODO : mv.printMessage("Unable to open the selected file"); pour prévenir
+				// l'utilisateur
 				e.printStackTrace();
 			}
 		}
@@ -43,30 +51,35 @@ public class StateRoundCalculated extends StateDefault {
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);
 		mainView.printDeliveryRequest(deliveryRequest);
-		mainView.printPotentielDeliveries(cityMap, deliveryRequest);
 		mainView.printRoundSet(roundSet);
+		mainView.setDeliverySelected(this.deliverySelected);
 	}
 
 	@Override
-	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,Delivery delivery) {
+	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
+			Delivery delivery) {
 		// TODO : changement dans l'ihm en appelant des fonctions de mainView : afficher
 		// un message à l'utilisateur pour lui dire quoi faire
-
 		mainView.setDeliverySelected(delivery);
 		Controller.stateModify.actionDeliverySelected(delivery);
 		Controller.setCurrentState(Controller.stateModify);
 	}
 
 	@Override
-	public void add(MainView mv) {
-		mv.printMessage("Please select the point where you want to add a delivery... ");
-		Controller.setCurrentState(Controller.stateAdd1);
+	public void delete(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet) {
+		// TODO : Recalculer le morceau de tournée qui a été modifié
+
+		System.out.println("Delete " + deliverySelected.getId());
+		deliveryRequest.delete(deliverySelected);
+		roundSet.deleteDelivery(deliverySelected);
+		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
-	
-	@Override
-	public void delete(MainView mv, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
-		mv.printMessage("Please select a delivery point to delete...");
-		Controller.setCurrentState(Controller.stateDelete);
+
+	// methode appelee avant d'entrer dans l'etat this, pour definir le delivery
+	// selectionne
+	protected void actionDeliverySelected(Delivery delivery) {
+		this.deliverySelected = delivery;
+		System.out.println(delivery.getAdress().getLatitude());
 	}
 
 }

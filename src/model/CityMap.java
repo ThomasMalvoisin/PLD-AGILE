@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
-
+import java.util.Map.Entry;
 import java.util.Iterator;
 
 import java.util.List;
@@ -157,5 +157,30 @@ public class CityMap{
 		longitudeMin = map.longitudeMin;
 		latitudeMax = map.latitudeMax;
 		longitudeMax = map.longitudeMax;
+	}
+	
+	public Map<Long, Intersection> getNotDeliveriesIntersections(DeliveryRequest dr)
+	{
+		Map<Long, Intersection> result = new HashMap<Long,Intersection>();
+		boolean found;
+		for (Entry<Long, Intersection> entry : intersections.entrySet()) {
+			found = false;
+			if (entry.getValue().equals(dr.getWarehouse())){
+				found = true;
+			}
+			for (Delivery d : dr.getRequestDeliveries())
+			{
+				if (entry.getValue().equals(d.getAdress()))
+				{
+					found = true;
+					break;
+				}
+			}
+			if(!found)
+			{
+				result.put(entry.getValue().getId(), entry.getValue());
+			}
+		}
+		return result;
 	}
 }

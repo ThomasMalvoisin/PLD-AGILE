@@ -1,8 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class RoundSet {
+public class RoundSet extends Observable{
 	protected int deliveryManNb;
 	protected ArrayList<Round> rounds;
 	protected double totalLength;
@@ -56,5 +57,16 @@ public class RoundSet {
 		deliveryManNb = roundSet.deliveryManNb;
 		duration = roundSet.duration;
 		totalLength = roundSet.totalLength;
+	}
+	
+	public void deleteDelivery(Delivery d) {
+		int i=0;
+		for(Round r : rounds) {
+			if(r.getDeliveries().contains(d)) {
+				r.deleteDelivery(d);
+				setChanged();
+				notifyObservers();
+			}
+		}	
 	}
 }

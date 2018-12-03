@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Observable;
 
-public class DeliveryRequest{
+public class DeliveryRequest extends Observable{
 
 	private Date startTime;
 	private ArrayList<Delivery>  requestDeliveries;
@@ -43,6 +43,8 @@ public class DeliveryRequest{
 	
 	public void addDelivery(Delivery delivery) {
 		requestDeliveries.add(delivery);
+		setChanged();
+		notifyObservers();	
 	}
 	
 	public void reset() {
@@ -57,5 +59,11 @@ public class DeliveryRequest{
 		warehouse = new Intersection(deliveryRequest.getWarehouse().getLatitude(),
 				deliveryRequest.getWarehouse().getLongitude() ,
 				deliveryRequest.getWarehouse().getId());
+	}
+	
+	public void delete(Delivery d) {
+		requestDeliveries.remove(d);
+		setChanged();
+		notifyObservers(d);
 	}
 }

@@ -73,5 +73,24 @@ public class Round {
 		this.totalLength = totalLength;
 	}
 	
+	public void deleteDelivery(Delivery d) {
+		
+		for(int i = 0 ; i < journeys.size() ; i++) {
+			if(journeys.get(i).getDestination().equals(d.getAdress())) {
+				journeys.remove(i);
+				break;
+			}
+		}	
+		
+		for(int i = 0 ; i < journeys.size() ; i++) {
+			if(journeys.get(i).getOrigin().equals(d.getAdress())) {
+				journeys.remove(i);
+				break;
+			}
+		}	
+		
+		deliveries.remove(d);
+	}
+	
 	
 }

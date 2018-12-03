@@ -7,14 +7,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import javafx.scene.canvas.Canvas;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.CityMap;
+import model.Delivery;
 import model.DeliveryRequest;
+import model.Intersection;
 import model.RoundSet;
 import view.MainView;
-import view.MapViewBuilder;
 import xml.ExceptionXML;
 import xml.MapDeserializer;
 
@@ -50,7 +50,23 @@ public class StateDefault implements State {
 
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
+	}
+
+	@Override
+	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet, Delivery delivery) {		
+	}
+
+	@Override
+	public void delete(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		
+	}
+
+	@Override
+	public void selectIntersection(MainView mv,Intersection i) {
+	}
+
+	@Override
+	public void add(MainView mv) {
 	}
 	
 }

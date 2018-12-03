@@ -21,7 +21,7 @@ import model.DeliveryRequest;
 import model.Intersection;
 
 public class DeliveryRequestDeserializer {
-	
+		
 	public static DeliveryRequest Load(CityMap map, File xml) throws ParserConfigurationException,
 	SAXException, IOException, ExceptionXML, NumberFormatException, ParseException{
 		if(map == null ) {
