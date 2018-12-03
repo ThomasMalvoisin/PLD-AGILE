@@ -45,7 +45,7 @@ public class StateDefault implements State {
 	}
 
 	@Override
-	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, RoundSet roundSet) {
+	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan, RoundSet roundSet) {
 	}
 
 	@Override

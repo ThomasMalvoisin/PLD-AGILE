@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.CityMap;
+import model.Delivery;
 import model.DeliveryRequest;
 import model.RoundSet;
 import view.MainView;
@@ -29,12 +30,15 @@ public class StateDeliveryLoaded extends StateDefault {
 		File file = fileChooser.showOpenDialog(new Stage());
 
 		if (file != null) {
+			int temp = Delivery.currentId;
 			try {
+				Delivery.currentId = 1;
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
 				mainView.printDeliveryRequest(deliveryRequest);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
 					| ParseException e) {
+				Delivery.currentId = temp;
 				mainView.displayMessage("Unable to load delivery request", "Please choose a valid delivery request file. Make sure that all the delivery point's locations are available in the current loaded map !");
 				e.printStackTrace();
 			}
@@ -42,7 +46,7 @@ public class StateDeliveryLoaded extends StateDefault {
 	}
 
 	@Override
-	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, RoundSet roundSet) {
+	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan, RoundSet roundSet) {
 		Algorithms algoUtil = new Algorithms(map);
 
 		new Thread(() -> {
@@ -53,7 +57,7 @@ public class StateDeliveryLoaded extends StateDefault {
 			algoUtil.dijkstraDeliveryRequest(delivReq);
 			// TODO : Constructeur de copie nécessaire
 			//TODO : trouver une solution pour modifier la variable roundSet dans ce thread
-			roundSet.copy(algoUtil.solveTSP(delivReq, 1));
+			roundSet.copy(algoUtil.solveTSP(delivReq, nbDeliveryMan));
 			
 			if (roundSet != null) {
 				Platform.runLater(() -> {

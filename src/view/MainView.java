@@ -36,7 +36,7 @@ public class MainView implements Initializable{
 	@FXML
 	TextField infoBar;
   
-  @FXML
+	@FXML
 	ComboBox<Integer> deliveryManCombo;
 	
 	Controller controller;
@@ -86,9 +86,8 @@ public class MainView implements Initializable{
 	}
 	
 	public void clickRoundsCompute(){
-		//send delivery request with certain amount of delivery man
 		int nbDeliveryMan = deliveryManCombo.getValue();
-		controller.roundsCompute();
+		controller.roundsCompute(nbDeliveryMan);
 	}
 	
 	public void clickAddDelivery(){

@@ -29,12 +29,15 @@ public class StateDelete extends StateDefault{
 		File file = fileChooser.showOpenDialog(new Stage());
 
 		if (file != null) {
+			int temp = Delivery.currentId;
 			try {
+				Delivery.currentId = 1;
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
 				mainView.printDeliveryRequest(deliveryRequest);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
 					| ParseException e) {
+				Delivery.currentId = temp;
 				// TODO : mv.printMessage("Unable to open the selected file"); pour prévenir
 				// l'utilisateur
 				e.printStackTrace();

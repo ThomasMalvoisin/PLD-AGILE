@@ -12,6 +12,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.CityMap;
+import model.Delivery;
 import model.DeliveryRequest;
 import model.RoundSet;
 import view.MainView;
@@ -29,12 +30,15 @@ public class StateMapLoaded extends StateDefault {
 		File file = fileChooser.showOpenDialog(new Stage());
 
 		if (file != null) {
+			int temp = Delivery.currentId;
 			try {
+				Delivery.currentId = 1;
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
 				mainView.printDeliveryRequest(deliveryRequest);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
 					| ParseException e) {
+				Delivery.currentId = temp;
 				mainView.displayMessage("Unable to load delivery request", "Please choose a valid delivery request file. Make sure that all the delivery point's locations are available in the current loaded map !");
 				e.printStackTrace();
 			}

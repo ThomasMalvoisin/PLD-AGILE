@@ -43,8 +43,8 @@ public class Controller {
 		currentState.loadDeliveryRequest(mv, map, delivReq);
 	}
 
-	public void roundsCompute() {
-		currentState.roundsCompute(mv, map, delivReq, result);
+	public void roundsCompute(int nbDeliveryMan) {
+		currentState.roundsCompute(mv, map, delivReq, nbDeliveryMan, result);
 	}
 
 	public void refreshView() {

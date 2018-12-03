@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 public class RoundSet extends Observable{
-	protected int deliveryManNb;
 	protected ArrayList<Round> rounds;
 	protected double totalLength;
 	protected double duration;
@@ -13,19 +12,10 @@ public class RoundSet extends Observable{
 	public RoundSet() {
 		rounds = new ArrayList<Round>();
 	}
-	public RoundSet(int deliveryManNb, ArrayList<Round> rounds, double totalLength) {
+	public RoundSet(ArrayList<Round> rounds, double totalLength) {
 		super();
-		this.deliveryManNb = deliveryManNb;
 		this.rounds = rounds;
 		this.totalLength = totalLength;
-	}
-	
-	public int getDeliveryManNb() {
-		return deliveryManNb;
-	}
-	
-	public void setDeliveryManNb(int deliveryManNb) {
-		this.deliveryManNb = deliveryManNb;
 	}
 	
 	public ArrayList<Round> getRounds() {
@@ -54,7 +44,6 @@ public class RoundSet extends Observable{
 	
 	public void copy(RoundSet roundSet) {
 		rounds = new ArrayList<Round>(roundSet.rounds);
-		deliveryManNb = roundSet.deliveryManNb;
 		duration = roundSet.duration;
 		totalLength = roundSet.totalLength;
 	}

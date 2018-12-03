@@ -37,6 +37,8 @@ public class GraphicView implements Observer{
 	Group deliveries;
 	Group roundSet;
 	Group notDeliveriesIntersections;
+	
+	Color[] colors = {Color.ROYALBLUE, Color.BLACK, Color.ORANGE, Color.BROWN, Color.GREEN, Color.GOLD, Color.BLUEVIOLET, Color.YELLOW, Color.AQUAMARINE, Color.CORAL}; 
 
 	DeliveryPointsListener dpl;
 
@@ -88,12 +90,14 @@ public class GraphicView implements Observer{
 	public void drawRoundSet(RoundSet rs) {
 		rs.addObserver(this);
 		this.rs = rs;
+		int i=0;
 		for (Round r : rs.getRounds()) {
 			for (Journey j : r.getJourneys()) {
 				for (Section s : j.getSectionList()) {
-					drawRoundSection(s);
+					drawRoundSection(s, colors[i]);
 				}
-			}
+			};
+			i++;
 		}
 		pane.getChildren().add(roundSet);
 		pane.getChildren().remove(deliveries);
@@ -112,9 +116,9 @@ public class GraphicView implements Observer{
 		pane.getChildren().add(deliveries);
 	}
 
-	private void drawRoundSection(Section sec) {
+	private void drawRoundSection(Section sec, Color color) {
 
-		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()), 3, Color.ROYALBLUE);
+		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()), 3, color);
 		roundSet.getChildren().add(l);
 	}
 
