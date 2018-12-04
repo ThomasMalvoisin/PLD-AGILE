@@ -74,7 +74,7 @@ public class StateModify extends StateDefault {
 
 		System.out.println("Delete " + deliverySelected.getId());
 		deliveryRequest.delete(deliverySelected);
-		roundSet.deleteDelivery(deliverySelected);
+		roundSet.deleteDelivery(map, deliverySelected);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 

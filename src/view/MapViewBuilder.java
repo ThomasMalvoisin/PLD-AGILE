@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,12 +26,9 @@ public class MapViewBuilder {
 	}
 	
 	public void build(CityMap map) {
-		Collection<List<Section>> listSections = map.getSections();
-
-		for(List<Section> secs : listSections) {
-			for(Section sec : secs) {
-				drawSection(sec);
-			}
+		ArrayList<Section> listSections = map.getSections();
+		for(Section section : listSections) {
+				drawSection(section);
 		}
 	}
 	

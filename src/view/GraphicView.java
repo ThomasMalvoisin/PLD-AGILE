@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -66,13 +67,9 @@ public class GraphicView implements Observer{
 	public void drawCityMap(CityMap cityMap) {
 		clear();
 		this.map = cityMap;
-		Collection<List<Section>> listSections = cityMap.getSections();
-
-
-		for (List<Section> secs : listSections) {
-			for (Section sec : secs) {
-				drawSection(sec);
-			}
+		ArrayList<Section> listSections = cityMap.getSections();
+		for (Section section : listSections) {
+			drawSection(section);
 		}
 	}
 

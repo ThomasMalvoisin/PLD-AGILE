@@ -56,7 +56,7 @@ public class StateDelete extends StateDefault{
 	public void selectDelivery(MainView mv, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet, Delivery delivery) {
 		System.out.println("Delete " + delivery.getId());
 		deliveryRequest.delete(delivery);
-		roundSet.deleteDelivery(delivery);
+		roundSet.deleteDelivery(cityMap , delivery);
 		
 		// TODO : Recalculer le morceau de tournée qui a été modifié
 		mv.printMessage("");

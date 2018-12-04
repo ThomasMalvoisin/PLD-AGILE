@@ -48,11 +48,20 @@ public class RoundSet extends Observable{
 		totalLength = roundSet.totalLength;
 	}
 	
-	public void deleteDelivery(Delivery d) {
-		int i=0;
+	public void deleteDelivery(CityMap map ,Delivery d) {
 		for(Round r : rounds) {
 			if(r.getDeliveries().contains(d)) {
-				r.deleteDelivery(d);
+				r.deleteDelivery(map,d);
+				setChanged();
+				notifyObservers();
+			}
+		}	
+	}
+	
+	public void addDelivery(CityMap map ,Delivery d, Delivery deliveryBefore) {
+		for(Round r : rounds) {
+			if(r.getDeliveries().contains(deliveryBefore)) {
+				r.addDelivery(map,d,deliveryBefore);
 				setChanged();
 				notifyObservers();
 			}

@@ -46,18 +46,19 @@ public class StateDeliveryLoaded extends StateDefault {
 	}
 
 	@Override
+
 	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan, RoundSet roundSet) {
-		Algorithms algoUtil = new Algorithms(map);
 
 		new Thread(() -> {
 			Platform.runLater(() -> {
 				mainView.setLoader(true);
 			});
-			
-			algoUtil.dijkstraDeliveryRequest(delivReq);
-			// TODO : Constructeur de copie nécessaire
+
+
+			//algoUtil.dijkstraDeliveryRequest(delivReq);
+			roundSet.copy(Algorithms.solveTSP(map,delivReq, nbDeliveryMan));
+
 			//TODO : trouver une solution pour modifier la variable roundSet dans ce thread
-			roundSet.copy(algoUtil.solveTSP(delivReq, nbDeliveryMan));
 			
 			if (roundSet != null) {
 				Platform.runLater(() -> {

@@ -68,8 +68,8 @@ public class AlgoTest {
 		intersectionList.add(inter1);
 		intersectionList.add(inter5);
 		intersectionList.add(inter6);
-		Algorithms algo = new Algorithms (map);
-		Map<Long, Journey> dijkstra = algo.dijkstraOneToN (inter1, intersectionList);
+		//Algorithms algo = new Algorithms (map);
+		Map<Long, Journey> dijkstra = map.dijkstraOneToN (inter1, intersectionList);
 		
 		List<Section> sectionList1 = new ArrayList<Section> ();
 		
