@@ -1,16 +1,23 @@
 package Tests;
 import model.CityMap;
+import model.Delivery;
+import model.DeliveryRequest;
 import model.Intersection;
 import model.Journey;
+import model.Round;
+import model.RoundSet;
 import model.Section;
 import algo.Algorithms;
 import algo.ExceptionAlgo;
 
 import java.lang.Long;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -46,9 +53,10 @@ public class TSPTests {
 	Intersection inter6;
 	Intersection interIsole;
 	
+	
 	@Before
-	public void InitiliseClassAlgo() {
-		CityMap map =new CityMap();
+	public void InitiliseClassAlgo() throws ParseException {
+		map =new CityMap();
 		inter1 = new Intersection (41, 51.51, 1);
 		inter2 = new Intersection (42, 52.51, 2);
 		inter3 = new Intersection (43, 53.51, 3);
@@ -73,7 +81,7 @@ public class TSPTests {
 
 		section51=new Section (inter5, inter1, "Rue51", 2);
 		section31=new Section (inter3, inter1, "Rue31", 1);
-		section63=new Section (inter6, inter6, "Rue63", 1);
+		section63=new Section (inter6, inter3, "Rue63", 1);
 		
 		map.addSection(section12);
 		map.addSection(section13);
@@ -81,36 +89,182 @@ public class TSPTests {
 		map.addSection(section35);
 		map.addSection(section34);
 		map.addSection(section46);
-		map.addSection(section13);
-		this.map=map;
+		map.addSection(section56);
+		map.addSection(section51);
+		map.addSection(section31);
+		map.addSection(section63);
+		
+		
 	}
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
+	//TSP with 1 deliveryMan and 1 delivery (warehouse : 1 / deliveries : 5)
 	@Test
-	public void TSPTest() {
+	public void TSPTest() throws ParseException {
+		
+		//deliveryRequest
+		ArrayList<Delivery> listDeliveries = new ArrayList<>();
+		Delivery del = new Delivery(0, inter5);
+		listDeliveries.add(del);
+		
+		SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+    	Date startTime  = df.parse("8:0:0");
+    	
+    	DeliveryRequest dr=new DeliveryRequest(startTime,listDeliveries,inter1);
+    	
+    	
+		//journeys
+		List<Journey> journeys = new ArrayList<>();
+		List<Section> sectionList = new ArrayList<>();
+		sectionList.add(section13);
+		sectionList.add(section35);
+		Journey j1 = new Journey(inter1, inter5, sectionList, 4);
+		
+		List<Section> sectionList2 = new ArrayList<>();
+		sectionList2.add(section51);
+		Journey j2 = new Journey(inter5, inter1, sectionList2, 2);
+		
+		journeys.add(j1);
+		journeys.add(j2);
+		
+		//deliveries
+		ArrayList<Delivery> deliveries = new ArrayList<>();
+		Delivery d1 = new Delivery(0, inter1);
+		Delivery d2 = new Delivery(0, inter5);
+		deliveries.add(d1);
+		deliveries.add(d2);
+		
+		//rounds
+		ArrayList<Round> listeRound = new ArrayList<>();
+		Round r1 = new Round();
+		r1.setDeliveries(deliveries);
+		r1.setJourneys(journeys);
+		r1.setTotalLength(6.0);
+		r1.setDuration(6*0.2399998);
+		listeRound.add(r1);		
+		
+		
+		//roundSet	
+		RoundSet roundSetattendu = new RoundSet();	
+		roundSetattendu.setRounds(listeRound);
+		
+		roundSetattendu.setDuration(6*0.2399998);
+		
+		roundSetattendu.setTotalLength(6.0);
 		
 		
 		
-		/*if(theorique.size() != dijkstra.size()) {
-			   fail("map de taille différente");
-			   
-	   }
-		Set keysSections = theorique.keySet();
-		Iterator it_sec = keysSections.iterator();
-		while (it_sec.hasNext()){
-		   Object key = it_sec.next(); 
-		   if (dijkstra.get(key).getOrigin()!= theorique.get(key).getOrigin() || dijkstra.get(key).getDestination()!= theorique.get(key).getDestination() || dijkstra.get(key).getLength()!= theorique.get(key).getLength()) {
-			   fail("mauvaise origine, destination ou longueur");
-		   }
-		   List<Section> list_sec = theorique.get(key).getSectionList();
-		   for(Section s : list_sec) {
-			   if(dijkstra.get(key).getSectionList().indexOf(s)==-1) {
-				   fail("liste de Section non égale");
-				}
-		   }
-		}*/
+		RoundSet rs= Algorithms.solveTSP(map,dr, 1);
+		
+		compare(rs, roundSetattendu);
+		
 		return;
 	}
+	
+	//TSP with 1 deliveryMan and 2 delivery (warehouse : 1 / deliveries : 5, 6)
+		@Test
+		public void TSPTest2() throws ParseException {
+			
+			//deliveryRequest
+			ArrayList<Delivery> listDeliveries = new ArrayList<>();
+			Delivery del = new Delivery(0, inter5);
+			Delivery del2 = new Delivery(0, inter6);
+			listDeliveries.add(del);
+			listDeliveries.add(del2);
+			
+			SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+	    	Date startTime  = df.parse("8:0:0");
+	    	
+	    	DeliveryRequest dr=new DeliveryRequest(startTime,listDeliveries,inter1);
+	    	
+	    	
+			
+			//journeys
+			List<Journey> journeys = new ArrayList<>();
+			List<Section> sectionList = new ArrayList<>();
+			sectionList.add(section13);
+			sectionList.add(section35);
+			Journey j1 = new Journey(inter1, inter5, sectionList, 4);
+			
+			List<Section> sectionList2 = new ArrayList<>();
+			sectionList2.add(section56);
+			Journey j2 = new Journey(inter5, inter6, sectionList2, 5);
+			
+			List<Section> sectionList3 = new ArrayList<>();
+			sectionList3.add(section63);
+			sectionList3.add(section31);
+			Journey j3 = new Journey(inter6, inter1, sectionList3, 2);
+			
+			journeys.add(j1);
+			journeys.add(j2);
+			journeys.add(j3);
+			
+			//deliveries
+			ArrayList<Delivery> deliveries = new ArrayList<>();
+			Delivery d1 = new Delivery(0, inter1);
+			Delivery d2 = new Delivery(0, inter5);
+			Delivery d3 = new Delivery(0, inter6);
+			deliveries.add(d1);
+			deliveries.add(d2);
+			deliveries.add(d3);
+			
+			//rounds
+			ArrayList<Round> listeRound = new ArrayList<>();
+			Round r1 = new Round();
+			r1.setDeliveries(deliveries);
+			r1.setJourneys(journeys);
+			r1.setTotalLength(11.0);
+			r1.setDuration(11*0.2399998);
+			listeRound.add(r1);		
+			
+			
+			//roundSet	
+			RoundSet roundSetattendu = new RoundSet();	
+			roundSetattendu.setRounds(listeRound);
+			
+			roundSetattendu.setDuration(11*0.2399998);
+			
+			roundSetattendu.setTotalLength(6.0);
+			
+			
+			
+			RoundSet rs= Algorithms.solveTSP(map,dr, 1);
+			
+			compare(rs, roundSetattendu);
+			return;
+		
+	}
+	
+	private void compare(RoundSet roundSet, RoundSet roundSet2) {
+		assert(roundSet.getDuration()==roundSet2.getDuration());
+		//assert(roundSet.getTotalLength()==roundSet2.getTotalLength());
+		assert(roundSet.getRounds().size()==roundSet2.getRounds().size());
+		for(int i=0 ; i<roundSet.getRounds().size() ; i++) {
+			//assert(roundSet.getRounds().get(i).getTotalLength()==roundSet2.getRounds().get(i).getTotalLength());
+		   //	assert(roundSet.getRounds().get(i).getDuration()==roundSet2.getRounds().get(i).getDuration());
+			assert(roundSet.getRounds().get(i).getDeliveries().size() == roundSet2.getRounds().get(i).getDeliveries().size());
+			for(int j=0 ; j<roundSet.getRounds().get(i).getDeliveries().size() ; j++) {
+				assert(roundSet.getRounds().get(i).getDeliveries().get(j).getAdress().equals(roundSet2.getRounds().get(i).getDeliveries().get(j).getAdress()));
+			}
+			
+			assert(roundSet.getRounds().get(i).getJourneys().size()==roundSet2.getRounds().get(i).getJourneys().size());
+			for(int k=0 ; k<roundSet.getRounds().get(i).getJourneys().size() ; k++) {
+				
+				assert(roundSet.getRounds().get(i).getJourneys().get(k).getOrigin().equals(roundSet2.getRounds().get(i).getJourneys().get(k).getOrigin()));
+				
+				assert(roundSet.getRounds().get(i).getJourneys().get(k).getDestination().equals(roundSet2.getRounds().get(i).getJourneys().get(k).getDestination()));
+				
+				assert(roundSet.getRounds().get(i).getJourneys().get(k).getLength() == roundSet2.getRounds().get(i).getJourneys().get(k).getLength());
+				
+				assert(roundSet.getRounds().get(i).getJourneys().get(k).getSectionList().size() == roundSet2.getRounds().get(i).getJourneys().get(k).getSectionList().size());
+				for(int h=0 ; h<roundSet.getRounds().get(i).getJourneys().get(k).getSectionList().size() ; h++) {
+					assert(roundSet.getRounds().get(i).getJourneys().get(k).getSectionList().get(h).equals(roundSet2.getRounds().get(i).getJourneys().get(k).getSectionList().get(h)));
+				}
+			}
+		}
+	}
 }
+
+
