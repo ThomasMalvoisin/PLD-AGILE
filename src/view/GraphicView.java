@@ -28,7 +28,7 @@ import model.Round;
 import model.RoundSet;
 import model.Section;
 
-public class GraphicView implements Observer{
+public class GraphicView implements Observer {
 	// Implémentera le design pattern observer pour : deliveryRequest, peut être
 	// autre chose ?
 
@@ -39,8 +39,9 @@ public class GraphicView implements Observer{
 	Group deliveries;
 	Group roundSet;
 	Group notDeliveriesIntersections;
-	
-	Color[] colors = {Color.ROYALBLUE, Color.BLACK, Color.ORANGE, Color.BROWN, Color.GREEN, Color.GOLD, Color.BLUEVIOLET, Color.YELLOW, Color.AQUAMARINE, Color.CORAL}; 
+
+	Color[] colors = { Color.ROYALBLUE, Color.BLACK, Color.ORANGE, Color.BROWN, Color.GREEN, Color.GOLD,
+			Color.BLUEVIOLET, Color.YELLOW, Color.AQUAMARINE, Color.CORAL };
 
 	DeliveryPointsListener dpl;
 
@@ -90,27 +91,28 @@ public class GraphicView implements Observer{
 		ArrayList<Section> listeSection = new ArrayList<>();
 		rs.addObserver(this);
 		this.rs = rs;
-		int i=0;
-		double delta=0.0;
+		int i = 0;
+		double delta = 0.0;
 		for (Round r : rs.getRounds()) {
 			double opacity = 1.0;
 			int nbJourneys = r.getJourneys().size();
 			for (Journey j : r.getJourneys()) {
-				
+
 				for (Section s : j.getSectionList()) {
-			    	//delta=10.0/(Collections.frequency(listeSection, s));
+					// delta=10.0/(Collections.frequency(listeSection, s));
 					System.out.println(s);
 					System.out.println(s.getInverse());
-			    delta=3.5*(Collections.frequency(listeSection, s)+Collections.frequency(listeSection, s.getInverse()));
-			    	//delta=3.5*(Collections.frequency(listeSection, s));
-				    
+//					delta = 3.5 * (Collections.frequency(listeSection, s)
+//							+ Collections.frequency(listeSection, s.getInverse()));
+					// delta=3.5*(Collections.frequency(listeSection, s));
+
 					drawRoundSection(s, colors[i], delta, opacity);
 					listeSection.add(s);
 				}
-				opacity=opacity-0.75/nbJourneys;
+//				opacity = opacity - 0.75 / nbJourneys;
 				System.out.println(opacity);
-				}
-			};
+
+			}
 			i++;
 		}
 		pane.getChildren().add(roundSet);
@@ -130,9 +132,8 @@ public class GraphicView implements Observer{
 		pane.getChildren().add(deliveries);
 	}
 
-
 	private void drawRoundSection(Section sec, Color color, double delta, double opacity) {
-		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()), 3, color,delta,opacity);
+		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()), 3, color, delta, opacity);
 		roundSet.getChildren().add(l);
 	}
 
@@ -157,40 +158,39 @@ public class GraphicView implements Observer{
 		// GraphicsContext gc = canvas.getGraphicsContext2D();
 		// gc.strokeLine(departure[0], departure[1], arrival[0], arrival[1]);
 
-		double x=0;
-		double y=0;
-		if(delta!=0) {
-			if( (arrival[1]-departure[1]) != 0) {
-			 x = delta/Math.sqrt(1+((arrival[0]-departure[0])/(arrival[1]-departure[1]))*((arrival[0]-departure[0])/(arrival[1]-departure[1])));
-			 y = Math.sqrt(delta*delta-x*x);
-			}else {
-			 x=0;
-			 y=delta;
+		double x = 0;
+		double y = 0;
+		if (delta != 0) {
+			if ((arrival[1] - departure[1]) != 0) {
+				x = delta / Math.sqrt(1 + ((arrival[0] - departure[0]) / (arrival[1] - departure[1]))
+						* ((arrival[0] - departure[0]) / (arrival[1] - departure[1])));
+				y = Math.sqrt(delta * delta - x * x);
+			} else {
+				x = 0;
+				y = delta;
 			}
 		}
-		Line l = new Line(departure[0]-x, departure[1]-y, arrival[0]-x, arrival[1]-y);
+		Line l = new Line(departure[0] - x, departure[1] - y, arrival[0] - x, arrival[1] - y);
 		l.setOpacity(opacity);
-		/*if(deltaY!=0) {
-			l.getStrokeDashArray().addAll(deltaY);
-		}*/
-		
+		/*
+		 * if(deltaY!=0) { l.getStrokeDashArray().addAll(deltaY); }
+		 */
+
 		l.setStroke(p);
 		l.setStrokeWidth(width);
-		
 
 		return l;
 	}
 
-	private void drawIntersectionPoint (Intersection i)
-	{
-		Circle c = new Circle(geoToCoord(i)[0],geoToCoord(i)[1], 5);
+	private void drawIntersectionPoint(Intersection i) {
+		Circle c = new Circle(geoToCoord(i)[0], geoToCoord(i)[1], 5);
 		c.setFill(Color.WHITE);
 		c.setOpacity(0);
 		notDeliveriesIntersections.getChildren().add(c);
 		c.getProperties().put("INTERSECTION", i);
 		c.addEventHandler(MouseEvent.ANY, dpl);
 	}
-	
+
 	public void drawDeliveryPoint(Delivery d) {
 //		drawPoint(geoToCoord(d.getAdress()),5, Color.RED, d);
 		Circle c = makePoint(geoToCoord(d.getAdress()), 5, Color.RED);
@@ -220,22 +220,22 @@ public class GraphicView implements Observer{
 //	}
 
 	public void setDeliverySelected(Delivery d) {
-		for(Node n : deliveries.getChildren()) {
-			if(d.equals(n.getProperties().get("DELIVERY"))) {
+		for (Node n : deliveries.getChildren()) {
+			if (d.equals(n.getProperties().get("DELIVERY"))) {
 				((Circle) n).setFill(Color.AQUA);
 				((Circle) n).setRadius(7);
-			}else if (n.getProperties().get("DELIVERY")==null){
+			} else if (n.getProperties().get("DELIVERY") == null) {
 				((Circle) n).setFill(Color.FORESTGREEN);
-			}else {
+			} else {
 				((Circle) n).setFill(Color.RED);
 				((Circle) n).setRadius(5);
 			}
 		}
 	}
-	
+
 	public void setIntersectionSelected(Intersection i) {
 		for (Node n : notDeliveriesIntersections.getChildren()) {
-			if(i.equals(n.getProperties().get("INTERSECTION"))) {
+			if (i.equals(n.getProperties().get("INTERSECTION"))) {
 				((Circle) n).setFill(Color.AQUA);
 				((Circle) n).setOpacity(1);
 			} else {
