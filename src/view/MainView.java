@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
@@ -49,6 +50,7 @@ public class MainView implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
 		controller = new Controller(this);
 		gv = new GraphicView(pane);
 		tv = new TextView(txtArea);
@@ -70,7 +72,7 @@ public class MainView implements Initializable{
 		}
 		deliveryManCombo.getItems().addAll(values);
 		deliveryManCombo.setValue(1);
-		
+
 	}
 	
 	public void clickLoadMap(){
@@ -138,5 +140,17 @@ public class MainView implements Initializable{
 
 		alert.showAndWait();
 		
+	}
+	
+	public void zoomIn() {
+		gv.zoomIn();
+	}
+	
+	public void zoomOut() {
+		gv.zoomOut();
+	}
+	
+	public void zoomAuto() {
+		gv.zoomAuto();
 	}
 }

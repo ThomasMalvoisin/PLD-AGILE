@@ -43,6 +43,19 @@
                               <MenuItem mnemonicParsing="false" onAction="#clickLoadDeliveryRequest" text="Load New Delivery Request" />
                       </items>
                     </Menu>
+                        <Menu mnemonicParsing="false" text="Edit">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#clickLoadMap" text="Undo" />
+                              <MenuItem mnemonicParsing="false" onAction="#clickLoadDeliveryRequest" text="Redo" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="View">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#zoomAuto" text="Zoom Auto" />
+                              <MenuItem mnemonicParsing="false" onAction="#zoomIn" text="Zoom IN" />
+                              <MenuItem mnemonicParsing="false" onAction="#zoomOut" text="Zoom OUT" />
+                           </items>
+                        </Menu>
                         <Menu mnemonicParsing="false" text="Tools">
                            <items>
                               <MenuItem mnemonicParsing="false" onAction="#clickLoadMap" text="Compute Round Set" />

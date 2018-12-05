@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Event;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,12 +14,14 @@ import java.util.Iterator;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.transform.Scale;
 import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
@@ -50,8 +53,31 @@ public class GraphicView implements Observer {
 		this.deliveries = new Group();
 		this.roundSet = new Group();
 		this.notDeliveriesIntersections = new Group();
+		
+		pane.setOnScroll(event -> {
+			zoom(event.getDeltaY()*0.1,event.getX(),event.getY());
+	        
+	    });
+		
+		
+		pane.setOnMousePressed(event ->{
+			double mouseXPos = event.getX();
+			double mouseYPos = event.getY();
+			
+			initDrag(mouseXPos,mouseYPos);
+		});
+			
 	}
 
+	private void initDrag(double mouseXPos, double mouseYPos) {
+		pane.setOnMouseDragged(event -> {
+
+		    pane.setTranslateX(event.getX() + pane.getTranslateX() - mouseXPos);
+		    pane.setTranslateY(event.getY() + pane.getTranslateY() - mouseYPos);
+		    event.consume();
+		});
+	}
+	
 	public void clear() {
 //		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		pane.getChildren().clear();
@@ -245,6 +271,44 @@ public class GraphicView implements Observer {
 		}
 	}
 
+	public void zoomIn() {
+		
+		pane.setScaleX(pane.getScaleX() + 0.4);
+		pane.setScaleY(pane.getScaleY() + 0.4);
+		
+	}
+	
+	public void zoomOut() {
+		
+		if(pane.getScaleX() - 0.4 < 1) {
+			
+			return;
+		}
+		
+		
+		pane.setScaleX(pane.getScaleX() - 0.4);
+		pane.setScaleY(pane.getScaleY() - 0.4);
+	}
+	
+	public void zoomAuto() {
+		pane.setScaleX(1);
+		pane.setScaleY(1);
+		pane.setTranslateX(0);
+		pane.setTranslateY(0);
+		
+	}
+	
+	public void zoom(double zoomFactor, double xFocus, double yFocus) {
+		
+		if(pane.getScaleX() + zoomFactor < 1) {
+			
+			return;
+		}
+		pane.setScaleX(pane.getScaleX() + zoomFactor);
+		pane.setScaleY(pane.getScaleY() + zoomFactor);
+	}
+	
+	
 	public void setDeliveryPointsListener(DeliveryPointsListener dpl) {
 		this.dpl = dpl;
 	}
