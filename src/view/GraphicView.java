@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -85,13 +86,29 @@ public class GraphicView implements Observer{
 	}
 
 	public void drawRoundSet(RoundSet rs) {
+		drawDeliveryRequest(dr);
+		ArrayList<Section> listeSection = new ArrayList<>();
 		rs.addObserver(this);
 		this.rs = rs;
 		int i=0;
+		double delta=0.0;
 		for (Round r : rs.getRounds()) {
+			double opacity = 1.0;
+			int nbJourneys = r.getJourneys().size();
 			for (Journey j : r.getJourneys()) {
+				
 				for (Section s : j.getSectionList()) {
-					drawRoundSection(s, colors[i]);
+			    	//delta=10.0/(Collections.frequency(listeSection, s));
+					System.out.println(s);
+					System.out.println(s.getInverse());
+			    delta=3.5*(Collections.frequency(listeSection, s)+Collections.frequency(listeSection, s.getInverse()));
+			    	//delta=3.5*(Collections.frequency(listeSection, s));
+				    
+					drawRoundSection(s, colors[i], delta, opacity);
+					listeSection.add(s);
+				}
+				opacity=opacity-0.75/nbJourneys;
+				System.out.println(opacity);
 				}
 			};
 			i++;
@@ -113,14 +130,14 @@ public class GraphicView implements Observer{
 		pane.getChildren().add(deliveries);
 	}
 
-	private void drawRoundSection(Section sec, Color color) {
 
-		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()), 3, color);
+	private void drawRoundSection(Section sec, Color color, double delta, double opacity) {
+		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()), 3, color,delta,opacity);
 		roundSet.getChildren().add(l);
 	}
 
 	private void drawSection(Section sec) {
-		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()), 1, Color.WHITE);
+		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()), 1, Color.WHITE, 0, 1);
 		pane.getChildren().add(l);
 	}
 
@@ -136,13 +153,30 @@ public class GraphicView implements Observer{
 		return result;
 	}
 
-	private Line drawLine(double[] departure, double[] arrival, double width, Paint p) {
+	private Line drawLine(double[] departure, double[] arrival, double width, Paint p, double delta, double opacity) {
 		// GraphicsContext gc = canvas.getGraphicsContext2D();
 		// gc.strokeLine(departure[0], departure[1], arrival[0], arrival[1]);
 
-		Line l = new Line(departure[0], departure[1], arrival[0], arrival[1]);
+		double x=0;
+		double y=0;
+		if(delta!=0) {
+			if( (arrival[1]-departure[1]) != 0) {
+			 x = delta/Math.sqrt(1+((arrival[0]-departure[0])/(arrival[1]-departure[1]))*((arrival[0]-departure[0])/(arrival[1]-departure[1])));
+			 y = Math.sqrt(delta*delta-x*x);
+			}else {
+			 x=0;
+			 y=delta;
+			}
+		}
+		Line l = new Line(departure[0]-x, departure[1]-y, arrival[0]-x, arrival[1]-y);
+		l.setOpacity(opacity);
+		/*if(deltaY!=0) {
+			l.getStrokeDashArray().addAll(deltaY);
+		}*/
+		
 		l.setStroke(p);
 		l.setStrokeWidth(width);
+		
 
 		return l;
 	}

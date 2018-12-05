@@ -47,6 +47,7 @@ public class StateDeliveryLoaded extends StateDefault {
 
 	@Override
 
+
 	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan, RoundSet roundSet) {
 
 		new Thread(() -> {
@@ -59,6 +60,7 @@ public class StateDeliveryLoaded extends StateDefault {
 			roundSet.copy(Algorithms.solveTSP(map,delivReq, nbDeliveryMan));
 
 			//TODO : trouver une solution pour modifier la variable roundSet dans ce thread
+
 			
 			if (roundSet != null) {
 				Platform.runLater(() -> {

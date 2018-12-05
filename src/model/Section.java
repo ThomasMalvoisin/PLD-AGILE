@@ -34,6 +34,10 @@ public class Section{
 	public String toString() {
 		   return "nom : "+name +" origine : "+origin+" destination : "+destination;
 	}
+	
+	public Section getInverse() {
+		   return new Section(destination, origin, name, length);
+	}
 
 	@Override
 	public boolean equals(Object obj) {
