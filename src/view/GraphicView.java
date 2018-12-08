@@ -32,13 +32,13 @@ import model.RoundSet;
 import model.Section;
 
 public class GraphicView implements Observer {
-	// Implémentera le design pattern observer pour : deliveryRequest, peut être
-	// autre chose ?
 
 	Pane pane;
+	
 	CityMap map;
 	DeliveryRequest dr;
 	RoundSet rs;
+	
 	Group deliveries;
 	Group roundSet;
 	Group notDeliveriesIntersections;
@@ -79,7 +79,6 @@ public class GraphicView implements Observer {
 	}
 	
 	public void clear() {
-//		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		pane.getChildren().clear();
 	}
 
@@ -95,8 +94,7 @@ public class GraphicView implements Observer {
 	public void drawCityMap(CityMap cityMap) {
 		clear();
 		this.map = cityMap;
-		ArrayList<Section> listSections = cityMap.getSections();
-		for (Section section : listSections) {
+		for (Section section : cityMap.getSections()) {
 			drawSection(section);
 		}
 	}
@@ -137,6 +135,7 @@ public class GraphicView implements Observer {
 				}
 //				opacity = opacity - 0.75 / nbJourneys;
 				System.out.println(opacity);
+				
 
 			}
 			i++;

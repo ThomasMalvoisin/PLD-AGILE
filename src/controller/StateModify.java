@@ -29,7 +29,7 @@ public class StateModify extends StateDefault {
 	@Override
 	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest) {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Charger une demande de livraison");
+		fileChooser.setTitle("Open a delivery request");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
 		File file = fileChooser.showOpenDialog(new Stage());
 
@@ -43,8 +43,7 @@ public class StateModify extends StateDefault {
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
 					| ParseException e) {
 				Delivery.currentId = temp;
-				// TODO : mv.printMessage("Unable to open the selected file"); pour prévenir
-				// l'utilisateur
+				mainView.displayMessage("Unable to load delivery request", "Please choose a valid delivery request file. Make sure that all the delivery point's locations are available in the current loaded map !");
 				e.printStackTrace();
 			}
 		}
@@ -70,10 +69,7 @@ public class StateModify extends StateDefault {
 
 	@Override
 	public void delete(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet) {
-		// TODO : Recalculer le morceau de tournée qui a été modifié
-
-		System.out.println("Delete " + deliverySelected.getId());
-		deliveryRequest.delete(deliverySelected);
+		deliveryRequest.deleteDelivery(deliverySelected);
 		roundSet.deleteDelivery(map, deliverySelected);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}

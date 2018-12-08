@@ -43,7 +43,6 @@ public class MainView implements Initializable{
 	Controller controller;
 	ResizeListener rl;
 	DeliveryPointsListener dpl;
-	ButtonListener bl;
 	
 	GraphicView gv;
 	TextView tv;
@@ -57,7 +56,6 @@ public class MainView implements Initializable{
 		
 		rl = new ResizeListener(controller);
 		dpl = new DeliveryPointsListener(controller);
-		bl = new ButtonListener(controller);
 		
 		gv.setDeliveryPointsListener(dpl);
 		tv.setDeliveryPointsListener(dpl);

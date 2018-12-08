@@ -65,7 +65,7 @@ public class DeliveryRequest extends Observable{
 				deliveryRequest.getWarehouse().getId());
 	}
 	
-	public void delete(Delivery d) {
+	public void deleteDelivery(Delivery d) {
 		requestDeliveries.remove(d);
 		setChanged();
 		notifyObservers(d);

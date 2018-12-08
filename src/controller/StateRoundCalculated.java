@@ -22,7 +22,7 @@ public class StateRoundCalculated extends StateDefault {
 	@Override
 	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest) {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Charger une demande de livraison");
+		fileChooser.setTitle("Open a delivery request");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
 		File file = fileChooser.showOpenDialog(new Stage());
 
@@ -66,10 +66,4 @@ public class StateRoundCalculated extends StateDefault {
 		Controller.setCurrentState(Controller.stateAdd1);
 	}
 	
-	@Override
-	public void delete(MainView mv, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
-		mv.printMessage("Please select a delivery point to delete...");
-		Controller.setCurrentState(Controller.stateDelete);
-	}
-
 }

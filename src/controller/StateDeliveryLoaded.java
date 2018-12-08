@@ -25,7 +25,7 @@ public class StateDeliveryLoaded extends StateDefault {
 	@Override
 	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest) {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Charger une demande de livraison");
+		fileChooser.setTitle("Open a delivery request");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
 		File file = fileChooser.showOpenDialog(new Stage());
 
@@ -58,8 +58,6 @@ public class StateDeliveryLoaded extends StateDefault {
 
 			roundSet.copy(Algorithms.solveTSP(map,delivReq, nbDeliveryMan));
 			
-			// TODO : trouver une solution pour modifier la variable roundSet dans ce thread
-
 			if (roundSet != null) {
 				Platform.runLater(() -> {
 					roundSet.calculTime(delivReq);
@@ -72,7 +70,6 @@ public class StateDeliveryLoaded extends StateDefault {
 			Platform.runLater(() -> {
 				mainView.setLoader(false);
 			});
-			// System.out.println(result.getRounds().get(0).getDuration());
 		}).start();
 	}
 

@@ -23,7 +23,7 @@ public class StateDefault implements State {
 	@Override
 	public void loadMap(MainView mainView, CityMap cityMap){
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Charger un plan");
+		fileChooser.setTitle("Open a map");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(" MAP XML", "*.xml"));
 		File file = fileChooser.showOpenDialog(new Stage());
 
@@ -33,7 +33,6 @@ public class StateDefault implements State {
 				mainView.printCityMap(cityMap);
 				Controller.setCurrentState(Controller.stateMapLoaded);
 			} catch (ParserConfigurationException | SAXException | IOException | ExceptionXML e) {
-				
 				mainView.displayMessage("Cannot load this map file","Please select a valid file");
 				e.printStackTrace();
 			}

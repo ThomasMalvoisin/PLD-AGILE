@@ -35,7 +35,6 @@ import model.RoundSet;
 import model.Section;
 
 public class TextView implements Observer{
-
 	private DeliveryPointsListener dpl;
 	private CityMap map;
 	private RoundSet roundSet;
@@ -178,8 +177,7 @@ public class TextView implements Observer{
 	public void setDeliveryPointsListener(DeliveryPointsListener dpl) {
 		this.dpl = dpl;
 	}
-	
-	
+
 	@Override
 	public void update(Observable o, Object a) {
 		printRoundSet(map, roundSet);

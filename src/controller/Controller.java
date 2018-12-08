@@ -21,7 +21,6 @@ public class Controller {
 	protected static final StateAdd1 stateAdd1 = new StateAdd1();
 	protected static final StateAdd2 stateAdd2 = new StateAdd2();
 	protected static final StateModify stateModify = new StateModify();
-	protected static final StateDelete stateDelete = new StateDelete();
 
 	public Controller(MainView mv) {
 		this.mv = mv;

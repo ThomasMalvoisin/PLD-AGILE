@@ -16,7 +16,6 @@ import model.Delivery;
 import model.DeliveryRequest;
 import model.RoundSet;
 import view.MainView;
-import view.MapViewBuilder;
 import xml.DeliveryRequestDeserializer;
 import xml.ExceptionXML;
 
@@ -25,7 +24,7 @@ public class StateMapLoaded extends StateDefault {
 	@Override
 	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest){
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Charger une demande de livraison");
+		fileChooser.setTitle("Open a delivery request");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Delivery Request XML", "*.xml"));
 		File file = fileChooser.showOpenDialog(new Stage());
 

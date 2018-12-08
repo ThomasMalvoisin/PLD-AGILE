@@ -96,7 +96,7 @@
                                     </VBox>
                                  </children>
                               </HBox>
-                              <Label alignment="CENTER" text="Upload Files">
+                              <Label alignment="CENTER" text="Open Files">
                                  <font>
                                     <Font size="10.0" />
                                  </font>
