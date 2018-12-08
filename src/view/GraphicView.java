@@ -305,6 +305,10 @@ public class GraphicView implements Observer {
 		
 		if(pane.getScaleX() + zoomFactor < 1) {
 			
+			pane.setScaleX(1);
+			pane.setScaleY(1);
+			pane.setTranslateX(0);
+			pane.setTranslateY(0);
 			return;
 		}
 		pane.setScaleX(pane.getScaleX() + zoomFactor);
