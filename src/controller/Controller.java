@@ -1,5 +1,6 @@
 package controller;
 
+import controller.ListCommands;
 import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
@@ -12,6 +13,8 @@ public class Controller {
 	private CityMap map;
 	private DeliveryRequest delivReq;
 	private RoundSet result;
+	
+	private ListCommands listCdes;
 	private MainView mv;
 	protected static State currentState;
 	protected static final StateInit stateInit = new StateInit();
@@ -27,6 +30,7 @@ public class Controller {
 		map = new CityMap();
 		delivReq = new DeliveryRequest();
 		result = new RoundSet();
+		listCdes = new ListCommands();
 		currentState = stateInit;
 	}
 
@@ -43,7 +47,7 @@ public class Controller {
 	}
 
 	public void roundsCompute(int nbDeliveryMan) {
-		currentState.roundsCompute(mv, map, delivReq, nbDeliveryMan, result);
+		currentState.roundsCompute(mv, map, delivReq, nbDeliveryMan, result, listCdes);
 	}
 
 	public void refreshView() {
@@ -55,15 +59,29 @@ public class Controller {
 	}
 
 	public void selectDelivery(Delivery delivery) {
-		currentState.selectDelivery(mv, map, delivReq, result, delivery);
+		currentState.selectDelivery(mv, map, delivReq, result, delivery, listCdes);
 	}
 
 	public void buttonDelete() {
-		currentState.delete(mv, map, delivReq, result);
+		currentState.delete(mv, map, delivReq, result, listCdes);
 	}
 
 	public void selectIntersection(Intersection i) {
 		currentState.selectIntersection(mv, i);
 	}
+	
+
+	public void undo(){
+		currentState.undo(listCdes);
+	}
+
+	public void redo(){
+		currentState.redo(listCdes);
+	}
+	
+	public void discardChanges(){
+		currentState.discardChanges(listCdes);
+	}
+	
 
 }

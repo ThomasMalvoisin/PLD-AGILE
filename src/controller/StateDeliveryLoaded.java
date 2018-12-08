@@ -47,9 +47,8 @@ public class StateDeliveryLoaded extends StateDefault {
 	}
 
 	@Override
+	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan, RoundSet roundSet,  ListCommands listeDeCdes) {
 
-	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan,
-			RoundSet roundSet) {
 
 		new Thread(() -> {
 			Platform.runLater(() -> {
@@ -69,6 +68,7 @@ public class StateDeliveryLoaded extends StateDefault {
 					mainView.setMapButtonEnable(true);
 					mainView.setDeliveryButtonEnable(true);
 					Controller.setCurrentState(Controller.stateRoundCalculated);
+					listeDeCdes.reset();
 				});
 			}
 
@@ -85,7 +85,7 @@ public class StateDeliveryLoaded extends StateDefault {
 	}
 	
 	@Override
-	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,Delivery delivery) {
+	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,Delivery delivery,  ListCommands listeDeCdes) {
 		// TODO : changement dans l'ihm en appelant des fonctions de mainView : afficher
 		// un message à l'utilisateur pour lui dire quoi faire
 

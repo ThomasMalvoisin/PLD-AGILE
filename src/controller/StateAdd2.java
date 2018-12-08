@@ -20,11 +20,12 @@ public class StateAdd2 extends StateDefault {
 	}
 	
 	@Override
-	public void selectDelivery(MainView mv, CityMap map, DeliveryRequest delivReq, RoundSet result, Delivery delivery) {
+	public void selectDelivery(MainView mv, CityMap map, DeliveryRequest delivReq, RoundSet result, Delivery delivery,  ListCommands listeDeCdes) {
 		mv.printMessage("");
 		Delivery d = new Delivery(5, intersectionSelected); //TODO: permettre � l'utilisateur de saisir la dur�e
-		delivReq.addDelivery(d);
-		result.addDelivery(map, d, delivery);
+		/*delivReq.addDelivery(d);
+		result.addDelivery(map, d, delivery);*/
+		listeDeCdes.ajoute(new ComAdd(map,delivReq, result, d, delivery));
 		//TODO :faire les autres modifications : mettre � jour le roundset...
 		mv.setAddButtonEnable(true);
 		mv.setComputeButtonEnable(false);

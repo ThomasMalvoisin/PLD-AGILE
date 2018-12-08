@@ -167,6 +167,47 @@
                               </Label>
                            </children>
                         </VBox>
+                        <Separator orientation="VERTICAL" />
+                        <VBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <VBox alignment="CENTER" onMouseClicked="#undo" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                       <children>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                               <!--   <Image url="@../images/add.png" /> -->
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Undo" />
+                                       </children>
+                                    </VBox>
+                                    <Separator orientation="VERTICAL" />
+                                    <VBox alignment="CENTER" onMouseClicked="#redo" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                       <children>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                               <!--  <Image url="@../images/delete.png" />  -->
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Redo" />
+                                       </children>
+                                    </VBox>
+                                    <Separator orientation="VERTICAL" />
+                                    <VBox alignment="CENTER" onMouseClicked="#discardChanges" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                       <children>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                               <!--  <Image url="@../images/delete.png" />  -->
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="120.0" text="Discard changes" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </items>
                   </ToolBar>
                   <AnchorPane prefHeight="80000.0" prefWidth="640.0">

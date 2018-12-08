@@ -56,7 +56,7 @@ public class StateRoundCalculated extends StateDefault {
 	}
 
 	@Override
-	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,Delivery delivery) {
+	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,Delivery delivery,  ListCommands listeDeCdes) {
 		// TODO : changement dans l'ihm en appelant des fonctions de mainView : afficher
 		// un message à l'utilisateur pour lui dire quoi faire
 
@@ -81,4 +81,18 @@ public class StateRoundCalculated extends StateDefault {
 		Controller.setCurrentState(Controller.stateAdd1);
 	}
 	
+	@Override
+	public void undo(ListCommands listeDeCdes){
+		listeDeCdes.undo();
+	}
+
+	@Override
+	public void redo(ListCommands listeDeCdes){
+		listeDeCdes.redo();
+	}
+	
+	@Override
+	public void discardChanges(ListCommands listeDeCdes){
+		listeDeCdes.discard();
+	}
 }

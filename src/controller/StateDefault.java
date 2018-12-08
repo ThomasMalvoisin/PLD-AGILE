@@ -49,7 +49,7 @@ public class StateDefault implements State {
 	}
 
 	@Override
-	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan, RoundSet roundSet) {
+	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan, RoundSet roundSet, ListCommands listeDeCdes) {
 	}
 
 	@Override
@@ -57,11 +57,11 @@ public class StateDefault implements State {
 	}
 
 	@Override
-	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet, Delivery delivery) {		
+	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet, Delivery delivery, ListCommands listeDeCdes) {		
 	}
 
 	@Override
-	public void delete(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
+	public void delete(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet, ListCommands listeDeCdes) {
 		
 	}
 
@@ -71,6 +71,18 @@ public class StateDefault implements State {
 
 	@Override
 	public void add(MainView mv) {
+	}
+	
+	@Override
+	public void undo(ListCommands listeDeCdes) {
+	}
+	
+	@Override
+	public void redo(ListCommands listeDeCdes) {
+	}
+	
+	@Override
+	public void discardChanges(ListCommands listeDeCdes) {
 	}
 	
 }

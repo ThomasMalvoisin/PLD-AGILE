@@ -120,6 +120,18 @@ public class MainView implements Initializable{
 		controller.add();
 	}
 	
+	public void undo(){
+		controller.undo();
+	}
+	
+	public void redo(){
+		controller.redo();
+	}
+	
+	public void discardChanges(){
+		controller.discardChanges();
+	}
+	
 	public void printCityMap(CityMap map) {
 		tv.clearTextView();
 		gv.drawCityMap(map);

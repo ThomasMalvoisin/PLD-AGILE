@@ -64,7 +64,7 @@ public class StateModify extends StateDefault {
 
 	@Override
 	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
-			Delivery delivery) {
+			Delivery delivery,  ListCommands listeDeCdes) {
 		// TODO : changement dans l'ihm en appelant des fonctions de mainView : afficher
 		// un message à l'utilisateur pour lui dire quoi faire
 		mainView.setDeliverySelected(delivery);
@@ -78,9 +78,11 @@ public class StateModify extends StateDefault {
 	}
 
 	@Override
-	public void delete(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet) {
-		deliveryRequest.deleteDelivery(deliverySelected);
-		roundSet.deleteDelivery(map, deliverySelected);
+	public void delete(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet, ListCommands listeDeCdes) {
+		System.out.println("Delete " + deliverySelected.getId());
+		/*deliveryRequest.delete(deliverySelected);
+		roundSet.deleteDelivery(map, deliverySelected);*/
+		listeDeCdes.ajoute(new ComDelete(map,deliveryRequest, roundSet, deliverySelected));
 		mainView.setAddButtonEnable(true);
 		mainView.setComputeButtonEnable(false);
 		mainView.setDeleteButtonEnable(false);

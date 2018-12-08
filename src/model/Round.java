@@ -139,7 +139,7 @@ public class Round {
 					.collect(Collectors.toCollection(ArrayList::new));
 			if (tempJourneys.size() == 1) {
 				Journey newJourney = tempJourneys.get(0);
-				journeys.add(journeyBetweenIndex, newJourney);
+				journeys.add(journeyBetweenIndex +1, newJourney);
 			}
 		}
 		deliveries.add(deliveryBeforeIndex + 1, d);
