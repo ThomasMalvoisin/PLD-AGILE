@@ -155,8 +155,8 @@ public class TSPTests {
 		roundSetattendu.setTotalLength(6.0);
 		
 		
-		
-		RoundSet rs= Algorithms.solveTSP(map,dr, 1);
+		RoundSet rs = new RoundSet();
+		Algorithms.solveTSP(rs, map,dr, 1);
 		
 		compare(rs, roundSetattendu);
 		
@@ -229,8 +229,8 @@ public class TSPTests {
 			roundSetattendu.setTotalLength(6.0);
 			
 			
-			
-			RoundSet rs= Algorithms.solveTSP(map,dr, 1);
+			RoundSet rs = new RoundSet();
+			Algorithms.solveTSP(rs, map,dr, 1);
 			
 			compare(rs, roundSetattendu);
 			return;

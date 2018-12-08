@@ -124,6 +124,10 @@ public class MainView implements Initializable{
 		controller.add();
 	}
 	
+	public void clickStopAlgo(){
+		controller.stopAlgo();
+	}
+		
 	public void undo(){
 		controller.undo();
 	}

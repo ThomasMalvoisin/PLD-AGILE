@@ -89,4 +89,8 @@ public class StateDefault implements State {
 	public void discardChanges(ListCommands listeDeCdes) {
 	}
 	
+	@Override
+	public void stopAlgo() {
+	}
+	
 }

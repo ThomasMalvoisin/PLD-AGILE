@@ -46,6 +46,8 @@ public class RoundSet extends Observable {
 		rounds = new ArrayList<Round>(roundSet.rounds);
 		duration = roundSet.duration;
 		totalLength = roundSet.totalLength;
+		setChanged();
+		notifyObservers();
 	}
 
 	public void deleteDelivery(CityMap map, Delivery d) {

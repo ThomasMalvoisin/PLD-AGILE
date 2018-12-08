@@ -177,6 +177,25 @@
                               </Label>
                            </children>
                         </VBox>
+                         <Separator orientation="VERTICAL" />
+                        <VBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <VBox alignment="CENTER" onMouseClicked="#clickStopAlgo" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                       <children>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/stop.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Stop" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                         <Separator orientation="VERTICAL" />
                         <VBox alignment="CENTER" spacing="5.0">
                            <children>

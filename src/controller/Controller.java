@@ -20,6 +20,7 @@ public class Controller {
 	protected static final StateInit stateInit = new StateInit();
 	protected static final StateMapLoaded stateMapLoaded = new StateMapLoaded();
 	protected static final StateDeliveryLoaded stateDeliveryLoaded = new StateDeliveryLoaded();
+	protected static final StateRoundCalculating stateRoundCalculating = new StateRoundCalculating();
 	protected static final StateRoundCalculated stateRoundCalculated = new StateRoundCalculated();
 	protected static final StateAdd1 stateAdd1 = new StateAdd1();
 	protected static final StateAdd2 stateAdd2 = new StateAdd2();
@@ -70,7 +71,10 @@ public class Controller {
 		currentState.selectIntersection(mv, i);
 	}
 	
-
+	public void stopAlgo() {
+		currentState.stopAlgo();
+	}
+	
 	public void undo(){
 		currentState.undo(listCdes);
 	}

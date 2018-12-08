@@ -24,6 +24,8 @@ public interface State {
 
 	public void selectIntersection(MainView mainView, Intersection i);
 
+	public void stopAlgo();
+
 	public void delete(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet, ListCommands listeDeCdes);
 	
 	public void undo(ListCommands listeDeCdes);

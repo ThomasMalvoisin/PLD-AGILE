@@ -24,14 +24,14 @@ import model.Section;
 
 public class Algorithms {
 
-	public static RoundSet solveTSP (CityMap map , DeliveryRequest request, int nbDeliveryMan) {
+	public static void solveTSP (RoundSet rounds, CityMap map , DeliveryRequest request, int nbDeliveryMan) {
 		// Pour l'instant, nbDeliveryMan = 1 forcément
 		Map<Long, Map<Long, Journey>> reducedMap = map.GetShortestJourneys(request);
 		ArrayList<Delivery> visited = new ArrayList<Delivery>();
 		visited.add(new Delivery(0, request.getWarehouse()));
 		ArrayList<Delivery> cand = new ArrayList<Delivery> (request.getRequestDeliveries());
-		System.out.println(cand.size());
-		RoundSet rounds = new RoundSet();
+		//System.out.println(cand.size());
+		//RoundSet rounds = new RoundSet();
 		rounds.setDuration(Double.MAX_VALUE);	// Modifier branchAndBound pour construire un roundSet, et ajouter le numero de Round en cours de remplissage
 		
 		ArrayList<Integer> nbCandWhenChangingRound = new ArrayList<Integer>();
@@ -40,13 +40,11 @@ public class Algorithms {
 			nbDelivery -= nbDelivery/i;
 			nbCandWhenChangingRound.add(nbDelivery);
 		}
-		for (Integer i : nbCandWhenChangingRound) System.out.print(i + "  ");
-		System.out.println();
+		//for (Integer i : nbCandWhenChangingRound) System.out.print(i + "  ");
+		//System.out.println();
 		
 		branchAndBound(reducedMap, visited, cand, 0.0, rounds, nbCandWhenChangingRound, request.getWarehouse(), nbDeliveryMan-1);
 
-		
-		return rounds;
 	}
 	
 	private static void branchAndBound (Map<Long, Map<Long, Journey>> reducedMap , ArrayList<Delivery> visited, ArrayList<Delivery> cand, double t, RoundSet bestSolution, ArrayList<Integer> nbCandWhenChangingRound, Intersection warehouse, int remainingReturnToWarehouse) {
@@ -84,9 +82,9 @@ public class Algorithms {
 					}
 					currentWay.add(reducedMap.get(visited.get(i).getAdress().getId()).get(visited.get(i+1).getAdress().getId()));
 					currentDeliveries.add(visited.get(i));
-					System.out.print(visited.get(i).getAdress().getId() + " ");
+					//System.out.print(visited.get(i).getAdress().getId() + " ");
 				}
-				System.out.println(visited.get(visited.size()-1).getAdress().getId());
+				//System.out.println(visited.get(visited.size()-1).getAdress().getId());
 				currentWay.add(reducedMap.get(visited.get(visited.size()-1).getAdress().getId()).get(warehouse.getId()));
 				currentDeliveries.add(visited.get(visited.size()-1));
 				currentRound.setJourneys(currentWay);

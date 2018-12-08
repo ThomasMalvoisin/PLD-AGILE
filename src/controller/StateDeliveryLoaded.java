@@ -21,7 +21,6 @@ import xml.DeliveryRequestDeserializer;
 import xml.ExceptionXML;
 
 public class StateDeliveryLoaded extends StateDefault {
-
 	@Override
 	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest) {
 		FileChooser fileChooser = new FileChooser();
@@ -49,33 +48,50 @@ public class StateDeliveryLoaded extends StateDefault {
 	@Override
 	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan, RoundSet roundSet,  ListCommands listeDeCdes) {
 
-
-		new Thread(() -> {
+		mainView.setAddButtonEnable(true);
+		mainView.setComputeButtonEnable(false);
+		mainView.setDeleteButtonEnable(false);
+		mainView.setMapButtonEnable(true);
+		mainView.setDeliveryButtonEnable(true);
+		listeDeCdes.reset();
+		
+		RoundSet roundsTemp = new RoundSet();
+		Thread calculate = new Thread(() -> {
+			Algorithms.solveTSP(roundsTemp, map,delivReq, nbDeliveryMan);
+		});
+		Thread display = new Thread(() -> {
 			Platform.runLater(() -> {
-				mainView.setLoader(true);
+				mainView.printRoundSet(map,roundSet);
+				mainView.printPotentielDeliveries(map, delivReq);
 			});
-
-			roundSet.copy(Algorithms.solveTSP(map,delivReq, nbDeliveryMan));
 			
-			if (roundSet != null) {
+			double duration = roundsTemp.getDuration();
+			while(calculate.isAlive())
+			{
+				if(roundsTemp.getDuration() < duration || duration == 0.0) {
+					System.out.println(duration);
+					duration = roundsTemp.getDuration();
+					Platform.runLater(() -> {
+						roundSet.copy(roundsTemp);
+					});
+				}
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}			
+			}
+			if(roundsTemp.getDuration() < duration || duration == 0.0) {
+				duration = roundsTemp.getDuration();
 				Platform.runLater(() -> {
-					roundSet.calculTime(delivReq);
-					mainView.printRoundSet(map,roundSet);
-					mainView.printPotentielDeliveries(map, delivReq);
-					mainView.setAddButtonEnable(true);
-					mainView.setComputeButtonEnable(false);
-					mainView.setDeleteButtonEnable(false);
-					mainView.setMapButtonEnable(true);
-					mainView.setDeliveryButtonEnable(true);
-					Controller.setCurrentState(Controller.stateRoundCalculated);
-					listeDeCdes.reset();
+					roundSet.copy(roundsTemp);
 				});
 			}
-
-			Platform.runLater(() -> {
-				mainView.setLoader(false);
-			});
-		}).start();
+			
+			Controller.setCurrentState(Controller.stateRoundCalculated);
+		});
+		Controller.stateRoundCalculating.actionCalculate(calculate, display);
+		Controller.setCurrentState(Controller.stateRoundCalculating);
 	}
 
 	@Override

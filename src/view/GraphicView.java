@@ -124,8 +124,8 @@ public class GraphicView implements Observer {
 
 				for (Section s : j.getSectionList()) {
 					// delta=10.0/(Collections.frequency(listeSection, s));
-					System.out.println(s);
-					System.out.println(s.getInverse());
+					//System.out.println(s);
+					//System.out.println(s.getInverse());
 //					delta = 3.5 * (Collections.frequency(listeSection, s)
 //							+ Collections.frequency(listeSection, s.getInverse()));
 					// delta=3.5*(Collections.frequency(listeSection, s));
@@ -134,9 +134,7 @@ public class GraphicView implements Observer {
 					listeSection.add(s);
 				}
 //				opacity = opacity - 0.75 / nbJourneys;
-				System.out.println(opacity);
-				
-
+				//System.out.println(opacity);
 			}
 			i++;
 		}
