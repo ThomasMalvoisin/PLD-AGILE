@@ -67,4 +67,13 @@ public class RoundSet extends Observable{
 			}
 		}	
 	}
+	
+	public void calculTime(DeliveryRequest dr) {
+		for(Round r : rounds) {
+			r.setDepartureTime(dr.getStartTime());
+			r.calculTime();
+		}
+		
+		//TODO modifier duration (min des durations des rounds)
+	}
 }

@@ -39,7 +39,8 @@ public class StateDeliveryLoaded extends StateDefault {
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
 					| ParseException e) {
 				Delivery.currentId = temp;
-				mainView.displayMessage("Unable to load delivery request", "Please choose a valid delivery request file. Make sure that all the delivery point's locations are available in the current loaded map !");
+				mainView.displayMessage("Unable to load delivery request",
+						"Please choose a valid delivery request file. Make sure that all the delivery point's locations are available in the current loaded map !");
 				e.printStackTrace();
 			}
 		}
@@ -47,8 +48,8 @@ public class StateDeliveryLoaded extends StateDefault {
 
 	@Override
 
-
-	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan, RoundSet roundSet) {
+	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan,
+			RoundSet roundSet) {
 
 		new Thread(() -> {
 			Platform.runLater(() -> {
@@ -56,30 +57,29 @@ public class StateDeliveryLoaded extends StateDefault {
 			});
 
 			roundSet.copy(Algorithms.solveTSP(map,delivReq, nbDeliveryMan));
-
-			//TODO : trouver une solution pour modifier la variable roundSet dans ce thread
-
 			
+			// TODO : trouver une solution pour modifier la variable roundSet dans ce thread
+
 			if (roundSet != null) {
 				Platform.runLater(() -> {
+					roundSet.calculTime(delivReq);
 					mainView.printRoundSet(map,roundSet);
 					mainView.printPotentielDeliveries(map, delivReq);
 					Controller.setCurrentState(Controller.stateRoundCalculated);
 				});
 			}
-			
+
 			Platform.runLater(() -> {
 				mainView.setLoader(false);
 			});
 			// System.out.println(result.getRounds().get(0).getDuration());
 		}).start();
 	}
-	
+
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 			mainView.printCityMap(cityMap);
 			mainView.printDeliveryRequest(cityMap, deliveryRequest);
-
 	}
 	
 	@Override
