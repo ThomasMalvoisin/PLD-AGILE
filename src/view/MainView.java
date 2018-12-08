@@ -107,6 +107,10 @@ public class MainView implements Initializable{
 		controller.buttonDelete();
 	}
 	
+	public void buttonCancel() {
+		controller.buttonCancel();
+	}
+	
 	public void clickLoadDeliveryRequest(){
 		controller.loadDeliveryRequest();
 	}

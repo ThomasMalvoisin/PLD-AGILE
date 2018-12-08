@@ -84,4 +84,8 @@ public class Controller {
 	}
 	
 
+	public void buttonCancel() {
+		currentState.cancel(mv);
+	}
+
 }

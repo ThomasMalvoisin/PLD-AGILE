@@ -20,3 +20,8 @@
 	-fx-fill:  aqua;
 	-fx-opacity: 1;
 }
+
+.map-point-selected{
+	-fx-fill: aqua;
+	-fx-opacity: 1;
+}

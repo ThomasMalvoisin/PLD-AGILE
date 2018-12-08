@@ -35,6 +35,14 @@ public class StateAdd2 extends StateDefault {
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 	
+	@Override
+	public void cancel(MainView mainView) {
+		mainView.printMessage("");
+		mainView.setIntersectionSelected(null);
+		this.intersectionSelected = null;
+		Controller.setCurrentState(Controller.stateRoundCalculated);
+	}
+	
 	protected void actionSelect(Intersection i) {
 		this.intersectionSelected = i;
 	}

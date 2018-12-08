@@ -28,4 +28,10 @@ public class StateAdd1 extends StateDefault {
 		mv.setDeliveryButtonEnable(false);
 		Controller.setCurrentState(Controller.stateAdd2);
 	}
+
+	@Override
+	public void cancel(MainView mainView) {
+		mainView.printMessage("");
+		Controller.setCurrentState(Controller.stateRoundCalculated);
+	}
 }

@@ -91,6 +91,13 @@ public class StateModify extends StateDefault {
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 
+	@Override
+	public void cancel(MainView mainView) {
+		this.deliverySelected = null;
+		mainView.setDeliverySelected(null);
+		Controller.setCurrentState(Controller.stateRoundCalculated);
+	}
+
 	// methode appelee avant d'entrer dans l'etat this, pour definir le delivery
 	// selectionne
 	protected void actionDeliverySelected(Delivery delivery) {

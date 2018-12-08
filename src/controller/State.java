@@ -30,5 +30,7 @@ public interface State {
 	
 	public void redo(ListCommands listeDeCdes);
 	
+	public void cancel(MainView mainView);
+  
 	public void discardChanges(ListCommands listeDeCdes);
 }

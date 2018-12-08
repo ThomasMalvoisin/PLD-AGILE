@@ -72,6 +72,10 @@ public class StateDefault implements State {
 	@Override
 	public void add(MainView mv) {
 	}
+
+	@Override
+	public void cancel(MainView mainView) {
+	}
 	
 	@Override
 	public void undo(ListCommands listeDeCdes) {

@@ -158,6 +158,16 @@
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Delete" />
                                        </children>
                                     </VBox>
+                                    <VBox alignment="CENTER" onMouseClicked="#buttonCancel" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                       <children>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/cancel.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Cancel" />
+                                       </children>
+                                    </VBox>
                                  </children>
                               </HBox>
                               <Label alignment="CENTER" text="Update Rounds">
