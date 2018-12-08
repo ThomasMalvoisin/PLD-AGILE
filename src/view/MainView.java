@@ -62,6 +62,21 @@ public class MainView implements Initializable{
 	@FXML
 	VBox deleteButton;
 	
+	@FXML
+	VBox cancelButton;
+	
+	@FXML
+	VBox stopButton;
+	
+	@FXML
+	VBox undoButton;
+	
+	@FXML
+	VBox redoButton;
+	
+	@FXML
+	VBox discardButton;
+	
 	Controller controller;
 	ResizeListener rl;
 	DeliveryPointsListener dpl;
@@ -220,5 +235,25 @@ public class MainView implements Initializable{
 	
 	public void setDeleteButtonEnable(boolean b) {
 		deleteButton.setDisable(!b);
+	}
+	
+	public void setCancelButtonEnable(boolean b) {
+		cancelButton.setDisable(!b);
+	}
+	
+	public void setStopButtonEnable(boolean b) {
+		stopButton.setDisable(!b);
+	}
+	
+	public void setUndoButtonEnable(boolean b) {
+		undoButton.setDisable(!b);
+	}
+	
+	public void setRedoButtonEnable(boolean b) {
+		redoButton.setDisable(!b);
+	}
+	
+	public void setDiscardButtonEnable(boolean b) {
+		discardButton.setDisable(!b);
 	}
 }

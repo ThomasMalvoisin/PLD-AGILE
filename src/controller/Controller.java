@@ -32,6 +32,8 @@ public class Controller {
 		delivReq = new DeliveryRequest();
 		result = new RoundSet();
 		listCdes = new ListCommands();
+		
+		stateInit.setButtonsEnabled(mv);
 		currentState = stateInit;
 	}
 

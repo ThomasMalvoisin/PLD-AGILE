@@ -9,6 +9,20 @@ import view.MainView;
 public class StateRoundCalculating extends StateDefault {
 	Thread calculate;
 	Thread display;
+	
+	@Override
+	public void setButtonsEnabled(MainView mainView) {
+		mainView.setAddButtonEnable(false);
+		mainView.setComputeButtonEnable(false);
+		mainView.setDeleteButtonEnable(false);
+		mainView.setMapButtonEnable(false);
+		mainView.setDeliveryButtonEnable(false);
+		mainView.setCancelButtonEnable(false);
+		mainView.setStopButtonEnable(true);
+		mainView.setUndoButtonEnable(false);
+		mainView.setRedoButtonEnable(false);
+		mainView.setDiscardButtonEnable(false);
+	}
 
 	@Override
 	public void stopAlgo() {

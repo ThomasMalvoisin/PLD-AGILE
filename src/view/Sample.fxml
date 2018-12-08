@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -118,10 +119,23 @@
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="70.0" text="Compute" />
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" onMouseClicked="#clickRoundsCompute" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <VBox alignment="CENTER" onMouseClicked="#clickRoundsCompute" prefHeight="48.0" prefWidth="95.0" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ComboBox fx:id="deliveryManCombo" prefHeight="25.0" prefWidth="66.0" />
-                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="70.0" text="Delivery Man" />
+                                          <ComboBox fx:id="deliveryManCombo" prefHeight="27.0" prefWidth="90.0" />
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="90.0" text="Delivery Man">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin></Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="stopButton" alignment="CENTER" onMouseClicked="#clickStopAlgo" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                       <children>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/stop.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Stop" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -158,7 +172,7 @@
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Delete" />
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" onMouseClicked="#buttonCancel" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <VBox fx:id="cancelButton" alignment="CENTER" onMouseClicked="#buttonCancel" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -182,26 +196,7 @@
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <VBox alignment="CENTER" onMouseClicked="#clickStopAlgo" style="-fx-cursor: hand;" styleClass="toolbar-card">
-                                       <children>
-                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../images/stop.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Stop" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                        <Separator orientation="VERTICAL" />
-                        <VBox alignment="CENTER" spacing="5.0">
-                           <children>
-                              <HBox alignment="CENTER">
-                                 <children>
-                                    <VBox alignment="CENTER" onMouseClicked="#undo" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <VBox fx:id="undoButton" alignment="CENTER" onMouseClicked="#undo" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -212,7 +207,7 @@
                                        </children>
                                     </VBox>
                                     <Separator orientation="VERTICAL" />
-                                    <VBox alignment="CENTER" onMouseClicked="#redo" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <VBox fx:id="redoButton" alignment="CENTER" onMouseClicked="#redo" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -223,7 +218,7 @@
                                        </children>
                                     </VBox>
                                     <Separator orientation="VERTICAL" />
-                                    <VBox alignment="CENTER" onMouseClicked="#discardChanges" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <VBox fx:id="discardButton" alignment="CENTER" onMouseClicked="#discardChanges" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>

@@ -8,7 +8,22 @@ import model.RoundSet;
 import view.MainView;
 
 public class StateAdd2 extends StateDefault {
+	
 	Intersection intersectionSelected;
+	
+	@Override
+	public void setButtonsEnabled(MainView mainView) {
+		mainView.setAddButtonEnable(false);
+		mainView.setComputeButtonEnable(false);
+		mainView.setDeleteButtonEnable(false);
+		mainView.setMapButtonEnable(false);
+		mainView.setDeliveryButtonEnable(false);
+		mainView.setCancelButtonEnable(true);
+		mainView.setStopButtonEnable(false);
+		mainView.setUndoButtonEnable(false);
+		mainView.setRedoButtonEnable(false);
+		mainView.setDiscardButtonEnable(false);
+	}
 
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
@@ -26,12 +41,7 @@ public class StateAdd2 extends StateDefault {
 		/*delivReq.addDelivery(d);
 		result.addDelivery(map, d, delivery);*/
 		listeDeCdes.ajoute(new ComAdd(map,delivReq, result, d, delivery));
-		//TODO :faire les autres modifications : mettre � jour le roundset...
-		mv.setAddButtonEnable(true);
-		mv.setComputeButtonEnable(false);
-		mv.setDeleteButtonEnable(false);
-		mv.setMapButtonEnable(true);
-		mv.setDeliveryButtonEnable(true);
+		Controller.stateRoundCalculated.setButtonsEnabled(mv);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 	
@@ -40,6 +50,7 @@ public class StateAdd2 extends StateDefault {
 		mainView.printMessage("");
 		mainView.setIntersectionSelected(null);
 		this.intersectionSelected = null;
+		Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 	

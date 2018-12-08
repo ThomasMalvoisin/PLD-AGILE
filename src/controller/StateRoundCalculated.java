@@ -19,6 +19,21 @@ import xml.DeliveryRequestDeserializer;
 import xml.ExceptionXML;
 
 public class StateRoundCalculated extends StateDefault {
+
+	@Override
+	public void setButtonsEnabled(MainView mainView) {
+		mainView.setAddButtonEnable(true);
+		mainView.setComputeButtonEnable(false);
+		mainView.setDeleteButtonEnable(false);
+		mainView.setMapButtonEnable(true);
+		mainView.setDeliveryButtonEnable(true);
+		mainView.setCancelButtonEnable(false);
+		mainView.setStopButtonEnable(false);
+		mainView.setUndoButtonEnable(true);
+		mainView.setRedoButtonEnable(true);
+		mainView.setDiscardButtonEnable(true);
+	}
+
 	@Override
 	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest) {
 		FileChooser fileChooser = new FileChooser();
@@ -31,17 +46,14 @@ public class StateRoundCalculated extends StateDefault {
 			try {
 				Delivery.currentId = 1;
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
-				mainView.setAddButtonEnable(false);
-				mainView.setComputeButtonEnable(true);
-				mainView.setDeleteButtonEnable(false);
-				mainView.setMapButtonEnable(true);
-				mainView.setDeliveryButtonEnable(true);
 				mainView.printDeliveryRequest(cityMap, deliveryRequest);
+				Controller.stateDeliveryLoaded.setButtonsEnabled(mainView);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
 					| ParseException e) {
 				Delivery.currentId = temp;
-				mainView.displayMessage("Unable to load delivery request", "Please choose a valid delivery request file. Make sure that all the delivery point's locations are available in the current loaded map !");
+				mainView.displayMessage("Unable to load delivery request",
+						"Please choose a valid delivery request file. Make sure that all the delivery point's locations are available in the current loaded map !");
 				e.printStackTrace();
 			}
 		}
@@ -50,49 +62,42 @@ public class StateRoundCalculated extends StateDefault {
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);
-		//mainView.printDeliveryRequest(cityMap, deliveryRequest);
+		// mainView.printDeliveryRequest(cityMap, deliveryRequest);
 		mainView.printPotentielDeliveries(cityMap, deliveryRequest);
-		mainView.printRoundSet(cityMap,roundSet);
+		mainView.printRoundSet(cityMap, roundSet);
 	}
 
 	@Override
-	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,Delivery delivery,  ListCommands listeDeCdes) {
+	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
+			Delivery delivery, ListCommands listeDeCdes) {
 		// TODO : changement dans l'ihm en appelant des fonctions de mainView : afficher
 		// un message à l'utilisateur pour lui dire quoi faire
 
 		mainView.setDeliverySelected(delivery);
 		Controller.stateModify.actionDeliverySelected(delivery);
-		mainView.setAddButtonEnable(false);
-		mainView.setComputeButtonEnable(false);
-		mainView.setDeleteButtonEnable(true);
-		mainView.setMapButtonEnable(true);
-		mainView.setDeliveryButtonEnable(true);
+		Controller.stateModify.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateModify);
 	}
 
 	@Override
 	public void add(MainView mv) {
 		mv.printMessage("Please select the point where you want to add a delivery... ");
-		mv.setAddButtonEnable(false);
-		mv.setComputeButtonEnable(false);
-		mv.setDeleteButtonEnable(false);
-		mv.setMapButtonEnable(false);
-		mv.setDeliveryButtonEnable(false);
+		Controller.stateAdd1.setButtonsEnabled(mv);
 		Controller.setCurrentState(Controller.stateAdd1);
 	}
-	
+
 	@Override
-	public void undo(ListCommands listeDeCdes){
+	public void undo(ListCommands listeDeCdes) {
 		listeDeCdes.undo();
 	}
 
 	@Override
-	public void redo(ListCommands listeDeCdes){
+	public void redo(ListCommands listeDeCdes) {
 		listeDeCdes.redo();
 	}
-	
+
 	@Override
-	public void discardChanges(ListCommands listeDeCdes){
+	public void discardChanges(ListCommands listeDeCdes) {
 		listeDeCdes.discard();
 	}
 }
