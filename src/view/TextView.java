@@ -1,106 +1,188 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import javax.swing.border.TitledBorder;
+
+import org.omg.CORBA.TIMEOUT;
+
+import com.sun.javafx.scene.traversal.WeightedClosestCorner;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
+import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
 import model.Intersection;
+import model.Round;
+import model.RoundSet;
+import model.Section;
 
 public class TextView implements Observer{
 
-	DeliveryPointsListener dpl;
-	ButtonListener bl;
-	
-	DeliveryRequest dr;
-
+	private DeliveryPointsListener dpl;
+	private CityMap map;
+	private RoundSet roundSet;
+	private Color[] colors = { Color.ROYALBLUE, Color.BLACK, Color.ORANGE, Color.BROWN, Color.GREEN, Color.GOLD,
+			Color.BLUEVIOLET, Color.YELLOW, Color.AQUAMARINE, Color.CORAL };
+	private ArrayList<Text> deliveries;
+	private Text selectedDelivery ;
 	private VBox txtArea;
 
 	public TextView(VBox txtArea) {
-
 		this.txtArea = txtArea;
+		deliveries = new ArrayList<Text>();
 	}
 
-	public void printDeliveryRequest(DeliveryRequest deliveryRequest) {
-		clearDeliveryRequest();
-		deliveryRequest.addObserver(this);
-		this.dr=deliveryRequest;
-		printWarehouse(deliveryRequest.getWarehouse());
+	public void printDeliveryRequest(CityMap map, DeliveryRequest deliveryRequest) {
+		clearTextView();
+		this.map = map;
+		TitledPane titledPane = new TitledPane();
+		VBox titledPaneContent = new VBox();
+		addWarehouse(map, deliveryRequest.getWarehouse(),titledPaneContent);
+		titledPaneContent.getChildren().add(new Separator());
 
 		for (Delivery d : deliveryRequest.getRequestDeliveries()) {
-			printDeliveryPoint(d);
+			addDeliveryPoint(map, d,titledPaneContent,Color.RED);
+			titledPaneContent.getChildren().add(new Separator());
 		}
+		
+		titledPane.setContent(titledPaneContent);
+		titledPane.setText("Delivery Request with "+ deliveryRequest.getNbDeliveries() + "  Delivery Points");
+		txtArea.getChildren().add(titledPane);
+	}
+	
+	public void printRoundSet(CityMap map, RoundSet roundSet) {
+		clearTextView();
+		roundSet.addObserver(this);
+		this.roundSet=roundSet;
+		this.map = map;
+		ArrayList<Round> rounds = roundSet.getRounds();
+		int r =  0;
+		for(Round round : rounds) {
+			if(r < 10 ) {
+				TitledPane titledPane = new TitledPane();
+				titledPane.setExpanded(false);
+				VBox titledPaneContent = new VBox();
+				int i = 0 ;
+				for (Delivery d : round.getDeliveries()) {
+					if(i != 0) {
+						addDeliveryPoint(map, d,titledPaneContent,colors[r]);
+						titledPaneContent.getChildren().add(new Separator());
+					}
+					i++;
+				}
+				titledPane.setContent(titledPaneContent);
+				titledPane.setText("Round with "+ (round.getDeliveries().size()-1) + "  Delivery Points");
+				titledPane.setTextFill(colors[r]);
+				txtArea.getChildren().add(titledPane);
+			}
+			r++;
+		}
+	}
+		
+
+	private void addDeliveryPoint(CityMap map, Delivery d,VBox titledPane,Color color) {
+		
+		ArrayList<String> sectionNames = map.getIntersectionSectionNames(d.getAdress());
+		String dlvP = "\n Delivery " + d.getId() + " :\n" ;
+		dlvP = dlvP +  "                      ";
+		int i = 0;
+		for(String name : sectionNames) {
+			if(i != 0 ) {
+				dlvP += " , ";
+			}
+			if(name.equals("")){
+				name =  "No Name";
+			}
+			dlvP +=  name;
+			i++;
+		}
+		if(d.getDepartureTime() != null && d.getArrivalTime() != null) {
+			dlvP +=  "\n                      ";
+			dlvP += "Departure : " + d.getDepartureTime();
+			dlvP +=  "\n                      ";
+			dlvP += "Arrival   : " + d.getArrivalTime();
+			dlvP +=  "\n                      ";
+			dlvP += "Duration  : " + d.getDuration();
+		}
+		Text t = new Text(dlvP);
+		t.setFill(color);
+		t.getProperties().put("DELIVERY", d);
+		t.addEventHandler(MouseEvent.ANY, dpl);
+		t.getStyleClass().add("delivery-text");
+		deliveries.add(t);
+		titledPane.getChildren().add(t);
 
 	}
 
-	private void printDeliveryPoint(Delivery d) {
-		Group group = new Group();
-
-		String dlvP = d.getId() + " : Delivery at (" + d.getAdress().getLatitude() + " , "
-				+ d.getAdress().getLongitude() + ")\n";
-
+	
+	
+	private void addWarehouse(CityMap map, Intersection warehouse,VBox titledPane) {
+		//String dlvP = "Warehouse :" + warehouse.getLatitude() + " , " + warehouse.getLongitude() + ")\n";
+		ArrayList<String> sectionNames = map.getIntersectionSectionNames(warehouse);
+		String dlvP = "\n Warehouse " + " :\n" ;
+		dlvP = dlvP +  "                      ";
+		int i = 0;
+		for(String name : sectionNames) {
+			if(i != 0 ) {
+				dlvP += " , ";
+			}
+			if(name.equals("")){
+				name =  "No Name";
+			}
+			dlvP +=  name;
+			i++;
+		}
 		Text t = new Text(dlvP);
-		t.setFill(Color.RED);
-
-		group.getChildren().add(t);
-		group.getProperties().put("DELIVERY", d);
-		group.addEventHandler(MouseEvent.ANY, dpl);
-		txtArea.getChildren().add(group);
-
-	}
-
-	private void printWarehouse(Intersection warehouse) {
-		String dlvP = "Warehouse at (" + warehouse.getLatitude() + " , " + warehouse.getLongitude() + ")\n";
-
-		Text t = new Text(dlvP);
+		//store this one ?
 		t.setFill(Color.FORESTGREEN);
-		txtArea.getChildren().add(t);
-
+		titledPane.getChildren().add(t);
 	}
 
-	public void clearDeliveryRequest() {
+	public void clearTextView() {
 		txtArea.getChildren().clear();
+		deliveries.clear();
+		selectedDelivery = null;
 	}
 	
 	public void setDeliverySelected(Delivery delivery) {
-		for(Node n : txtArea.getChildren()) {
-			if(delivery.equals(n.getProperties().get("DELIVERY"))) {
-				Group group = (Group) n;
-				//Button deleteButton = new Button("Delete");
-				//deleteButton.setId("DELETE");
-				//deleteButton.addEventHandler(ActionEvent.ACTION, bl);
-				//group.getChildren().add(deleteButton);
-				((Text) group.getChildren().get(0)).setFill(Color.BLUE);
-				
-			}else if(n.getProperties().get("DELIVERY")==null){
-				((Text) n).setFill(Color.FORESTGREEN);
-			}else {
-				Group group = (Group) n;
-				((Text) group.getChildren().get(0)).setFill(Color.RED);
+		if(selectedDelivery != null) {
+			selectedDelivery.getStyleClass().remove("selected-delivery-text");
+		}
+		for (Text text : deliveries) {
+			Delivery temp = (Delivery) text.getProperties().get("DELIVERY");
+			if(temp.equals(delivery)){
+				selectedDelivery = text;
+				text.getStyleClass().add("selected-delivery-text");
 			}
 		}
 	}
-
+	
 	public void setDeliveryPointsListener(DeliveryPointsListener dpl) {
 		this.dpl = dpl;
 	}
 	
-	public void setButtonListener(ButtonListener bl) {
-		this.bl = bl;
-	}
 	
 	@Override
 	public void update(Observable o, Object a) {
-		printDeliveryRequest(dr);
+		printRoundSet(map, roundSet);
 	}
 
 }

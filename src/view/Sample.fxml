@@ -182,7 +182,7 @@
                                  <children>
                                     <ScrollPane prefHeight="265.0" prefWidth="172.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <content>
-                                          <VBox fx:id="txtArea" prefHeight="264.0" prefWidth="153.0" />
+                                          <VBox fx:id="txtArea" prefHeight="264.0" prefWidth="153.0" spacing="10.0" />
                                        </content>
                                     </ScrollPane>
                                  </children>

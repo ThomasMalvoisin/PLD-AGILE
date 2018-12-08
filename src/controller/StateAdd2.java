@@ -13,10 +13,10 @@ public class StateAdd2 extends StateDefault {
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);
-		mainView.printDeliveryRequest(deliveryRequest);
+		//mainView.printDeliveryRequest(cityMap, deliveryRequest);
 		mainView.printPotentielDeliveries(cityMap, deliveryRequest);
 		mainView.setIntersectionSelected(intersectionSelected);
-		mainView.printRoundSet(roundSet);
+		mainView.printRoundSet(cityMap,roundSet);
 	}
 	
 	@Override

@@ -131,7 +131,7 @@ public class GraphicView implements Observer {
 //					delta = 3.5 * (Collections.frequency(listeSection, s)
 //							+ Collections.frequency(listeSection, s.getInverse()));
 					// delta=3.5*(Collections.frequency(listeSection, s));
-
+					// ATTENTION IL FAUT METTRE UN IF SUR I SINON INDEX OUT OUF BOUNDS SI BCP DE ROUNDS !!!
 					drawRoundSection(s, colors[i], delta, opacity);
 					listeSection.add(s);
 				}
@@ -212,6 +212,7 @@ public class GraphicView implements Observer {
 		Circle c = new Circle(geoToCoord(i)[0], geoToCoord(i)[1], 5);
 		c.setFill(Color.WHITE);
 		c.setOpacity(0);
+		c.getStyleClass().add("map-point");
 		notDeliveriesIntersections.getChildren().add(c);
 		c.getProperties().put("INTERSECTION", i);
 		c.addEventHandler(MouseEvent.ANY, dpl);
@@ -233,6 +234,7 @@ public class GraphicView implements Observer {
 	private Circle makePoint(double[] point, double radius, Paint p) {
 		Circle c = new Circle(point[0], point[1], radius);
 		c.setFill(p);
+		c.getStyleClass().add("map-point");
 		deliveries.getChildren().add(c);
 		return c;
 	}

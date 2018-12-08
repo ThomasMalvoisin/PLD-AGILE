@@ -61,7 +61,6 @@ public class MainView implements Initializable{
 		
 		gv.setDeliveryPointsListener(dpl);
 		tv.setDeliveryPointsListener(dpl);
-		tv.setButtonListener(bl);
 		
 		pane.widthProperty().addListener(rl);
 		pane.heightProperty().addListener(rl);
@@ -97,21 +96,22 @@ public class MainView implements Initializable{
 	}
 	
 	public void printCityMap(CityMap map) {
-		tv.clearDeliveryRequest();
+		tv.clearTextView();
 		gv.drawCityMap(map);
 	}
 
-	public void printDeliveryRequest(DeliveryRequest delivReq) {
+	public void printDeliveryRequest(CityMap map ,DeliveryRequest delivReq) {
 		gv.drawDeliveryRequest(delivReq);
-		tv.printDeliveryRequest(delivReq);
+		tv.printDeliveryRequest(map, delivReq);
 	}
 	
 	public void printPotentielDeliveries(CityMap map, DeliveryRequest deliveryRequest) {
 		gv.drawIntersections(map, deliveryRequest);
 	}
 
-	public void printRoundSet(RoundSet result) {
+	public void printRoundSet(CityMap map ,RoundSet result) {
 		gv.drawRoundSet(result);
+		tv.printRoundSet(map, result);
 	}
 	
 	public void setLoader(boolean toBePrinted) {

@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import algo.Algorithms;
@@ -278,6 +279,15 @@ public class CityMap{
 			result.put(i.getId(), shortestJourneys.get(i.getId()));
 		
 		return result;
+	}
+	
+	public ArrayList<String> getIntersectionSectionNames(Intersection intersection){
+		return cityMapSections.values().stream()
+			.flatMap(Collection::stream)
+			.filter(section -> section.getOrigin().equals(intersection) || section.getDestination().equals(intersection))
+			.map(section -> section.getName())
+			.distinct( )
+			.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
 }

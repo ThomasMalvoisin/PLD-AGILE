@@ -33,7 +33,7 @@ public class StateDelete extends StateDefault{
 			try {
 				Delivery.currentId = 1;
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
-				mainView.printDeliveryRequest(deliveryRequest);
+				mainView.printDeliveryRequest(cityMap, deliveryRequest);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
 					| ParseException e) {
@@ -48,8 +48,8 @@ public class StateDelete extends StateDefault{
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);
-		mainView.printDeliveryRequest(deliveryRequest);
-		mainView.printRoundSet(roundSet);
+		//mainView.printDeliveryRequest(cityMap, deliveryRequest);
+		mainView.printRoundSet(cityMap,roundSet);
 	}
 	
 	@Override

@@ -34,7 +34,7 @@ public class StateMapLoaded extends StateDefault {
 			try {
 				Delivery.currentId = 1;
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
-				mainView.printDeliveryRequest(deliveryRequest);
+				mainView.printDeliveryRequest(cityMap, deliveryRequest);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
 					| ParseException e) {

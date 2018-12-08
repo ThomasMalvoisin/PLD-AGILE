@@ -41,6 +41,10 @@ public class DeliveryRequest extends Observable{
 		this.startTime = startTime;
 	}
 	
+	public int getNbDeliveries() {
+		return requestDeliveries.size();
+	}
+	
 	public void addDelivery(Delivery delivery) {
 		requestDeliveries.add(delivery);
 		setChanged();

@@ -5,3 +5,18 @@
 .loader-pane{
     -fx-background-color: rgb(169, 169, 169, 0.5);
 }
+
+.selected-delivery-text{
+	-fx-font-weight: bold;
+}
+
+.delivery-text:hover{
+	-fx-cursor: hand;
+	-fx-font-weight: bold;
+}
+
+.map-point:hover{
+	-fx-cursor: hand;
+	-fx-fill:  aqua;
+	-fx-opacity: 1;
+}

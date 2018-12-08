@@ -34,7 +34,7 @@ public class StateDeliveryLoaded extends StateDefault {
 			try {
 				Delivery.currentId = 1;
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
-				mainView.printDeliveryRequest(deliveryRequest);
+				mainView.printDeliveryRequest(cityMap, deliveryRequest);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
 					| ParseException e) {
@@ -55,8 +55,6 @@ public class StateDeliveryLoaded extends StateDefault {
 				mainView.setLoader(true);
 			});
 
-
-			//algoUtil.dijkstraDeliveryRequest(delivReq);
 			roundSet.copy(Algorithms.solveTSP(map,delivReq, nbDeliveryMan));
 
 			//TODO : trouver une solution pour modifier la variable roundSet dans ce thread
@@ -64,7 +62,7 @@ public class StateDeliveryLoaded extends StateDefault {
 			
 			if (roundSet != null) {
 				Platform.runLater(() -> {
-					mainView.printRoundSet(roundSet);
+					mainView.printRoundSet(map,roundSet);
 					mainView.printPotentielDeliveries(map, delivReq);
 					Controller.setCurrentState(Controller.stateRoundCalculated);
 				});
@@ -80,7 +78,16 @@ public class StateDeliveryLoaded extends StateDefault {
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 			mainView.printCityMap(cityMap);
-			mainView.printDeliveryRequest(deliveryRequest);
+			mainView.printDeliveryRequest(cityMap, deliveryRequest);
 
+	}
+	
+	@Override
+	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,Delivery delivery) {
+		// TODO : changement dans l'ihm en appelant des fonctions de mainView : afficher
+		// un message à l'utilisateur pour lui dire quoi faire
+
+		mainView.setDeliverySelected(delivery);
+		Controller.stateModify.actionDeliverySelected(delivery);
 	}
 }
