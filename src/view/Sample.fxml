@@ -39,8 +39,8 @@
                   <menus>
                     <Menu mnemonicParsing="false" text="File">
                       <items>
-                        <MenuItem mnemonicParsing="false" onAction="#clickLoadMap" text="Load New Map" />
-                              <MenuItem mnemonicParsing="false" onAction="#clickLoadDeliveryRequest" text="Load New Delivery Request" />
+                        <MenuItem fx:id="mapMenuButton" mnemonicParsing="false" onAction="#clickLoadMap" text="Load New Map" />
+                              <MenuItem fx:id="deliveryMenuButton" mnemonicParsing="false" onAction="#clickLoadDeliveryRequest" text="Load New Delivery Request" />
                       </items>
                     </Menu>
                         <Menu mnemonicParsing="false" text="Edit">
@@ -58,7 +58,7 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Tools">
                            <items>
-                              <MenuItem mnemonicParsing="false" onAction="#clickLoadMap" text="Compute Round Set" />
+                              <MenuItem fx:id="computeMenuButton" mnemonicParsing="false" onAction="#clickLoadMap" text="Compute Round Set" />
                            </items>
                         </Menu>
                     <Menu mnemonicParsing="false" text="Draw">
@@ -74,7 +74,7 @@
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <VBox alignment="CENTER" onMouseClicked="#clickLoadMap" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <VBox fx:id="mapButton" alignment="CENTER" onMouseClicked="#clickLoadMap" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -84,7 +84,7 @@
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Map" />
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" onMouseClicked="#clickLoadDeliveryRequest" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <VBox fx:id="deliveryButton" alignment="CENTER" onMouseClicked="#clickLoadDeliveryRequest" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -108,7 +108,7 @@
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <VBox alignment="CENTER" onMouseClicked="#clickRoundsCompute" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <VBox fx:id="computeButton" alignment="CENTER" onMouseClicked="#clickRoundsCompute" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -138,7 +138,7 @@
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <VBox alignment="CENTER" onMouseClicked="#clickAddDelivery" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <VBox fx:id="addButton" alignment="CENTER" onMouseClicked="#clickAddDelivery" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -148,7 +148,7 @@
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Add" />
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" onMouseClicked="#buttonDelete" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <VBox fx:id="deleteButton" alignment="CENTER" onMouseClicked="#buttonDelete" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                              <image>

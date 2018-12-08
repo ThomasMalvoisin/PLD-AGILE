@@ -63,6 +63,11 @@ public class StateDeliveryLoaded extends StateDefault {
 					roundSet.calculTime(delivReq);
 					mainView.printRoundSet(map,roundSet);
 					mainView.printPotentielDeliveries(map, delivReq);
+					mainView.setAddButtonEnable(true);
+					mainView.setComputeButtonEnable(false);
+					mainView.setDeleteButtonEnable(false);
+					mainView.setMapButtonEnable(true);
+					mainView.setDeliveryButtonEnable(true);
 					Controller.setCurrentState(Controller.stateRoundCalculated);
 				});
 			}

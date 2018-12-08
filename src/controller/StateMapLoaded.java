@@ -33,6 +33,11 @@ public class StateMapLoaded extends StateDefault {
 			try {
 				Delivery.currentId = 1;
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
+				mainView.setAddButtonEnable(false);
+				mainView.setComputeButtonEnable(true);
+				mainView.setDeleteButtonEnable(false);
+				mainView.setMapButtonEnable(true);
+				mainView.setDeliveryButtonEnable(true);
 				mainView.printDeliveryRequest(cityMap, deliveryRequest);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML

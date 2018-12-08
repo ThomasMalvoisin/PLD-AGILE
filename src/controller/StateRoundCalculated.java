@@ -31,6 +31,11 @@ public class StateRoundCalculated extends StateDefault {
 			try {
 				Delivery.currentId = 1;
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
+				mainView.setAddButtonEnable(false);
+				mainView.setComputeButtonEnable(true);
+				mainView.setDeleteButtonEnable(false);
+				mainView.setMapButtonEnable(true);
+				mainView.setDeliveryButtonEnable(true);
 				mainView.printDeliveryRequest(cityMap, deliveryRequest);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
@@ -57,12 +62,22 @@ public class StateRoundCalculated extends StateDefault {
 
 		mainView.setDeliverySelected(delivery);
 		Controller.stateModify.actionDeliverySelected(delivery);
+		mainView.setAddButtonEnable(false);
+		mainView.setComputeButtonEnable(false);
+		mainView.setDeleteButtonEnable(true);
+		mainView.setMapButtonEnable(true);
+		mainView.setDeliveryButtonEnable(true);
 		Controller.setCurrentState(Controller.stateModify);
 	}
 
 	@Override
 	public void add(MainView mv) {
 		mv.printMessage("Please select the point where you want to add a delivery... ");
+		mv.setAddButtonEnable(false);
+		mv.setComputeButtonEnable(false);
+		mv.setDeleteButtonEnable(false);
+		mv.setMapButtonEnable(false);
+		mv.setDeliveryButtonEnable(false);
 		Controller.setCurrentState(Controller.stateAdd1);
 	}
 	

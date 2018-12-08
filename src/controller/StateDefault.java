@@ -31,6 +31,11 @@ public class StateDefault implements State {
 			try {
 				cityMap.copy(MapDeserializer.load(file));
 				mainView.printCityMap(cityMap);
+				mainView.setAddButtonEnable(false);
+				mainView.setComputeButtonEnable(false);
+				mainView.setDeleteButtonEnable(false);
+				mainView.setMapButtonEnable(true);
+				mainView.setDeliveryButtonEnable(true);
 				Controller.setCurrentState(Controller.stateMapLoaded);
 			} catch (ParserConfigurationException | SAXException | IOException | ExceptionXML e) {
 				mainView.displayMessage("Cannot load this map file","Please select a valid file");

@@ -39,6 +39,11 @@ public class StateModify extends StateDefault {
 				Delivery.currentId = 1;
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
 				mainView.printDeliveryRequest(cityMap, deliveryRequest);
+				mainView.setAddButtonEnable(false);
+				mainView.setComputeButtonEnable(true);
+				mainView.setDeleteButtonEnable(false);
+				mainView.setMapButtonEnable(true);
+				mainView.setDeliveryButtonEnable(true);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
 					| ParseException e) {
@@ -64,6 +69,11 @@ public class StateModify extends StateDefault {
 		// un message à l'utilisateur pour lui dire quoi faire
 		mainView.setDeliverySelected(delivery);
 		Controller.stateModify.actionDeliverySelected(delivery);
+		mainView.setAddButtonEnable(false);
+		mainView.setComputeButtonEnable(false);
+		mainView.setDeleteButtonEnable(true);
+		mainView.setMapButtonEnable(true);
+		mainView.setDeliveryButtonEnable(true);
 		Controller.setCurrentState(Controller.stateModify);
 	}
 
@@ -71,6 +81,11 @@ public class StateModify extends StateDefault {
 	public void delete(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		deliveryRequest.deleteDelivery(deliverySelected);
 		roundSet.deleteDelivery(map, deliverySelected);
+		mainView.setAddButtonEnable(true);
+		mainView.setComputeButtonEnable(false);
+		mainView.setDeleteButtonEnable(false);
+		mainView.setMapButtonEnable(true);
+		mainView.setDeliveryButtonEnable(true);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 

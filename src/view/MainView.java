@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -39,6 +40,27 @@ public class MainView implements Initializable{
   
 	@FXML
 	ComboBox<Integer> deliveryManCombo;
+	
+	@FXML
+	VBox mapButton;
+	@FXML
+	MenuItem mapMenuButton;
+	
+	@FXML
+	VBox deliveryButton;
+	@FXML
+	MenuItem deliveryMenuButton;
+	
+	@FXML
+	VBox computeButton;
+	@FXML
+	MenuItem computeMenuButton;
+	
+	@FXML
+	VBox addButton;
+	
+	@FXML
+	VBox deleteButton;
 	
 	Controller controller;
 	ResizeListener rl;
@@ -70,6 +92,11 @@ public class MainView implements Initializable{
 		deliveryManCombo.getItems().addAll(values);
 		deliveryManCombo.setValue(1);
 
+		setMapButtonEnable(true);
+		setDeliveryButtonEnable(false);
+		setComputeButtonEnable(false);
+		setAddButtonEnable(false);
+		setDeleteButtonEnable(false);
 	}
 	
 	public void clickLoadMap(){
@@ -150,5 +177,28 @@ public class MainView implements Initializable{
 	
 	public void zoomAuto() {
 		gv.zoomAuto();
+	}
+	
+	public void setMapButtonEnable(boolean b) {
+		mapButton.setDisable(!b);
+		mapMenuButton.setDisable(!b);
+	}
+	
+	public void setDeliveryButtonEnable(boolean b) {
+		deliveryButton.setDisable(!b);
+		deliveryMenuButton.setDisable(!b);
+	}
+	
+	public void setComputeButtonEnable(boolean b) {
+		computeButton.setDisable(!b);
+		computeMenuButton.setDisable(!b);
+	}
+	
+	public void setAddButtonEnable(boolean b) {
+		addButton.setDisable(!b);
+	}
+	
+	public void setDeleteButtonEnable(boolean b) {
+		deleteButton.setDisable(!b);
 	}
 }

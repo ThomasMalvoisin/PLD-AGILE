@@ -25,6 +25,12 @@ public class StateAdd2 extends StateDefault {
 		Delivery d = new Delivery(5, intersectionSelected); //TODO: permettre � l'utilisateur de saisir la dur�e
 		delivReq.addDelivery(d);
 		result.addDelivery(map, d, delivery);
+		//TODO :faire les autres modifications : mettre � jour le roundset...
+		mv.setAddButtonEnable(true);
+		mv.setComputeButtonEnable(false);
+		mv.setDeleteButtonEnable(false);
+		mv.setMapButtonEnable(true);
+		mv.setDeliveryButtonEnable(true);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 	
