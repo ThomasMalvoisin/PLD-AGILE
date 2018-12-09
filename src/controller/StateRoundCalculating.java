@@ -18,6 +18,7 @@ public class StateRoundCalculating extends StateDefault {
 		mainView.setMapButtonEnable(false);
 		mainView.setDeliveryButtonEnable(false);
 		mainView.setCancelButtonEnable(false);
+		mainView.setMoveButtonEnable(false);
 		mainView.setStopButtonEnable(true);
 		mainView.setUndoButtonEnable(false);
 		mainView.setRedoButtonEnable(false);

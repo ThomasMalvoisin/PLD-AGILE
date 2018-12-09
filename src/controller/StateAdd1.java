@@ -17,6 +17,7 @@ public class StateAdd1 extends StateDefault {
 		mainView.setDeliveryButtonEnable(false);
 		mainView.setCancelButtonEnable(true);
 		mainView.setStopButtonEnable(false);
+		mainView.setMoveButtonEnable(false);
 		mainView.setUndoButtonEnable(false);
 		mainView.setRedoButtonEnable(false);
 		mainView.setDiscardButtonEnable(false);

@@ -29,6 +29,7 @@ public class StateMapLoaded extends StateDefault {
 		mainView.setMapButtonEnable(true);
 		mainView.setDeliveryButtonEnable(true);
 		mainView.setCancelButtonEnable(false);
+		mainView.setMoveButtonEnable(false);
 		mainView.setStopButtonEnable(false);
 		mainView.setUndoButtonEnable(false);
 		mainView.setRedoButtonEnable(false);

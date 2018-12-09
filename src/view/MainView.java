@@ -63,6 +63,9 @@ public class MainView implements Initializable{
 	VBox deleteButton;
 	
 	@FXML
+	VBox moveButton;
+	
+	@FXML
 	VBox cancelButton;
 	
 	@FXML
@@ -106,12 +109,6 @@ public class MainView implements Initializable{
 		}
 		deliveryManCombo.getItems().addAll(values);
 		deliveryManCombo.setValue(1);
-
-		setMapButtonEnable(true);
-		setDeliveryButtonEnable(false);
-		setComputeButtonEnable(false);
-		setAddButtonEnable(false);
-		setDeleteButtonEnable(false);
 	}
 	
 	public void clickLoadMap(){
@@ -153,6 +150,10 @@ public class MainView implements Initializable{
 	
 	public void discardChanges(){
 		controller.discardChanges();
+	}
+	
+	public void clickMove() {
+		controller.buttonMove();
 	}
 	
 	public void printCityMap(CityMap map) {
@@ -235,6 +236,10 @@ public class MainView implements Initializable{
 	
 	public void setDeleteButtonEnable(boolean b) {
 		deleteButton.setDisable(!b);
+	}
+	
+	public void setMoveButtonEnable(boolean b) {
+		moveButton.setDisable(!b);
 	}
 	
 	public void setCancelButtonEnable(boolean b) {

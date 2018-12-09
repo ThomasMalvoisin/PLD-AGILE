@@ -172,6 +172,11 @@
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Delete" />
                                        </children>
                                     </VBox>
+                                    <VBox fx:id="moveButton" alignment="CENTER" onMouseClicked="#clickMove" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Move" />
+                                       </children>
+                                    </VBox>
                                     <VBox fx:id="cancelButton" alignment="CENTER" onMouseClicked="#buttonCancel" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
                                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">

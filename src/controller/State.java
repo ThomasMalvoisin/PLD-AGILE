@@ -37,4 +37,6 @@ public interface State {
 	public void cancel(MainView mainView);
   
 	public void discardChanges(ListCommands listeDeCdes);
+	
+	public void move(MainView mainView);
 }

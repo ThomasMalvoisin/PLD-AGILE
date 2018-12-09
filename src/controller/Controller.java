@@ -25,6 +25,7 @@ public class Controller {
 	protected static final StateAdd1 stateAdd1 = new StateAdd1();
 	protected static final StateAdd2 stateAdd2 = new StateAdd2();
 	protected static final StateModify stateModify = new StateModify();
+	protected static final StateMove stateMove = new StateMove();
 
 	public Controller(MainView mv) {
 		this.mv = mv;
@@ -92,6 +93,10 @@ public class Controller {
 
 	public void buttonCancel() {
 		currentState.cancel(mv);
+	}
+	
+	public void buttonMove() {
+		currentState.move(mv);
 	}
 
 }

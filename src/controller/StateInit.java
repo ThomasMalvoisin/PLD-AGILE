@@ -12,6 +12,7 @@ public class StateInit extends StateDefault{
 		mainView.setAddButtonEnable(false);
 		mainView.setDeleteButtonEnable(false);
 		mainView.setCancelButtonEnable(false);
+		mainView.setMoveButtonEnable(false);
 		mainView.setStopButtonEnable(false);
 		mainView.setUndoButtonEnable(false);
 		mainView.setRedoButtonEnable(false);

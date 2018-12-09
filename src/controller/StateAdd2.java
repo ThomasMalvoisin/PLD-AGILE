@@ -19,6 +19,8 @@ public class StateAdd2 extends StateDefault {
 		mainView.setMapButtonEnable(false);
 		mainView.setDeliveryButtonEnable(false);
 		mainView.setCancelButtonEnable(true);
+		mainView.setMoveButtonEnable(false);
+		mainView.setMoveButtonEnable(false);
 		mainView.setStopButtonEnable(false);
 		mainView.setUndoButtonEnable(false);
 		mainView.setRedoButtonEnable(false);

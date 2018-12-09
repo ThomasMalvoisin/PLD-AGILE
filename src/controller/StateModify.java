@@ -34,6 +34,7 @@ public class StateModify extends StateDefault {
  		mainView.setMapButtonEnable(true);
  		mainView.setDeliveryButtonEnable(true);
 		mainView.setCancelButtonEnable(true);
+		mainView.setMoveButtonEnable(true);
 		mainView.setStopButtonEnable(false);
 		mainView.setUndoButtonEnable(true);
 		mainView.setRedoButtonEnable(true);
@@ -103,6 +104,15 @@ public class StateModify extends StateDefault {
 		mainView.setDeliverySelected(null);
 		Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
+	}
+	
+
+	@Override
+	public void move(MainView mainView) {
+		mainView.printMessage("Please select the delivery you want to put before...");
+		Controller.stateMove.actionDeliveriesSelected(this.deliverySelected);
+		Controller.stateMove.setButtonsEnabled(mainView);
+		Controller.setCurrentState(Controller.stateMove);
 	}
 
 	// methode appelee avant d'entrer dans l'etat this, pour definir le delivery

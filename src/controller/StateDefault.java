@@ -93,5 +93,9 @@ public class StateDefault implements State {
 	@Override
 	public void stopAlgo() {
 	}
+
+	@Override
+	public void move(MainView mainView) {		
+	}
 	
 }
