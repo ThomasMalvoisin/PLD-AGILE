@@ -169,6 +169,8 @@ public class Round {
 			currentTime += (long)Math.round(journeyDuration);
 			i++;
 		}
+		
+		this.duration = currentTime;
 	}
 
 }

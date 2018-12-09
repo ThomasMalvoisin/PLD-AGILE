@@ -85,6 +85,7 @@ public class StateDeliveryLoaded extends StateDefault {
 					duration = roundsTemp.getDuration();
 					Platform.runLater(() -> {
 						roundSet.copy(roundsTemp);
+						roundSet.calculTime(delivReq);
 					});
 				}
 				try {
@@ -97,6 +98,7 @@ public class StateDeliveryLoaded extends StateDefault {
 				duration = roundsTemp.getDuration();
 				Platform.runLater(() -> {
 					roundSet.copy(roundsTemp);
+					roundSet.calculTime(delivReq);
 				});
 			}
 
