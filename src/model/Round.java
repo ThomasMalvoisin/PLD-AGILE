@@ -154,23 +154,18 @@ public class Round {
 		int i = 0;
 
 		for (Delivery d : deliveries) {
-			System.out.println("Intersection : " + d.getAdress().getId());
-			System.out.println("current : " + currentTime);
 			d.setArrivalTime(new Date(currentTime));
 						
 			currentTime += (long)d.getDuration() * 1000;
-			System.out.println("current : " + currentTime);
 			d.setDepartureTime(new Date(currentTime));
 			
 			currentJourney = journeys.get(i);
 			journeyDuration = (currentJourney.getLength() * 0.2399998) * 1000;
-			System.out.println("Journey from " + currentJourney.getOrigin().getId() + " to " + currentJourney.getDestination().getId());
-
 			currentTime += (long)Math.round(journeyDuration);
 			i++;
-		}
+		}	
 		
-		this.duration = currentTime;
+		this.duration = currentTime - this.departureTime.getTime();
 	}
 
 }
