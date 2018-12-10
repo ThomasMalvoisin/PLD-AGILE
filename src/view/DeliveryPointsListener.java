@@ -22,7 +22,11 @@ public class DeliveryPointsListener implements EventHandler<MouseEvent> {
 			ObservableMap<Object, Object> circleProp = ((Node) event.getSource()).getProperties();
 			if (circleProp.get("DELIVERY") != null) {
 				onClick((Delivery) circleProp.get("DELIVERY"));
-			} else if (circleProp.get("INTERSECTION") != null) {
+			}
+			else if(circleProp.get("WAREHOUSE") != null) {
+				onClickWarehouse((Intersection) circleProp.get("WAREHOUSE"));
+			}
+			 else if (circleProp.get("INTERSECTION") != null) {
 				onClick((Intersection) circleProp.get("INTERSECTION"));
 			}
 		}
@@ -34,5 +38,9 @@ public class DeliveryPointsListener implements EventHandler<MouseEvent> {
 
 	private void onClick(Intersection i) {
 		controller.selectIntersection(i);
+	}
+	
+	private void onClickWarehouse(Intersection i) {
+		controller.selectWarehouse(i);
 	}
 }

@@ -226,6 +226,8 @@ public class GraphicView implements Observer {
 	public void drawWarehousePoint(Intersection i) {
 //		drawPoint(geoToCoord(i),8, Color.FORESTGREEN, null);
 		Circle c = makePoint(geoToCoord(i), 5, Color.FORESTGREEN);
+		c.getProperties().put("WAREHOUSE", i);
+		c.addEventHandler(MouseEvent.ANY, dpl);
 	}
 
 	private Circle makePoint(double[] point, double radius, Paint p) {

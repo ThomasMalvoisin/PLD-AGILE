@@ -22,6 +22,8 @@ public interface State {
 
 	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet, Delivery delivery, ListCommands listeDeCdes);
 
+	public void selectWarehouse(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet, Intersection i, ListCommands listeDeCdes);
+	
 	public void add(MainView mv);
 
 	public void selectIntersection(MainView mainView, Intersection i);

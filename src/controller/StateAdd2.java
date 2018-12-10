@@ -40,10 +40,59 @@ public class StateAdd2 extends StateDefault {
 	@Override
 	public void selectDelivery(MainView mv, CityMap map, DeliveryRequest delivReq, RoundSet result, Delivery delivery,  ListCommands listeDeCdes) {
 		mv.printMessage("");
-		Delivery d = new Delivery(5, intersectionSelected); //TODO: permettre � l'utilisateur de saisir la dur�e
-		/*delivReq.addDelivery(d);
-		result.addDelivery(map, d, delivery);*/
-		listeDeCdes.ajoute(new ComAdd(map,delivReq, result, d, delivery));
+		int duration;
+		duration = mv.displayPopUpAdd(null);
+		if(duration!=-1) {
+			Delivery d = new Delivery(duration, intersectionSelected); //TODO: permettre � l'utilisateur de saisir la dur�e
+			listeDeCdes.ajoute(new ComAdd(map,delivReq, result, d, delivery));
+		}else {
+			cancel(mv);
+			return;
+		}
+		Controller.stateRoundCalculated.setButtonsEnabled(mv);
+		Controller.setCurrentState(Controller.stateRoundCalculated);
+	}
+	
+	@Override
+	public void selectWarehouse(MainView mv, CityMap map, DeliveryRequest delivReq, RoundSet result, Intersection i,  ListCommands listeDeCdes) {
+		mv.printMessage("");
+		int resultSetSize = result.getRounds().size();
+		int duration;
+		Delivery d ;
+		int indexRound ;
+		if(resultSetSize>1) {
+			 indexRound = mv.displayPopUpWarehouse(resultSetSize, true);
+			if( indexRound !=-1 ) {
+				duration = mv.displayPopUpAdd(null);
+				if(duration!=-1) {
+					d = new Delivery(duration, intersectionSelected);
+					indexRound = indexRound-1;
+					Delivery delBefore = result.getRounds().get(indexRound).getDeliveries().get(0);
+					listeDeCdes.ajoute(new ComAdd(map,delivReq, result, d, delBefore));
+				}else {
+					cancel(mv);
+					return;
+				}
+			}else {
+				cancel(mv);
+				return;
+			}
+		}
+		else if(resultSetSize==1){
+			
+			duration = mv.displayPopUpAdd(null);
+			if(duration!=-1) {
+				indexRound=0;
+				d = new Delivery(duration, intersectionSelected);
+				Delivery delBefore = result.getRounds().get(indexRound).getDeliveries().get(0);
+				listeDeCdes.ajoute(new ComAdd(map,delivReq, result, d, delBefore));
+			}else {
+				cancel(mv);
+				return;
+			}
+			
+		}
+		
 		Controller.stateRoundCalculated.setButtonsEnabled(mv);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}

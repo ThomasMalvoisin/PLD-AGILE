@@ -99,6 +99,11 @@ public class Controller {
 		currentState.move(mv);
 	}
 
+	
+	public void selectWarehouse(Intersection i) {
+		currentState.selectWarehouse(mv, map, delivReq, result, i, listCdes);
+  }
+
 	public void export() {
 		currentState.exportRoundSet(result);
 	}

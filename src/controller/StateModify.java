@@ -90,11 +90,13 @@ public class StateModify extends StateDefault {
 	public void delete(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
 			ListCommands listeDeCdes) {
 		System.out.println("Delete " + deliverySelected.getId());
-		/*
-		 * deliveryRequest.delete(deliverySelected); roundSet.deleteDelivery(map,
-		 * deliverySelected);
-		 */
-		listeDeCdes.ajoute(new ComDelete(map, deliveryRequest, roundSet, deliverySelected));
+		boolean delete = mainView.displayPopUpConfirmation("Are you sure to delete this delivery?");
+		if(delete) {
+			listeDeCdes.ajoute(new ComDelete(map, deliveryRequest, roundSet, deliverySelected));
+		}else {
+			cancel(mainView);
+			return;
+		}
 		Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}

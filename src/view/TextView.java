@@ -88,12 +88,13 @@ public class TextView implements Observer{
 					i++;
 				}
 				titledPane.setContent(titledPaneContent);
-				titledPane.setText("Round with "+ (round.getDeliveries().size()-1) + "  Delivery Points");
+				titledPane.setText("Round "+(r+1)+" with "+ (round.getDeliveries().size()-1) + "  Delivery Points");
 				titledPane.setTextFill(colors[r]);
 				txtArea.getChildren().add(titledPane);
 			}
 			r++;
 		}
+		
 	}
 		
 
