@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
+import model.Intersection;
 import model.Round;
 import model.RoundSet;
 import model.Section;
@@ -175,4 +176,6 @@ public class StateRoundCalculated extends StateDefault {
 	public void discardChanges(ListCommands listeDeCdes) {
 		listeDeCdes.discard();
 	}
+	
+	
 }

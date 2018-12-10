@@ -29,6 +29,17 @@ public class DeliveryPointsListener implements EventHandler<MouseEvent> {
 			 else if (circleProp.get("INTERSECTION") != null) {
 				onClick((Intersection) circleProp.get("INTERSECTION"));
 			}
+		}else if(event.getEventType() == MouseEvent.MOUSE_ENTERED) {
+			ObservableMap<Object, Object> circleProp = ((Node) event.getSource()).getProperties();
+			if (circleProp.get("INTERSECTION") != null) {
+				 onHover((Intersection) circleProp.get("INTERSECTION"));
+			}
+		}
+		else if(event.getEventType() == MouseEvent.MOUSE_EXITED) {
+			ObservableMap<Object, Object> circleProp = ((Node) event.getSource()).getProperties();
+			if (circleProp.get("INTERSECTION") != null) {
+				 onExit((Intersection) circleProp.get("INTERSECTION"));
+			}
 		}
 	}
 
@@ -42,5 +53,13 @@ public class DeliveryPointsListener implements EventHandler<MouseEvent> {
 	
 	private void onClickWarehouse(Intersection i) {
 		controller.selectWarehouse(i);
+	}
+	
+	private void onHover(Intersection i) {
+		controller.hoverIntersection(i);
+	}
+	
+	private void onExit(Intersection i) {
+		controller.exitIntersection(i);
 	}
 }

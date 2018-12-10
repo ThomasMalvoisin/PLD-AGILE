@@ -107,5 +107,13 @@ public class Controller {
 	public void export() {
 		currentState.exportRoundSet(result);
 	}
+	
+	public void hoverIntersection(Intersection i) {
+		currentState.hoverIntersection(mv, map, i);
+	}
+	
+	public void exitIntersection(Intersection i) {
+		currentState.exitIntersection(mv);
+	}
 
 }

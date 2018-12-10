@@ -43,4 +43,9 @@ public interface State {
 	public void exportRoundSet(RoundSet roundSet);
 
 	public void move(MainView mainView);
+	
+	public void hoverIntersection(MainView mv,CityMap map,Intersection i) ;
+	
+	public void exitIntersection(MainView mv) ;
+	
 }

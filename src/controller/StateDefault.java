@@ -109,4 +109,13 @@ public class StateDefault implements State {
 	public void move(MainView mainView) {	
 	}
 	
+	@Override
+	public void hoverIntersection(MainView mv, CityMap map, Intersection i) {	
+	}
+	
+	@Override
+	public void exitIntersection(MainView mv) {
+		
+	}
+	
 }

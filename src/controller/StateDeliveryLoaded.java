@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
+import model.Intersection;
 import model.RoundSet;
 import view.MainView;
 import xml.DeliveryRequestDeserializer;
@@ -127,4 +129,8 @@ public class StateDeliveryLoaded extends StateDefault {
 
 		mainView.setDeliverySelected(delivery);
 	}
+	
+	
+		
+
 }

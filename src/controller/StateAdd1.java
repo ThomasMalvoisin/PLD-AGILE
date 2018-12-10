@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.CityMap;
 import model.DeliveryRequest;
 import model.Intersection;
@@ -47,5 +49,28 @@ public class StateAdd1 extends StateDefault {
 		mainView.printMessage("");
 		Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
+	}
+	
+	@Override 
+	public void hoverIntersection(MainView mv, CityMap map, Intersection inter) {
+		ArrayList<String> sectionNames = map.getIntersectionSectionNames(inter);
+		String dlvP ="Add a new delivery at : ";
+		int i = 0;
+		for(String name : sectionNames) {
+			if(i != 0 ) {
+				dlvP += " , ";
+			}
+			if(name.equals("")){
+				name =  "No Name";
+			}
+			dlvP +=  name;
+			i++;
+		}
+		mv.printMessage(dlvP);
+	}
+	
+	@Override
+	public void exitIntersection(MainView mv) {
+		mv.printMessage("Please select the point where you want to add a delivery... ");
 	}
 }
