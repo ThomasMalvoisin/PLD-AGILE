@@ -38,5 +38,7 @@ public interface State {
   
 	public void discardChanges(ListCommands listeDeCdes);
 	
+	public void exportRoundSet(RoundSet roundSet);
+
 	public void move(MainView mainView);
 }

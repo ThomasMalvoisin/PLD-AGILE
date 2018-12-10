@@ -96,4 +96,23 @@ public class RoundSet extends Observable {
 			}
 		}
 	}
+	
+	public String toString () {
+		String a  ="***** General information about Round Set ***** \n"; 
+		a+="\n";
+		a+="Number of Delivery Man : "+rounds.size()+" \n";
+		a+="Total length : "+totalLength+" meters \n";
+		a+="Maximum duration: "+Math.round(duration/60)+" minutes \n";
+		a+="\n";
+		int numeroLivreur =0;
+		for(Round r : rounds) {
+			numeroLivreur++;
+			a+="***** Roadmap of delivery man "+numeroLivreur+" ******\n ";
+			a+= r.toString();
+			a+="***** End of the roadmap of delivery man *****"+numeroLivreur+" \n ";
+			a+="\n";
+			}
+		return a;
+		}
 }
+

@@ -30,8 +30,9 @@ public class Intersection{
 	}
 	
 	public String toString() {
-		   return "inter : lat : "+latitude+" long : "+longitude;
-		}
+		String	a ="Intersection " +id +" at latitude "+ latitude +" and at longitude " + longitude+".\n";
+		return a;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

@@ -99,4 +99,8 @@ public class Controller {
 		currentState.move(mv);
 	}
 
+	public void export() {
+		currentState.exportRoundSet(result);
+	}
+
 }

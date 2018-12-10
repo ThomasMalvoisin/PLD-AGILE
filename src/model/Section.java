@@ -32,7 +32,10 @@ public class Section{
 	}
 	
 	public String toString() {
-		   return "nom : "+name +" origine : "+origin+" destination : "+destination;
+		String a = "- Take "+name +" for "+Math.round(length)+ " meters. \n";
+		a+= "Goes from : " +origin.toString();
+		a+= "To "+ destination.toString() + "\n"; 
+		return a;
 	}
 	
 	public Section getInverse() {

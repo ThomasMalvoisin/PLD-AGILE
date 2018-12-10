@@ -75,6 +75,10 @@ public class StateDefault implements State {
 	}
 
 	@Override
+	public void exportRoundSet(RoundSet roundSet) {	
+  }
+  
+  @Override
 	public void cancel(MainView mainView) {
 	}
 	
@@ -95,7 +99,7 @@ public class StateDefault implements State {
 	}
 
 	@Override
-	public void move(MainView mainView) {		
+	public void move(MainView mainView) {	
 	}
 	
 }

@@ -44,5 +44,13 @@ public class Journey {
 		this.length = length;
 	}
 	
+	public String toString(int number) {
+		String a = "Lenght of journey "+number+" : "+ Math.round(length) +" meter \n \n";
+		for (Section s : sectionList) {
+			a+=s.toString();
+			a+="\n";
+		}
+		return a;
+	}
 	
 }

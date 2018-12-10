@@ -144,6 +144,40 @@ public class Round {
 		}
 		deliveries.add(deliveryBeforeIndex + 1, d);
 	}
+	
+	public String toString () {
+
+		String a="Length of this round : "+Math.round(totalLength)+" meters \n";
+		a+="Duration  : "+Math.round(duration/60.0)+" minutes \n";
+		a+="Departure time : "+departureTime+" minutes \n";
+		a+="Arrival time : "+arrivalTime+" minutes \n";
+		a+="\n";
+		a+= "--- Deliveries for this round--- \n";
+		boolean isFirst = true;
+		for(Delivery d : deliveries) {
+			a+=d.toString(isFirst);
+			a+="\n";
+			isFirst=false;
+		}
+		a+= "--- Details round--- \n";
+		a+="You start at the warehouse. \n";
+		int i = 1;
+		isFirst = false;
+		for(Journey j : journeys) {
+			a+=j.toString(i);
+			a+="\n";
+			a+="You arrive at ";
+			a+=deliveries.get(i).toString(isFirst);
+			i++;
+			if (i==deliveries.size()) {
+				isFirst=true;
+				i=0;
+			}
+		}
+		return a;
+	}
+	
+	
 
 	public void calculTime() {
 		long currentTime = departureTime.getTime();

@@ -1,8 +1,12 @@
 package controller;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -13,7 +17,9 @@ import javafx.stage.Stage;
 import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
+import model.Round;
 import model.RoundSet;
+import model.Section;
 import view.MainView;
 import xml.DeliveryRequestDeserializer;
 import xml.ExceptionXML;
@@ -96,6 +102,20 @@ public class StateRoundCalculated extends StateDefault {
 	public void redo(ListCommands listeDeCdes) {
 		listeDeCdes.redo();
 	}
+	
+	@Override
+	public void exportRoundSet(RoundSet roundSet) {
+		System.out.println("export");
+		try{
+			File ff=new File("C:\\Users\\Samuel GOY\\Desktop\\PLD AGILE\\Feuille de Route\\Roadmap.txt"); // définir l'arborescence
+			ff.createNewFile();
+			FileWriter ffw=new FileWriter(ff);
+			
+			ffw.write(roundSet.toString());
+			ffw.close();
+		} catch (Exception e) {}
+	}
+
 
 	@Override
 	public void discardChanges(ListCommands listeDeCdes) {

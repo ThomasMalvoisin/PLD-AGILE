@@ -64,4 +64,17 @@ public class Delivery {
 		return false;
 	}
 	
+	public String toString (boolean isFirst) {
+		String a = "";
+		if (isFirst) {
+			a+="Warehouse.\n";
+		} else {
+			a+="Delivery "+id+".\n";
+		}
+		a+="Duration : "+Math.round(duration/60)+" minutes. \n";
+		a+="Departure time : "+departureTime+" minutes. \n";
+		a+="Arrival time : "+arrivalTime+" minutes. \n";
+		a+=adress.toString();
+		return a;
+	}
 }
