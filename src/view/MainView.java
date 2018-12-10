@@ -80,6 +80,9 @@ public class MainView implements Initializable{
 	@FXML
 	VBox discardButton;
 	
+	@FXML
+	VBox exportButton;
+	
 	Controller controller;
 	ResizeListener rl;
 	DeliveryPointsListener dpl;
@@ -150,6 +153,10 @@ public class MainView implements Initializable{
 	
 	public void discardChanges(){
 		controller.discardChanges();
+	}
+	
+	public void clickExport() {
+		controller.export();
 	}
 	
 	public void clickMove() {
@@ -260,5 +267,9 @@ public class MainView implements Initializable{
 	
 	public void setDiscardButtonEnable(boolean b) {
 		discardButton.setDisable(!b);
+	}
+	
+	public void setExportButtonEnable(boolean b) {
+		exportButton.setDisable(!b);
 	}
 }

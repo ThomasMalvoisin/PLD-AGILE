@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
+<BorderPane prefHeight="627.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
    <center>
       <StackPane>
          <children>
@@ -77,7 +77,7 @@
                                  <children>
                                     <VBox fx:id="mapButton" alignment="CENTER" onMouseClicked="#clickLoadMap" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../images/placeholder.png" />
                                              </image>
@@ -87,7 +87,7 @@
                                     </VBox>
                                     <VBox fx:id="deliveryButton" alignment="CENTER" onMouseClicked="#clickLoadDeliveryRequest" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../images/map.png" />
                                              </image>
@@ -111,9 +111,9 @@
                                  <children>
                                     <VBox fx:id="computeButton" alignment="CENTER" onMouseClicked="#clickRoundsCompute" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../images/search.png" />
+                                                <Image url="@../images/computePlay.png" />
                                              </image>
                                           </ImageView>
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="70.0" text="Compute" />
@@ -130,12 +130,12 @@
                                     </VBox>
                                     <VBox fx:id="stopButton" alignment="CENTER" onMouseClicked="#clickStopAlgo" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../images/stop.png" />
+                                                <Image url="@../images/computeStop.png" />
                                              </image>
                                           </ImageView>
-                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Stop" />
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="70.0" text="Stop" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -154,9 +154,9 @@
                                  <children>
                                     <VBox fx:id="addButton" alignment="CENTER" onMouseClicked="#clickAddDelivery" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../images/add.png" />
+                                                <Image url="@../images/AddPointer.png" />
                                              </image>
                                           </ImageView>
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Add" />
@@ -164,9 +164,9 @@
                                     </VBox>
                                     <VBox fx:id="deleteButton" alignment="CENTER" onMouseClicked="#buttonDelete" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../images/delete.png" />
+                                                <Image url="@../images/deletepointer.png" />
                                              </image>
                                           </ImageView>
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Delete" />
@@ -174,12 +174,17 @@
                                     </VBox>
                                     <VBox fx:id="moveButton" alignment="CENTER" onMouseClicked="#clickMove" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
+                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/deplacer.png" />
+                                             </image>
+                                          </ImageView>
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Move" />
                                        </children>
                                     </VBox>
                                     <VBox fx:id="cancelButton" alignment="CENTER" onMouseClicked="#buttonCancel" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../images/cancel.png" />
                                              </image>
@@ -203,38 +208,65 @@
                                  <children>
                                     <VBox fx:id="undoButton" alignment="CENTER" onMouseClicked="#undo" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                               <!--   <Image url="@../images/add.png" /> -->
+                                                <Image url="@../images/back.png" />
                                              </image>
                                           </ImageView>
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Undo" />
                                        </children>
                                     </VBox>
-                                    <Separator orientation="VERTICAL" />
+                                    <VBox fx:id="discardButton" alignment="CENTER" onMouseClicked="#discardChanges" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                       <children>
+                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/discareChanges.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Discare" />
+                                       </children>
+                                    </VBox>
                                     <VBox fx:id="redoButton" alignment="CENTER" onMouseClicked="#redo" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                               <!--  <Image url="@../images/delete.png" />  -->
+                                                <Image url="@../images/right-arrow.png" />
                                              </image>
                                           </ImageView>
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Redo" />
                                        </children>
                                     </VBox>
-                                    <Separator orientation="VERTICAL" />
-                                    <VBox fx:id="discardButton" alignment="CENTER" onMouseClicked="#discardChanges" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                 </children>
+                              </HBox>
+                              <Label alignment="CENTER" text="Edit">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <Separator orientation="VERTICAL" />
+                        <VBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <VBox fx:id="exportButton" alignment="CENTER" onMouseClicked="#clickExport" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                               <!--  <Image url="@../images/delete.png" />  -->
+                                                <Image url="@../images/diskette.png" />
                                              </image>
                                           </ImageView>
-                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="120.0" text="Discard changes" />
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Export" />
                                        </children>
                                     </VBox>
                                  </children>
                               </HBox>
+                              <Label alignment="CENTER" text="Road Map">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </VBox>
                      </items>

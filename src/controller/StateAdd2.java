@@ -25,6 +25,7 @@ public class StateAdd2 extends StateDefault {
 		mainView.setUndoButtonEnable(false);
 		mainView.setRedoButtonEnable(false);
 		mainView.setDiscardButtonEnable(false);
+		mainView.setExportButtonEnable(false);
 	}
 
 	@Override

@@ -39,6 +39,7 @@ public class StateModify extends StateDefault {
 		mainView.setUndoButtonEnable(true);
 		mainView.setRedoButtonEnable(true);
 		mainView.setDiscardButtonEnable(true);
+		mainView.setExportButtonEnable(false);
 	}
 
 	@Override
