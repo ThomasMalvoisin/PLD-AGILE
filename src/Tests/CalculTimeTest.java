@@ -23,13 +23,10 @@ class CalculTimeTest {
 
 	@Test
 	void calculTimeTest() {
-		// Creation of the deliveryRequest
-		DeliveryRequest deliveryRequest = new DeliveryRequest();
 
 		SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss:SS");
 		try {
 			Date startTime = df.parse("10:10:0:000");
-			deliveryRequest.setStartTime(startTime);
 
 			// Creation of deliveries
 			ArrayList<Delivery> deliveries = new ArrayList<Delivery>();
@@ -86,8 +83,9 @@ class CalculTimeTest {
 			RoundSet roundSet = new RoundSet();
 			roundSet.getRounds().add(round);
 			roundSet.getRounds().add(round2);
+			roundSet.setDepartureTime(startTime);
 
-			roundSet.calculTime(deliveryRequest);
+			roundSet.calculTime();
 
 			assertEquals(Adate1Expected, deliveries.get(0).getArrivalTime().getTime());
 			assertEquals(Adate2Expected, deliveries.get(1).getArrivalTime().getTime());

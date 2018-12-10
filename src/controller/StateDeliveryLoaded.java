@@ -66,10 +66,12 @@ public class StateDeliveryLoaded extends StateDefault {
 	@Override
 	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan,
 			RoundSet roundSet, ListCommands listeDeCdes) {
-		
+
 		listeDeCdes.reset();
 
 		RoundSet roundsTemp = new RoundSet();
+		roundsTemp.setDepartureTime(delivReq.getStartTime());
+	
 		Thread calculate = new Thread(() -> {
 			Algorithms.solveTSP(roundsTemp, map, delivReq, nbDeliveryMan);
 		});
@@ -85,13 +87,11 @@ public class StateDeliveryLoaded extends StateDefault {
 					System.out.println(duration);
 					duration = roundsTemp.getDuration();
 					Platform.runLater(() -> {
-						roundsTemp.calculTime(delivReq);
 						roundSet.copy(roundsTemp);
-//						roundSet.calculTime(delivReq);
 					});
 				}
 				try {
-					Thread.sleep(500);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -99,9 +99,7 @@ public class StateDeliveryLoaded extends StateDefault {
 			if (roundsTemp.getDuration() < duration || duration == 0.0) {
 				duration = roundsTemp.getDuration();
 				Platform.runLater(() -> {
-					roundsTemp.calculTime(delivReq);
 					roundSet.copy(roundsTemp);
-//					roundSet.calculTime(delivReq);
 				});
 			}
 

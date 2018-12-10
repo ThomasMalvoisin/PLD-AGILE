@@ -1,12 +1,14 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Observable;
 
 public class RoundSet extends Observable {
 	protected ArrayList<Round> rounds;
 	protected double totalLength;
 	protected double duration;
+	protected Date departureTime;
 
 	public RoundSet() {
 		rounds = new ArrayList<Round>();
@@ -42,10 +44,19 @@ public class RoundSet extends Observable {
 		this.duration = duration;
 	}
 
+	public Date getDepartureTime() {
+		return departureTime;
+	}
+
+	public void setDepartureTime(Date departureTime) {
+		this.departureTime = departureTime;
+	}
+
 	public void copy(RoundSet roundSet) {
 		rounds = new ArrayList<Round>(roundSet.rounds);
-		duration = roundSet.duration;
 		totalLength = roundSet.totalLength;
+		this.departureTime = roundSet.getDepartureTime();
+		this.calculTime();
 		setChanged();
 		notifyObservers();
 	}
@@ -54,6 +65,7 @@ public class RoundSet extends Observable {
 		for (Round r : rounds) {
 			if (r.getDeliveries().contains(d)) {
 				r.deleteDelivery(map, d);
+				calculTime();
 				setChanged();
 				notifyObservers();
 			}
@@ -64,6 +76,7 @@ public class RoundSet extends Observable {
 		for (Round r : rounds) {
 			if (r.getDeliveries().contains(deliveryBefore)) {
 				r.addDelivery(map, d, deliveryBefore);
+				calculTime();
 				setChanged();
 				notifyObservers();
 			}
@@ -82,9 +95,9 @@ public class RoundSet extends Observable {
 		return null;
 	}
 
-	public void calculTime(DeliveryRequest dr) {
+	public void calculTime() {
 		for (Round r : rounds) {
-			r.setDepartureTime(dr.getStartTime());
+			r.setDepartureTime(this.getDepartureTime());
 			r.calculTime();
 		}
 		
