@@ -36,6 +36,7 @@ public class StateDeliveryLoaded extends StateDefault {
 		mainView.setRedoButtonEnable(false);
 		mainView.setDiscardButtonEnable(false);
 		mainView.setExportButtonEnable(false);
+		mainView.setDeliveryManEnable(true);
 	}
 
 	@Override

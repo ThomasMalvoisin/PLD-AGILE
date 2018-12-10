@@ -22,6 +22,7 @@ public class StateAdd1 extends StateDefault {
 		mainView.setRedoButtonEnable(false);
 		mainView.setDiscardButtonEnable(false);
 		mainView.setExportButtonEnable(false);
+		mainView.setDeliveryManEnable(false);
 	}
 
 	@Override

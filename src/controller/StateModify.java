@@ -40,6 +40,7 @@ public class StateModify extends StateDefault {
 		mainView.setRedoButtonEnable(true);
 		mainView.setDiscardButtonEnable(true);
 		mainView.setExportButtonEnable(false);
+		mainView.setDeliveryManEnable(false);
 	}
 
 	@Override

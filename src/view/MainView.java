@@ -7,9 +7,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import controller.Controller;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.Scene;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -22,6 +29,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
@@ -44,49 +52,69 @@ public class MainView implements Initializable{
 	TextField infoBar;
   
 	@FXML
+	VBox deliveryMan;
+	@FXML
 	ComboBox<Integer> deliveryManCombo;
 	
 	@FXML
 	VBox mapButton;
 	@FXML
-	MenuItem mapMenuButton;
+	ImageView addMapImage;
 	
 	@FXML
 	VBox deliveryButton;
 	@FXML
-	MenuItem deliveryMenuButton;
+	ImageView addDeliveryImage;
 	
 	@FXML
 	VBox computeButton;
 	@FXML
-	MenuItem computeMenuButton;
+	ImageView computeImage;
 	
 	@FXML
 	VBox addButton;
+	@FXML
+	ImageView addImage;
 	
 	@FXML
 	VBox deleteButton;
+	@FXML
+	ImageView deleteImage;
 	
 	@FXML
 	VBox moveButton;
+	@FXML
+	ImageView moveImage;
 	
 	@FXML
 	VBox cancelButton;
+	@FXML
+	ImageView cancelImage;
 	
 	@FXML
 	VBox stopButton;
+	@FXML
+	ImageView stopImage;
 	
 	@FXML
 	VBox undoButton;
+	@FXML
+	ImageView undoImage;
 	
 	@FXML
 	VBox redoButton;
+	@FXML
+	ImageView redoImage;
 	
 	@FXML
 	VBox discardButton;
+	@FXML
+	ImageView discardImage;
 	
 	@FXML
 	VBox exportButton;
+	@FXML
+	ImageView exportImage;
 	
 	Controller controller;
 	ResizeListener rl;
@@ -117,6 +145,30 @@ public class MainView implements Initializable{
 		}
 		deliveryManCombo.getItems().addAll(values);
 		deliveryManCombo.setValue(1);
+		
+	}
+	
+	public void postInitialize(Scene scene) {
+
+		scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+        	
+        	if(event.getCode() == KeyCode.Z && event.isControlDown()) {
+				controller.undo();
+				
+			}
+			
+			if(event.getCode() == KeyCode.Y && event.isControlDown()) {
+				controller.redo();
+				
+			}
+        });
+		
+		pane.setOnMouseClicked(event -> {
+			
+			if(event.getButton() == MouseButton.SECONDARY) {
+				buttonCancel();
+			}
+		});
 	}
 	
 	public void clickLoadMap(){
@@ -292,52 +344,176 @@ public class MainView implements Initializable{
 	
 	public void setMapButtonEnable(boolean b) {
 		mapButton.setDisable(!b);
-		mapMenuButton.setDisable(!b);
+		
+		if(b) {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(0);
+	        addMapImage.setEffect(desaturate);
+		}else {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(-1);
+	        addMapImage.setEffect(desaturate);
+		}
 	}
 	
 	public void setDeliveryButtonEnable(boolean b) {
 		deliveryButton.setDisable(!b);
-		deliveryMenuButton.setDisable(!b);
+		
+		if(b) {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(0);
+	        addDeliveryImage.setEffect(desaturate);
+		}else {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(-1);
+	        addDeliveryImage.setEffect(desaturate);
+		}
 	}
 	
 	public void setComputeButtonEnable(boolean b) {
 		computeButton.setDisable(!b);
-		computeMenuButton.setDisable(!b);
+		
+		if(b) {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(0);
+	        computeImage.setEffect(desaturate);
+		}else {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(-1);
+	        computeImage.setEffect(desaturate);
+		}
 	}
 	
 	public void setAddButtonEnable(boolean b) {
 		addButton.setDisable(!b);
+		
+		if(b) {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(0);
+	        addImage.setEffect(desaturate);
+		}else {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(-1);
+	        addImage.setEffect(desaturate);
+		}
 	}
 	
 	public void setDeleteButtonEnable(boolean b) {
 		deleteButton.setDisable(!b);
+		
+		if(b) {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(0);
+	        deleteImage.setEffect(desaturate);
+		}else {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(-1);
+	        deleteImage.setEffect(desaturate);
+		}
 	}
 	
 	public void setMoveButtonEnable(boolean b) {
 		moveButton.setDisable(!b);
+		
+		if(b) {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(0);
+	        moveImage.setEffect(desaturate);
+		}else {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(-1);
+	        moveImage.setEffect(desaturate);
+		}
 	}
 	
 	public void setCancelButtonEnable(boolean b) {
 		cancelButton.setDisable(!b);
+		
+		if(b) {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(0);
+	        cancelImage.setEffect(desaturate);
+		}else {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(-1);
+	        cancelImage.setEffect(desaturate);
+		}
 	}
 	
 	public void setStopButtonEnable(boolean b) {
 		stopButton.setDisable(!b);
+		
+		if(b) {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(0);
+	        stopImage.setEffect(desaturate);
+		}else {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(-1);
+	        stopImage.setEffect(desaturate);
+		}
 	}
 	
 	public void setUndoButtonEnable(boolean b) {
 		undoButton.setDisable(!b);
+		
+		if(b) {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(0);
+	        undoImage.setEffect(desaturate);
+		}else {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(-1);
+	        undoImage.setEffect(desaturate);
+		}
 	}
 	
 	public void setRedoButtonEnable(boolean b) {
 		redoButton.setDisable(!b);
+		
+		if(b) {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(0);
+	        redoImage.setEffect(desaturate);
+		}else {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(-1);
+	        redoImage.setEffect(desaturate);
+		}
 	}
 	
 	public void setDiscardButtonEnable(boolean b) {
 		discardButton.setDisable(!b);
+		
+		if(b) {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(0);
+	        discardImage.setEffect(desaturate);
+		}else {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(-1);
+	        discardImage.setEffect(desaturate);
+		}
 	}
 	
 	public void setExportButtonEnable(boolean b) {
 		exportButton.setDisable(!b);
+		
+		if(b) {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(0);
+	        exportImage.setEffect(desaturate);
+		}else {
+			ColorAdjust desaturate = new ColorAdjust();
+	        desaturate.setSaturation(-1);
+	        exportImage.setEffect(desaturate);
+		}
 	}
+	
+	public void setDeliveryManEnable(boolean b) {
+		deliveryMan.setDisable(!b);
+		
+	}
+
+
 }

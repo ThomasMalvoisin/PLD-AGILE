@@ -42,6 +42,7 @@ public class StateRoundCalculated extends StateDefault {
 		mainView.setRedoButtonEnable(true);
 		mainView.setDiscardButtonEnable(true);
 		mainView.setExportButtonEnable(true);
+		mainView.setDeliveryManEnable(false);
 	}
 
 	@Override
