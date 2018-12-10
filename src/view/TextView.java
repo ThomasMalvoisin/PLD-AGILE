@@ -1,5 +1,6 @@
 package view;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +44,8 @@ public class TextView implements Observer{
 	private ArrayList<Text> deliveries;
 	private Text selectedDelivery ;
 	private VBox txtArea;
+	
+	private SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
 
 	public TextView(VBox txtArea) {
 		this.txtArea = txtArea;
@@ -77,7 +80,7 @@ public class TextView implements Observer{
 		for(Round round : rounds) {
 			if(r < 10 ) {
 				TitledPane titledPane = new TitledPane();
-				titledPane.setExpanded(false);
+				titledPane.setExpanded(true);
 				VBox titledPaneContent = new VBox();
 				int i = 0 ;
 				for (Delivery d : round.getDeliveries()) {
@@ -116,11 +119,12 @@ public class TextView implements Observer{
 		}
 		if(d.getDepartureTime() != null && d.getArrivalTime() != null) {
 			dlvP +=  "\n                      ";
-			dlvP += "Departure : " + d.getDepartureTime();
+			dlvP += "Arrival   : " + df.format(d.getArrivalTime());
 			dlvP +=  "\n                      ";
-			dlvP += "Arrival   : " + d.getArrivalTime();
+			dlvP += "Duration  : " + d.getDuration()/60 + " min";
 			dlvP +=  "\n                      ";
-			dlvP += "Duration  : " + d.getDuration();
+			dlvP += "Departure : " + df.format(d.getDepartureTime());
+			
 		}
 		Text t = new Text(dlvP);
 		t.setFill(color);

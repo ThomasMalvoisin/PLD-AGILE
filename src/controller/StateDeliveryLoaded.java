@@ -125,7 +125,5 @@ public class StateDeliveryLoaded extends StateDefault {
 		// un message à l'utilisateur pour lui dire quoi faire
 
 		mainView.setDeliverySelected(delivery);
-		Controller.stateModify.setButtonsEnabled(mainView);
-		Controller.stateModify.actionDeliverySelected(delivery);
 	}
 }
