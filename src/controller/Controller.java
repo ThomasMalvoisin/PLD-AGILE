@@ -43,11 +43,11 @@ public class Controller {
 	}
 
 	public void loadMap() {
-		currentState.loadMap(mv, map);
+		currentState.loadMap(mv, map, delivReq, result);
 	}
 
 	public void loadDeliveryRequest() {
-		currentState.loadDeliveryRequest(mv, map, delivReq);
+		currentState.loadDeliveryRequest(mv, map, delivReq, result);
 	}
 
 	public void roundsCompute(int nbDeliveryMan) {

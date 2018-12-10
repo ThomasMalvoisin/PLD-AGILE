@@ -39,7 +39,7 @@ public class StateDeliveryLoaded extends StateDefault {
 	}
 
 	@Override
-	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest) {
+	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result) {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open a delivery request");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
@@ -51,6 +51,7 @@ public class StateDeliveryLoaded extends StateDefault {
 				Delivery.currentId = 1;
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
 				mainView.printDeliveryRequest(cityMap, deliveryRequest);
+				result.reset();
 				Controller.stateDeliveryLoaded.setButtonsEnabled(mainView);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML

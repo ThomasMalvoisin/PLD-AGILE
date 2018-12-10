@@ -126,6 +126,13 @@ public class RoundSet extends Observable {
 			a+="\n";
 			}
 		return a;
-		}
+	}
+	
+	public void reset() {
+		rounds.clear();
+		totalLength=0;
+		duration=0;
+		departureTime=null;
+	}
 }
 

@@ -26,7 +26,7 @@ public class StateDefault implements State {
 	}
 
 	@Override
-	public void loadMap(MainView mainView, CityMap cityMap){
+	public void loadMap(MainView mainView, CityMap cityMap,DeliveryRequest delivReq, RoundSet result){
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open a map");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(" MAP XML", "*.xml"));
@@ -36,6 +36,8 @@ public class StateDefault implements State {
 			try {
 				cityMap.copy(MapDeserializer.load(file));
 				mainView.printCityMap(cityMap);
+				delivReq.reset();
+				result.reset();
 				Controller.stateMapLoaded.setButtonsEnabled(mainView);
 				Controller.setCurrentState(Controller.stateMapLoaded);
 			} catch (ParserConfigurationException | SAXException | IOException | ExceptionXML e) {
@@ -46,7 +48,7 @@ public class StateDefault implements State {
 	}
 
 	@Override
-	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest){
+	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result){
 	}
 
 	@Override

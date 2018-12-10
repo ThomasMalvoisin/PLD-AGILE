@@ -12,9 +12,9 @@ public interface State {
 	
 	public void setButtonsEnabled(MainView mainView);
 	
-	public void loadMap(MainView mainView, CityMap cityMap);
+	public void loadMap(MainView mainView, CityMap cityMap, DeliveryRequest delivReq, RoundSet result);
 
-	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest);
+	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result);
 
 	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan, RoundSet roundSet, ListCommands listeDeCdes);
 

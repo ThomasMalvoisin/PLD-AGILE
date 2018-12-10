@@ -12,6 +12,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import algo.Algorithms;
+import javafx.application.Platform;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.CityMap;
@@ -29,7 +31,7 @@ public class StateRoundCalculated extends StateDefault {
 	@Override
 	public void setButtonsEnabled(MainView mainView) {
 		mainView.setAddButtonEnable(true);
-		mainView.setComputeButtonEnable(false);
+		mainView.setComputeButtonEnable(true);
 		mainView.setDeleteButtonEnable(false);
 		mainView.setMapButtonEnable(true);
 		mainView.setDeliveryButtonEnable(true);
@@ -43,7 +45,7 @@ public class StateRoundCalculated extends StateDefault {
 	}
 
 	@Override
-	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest) {
+	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result) {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open a delivery request");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
@@ -55,6 +57,7 @@ public class StateRoundCalculated extends StateDefault {
 				Delivery.currentId = 1;
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
 				mainView.printDeliveryRequest(cityMap, deliveryRequest);
+				result.reset();
 				Controller.stateDeliveryLoaded.setButtonsEnabled(mainView);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
@@ -65,6 +68,55 @@ public class StateRoundCalculated extends StateDefault {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	@Override
+	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan,
+			RoundSet roundSet, ListCommands listeDeCdes) {
+
+		listeDeCdes.reset();
+		roundSet.reset();
+
+		RoundSet roundsTemp = new RoundSet();
+		roundsTemp.setDepartureTime(delivReq.getStartTime());
+	
+		Thread calculate = new Thread(() -> {
+			Algorithms.solveTSP(roundsTemp, map, delivReq, nbDeliveryMan);
+		});
+		Thread display = new Thread(() -> {
+			Platform.runLater(() -> {
+				mainView.printRoundSet(map, roundSet);
+				mainView.printPotentielDeliveries(map, delivReq);
+			});
+
+			double duration = roundsTemp.getDuration();
+			while (calculate.isAlive()) {
+				if (roundsTemp.getDuration() < duration || duration == 0.0) {
+					System.out.println(duration);
+					duration = roundsTemp.getDuration();
+					Platform.runLater(() -> {
+						roundSet.copy(roundsTemp);
+					});
+				}
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			if (roundsTemp.getDuration() < duration || duration == 0.0) {
+				duration = roundsTemp.getDuration();
+				Platform.runLater(() -> {
+					roundSet.copy(roundsTemp);
+				});
+			}
+
+			Controller.stateRoundCalculated.setButtonsEnabled(mainView);
+			Controller.setCurrentState(Controller.stateRoundCalculated);
+		});
+		Controller.stateRoundCalculating.actionCalculate(calculate, display);
+		Controller.stateRoundCalculating.setButtonsEnabled(mainView);
+		Controller.setCurrentState(Controller.stateRoundCalculating);
 	}
 
 	@Override
