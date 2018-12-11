@@ -207,11 +207,9 @@ public class CityMap{
 	
 			for (Intersection i : intersectionList) {
 				//System.out.println(i.getId());
-				try {
-					reducedMap.put(i.getId(), dijkstraOneToN(i, intersectionList));
-				} catch (ExceptionAlgo e) {
-					e.printStackTrace();
-				}
+			
+				reducedMap.put(i.getId(), dijkstraOneToN(i, intersectionList));
+				
 				
 			}
 			return reducedMap;

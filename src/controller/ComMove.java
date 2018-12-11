@@ -24,21 +24,17 @@ public class ComMove implements Command {
 	}
 
 	@Override
-	public void doCde() {
-		try {
+	public void doCde() throws ExceptionAlgo {
 			roundSet.deleteDelivery(cityMap, delivery);
 			roundSet.addDelivery(cityMap, delivery, newBefore);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+			
 	}
 
 	@Override
 	public void undoCde() {
 		try {
 			roundSet.deleteDelivery(cityMap, delivery);
-			roundSet.addDelivery(cityMap, delivery, oldBefore);
+			roundSet.addDelivery(cityMap, delivery, oldBefore);	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

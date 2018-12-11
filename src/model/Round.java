@@ -84,11 +84,11 @@ public class Round {
 		Intersection newStart = null;
 		Intersection newEnd = null;
 		int insertionIndex = -1;
+		int indexRemove2 =-1;
 		for (int i = 0; i < journeys.size(); i++) {
 			if (journeys.get(i).getDestination().equals(d.getAdress())) {
 				newStart = journeys.get(i).getOrigin();
 				insertionIndex = i;
-				journeys.remove(i);
 				break;
 			}
 		}
@@ -96,7 +96,7 @@ public class Round {
 		for (int i = 0; i < journeys.size(); i++) {
 			if (journeys.get(i).getOrigin().equals(d.getAdress())) {
 				newEnd = journeys.get(i).getDestination();
-				journeys.remove(i);
+				indexRemove2 = i;
 				break;
 			}
 		}
@@ -104,18 +104,18 @@ public class Round {
 			ArrayList<Intersection> ends = new ArrayList<Intersection>();
 			ends.add(newEnd);
 			ArrayList<Journey> tempJourneys = null;
-			try {
+			
 				tempJourneys = map.dijkstraOneToN(newStart, ends).values().stream()
 					.collect(Collectors.toCollection(ArrayList::new));
 				
+				journeys.remove(indexRemove2);
+				journeys.remove(insertionIndex);
 				if (tempJourneys.size() == 1) {
 					Journey newJourney = tempJourneys.get(0);
 					journeys.add(insertionIndex, newJourney);
 					deliveries.remove(d);
 				}
-			} catch (ExceptionAlgo e) {
-				e.printStackTrace();
-			}
+			
 		}
 	}
 
@@ -129,39 +129,37 @@ public class Round {
 			if (journeys.get(i).getOrigin().equals(deliveryBefore.getAdress())) {
 				journeyBetweenIndex = i;
 				intersectionAfter = journeys.get(i).getDestination();
-				journeys.remove(i);
+				
 			}
 		}
 		if (journeyBetweenIndex != -1) {
+		  
 			ArrayList<Intersection> ends = new ArrayList<Intersection>();
 			ends.add(d.getAdress());
 			ArrayList<Journey> tempJourneys = null;
-			try {
-				tempJourneys = map.dijkstraOneToN(deliveryBefore.getAdress(), ends).values().stream()
+			tempJourneys = map.dijkstraOneToN(deliveryBefore.getAdress(), ends).values().stream()
+					.collect(Collectors.toCollection(ArrayList::new));
+			
+			ArrayList<Intersection> ends2 = new ArrayList<Intersection>();
+			ends2.add(intersectionAfter);
+			ArrayList<Journey> tempJourneys2 = map.dijkstraOneToN(d.getAdress(), ends2).values().stream()
 						.collect(Collectors.toCollection(ArrayList::new));
+				
+			journeys.remove(journeyBetweenIndex);
 				
 				if (tempJourneys.size() == 1) {
 					Journey newJourney = tempJourneys.get(0);
 					journeys.add(journeyBetweenIndex, newJourney);
 				}
-			} catch (ExceptionAlgo e) {
-				e.printStackTrace();
-			}
 			
-			ends = new ArrayList<Intersection>();
-			ends.add(intersectionAfter);
 			
-			try {
-				tempJourneys = map.dijkstraOneToN(d.getAdress(), ends).values().stream()
-						.collect(Collectors.toCollection(ArrayList::new));
-				
-				if (tempJourneys.size() == 1) {
-					Journey newJourney = tempJourneys.get(0);
+				if (tempJourneys2.size() == 1) {
+					Journey newJourney = tempJourneys2.get(0);
 					journeys.add(journeyBetweenIndex +1, newJourney);
 				}
-			} catch (ExceptionAlgo e) {
-				e.printStackTrace();
-			}
+		   
+		  
+			
 		}
 		deliveries.add(deliveryBeforeIndex + 1, d);
 	}

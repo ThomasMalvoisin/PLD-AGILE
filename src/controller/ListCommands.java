@@ -2,6 +2,7 @@ package controller;
 
 import java.util.LinkedList;
 
+import algo.ExceptionAlgo;
 import controller.Command;
 
 public class ListCommands {
@@ -16,16 +17,17 @@ public class ListCommands {
 	/**
 	 * Ajout de la commande c a la list this
 	 * @param c
+	 * @throws ExceptionAlgo 
 	 */
-	public void ajoute(Command c){
-        int i = indexList+1;
-        while(i<list.size()){
-        	System.out.println(i);
-        	list.remove(i);
-        }
-        indexList++;
-        list.add(indexList, c);
-        c.doCde();
+	public void ajoute(Command c) throws ExceptionAlgo{
+			c.doCde();
+			int i = indexList+1;
+	        while(i<list.size()){
+	        	System.out.println(i);
+	        	list.remove(i);
+	        }
+	        indexList++;
+	        list.add(indexList, c);	  
     }
 	
 	 /* Annule temporairement la derniere commande ajoutee (cette commande pourra etre remise dans la liste avec redo)
@@ -45,7 +47,11 @@ public class ListCommands {
 		if (indexList < list.size()-1){
 			indexList++;
 			Command cde = list.get(indexList);
-			cde.doCde();
+			try {
+				cde.doCde();
+			} catch (ExceptionAlgo e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

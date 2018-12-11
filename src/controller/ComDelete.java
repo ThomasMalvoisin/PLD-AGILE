@@ -24,21 +24,16 @@ public class ComDelete implements Command {
 	
 	
 	@Override
-	public void doCde() {
+	public void doCde() throws ExceptionAlgo {
+		rs.deleteDelivery(map, d);
 		dr.deleteDelivery(d);
-		try {
-			rs.deleteDelivery(map, d);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 	}
 	
 	@Override
 	public void undoCde() {
-		dr.addDelivery(d);
 		try {
 			rs.addDelivery(map, d, deliveryBefore);
+			dr.addDelivery(d);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

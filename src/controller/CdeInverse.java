@@ -1,6 +1,7 @@
 package controller;
 
 
+import algo.ExceptionAlgo;
 import model.Delivery;
 import model.DeliveryRequest;
 import model.RoundSet;
@@ -19,6 +20,10 @@ public class CdeInverse implements Command{
 	
 	@Override
 	public void undoCde() {
-		cmd.doCde();
+		try {
+			cmd.doCde();
+		} catch (ExceptionAlgo e) {
+			e.printStackTrace();
+		}
 	}
 }

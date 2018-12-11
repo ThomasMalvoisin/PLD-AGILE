@@ -30,11 +30,10 @@ public class Algorithms {
 		// Pour l'instant, nbDeliveryMan = 1 forcément
 		
 		Map<Long, Map<Long, Journey>> reducedMap;
-		try {
-			reducedMap = map.GetShortestJourneys(request);
-		} catch (ExceptionAlgo e) {
-			throw new ExceptionAlgo(e.getMessage());
-		}
+		
+		reducedMap = map.GetShortestJourneys(request);
+		
+		
 		
 		ArrayList<Delivery> visited = new ArrayList<Delivery>();
 		visited.add(new Delivery(request.getWarehouse()));

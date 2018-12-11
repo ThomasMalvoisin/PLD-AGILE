@@ -25,25 +25,23 @@ public class ComAdd implements Command {
 	
 	
 	@Override
-	public void doCde() {
+	public void doCde() throws ExceptionAlgo {
+		rs.addDelivery(map, d, deliveryBefore);
 		dr.addDelivery(d);
-		try {
-			rs.addDelivery(map, d, deliveryBefore);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 		
 	}
 	
 	@Override
 	public void undoCde() {
-		dr.deleteDelivery(d);
+		
 		try {
 			rs.deleteDelivery(map, d);
-		} catch (Exception e) {
+			dr.deleteDelivery(d);
+		} catch (ExceptionAlgo e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 	
 }

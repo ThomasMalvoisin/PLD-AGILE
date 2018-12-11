@@ -81,6 +81,7 @@ public class StateDeliveryLoaded extends StateDefault {
 			try {
 				Algorithms.solveTSP(roundsTemp, map, delivReq, nbDeliveryMan);
 			} catch (ExceptionAlgo e) {
+				//System.out.println("exception-- "+roundsTemp.getRounds().size());
 				e.printStackTrace();
 			}
 			
@@ -112,10 +113,23 @@ public class StateDeliveryLoaded extends StateDefault {
 				Platform.runLater(() -> {
 					roundSet.copy(roundsTemp);
 				});
+			}			
+			if(duration==0 ) {
+				System.out.println("erreur");
+				Platform.runLater(() -> {
+					roundSet.reset();
+					mainView.setLoader(false);
+					mainView.displayMessage("Unable to calculate rounds", "This delivery request contains unreachable delivery point");
+				});
+				Controller.stateDeliveryLoaded.setButtonsEnabled(mainView);
+				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			}
-			Platform.runLater(()-> mainView.setLoader(false));
-			Controller.stateRoundCalculated.setButtonsEnabled(mainView);
-			Controller.setCurrentState(Controller.stateRoundCalculated);
+			else {
+        Platform.runLater(()-> mainView.setLoader(false));
+			  Controller.stateRoundCalculated.setButtonsEnabled(mainView);
+				Controller.setCurrentState(Controller.stateRoundCalculated);
+			}
+
 		});
 		Controller.stateRoundCalculating.actionCalculate(calculate, display);
 		Controller.stateRoundCalculating.setButtonsEnabled(mainView);

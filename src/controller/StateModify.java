@@ -11,6 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import algo.Algorithms;
+import algo.ExceptionAlgo;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.CityMap;
@@ -94,10 +95,14 @@ public class StateModify extends StateDefault {
 	public void delete(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
 			ListCommands listeDeCdes) {
 		System.out.println("Delete " + deliverySelected.getId());
-		
-		listeDeCdes.ajoute(new ComDelete(map, deliveryRequest, roundSet, deliverySelected));
-		mainView.showNotificationCheck("Delivery deleted", "The delivery point number " + deliverySelected.getId() + " has been deleted correctly");
-
+				try {
+			listeDeCdes.ajoute(new ComDelete(map, deliveryRequest, roundSet, deliverySelected));
+      mainView.showNotificationCheck("Delivery deleted", "The delivery point number " + deliverySelected.getId() + " has been deleted correctly");
+		} catch (ExceptionAlgo e) {
+			cancel(mainView, roundSet);	
+			mainView.displayMessage(null, "Cannot delete this delivery!");
+			return;
+		}
 		/*boolean delete = mainView.displayPopUpConfirmation("Are you sure to delete this delivery?");
 		if(delete) {
 			listeDeCdes.ajoute(new ComDelete(map, deliveryRequest, roundSet, deliverySelected));

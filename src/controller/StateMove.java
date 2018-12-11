@@ -1,5 +1,6 @@
 package controller;
 
+import algo.ExceptionAlgo;
 import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
@@ -39,11 +40,16 @@ public class StateMove extends StateDefault{
 	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
 			Delivery delivery, ListCommands listeDeCdes) {
 		mainView.printMessage("");
-		
-		listeDeCdes.ajoute(new ComMove(map, roundSet, deliveryToMove, delivery, roundSet.getPreviousDelivery(deliveryToMove)));
-		mainView.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the delivery point " + delivery.getId() + " correctly");
-		
-/*boolean move = mainView.displayPopUpConfirmation("Are you sure to move this delivery?");
+
+		try {
+			listeDeCdes.ajoute(new ComMove(map, roundSet, deliveryToMove, delivery, roundSet.getPreviousDelivery(deliveryToMove)));
+      mainView.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the delivery point " + delivery.getId() + " correctly");
+		} catch (ExceptionAlgo e) {
+			cancel(mainView, roundSet);	
+			mainView.displayMessage(null, "Cannot move this delivery!");
+			return;
+		}
+		/*boolean move = mainView.displayPopUpConfirmation("Are you sure to move this delivery?");
 		if(move) {
 			listeDeCdes.ajoute(new ComMove(map, roundSet, deliveryToMove, delivery, roundSet.getPreviousDelivery(deliveryToMove)));
 		}else {
@@ -65,8 +71,14 @@ public class StateMove extends StateDefault{
 			if( indexRound !=-1 ) {
 				indexRound = indexRound-1;
 				delivery=result.getRounds().get(indexRound).getDeliveries().get(0);
-				listeDeCdes.ajoute(new ComMove(map, result, deliveryToMove, delivery, result.getPreviousDelivery(deliveryToMove)));
-				mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse in the round " + indexRound + 1 + " correctly");
+				try {
+					listeDeCdes.ajoute(new ComMove(map, result, deliveryToMove, delivery, result.getPreviousDelivery(deliveryToMove)));
+          mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse in the round " + indexRound + 1 + " correctly");
+				} catch (ExceptionAlgo e) {
+					cancel(mv, result);	
+					mv.displayMessage(null, "Cannot move this delivery!");
+					return;
+				}
 			}else {
 				cancel(mv, result);
 				return;
@@ -76,8 +88,14 @@ public class StateMove extends StateDefault{
 			boolean move = mv.displayPopUpConfirmation("Are you sure to move this delivery?");
 			if(move) {
 				delivery=result.getRounds().get(0).getDeliveries().get(0);
-				listeDeCdes.ajoute(new ComMove(map, result, deliveryToMove, delivery, result.getPreviousDelivery(deliveryToMove)));
-				mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse correctly");
+				try {
+					listeDeCdes.ajoute(new ComMove(map, result, deliveryToMove, delivery, result.getPreviousDelivery(deliveryToMove)));
+          mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse correctly");
+				} catch (ExceptionAlgo e) {
+					cancel(mv, result);	
+					mv.displayMessage(null, "Cannot move this delivery!");
+					return;
+				}
 			}else {
 				cancel(mv, result);
 				return;

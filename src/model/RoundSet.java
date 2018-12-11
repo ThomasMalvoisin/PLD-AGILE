@@ -66,31 +66,22 @@ public class RoundSet extends Observable {
 		notifyObservers();
 	}
 
-	public void deleteDelivery(CityMap map, Delivery d) {
+	public void deleteDelivery(CityMap map, Delivery d) throws ExceptionAlgo {
 		for (Round r : rounds) {
 			if (r.getDeliveries().contains(d)) {
-				try {
-					r.deleteDelivery(map, d);
-				} catch (ExceptionAlgo e) {
-					e.printStackTrace();
-				}
-				
+				r.deleteDelivery(map, d);		
 				calculTime();
 				setChanged();
 				notifyObservers();
+				
 			}
 		}
 	}
 
-	public void addDelivery(CityMap map, Delivery d, Delivery deliveryBefore) {
+	public void addDelivery(CityMap map, Delivery d, Delivery deliveryBefore) throws ExceptionAlgo {
 		for (Round r : rounds) {
 			if (r.getDeliveries().contains(deliveryBefore)) {
-				try {
-					r.addDelivery(map, d, deliveryBefore);
-				} catch (ExceptionAlgo e) {
-					e.printStackTrace();
-				}
-				
+				r.addDelivery(map, d, deliveryBefore);
 				calculTime();
 				setChanged();
 				notifyObservers();
