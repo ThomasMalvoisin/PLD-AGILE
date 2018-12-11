@@ -45,7 +45,7 @@ public class StateAdd1 extends StateDefault {
 	}
 
 	@Override
-	public void cancel(MainView mainView) {
+	public void cancel(MainView mainView, RoundSet roundSet) {
 		mainView.printMessage("");
 		Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculated);

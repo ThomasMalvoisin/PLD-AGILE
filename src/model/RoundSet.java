@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
-
 import algo.ExceptionAlgo;
 
 public class RoundSet extends Observable {
@@ -126,7 +125,7 @@ public class RoundSet extends Observable {
 			}
 		}
 	}
-	
+
 	public String toString () {
 		String a  ="***** General information about Round Set ***** \n"; 
 		a+="\n";

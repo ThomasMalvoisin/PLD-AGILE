@@ -1,20 +1,17 @@
 package view;
 
-import java.awt.Event;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Map.Entry;
 import java.util.Observer;
-import java.util.Iterator;
+import java.util.LinkedList;
 
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -41,8 +38,8 @@ public class GraphicView implements Observer {
 	RoundSet rs;
 	
 	Group deliveries;
+	Map<Color, Group> rounds;
 	Group deliveriesIds;
-	Group roundSet;
 	Group notDeliveriesIntersections;
 
 	Color[] colors = { Color.ROYALBLUE, Color.BLACK, Color.ORANGE, Color.BROWN, Color.GREEN, Color.GOLD,
@@ -53,8 +50,8 @@ public class GraphicView implements Observer {
 	public GraphicView(Pane pane) {
 		this.pane = pane;
 		this.deliveries = new Group();
+		this.rounds = new HashMap<Color, Group>();
 		this.deliveriesIds = new Group();
-		this.roundSet = new Group();
 		this.notDeliveriesIntersections = new Group();
 		
 		pane.setOnScroll(event -> {
@@ -89,10 +86,9 @@ public class GraphicView implements Observer {
 	public void clearDeliveryRequest() {
 		deliveries.getChildren().clear();
 		pane.getChildren().remove(deliveries);
+		clearRounds();
 		deliveriesIds.getChildren().clear();
 		pane.getChildren().remove(deliveriesIds);
-		roundSet.getChildren().clear();
-		pane.getChildren().remove(roundSet);
 		notDeliveriesIntersections.getChildren().clear();
 		pane.getChildren().remove(notDeliveriesIntersections);
 	}
@@ -118,36 +114,94 @@ public class GraphicView implements Observer {
 
 
 	}
-
-	public void drawRoundSet(RoundSet rs) {
-		drawDeliveryRequest(dr);
-		ArrayList<Section> listeSection = new ArrayList<>();
-		rs.addObserver(this);
-		this.rs = rs;
+	
+	public Map<Section, List<Color>> convertRoundSetToMap (RoundSet rs){
+		Map<Section, List<Color>> listeSection = new HashMap<Section, List<Color>>();
+		double arrowOpacity = 1.0;
 		int i = 0;
-		double delta = 0.0;
 		for (Round r : rs.getRounds()) {
-			double opacity = 1.0;
-			int nbJourneys = r.getJourneys().size();
 			for (Journey j : r.getJourneys()) {
-
+				int k = 0;
 				for (Section s : j.getSectionList()) {
-					// delta=10.0/(Collections.frequency(listeSection, s));
-					//System.out.println(s);
-					//System.out.println(s.getInverse());
-//					delta = 3.5 * (Collections.frequency(listeSection, s)
-//							+ Collections.frequency(listeSection, s.getInverse()));
-					// delta=3.5*(Collections.frequency(listeSection, s));
-					// ATTENTION IL FAUT METTRE UN IF SUR I SINON INDEX OUT OUF BOUNDS SI BCP DE ROUNDS !!!
-					drawRoundSection(s, colors[i], delta, opacity);
-					listeSection.add(s);
+					Section sinv = s.getInverse();
+					if (!listeSection.containsKey(s) ){
+						boolean foundInv = false ;
+						for (Entry<Section, List<Color>> entry : listeSection.entrySet()) {
+							
+							if (sinv.equals(entry.getKey()))
+							{
+								if (!entry.getValue().contains(colors[i])){
+									entry.getValue().add(colors[i]);
+								}
+								foundInv = true;
+								break;
+							}
+						}
+						if (!foundInv)
+						{
+							List<Color> c = new LinkedList<Color>();
+							c.add(colors[i]);
+							listeSection.put(s, c);
+						}
+						
+					}
+					else  {
+						if (!listeSection.get(s).contains(colors[i])){
+							listeSection.get(s).add(colors[i]);
+						}
+					}
+					if(k == j.getSectionList().size()/2 ) {
+						Line[] lines = drawArrow( geoToCoord(s.getOrigin()), geoToCoord(s.getDestination()), 2, colors[i], arrowOpacity);
+						addLineToRounds(colors[i], lines[0]);
+						addLineToRounds(colors[i], lines[1]);
+					}
+					k++;
 				}
-//				opacity = opacity - 0.75 / nbJourneys;
-				//System.out.println(opacity);
 			}
 			i++;
 		}
-		pane.getChildren().add(roundSet);
+				
+		return listeSection;
+	}
+
+	public void drawRoundSet(RoundSet rs) {
+		drawDeliveryRequest(dr);
+		rs.addObserver(this);
+		this.rs = rs;
+		Map<Section, List<Color>> listeSection = convertRoundSetToMap(rs);
+		drawRoundsFromMap(listeSection);
+	}
+	void drawRoundsFromMap(Map<Section,List<Color>> listeSection) {
+		double x0, y0, x1, y1;
+		double size;
+		for (Entry<Section, List<Color>> entry : listeSection.entrySet()) {
+			x0 = geoToCoord(entry.getKey().getOrigin())[0];
+			y0 = geoToCoord(entry.getKey().getOrigin())[1];
+			x1 = geoToCoord(entry.getKey().getDestination())[0];
+			y1 = geoToCoord(entry.getKey().getDestination())[1];
+			size = entry.getValue().size();
+			for(int m = 0; m<size; m++) {
+				for(int l = 0; l<size; l++){
+					Line line = new Line(x0 + l* (x1-x0)/size, y0 + l* (y1-y0)/size, x0 + (l+1)*(x1-x0)/size, y0 + (l+1)*(y1-y0)/size);
+					//System.out.println(("(x0,y0) = (" + x0 +", " +  y0 + " )  and (x1,y1) = (" +  + x1 +", " +  y1 + " )  from : (" + (x0 + l* (x1-x0)/size) + ", " + (y0 + l* (y1-y0)/size)) + ")  To (" + (x0 + (l+1)* (x1-x0)/size) + ", " + ( y0 + (l+1)*(y1-y0)/size) + ")");
+					line.setStroke(entry.getValue().get(m));
+					line.setStrokeWidth(3);
+					if (m == l)
+					{
+						line.setOpacity(1.0);
+					}else {
+						line.setOpacity(0.0);
+						line.getProperties().put("HiddenLine", line);
+					}
+					addLineToRounds(entry.getValue().get(m),line);
+				}
+				System.out.println("");
+			}
+		}
+		for(Entry<Color, Group> entry : rounds.entrySet())
+		{
+			pane.getChildren().add(entry.getValue());
+		}
 		pane.getChildren().remove(deliveries);
 		pane.getChildren().add(deliveries);
 		pane.getChildren().remove(deliveriesIds);
@@ -167,11 +221,7 @@ public class GraphicView implements Observer {
 		pane.getChildren().add(deliveriesIds);
 	}
 
-	private void drawRoundSection(Section sec, Color color, double delta, double opacity) {
-		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()), 3, color, delta, opacity);
-		roundSet.getChildren().add(l);
-	}
-
+	
 	private void drawSection(Section sec) {
 		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()), 1, Color.WHITE, 0, 1);
 		pane.getChildren().add(l);
@@ -190,32 +240,49 @@ public class GraphicView implements Observer {
 	}
 
 	private Line drawLine(double[] departure, double[] arrival, double width, Paint p, double delta, double opacity) {
-		// GraphicsContext gc = canvas.getGraphicsContext2D();
-		// gc.strokeLine(departure[0], departure[1], arrival[0], arrival[1]);
-
-		double x = 0;
-		double y = 0;
-		if (delta != 0) {
-			if ((arrival[1] - departure[1]) != 0) {
-				x = delta / Math.sqrt(1 + ((arrival[0] - departure[0]) / (arrival[1] - departure[1]))
-						* ((arrival[0] - departure[0]) / (arrival[1] - departure[1])));
-				y = Math.sqrt(delta * delta - x * x);
-			} else {
-				x = 0;
-				y = delta;
-			}
-		}
-		Line l = new Line(departure[0] - x, departure[1] - y, arrival[0] - x, arrival[1] - y);
+		Line l = new Line(departure[0] , departure[1] , arrival[0] , arrival[1] );
 		l.setOpacity(opacity);
-		/*
-		 * if(deltaY!=0) { l.getStrokeDashArray().addAll(deltaY); }
-		 */
-
 		l.setStroke(p);
 		l.setStrokeWidth(width);
-
+		
 		return l;
 	}
+	private Line[] drawArrow(double[] departure, double[] arrival, double width, Paint p, double opacity) {
+		//    D
+		//    |\
+		//    | \
+		//A---C--B------F
+		//    | /
+		//    |/
+		//    E
+		double xA, yA, xB, yB, xC, yC, xD, yD, xE, yE, xF, yF, AB;
+		double n = 6.0;
+		xA = arrival[0];
+		yA = arrival[1];
+		xF = departure[0];
+		yF = departure[1];
+		xB = (xA + xF)/2;
+		yB = (yA + yF)/2;
+		AB = Math.sqrt((xB-xA)*(xB-xA)+(yB-yA)*(yB-yA));
+		xC = xB + n * (xB-xA)/AB;
+		yC = yB + n * (yB-yA)/AB;
+		xD = xC + n * (yA-yB)/AB;
+		yD = yC + n * (xB-xA)/AB;
+		xE = xC - n * (yA-yB)/AB;
+		yE = yC - n * (xB-xA)/AB;
+		Line[] l = new Line[2];
+		l[0] = new Line(xB, yB, xD, yD);
+		l[1] = new Line(xB, yB, xE, yE);
+		l[0].setOpacity(opacity);
+		l[0].setStroke(p);
+		l[0].setStrokeWidth(width);
+		l[1].setOpacity(opacity);
+		l[1].setStroke(p);
+		l[1].setStrokeWidth(width);
+		return l;
+	}
+	
+	
 
 	private void drawIntersectionPoint(Intersection i) {
 		Circle c = new Circle(geoToCoord(i)[0], geoToCoord(i)[1], 5);
@@ -255,14 +322,6 @@ public class GraphicView implements Observer {
 		return c;
 	}
 
-//	public void drawPoint(double[] point,double radius, Paint p, Delivery d) {
-//		c.getProperties().put("INTERSECTION", i);
-//
-//		c.addEventHandler(MouseEvent.ANY, dpl);
-//
-//		deliveries.getChildren().add(c);
-//	}
-
 	public void setDeliverySelected(Delivery d) {
 		for (Node n : deliveries.getChildren()) {
 			if (d != null && d.equals(n.getProperties().get("DELIVERY"))) {
@@ -293,6 +352,64 @@ public class GraphicView implements Observer {
 		}
 	}
 
+	public void addLineToRounds (Color color, Line line)
+	{
+		if (!rounds.containsKey(color)) {
+			Group g = new Group();
+			g.getChildren().add(line);
+			rounds.put(color, g);
+		}else{
+			rounds.get(color).getChildren().add(line);
+		}
+	}
+	public void clearRound(Color color)
+	{
+		rounds.get(color).getChildren().clear();
+		pane.getChildren().remove(rounds.get(color));
+	}
+	public void clearRounds()
+	{
+		for(Entry<Color, Group> entry : rounds.entrySet())
+		{
+			entry.getValue().getChildren().clear();
+			pane.getChildren().remove(entry.getValue());
+		}
+	}
+	
+	public void setRoundSelected(RoundSet roundSet, Delivery delivery, boolean flag) {
+		ArrayList<Round> rs = roundSet.getRounds();
+		int i = 0;
+		for (Round round : rs) {
+			if(round.getDeliveries().contains(delivery)) {
+				break;
+			}
+			i++;
+		}
+		for(Node n : (rounds.get(colors[i]).getChildren()))
+		{
+			if(flag)
+			{
+				((Line) n).setStrokeWidth(5.0);
+				if(((Line) n).getProperties().containsKey("HiddenLine"))
+				{
+					((Line) n).setOpacity(1.0);
+				}
+			}
+			else
+			{
+				((Line) n).setStrokeWidth(3.0);
+				if(((Line) n).getProperties().containsKey("HiddenLine"))
+				{
+					((Line) n).setOpacity(0.0);
+				}
+			}
+		}
+		pane.getChildren().remove(rounds.get(colors[i]));
+		pane.getChildren().add(rounds.get(colors[i]));
+		pane.getChildren().remove(deliveries);
+		pane.getChildren().add(deliveries);
+	}
+	
 	public void zoomIn() {
 		
 		pane.setScaleX(pane.getScaleX() + 0.4);
@@ -345,4 +462,5 @@ public class GraphicView implements Observer {
 		drawRoundSet(rs);
 		drawIntersections(map, dr);
 	}
+
 }

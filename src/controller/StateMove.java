@@ -89,8 +89,8 @@ public class StateMove extends StateDefault{
 	}
 
 	@Override
-	public void cancel(MainView mainView) {
-		mainView.printMessage("");
+	public void cancel(MainView mainView, RoundSet roundSet) {
+	  mainView.printMessage("");
 		this.deliveryToMove = null;
 		mainView.setDeliverySelected(null);
 		Controller.stateRoundCalculated.setButtonsEnabled(mainView);

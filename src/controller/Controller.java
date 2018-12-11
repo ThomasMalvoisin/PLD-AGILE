@@ -92,7 +92,7 @@ public class Controller {
 	
 
 	public void buttonCancel() {
-		currentState.cancel(mv);
+		currentState.cancel(mv, result);
 	}
 	
 	public void buttonMove() {

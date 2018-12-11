@@ -503,6 +503,10 @@ public class MainView implements Initializable {
 		}
 	}
 
+	public void setRoundSelected(RoundSet roundSet, Delivery delivery, boolean flag) {
+		gv.setRoundSelected(roundSet, delivery, flag);
+	}
+  
 	public void setExportButtonEnable(boolean b) {
 		exportButton.setDisable(!b);
 

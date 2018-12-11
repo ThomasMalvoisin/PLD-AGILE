@@ -45,10 +45,10 @@ public class Section{
 		
 		Section section = (Section)obj;
 		
-		if(section.getDestination() == this.destination) {
-			if(section.getOrigin() == this.origin) {
+		if(section.getDestination().equals(this.destination)) {
+			if(section.getOrigin().equals(this.origin)) {
 				if(section.getLength() == this.length) {
-					if(section.getName() == this.name) {
+					if(section.getName().equals(this.name)) {
 						return true;
 					}else {
 						return false;

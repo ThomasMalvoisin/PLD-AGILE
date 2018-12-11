@@ -141,6 +141,7 @@ public class StateRoundCalculated extends StateDefault {
 		// un message à l'utilisateur pour lui dire quoi faire
 
 		mainView.setDeliverySelected(delivery);
+		mainView.setRoundSelected(roundSet, delivery, true);
 		Controller.stateModify.actionDeliverySelected(delivery);
 		Controller.stateModify.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateModify);

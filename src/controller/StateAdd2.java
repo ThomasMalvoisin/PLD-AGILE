@@ -102,7 +102,7 @@ public class StateAdd2 extends StateDefault {
 	}
 	
 	@Override
-	public void cancel(MainView mainView) {
+	public void cancel(MainView mainView, RoundSet roundSet) {
 		mainView.printMessage("");
 		mainView.setIntersectionSelected(null);
 		this.intersectionSelected = null;

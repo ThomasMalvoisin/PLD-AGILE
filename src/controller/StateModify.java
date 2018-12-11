@@ -83,6 +83,8 @@ public class StateModify extends StateDefault {
 		// TODO : changement dans l'ihm en appelant des fonctions de mainView : afficher
 		// un message à l'utilisateur pour lui dire quoi faire
 		mainView.setDeliverySelected(delivery);
+		mainView.setRoundSelected(roundSet, deliverySelected, false);
+		mainView.setRoundSelected(roundSet, delivery, true);
 		Controller.stateModify.actionDeliverySelected(delivery);
 		Controller.stateModify.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateModify);
@@ -108,7 +110,8 @@ public class StateModify extends StateDefault {
 	}
 
 	@Override
-	public void cancel(MainView mainView) {
+	public void cancel(MainView mainView, RoundSet roundSet) {
+		mainView.setRoundSelected(roundSet, deliverySelected, false);
 		this.deliverySelected = null;
 		mainView.setDeliverySelected(null);
 		Controller.stateRoundCalculated.setButtonsEnabled(mainView);

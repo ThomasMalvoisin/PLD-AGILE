@@ -82,13 +82,13 @@ public class StateDefault implements State {
 	}
 
 	@Override
-	public void exportRoundSet(MainView mainView, RoundSet roundSet) {	
+  public void cancel(MainView mainView, RoundSet roundSet) {
   }
   
   @Override
-	public void cancel(MainView mainView) {
-	}
-	
+	public void exportRoundSet(MainView mainView, RoundSet roundSet) {	
+  }
+  
 	@Override
 	public void undo(ListCommands listeDeCdes) {
 	}
