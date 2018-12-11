@@ -102,7 +102,7 @@ public class TSPTests {
 	
 	//TSP with 1 deliveryMan and 1 delivery (warehouse : 1 / deliveries : 5)
 	@Test
-	public void TSPTest() throws ParseException {
+	public void TSPTest() throws ParseException, ExceptionAlgo {
 		
 		//deliveryRequest
 		ArrayList<Delivery> listDeliveries = new ArrayList<>();
@@ -165,7 +165,7 @@ public class TSPTests {
 	
 	//TSP with 1 deliveryMan and 2 delivery (warehouse : 1 / deliveries : 5, 6)
 		@Test
-		public void TSPTest2() throws ParseException {
+		public void TSPTest2() throws ParseException, ExceptionAlgo {
 			
 			//deliveryRequest
 			ArrayList<Delivery> listDeliveries = new ArrayList<>();

@@ -81,7 +81,7 @@ public class DijkstraTest {
 	public ExpectedException thrown = ExpectedException.none();
 	
 	@Test
-	public void DijkstraOneToNTest() {
+	public void DijkstraOneToNTest() throws ExceptionAlgo {
 		
 		
 		ArrayList<Intersection> intersectionList = new ArrayList<Intersection>();
@@ -137,7 +137,7 @@ public class DijkstraTest {
 	
 	
 	@Test 	//Point isolé dans la liste d'intersection
-	public void DijkstraOneToNTestIsole1 () {
+	public void DijkstraOneToNTestIsole1 () throws ExceptionAlgo {
 		ArrayList<Intersection> intersectionList = new ArrayList<Intersection>();
 		intersectionList.add(inter1);
 		intersectionList.add(inter5);
@@ -148,7 +148,7 @@ public class DijkstraTest {
 	
 	
 	@Test 	//Point de départ isolé
-	public void DijkstraOneToNTestIsole2 () {
+	public void DijkstraOneToNTestIsole2 () throws ExceptionAlgo {
 		ArrayList<Intersection> intersectionList = new ArrayList<Intersection>();
 		intersectionList.add(inter1);
 		intersectionList.add(inter5);

@@ -34,7 +34,7 @@ public class AlgoTest {
 	public ExpectedException thrown = ExpectedException.none();
 	
 	@Test
-	public void DijkstraOneToNTest() {
+	public void DijkstraOneToNTest() throws ExceptionAlgo {
 		CityMap map =new CityMap();
 		Intersection inter1 = new Intersection (41, 51.51, 1);
 		Intersection inter2 = new Intersection (42, 52.51, 2);
@@ -117,7 +117,7 @@ public class AlgoTest {
 	
 	
 	@Test 	//Point isolé dans la liste d'intersection
-	public void DijkstraOneToNTestIsole1 () {
+	public void DijkstraOneToNTestIsole1 () throws ExceptionAlgo {
 		CityMap map =new CityMap();
 		Intersection inter1 = new Intersection (41, 51.51, 1);
 		Intersection inter2 = new Intersection (42, 52.51, 2);
@@ -160,7 +160,7 @@ public class AlgoTest {
 	
 	
 	@Test 	//Point de départ isolé
-	public void DijkstraOneToNTestIsole2 () {
+	public void DijkstraOneToNTestIsole2 () throws ExceptionAlgo {
 		CityMap map =new CityMap();
 		Intersection inter1 = new Intersection (41, 51.51, 1);
 		Intersection inter2 = new Intersection (42, 52.51, 2);
