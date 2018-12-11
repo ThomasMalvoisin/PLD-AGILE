@@ -1,5 +1,6 @@
 package controller;
 
+import algo.ExceptionAlgo;
 import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
@@ -24,14 +25,24 @@ public class ComMove implements Command {
 
 	@Override
 	public void doCde() {
-		roundSet.deleteDelivery(cityMap, delivery);
-		roundSet.addDelivery(cityMap, delivery, newBefore);
+		try {
+			roundSet.deleteDelivery(cityMap, delivery);
+			roundSet.addDelivery(cityMap, delivery, newBefore);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
 	public void undoCde() {
-		roundSet.deleteDelivery(cityMap, delivery);
-		roundSet.addDelivery(cityMap, delivery, oldBefore);
+		try {
+			roundSet.deleteDelivery(cityMap, delivery);
+			roundSet.addDelivery(cityMap, delivery, oldBefore);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

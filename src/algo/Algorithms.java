@@ -24,11 +24,20 @@ import model.Section;
 
 public class Algorithms {
 
-	public static void solveTSP (RoundSet rounds, CityMap map , DeliveryRequest request, int nbDeliveryMan) {
+	public static void solveTSP (RoundSet rounds, CityMap map , DeliveryRequest request, int nbDeliveryMan) throws ExceptionAlgo {
+		Clustering.cluster(map, request.getRequestDeliveries(), nbDeliveryMan);
+		System.out.println("finished clustering");
 		// Pour l'instant, nbDeliveryMan = 1 forcément
-		Map<Long, Map<Long, Journey>> reducedMap = map.GetShortestJourneys(request);
+		
+		Map<Long, Map<Long, Journey>> reducedMap;
+		try {
+			reducedMap = map.GetShortestJourneys(request);
+		} catch (ExceptionAlgo e) {
+			throw new ExceptionAlgo(e.getMessage());
+		}
+		
 		ArrayList<Delivery> visited = new ArrayList<Delivery>();
-		visited.add(new Delivery(0, request.getWarehouse()));
+		visited.add(new Delivery(request.getWarehouse()));
 		ArrayList<Delivery> cand = new ArrayList<Delivery> (request.getRequestDeliveries());
 
 		//System.out.println(cand.size());
@@ -114,7 +123,7 @@ public class Algorithms {
 
 		boolean newRound = (nbCandWhenChangingRound.indexOf(cand.size()) != -1);
 		if (newRound) {
-			Delivery returnToWarehouse = new Delivery(0, warehouse);
+			Delivery returnToWarehouse = new Delivery(warehouse);
 			t += bikersSpeed * reducedMap.get(visited.get(visited.size()-1).getAdress().getId()).get(warehouse.getId()).getLength();
 			visited.add(returnToWarehouse);
 			remainingReturnToWarehouse--;

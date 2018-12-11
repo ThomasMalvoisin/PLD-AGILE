@@ -28,7 +28,14 @@ public class Delivery {
 		this.adress = adress;
 		this.id = currentId++;
 	}
-
+	
+	public Delivery(Intersection adress) {
+		super();
+		this.duration = 0;
+		this.adress = adress;
+		this.id = 0;
+	}
+	
 	public int getDuration() {
 		return duration;
 	}
@@ -64,7 +71,7 @@ public class Delivery {
 		
 		return false;
 	}
-	
+
 	public String toString (boolean isFirst) {
 		SimpleDateFormat sdfDate = new SimpleDateFormat("HH:mm:ss");
 		String a = "";

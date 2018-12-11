@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
 
+import algo.ExceptionAlgo;
+
 public class RoundSet extends Observable {
 	protected ArrayList<Round> rounds;
 	protected double totalLength;
@@ -68,7 +70,12 @@ public class RoundSet extends Observable {
 	public void deleteDelivery(CityMap map, Delivery d) {
 		for (Round r : rounds) {
 			if (r.getDeliveries().contains(d)) {
-				r.deleteDelivery(map, d);
+				try {
+					r.deleteDelivery(map, d);
+				} catch (ExceptionAlgo e) {
+					e.printStackTrace();
+				}
+				
 				calculTime();
 				setChanged();
 				notifyObservers();
@@ -79,7 +86,12 @@ public class RoundSet extends Observable {
 	public void addDelivery(CityMap map, Delivery d, Delivery deliveryBefore) {
 		for (Round r : rounds) {
 			if (r.getDeliveries().contains(deliveryBefore)) {
-				r.addDelivery(map, d, deliveryBefore);
+				try {
+					r.addDelivery(map, d, deliveryBefore);
+				} catch (ExceptionAlgo e) {
+					e.printStackTrace();
+				}
+				
 				calculTime();
 				setChanged();
 				notifyObservers();

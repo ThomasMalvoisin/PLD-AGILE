@@ -12,6 +12,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import algo.Algorithms;
+import algo.ExceptionAlgo;
 
 import java.util.Map.Entry;
 import java.util.Iterator;
@@ -195,7 +196,7 @@ public class CityMap{
 		return result;
 	}
 	
-	public Map<Long, Map<Long, Journey>> GetShortestJourneys (DeliveryRequest request) {
+	public Map<Long, Map<Long, Journey>> GetShortestJourneys (DeliveryRequest request) throws ExceptionAlgo {
 			//Map<origin,Map<destination,path>>
 		  	Map<Long, Map<Long, Journey>> reducedMap = new HashMap<Long, Map<Long, Journey>>();
 			ArrayList<Intersection> intersectionList = new ArrayList<Intersection>();
@@ -206,12 +207,17 @@ public class CityMap{
 	
 			for (Intersection i : intersectionList) {
 				//System.out.println(i.getId());
-				reducedMap.put(i.getId(), dijkstraOneToN(i, intersectionList));
+				try {
+					reducedMap.put(i.getId(), dijkstraOneToN(i, intersectionList));
+				} catch (ExceptionAlgo e) {
+					e.printStackTrace();
+				}
+				
 			}
 			return reducedMap;
 	}
 	
-	public Map<Long, Journey> dijkstraOneToN (Intersection start, ArrayList<Intersection> ends) {
+	public Map<Long, Journey> dijkstraOneToN (Intersection start, ArrayList<Intersection> ends) throws ExceptionAlgo {
 		// Intersections car le warehouse n'est pas une delivery
 		// Warehouse DOIT etre dans ends
 		
@@ -239,7 +245,7 @@ public class CityMap{
 		shortestJourneys.get(startId).setLength(0.0);
 		pQueue.add(startId);
 		
-		while (!unreachedTargetPoints.isEmpty()) {
+		while (!unreachedTargetPoints.isEmpty() && !pQueue.isEmpty()) {
 			// On part du principe qu'aucun point n'est pas relié à d'autres, et donc qu'on finira 
 			// toujours par trouver les plus courts chemins vers les intersections ends avant de parcourir
 			// toute une composante connexe
@@ -272,6 +278,13 @@ public class CityMap{
 				reached.remove(currStartId);
 				reached.put(currStartId, true);
 			}
+		}
+		if (!unreachedTargetPoints.isEmpty()) {
+			String exceptionDescription = "";
+			for (Intersection i : unreachedTargetPoints) {
+				exceptionDescription += i.getId() + " ";
+			}
+			throw new ExceptionAlgo(exceptionDescription + "are not reachable");
 		}
 		
 		Map<Long, Journey> result = new HashMap<Long, Journey>();

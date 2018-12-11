@@ -1,5 +1,6 @@
 package controller;
 
+import algo.ExceptionAlgo;
 import controller.Command;
 import model.CityMap;
 import model.Delivery;
@@ -26,13 +27,23 @@ public class ComAdd implements Command {
 	@Override
 	public void doCde() {
 		dr.addDelivery(d);
-		rs.addDelivery(map, d, deliveryBefore);
+		try {
+			rs.addDelivery(map, d, deliveryBefore);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@Override
 	public void undoCde() {
 		dr.deleteDelivery(d);
-		rs.deleteDelivery(map, d);
+		try {
+			rs.deleteDelivery(map, d);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

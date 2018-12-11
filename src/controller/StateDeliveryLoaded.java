@@ -10,6 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import algo.Algorithms;
+import algo.ExceptionAlgo;
 import javafx.application.Platform;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -77,7 +78,12 @@ public class StateDeliveryLoaded extends StateDefault {
 		roundsTemp.setDepartureTime(delivReq.getStartTime());
 	
 		Thread calculate = new Thread(() -> {
-			Algorithms.solveTSP(roundsTemp, map, delivReq, nbDeliveryMan);
+			try {
+				Algorithms.solveTSP(roundsTemp, map, delivReq, nbDeliveryMan);
+			} catch (ExceptionAlgo e) {
+				e.printStackTrace();
+			}
+			
 		});
 		Thread display = new Thread(() -> {
 			Platform.runLater(() -> {
