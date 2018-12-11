@@ -35,8 +35,9 @@ public class StateRoundCalculating extends StateDefault {
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);
-		mainView.printDeliveryRequest(cityMap, deliveryRequest);
-
+		//mainView.printDeliveryRequest(cityMap, deliveryRequest);
+		mainView.printRoundSet(cityMap, roundSet);
+		mainView.printPotentielDeliveries(cityMap, deliveryRequest);
 	}
 	
 	protected void actionCalculate(Thread calculate, Thread display) {

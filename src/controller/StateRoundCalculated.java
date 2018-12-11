@@ -44,7 +44,7 @@ public class StateRoundCalculated extends StateDefault {
 		mainView.setRedoButtonEnable(true);
 		mainView.setDiscardButtonEnable(true);
 		mainView.setExportButtonEnable(true);
-		mainView.setDeliveryManEnable(false);
+		mainView.setDeliveryManEnable(true);
 	}
 
 	@Override
@@ -130,8 +130,8 @@ public class StateRoundCalculated extends StateDefault {
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);
 		// mainView.printDeliveryRequest(cityMap, deliveryRequest);
-		mainView.printPotentielDeliveries(cityMap, deliveryRequest);
 		mainView.printRoundSet(cityMap, roundSet);
+		mainView.printPotentielDeliveries(cityMap, deliveryRequest);
 	}
 
 	@Override
@@ -163,8 +163,8 @@ public class StateRoundCalculated extends StateDefault {
 		listeDeCdes.redo();
 	}
 
-	@Override
-	public void exportRoundSet(MainView mainView, RoundSet roundSet) {
+@Override
+public void exportRoundSet(MainView mainView, RoundSet roundSet) {
 
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Export");

@@ -39,13 +39,15 @@ public class StateMove extends StateDefault{
 	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
 			Delivery delivery, ListCommands listeDeCdes) {
 		mainView.printMessage("");
-		boolean move = mainView.displayPopUpConfirmation("Are you sure to move this delivery?");
+		
+		listeDeCdes.ajoute(new ComMove(map, roundSet, deliveryToMove, delivery, roundSet.getPreviousDelivery(deliveryToMove)));
+		/*boolean move = mainView.displayPopUpConfirmation("Are you sure to move this delivery?");
 		if(move) {
 			listeDeCdes.ajoute(new ComMove(map, roundSet, deliveryToMove, delivery, roundSet.getPreviousDelivery(deliveryToMove)));
 		}else {
 			cancel(mainView);
 			return;
-		}
+		}*/
 		Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}

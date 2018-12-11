@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="627.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
+<BorderPane prefHeight="640.0" prefWidth="1006.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
    <center>
       <StackPane>
          <children>
@@ -83,12 +83,15 @@
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="70.0" text="Compute" />
                                        </children>
                                     </VBox>
-                                    <VBox fx:id="deliveryMan" alignment="CENTER" onMouseClicked="#clickRoundsCompute" prefHeight="48.0" prefWidth="95.0" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <VBox fx:id="deliveryMan" alignment="CENTER" prefHeight="48.0" prefWidth="95.0" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ComboBox fx:id="deliveryManCombo" prefHeight="27.0" prefWidth="90.0" />
+                                          <ComboBox fx:id="deliveryManCombo" prefHeight="27.0" prefWidth="90.0">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin></ComboBox>
                                           <Label alignment="CENTER" prefHeight="18.0" prefWidth="90.0" text="Delivery Man">
                                              <VBox.margin>
-                                                <Insets top="5.0" />
+                                                <Insets top="10.0" />
                                              </VBox.margin></Label>
                                        </children>
                                     </VBox>
@@ -138,12 +141,18 @@
                                     </VBox>
                                     <VBox fx:id="moveButton" alignment="CENTER" onMouseClicked="#clickMove" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ImageView fx:id="moveImage" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="moveImage" fitHeight="45.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../images/deplacer.png" />
                                              </image>
+                                             <VBox.margin>
+                                                <Insets bottom="3.0" />
+                                             </VBox.margin>
                                           </ImageView>
-                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Move" />
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Move">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin></Label>
                                        </children>
                                     </VBox>
                                     <VBox fx:id="cancelButton" alignment="CENTER" onMouseClicked="#buttonCancel" style="-fx-cursor: hand;" styleClass="toolbar-card">
@@ -153,7 +162,10 @@
                                                 <Image url="@../images/cancel.png" />
                                              </image>
                                           </ImageView>
-                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Cancel" />
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Cancel">
+                                             <VBox.margin>
+                                                <Insets top="3.0" />
+                                             </VBox.margin></Label>
                                        </children>
                                     </VBox>
                                  </children>
@@ -187,7 +199,7 @@
                                                 <Image url="@../images/discareChanges.png" />
                                              </image>
                                           </ImageView>
-                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Discare" />
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="60.0" text="Discard" />
                                        </children>
                                     </VBox>
                                     <VBox fx:id="redoButton" alignment="CENTER" onMouseClicked="#redo" style="-fx-cursor: hand;" styleClass="toolbar-card">
@@ -203,6 +215,33 @@
                                  </children>
                               </HBox>
                               <Label alignment="CENTER" text="Edit">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <Separator orientation="VERTICAL" />
+                        <VBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <VBox fx:id="exportButton1" alignment="CENTER" onMouseClicked="#clickExport" prefHeight="58.0" prefWidth="63.0" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                       <children>
+                                          <ImageView fitHeight="44.0" fitWidth="56.0" onMousePressed="#zoomAuto" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/zoomauto.png" />
+                                             </image>
+                                             <VBox.margin>
+                                                <Insets bottom="-4.0" />
+                                             </VBox.margin>
+                                          </ImageView>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="77.0" text="Auto Zoom" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label alignment="CENTER" text="Display">
                                  <font>
                                     <Font size="10.0" />
                                  </font>

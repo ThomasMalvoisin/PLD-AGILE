@@ -56,6 +56,7 @@ public class TextView implements Observer{
 		clearTextView();
 		this.map = map;
 		TitledPane titledPane = new TitledPane();
+		titledPane.setCollapsible(false);
 		VBox titledPaneContent = new VBox();
 		addWarehouse(map, deliveryRequest.getWarehouse(),titledPaneContent);
 		titledPaneContent.getChildren().add(new Separator());
@@ -75,6 +76,13 @@ public class TextView implements Observer{
 		roundSet.addObserver(this);
 		this.roundSet=roundSet;
 		this.map = map;
+		
+		/*Text warehousePane = new Text();
+		warehousePane.setText("Warehouse ");
+		warehousePane.setFill(Color.FORESTGREEN);
+		warehousePane.getStyleClass().add("delivery-text");
+		txtArea.getChildren().add(warehousePane);*/
+		
 		ArrayList<Round> rounds = roundSet.getRounds();
 		int r =  0;
 		for(Round round : rounds) {
@@ -91,7 +99,7 @@ public class TextView implements Observer{
 					i++;
 				}
 				titledPane.setContent(titledPaneContent);
-				titledPane.setText("Round "+(r+1)+" with "+ (round.getDeliveries().size()-1) + "  Delivery Points");
+				titledPane.setText("Round "+(r+1)+", "+ (round.getDeliveries().size()-1) + "  Delivery Points");
 				titledPane.setTextFill(colors[r]);
 				txtArea.getChildren().add(titledPane);
 			}
@@ -125,6 +133,9 @@ public class TextView implements Observer{
 			dlvP +=  "\n                      ";
 			dlvP += "Departure : " + df.format(d.getDepartureTime());
 			
+		}else {
+			dlvP += "\n			";
+			dlvP += "Duration : " + d.getDuration()/60 + " min";
 		}
 		Text t = new Text(dlvP);
 		t.setFill(color);

@@ -21,6 +21,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
 import model.CityMap;
 import model.Delivery;
@@ -40,6 +41,7 @@ public class GraphicView implements Observer {
 	RoundSet rs;
 	
 	Group deliveries;
+	Group deliveriesIds;
 	Group roundSet;
 	Group notDeliveriesIntersections;
 
@@ -51,6 +53,7 @@ public class GraphicView implements Observer {
 	public GraphicView(Pane pane) {
 		this.pane = pane;
 		this.deliveries = new Group();
+		this.deliveriesIds = new Group();
 		this.roundSet = new Group();
 		this.notDeliveriesIntersections = new Group();
 		
@@ -72,6 +75,7 @@ public class GraphicView implements Observer {
 	private void initDrag(double mouseXPos, double mouseYPos) {
 		pane.setOnMouseDragged(event -> {
 
+			if(pane.getScaleX() == 1) return;
 		    pane.setTranslateX(event.getX() + pane.getTranslateX() - mouseXPos);
 		    pane.setTranslateY(event.getY() + pane.getTranslateY() - mouseYPos);
 		    event.consume();
@@ -85,6 +89,8 @@ public class GraphicView implements Observer {
 	public void clearDeliveryRequest() {
 		deliveries.getChildren().clear();
 		pane.getChildren().remove(deliveries);
+		deliveriesIds.getChildren().clear();
+		pane.getChildren().remove(deliveriesIds);
 		roundSet.getChildren().clear();
 		pane.getChildren().remove(roundSet);
 		notDeliveriesIntersections.getChildren().clear();
@@ -105,8 +111,11 @@ public class GraphicView implements Observer {
 			drawIntersectionPoint(entry.getValue());
 		}
 		pane.getChildren().remove(deliveries);
+		pane.getChildren().remove(deliveriesIds);
 		pane.getChildren().add(notDeliveriesIntersections);
 		pane.getChildren().add(deliveries);
+		pane.getChildren().add(deliveriesIds);
+
 
 	}
 
@@ -141,6 +150,8 @@ public class GraphicView implements Observer {
 		pane.getChildren().add(roundSet);
 		pane.getChildren().remove(deliveries);
 		pane.getChildren().add(deliveries);
+		pane.getChildren().remove(deliveriesIds);
+		pane.getChildren().add(deliveriesIds);
 	}
 
 	public void drawDeliveryRequest(DeliveryRequest deliveryRequest) {
@@ -153,6 +164,7 @@ public class GraphicView implements Observer {
 			drawDeliveryPoint(d);
 		}
 		pane.getChildren().add(deliveries);
+		pane.getChildren().add(deliveriesIds);
 	}
 
 	private void drawRoundSection(Section sec, Color color, double delta, double opacity) {
@@ -217,15 +229,20 @@ public class GraphicView implements Observer {
 
 	public void drawDeliveryPoint(Delivery d) {
 //		drawPoint(geoToCoord(d.getAdress()),5, Color.RED, d);
-		Circle c = makePoint(geoToCoord(d.getAdress()), 5, Color.RED);
-
+		double[] coord = geoToCoord(d.getAdress());
+		Circle c = makePoint(coord, 5, Color.RED);
+		Text t = new Text(d.getId() + "");
+		t.setX(coord[0] + 5);
+		t.setY(coord[1] - 5);
+		t.setFill(Color.RED);
+		deliveriesIds.getChildren().add(t);
 		c.getProperties().put("DELIVERY", d);
 		c.addEventHandler(MouseEvent.ANY, dpl);
 	}
 
 	public void drawWarehousePoint(Intersection i) {
 //		drawPoint(geoToCoord(i),8, Color.FORESTGREEN, null);
-		Circle c = makePoint(geoToCoord(i), 5, Color.FORESTGREEN);
+		Circle c = makePoint(geoToCoord(i), 7, Color.FORESTGREEN);
 		c.getProperties().put("WAREHOUSE", i);
 		c.addEventHandler(MouseEvent.ANY, dpl);
 	}
