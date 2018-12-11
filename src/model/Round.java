@@ -1,9 +1,9 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Round {
@@ -22,9 +22,11 @@ public class Round {
 		this.arrivalTime = arrivalTime;
 		this.deliveries = deliveries;
 		this.journeys = journeys;
+		this.totalLength = 0;
 	}
 
 	public Round() {
+		this.totalLength = 0;
 	}
 
 	public double getDuration() {
@@ -146,28 +148,33 @@ public class Round {
 	}
 	
 	public String toString () {
-
-		String a="Length of this round : "+Math.round(totalLength)+" meters \n";
-		a+="Duration  : "+Math.round(duration/60.0)+" minutes \n";
-		a+="Departure time : "+departureTime+" minutes \n";
-		a+="Arrival time : "+arrivalTime+" minutes \n";
+		SimpleDateFormat sdfDate = new SimpleDateFormat("HH:mm:ss");
+		String a="Length of this round : "+Math.round(totalLength)/1000.0+" kilometer(s) \n";
+		a+="Duration  : "+Math.round(duration/60000.0)+" minutes \n";
+		a+="Departure time : "+sdfDate.format(departureTime) + "\n";
+		a+="Arrival time : "+sdfDate.format(arrivalTime)+"\n";
+		a+=deliveries.get(0).toString(true);
 		a+="\n";
 		a+= "--- Deliveries for this round--- \n";
 		boolean isFirst = true;
 		for(Delivery d : deliveries) {
+			if (isFirst==true) {
+				isFirst=false;
+			}
+			else {
 			a+=d.toString(isFirst);
 			a+="\n";
-			isFirst=false;
+			}
 		}
 		a+= "--- Details round--- \n";
-		a+="You start at the warehouse. \n";
+		a+="You start at the warehouse. \n \n";
 		int i = 1;
 		isFirst = false;
 		for(Journey j : journeys) {
 			a+=j.toString(i);
-			a+="\n";
 			a+="You arrive at ";
 			a+=deliveries.get(i).toString(isFirst);
+			a+="\n";
 			i++;
 			if (i==deliveries.size()) {
 				isFirst=true;
@@ -195,11 +202,14 @@ public class Round {
 			
 			currentJourney = journeys.get(i);
 			journeyDuration = (currentJourney.getLength() * 0.2399998) * 1000;
+			this.totalLength += currentJourney.getLength();
 			currentTime += (long)Math.round(journeyDuration);
 			i++;
 		}	
 		
 		this.duration = currentTime - this.departureTime.getTime();
+		this.arrivalTime = new Date(currentTime);
+		this.deliveries.get(0).setArrivalTime(arrivalTime);
 	}
 
 }

@@ -105,7 +105,7 @@ public class Controller {
   }
 
 	public void export() {
-		currentState.exportRoundSet(result);
+		currentState.exportRoundSet(mv, result);
 	}
 	
 	public void hoverIntersection(Intersection i) {

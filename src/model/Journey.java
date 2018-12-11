@@ -45,10 +45,9 @@ public class Journey {
 	}
 	
 	public String toString(int number) {
-		String a = "Lenght of journey "+number+" : "+ Math.round(length) +" meter \n \n";
+		String a = "Lenght of journey "+number+" : "+ Math.round(length)/1000.0 +" kilometer(s).\n \n";
 		for (Section s : sectionList) {
 			a+=s.toString();
-			a+="\n";
 		}
 		return a;
 	}

@@ -1,4 +1,5 @@
 package model;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 //TODO : devra être observable
@@ -65,15 +66,17 @@ public class Delivery {
 	}
 	
 	public String toString (boolean isFirst) {
+		SimpleDateFormat sdfDate = new SimpleDateFormat("HH:mm:ss");
 		String a = "";
 		if (isFirst) {
-			a+="Warehouse.\n";
+			a+="Warehouse at ";
 		} else {
 			a+="Delivery "+id+".\n";
+			a+="Duration : "+duration/60.0+" minutes. \n";
+			a+="Arrival time : "+sdfDate.format(arrivalTime)+"\n";
+			a+="Departure time : "+sdfDate.format(departureTime)+"\n";
 		}
-		a+="Duration : "+Math.round(duration/60)+" minutes. \n";
-		a+="Departure time : "+departureTime+" minutes. \n";
-		a+="Arrival time : "+arrivalTime+" minutes. \n";
+
 		a+=adress.toString();
 		return a;
 	}

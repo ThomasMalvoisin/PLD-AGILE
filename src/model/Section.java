@@ -33,8 +33,6 @@ public class Section{
 	
 	public String toString() {
 		String a = "- Take "+name +" for "+Math.round(length)+ " meters. \n";
-		a+= "Goes from : " +origin.toString();
-		a+= "To "+ destination.toString() + "\n"; 
 		return a;
 	}
 	

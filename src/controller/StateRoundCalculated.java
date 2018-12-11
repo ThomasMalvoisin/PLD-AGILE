@@ -157,20 +157,28 @@ public class StateRoundCalculated extends StateDefault {
 	public void redo(ListCommands listeDeCdes) {
 		listeDeCdes.redo();
 	}
-	
-	@Override
-	public void exportRoundSet(RoundSet roundSet) {
-		System.out.println("export");
-		try{
-			File ff=new File("C:\\Users\\Samuel GOY\\Desktop\\PLD AGILE\\Feuille de Route\\Roadmap.txt"); // définir l'arborescence
-			ff.createNewFile();
-			FileWriter ffw=new FileWriter(ff);
-			
-			ffw.write(roundSet.toString());
-			ffw.close();
-		} catch (Exception e) {}
-	}
 
+	@Override
+	public void exportRoundSet(MainView mainView, RoundSet roundSet) {
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Export");
+		fileChooser.setInitialFileName("RoundsExport.txt");
+		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT", "*.txt"));
+		File file = fileChooser.showSaveDialog(new Stage());
+
+		if (file != null) {
+			FileWriter fw;
+			try {
+				fw = new FileWriter(file);
+				fw.write(roundSet.toString());
+				fw.close();
+			} catch (IOException e) {
+				mainView.displayMessage("Error occured", "An error occured. Please, try again");
+				e.printStackTrace();
+			}
+		}
+	}
 
 	@Override
 	public void discardChanges(ListCommands listeDeCdes) {

@@ -30,7 +30,7 @@ public class Intersection{
 	}
 	
 	public String toString() {
-		String	a ="Intersection " +id +" at latitude "+ latitude +" and at longitude " + longitude+".\n";
+		String	a ="Intersection " +id +".\n";
 		return a;
 	}
 

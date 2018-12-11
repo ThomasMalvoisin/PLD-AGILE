@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
@@ -12,12 +13,14 @@ public class RoundSet extends Observable {
 
 	public RoundSet() {
 		rounds = new ArrayList<Round>();
+		totalLength=0;
 	}
 
 	public RoundSet(ArrayList<Round> rounds, double totalLength) {
 		super();
 		this.rounds = rounds;
 		this.totalLength = totalLength;
+		totalLength=0;
 	}
 
 	public ArrayList<Round> getRounds() {
@@ -55,6 +58,7 @@ public class RoundSet extends Observable {
 	public void copy(RoundSet roundSet) {
 		rounds = new ArrayList<Round>(roundSet.rounds);
 		totalLength = roundSet.totalLength;
+		duration=-1;
 		this.departureTime = roundSet.getDepartureTime();
 		this.calculTime();
 		setChanged();
@@ -101,10 +105,11 @@ public class RoundSet extends Observable {
 			r.calculTime();
 		}
 		
-		this.duration = rounds.get(0).getDuration();
+		//this.duration = rounds.get(0).getDuration();
 		
 		for(Round r : rounds) {
-			if(r.getDuration() > this.duration) {
+			this.totalLength += r.getTotalLength();
+			if(duration==-1 || r.getDuration() > this.duration) {
 				this.duration = r.getDuration();
 			}
 		}
@@ -114,15 +119,15 @@ public class RoundSet extends Observable {
 		String a  ="***** General information about Round Set ***** \n"; 
 		a+="\n";
 		a+="Number of Delivery Man : "+rounds.size()+" \n";
-		a+="Total length : "+totalLength+" meters \n";
-		a+="Maximum duration: "+Math.round(duration/60)+" minutes \n";
+		a+="Total length : "+Math.round(totalLength)/1000.0+" kilometer(s) \n";
+		a+="Maximum duration: "+Math.round(duration/60000)+" minutes \n";
 		a+="\n";
 		int numeroLivreur =0;
 		for(Round r : rounds) {
 			numeroLivreur++;
-			a+="***** Roadmap of delivery man "+numeroLivreur+" ******\n ";
+			a+="***** Roadmap of delivery man "+numeroLivreur+" ******\n";
 			a+= r.toString();
-			a+="***** End of the roadmap of delivery man *****"+numeroLivreur+" \n ";
+			a+="***** End of the roadmap of delivery man *****"+numeroLivreur+" \n";
 			a+="\n";
 			}
 		return a;
