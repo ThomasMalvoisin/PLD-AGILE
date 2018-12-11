@@ -41,10 +41,11 @@ public class StateMove extends StateDefault{
 		mainView.printMessage("");
 		
 		listeDeCdes.ajoute(new ComMove(map, roundSet, deliveryToMove, delivery, roundSet.getPreviousDelivery(deliveryToMove)));
-		/*boolean move = mainView.displayPopUpConfirmation("Are you sure to move this delivery?");
+		mainView.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the delivery point " + delivery.getId() + " correctly");
+		
+/*boolean move = mainView.displayPopUpConfirmation("Are you sure to move this delivery?");
 		if(move) {
 			listeDeCdes.ajoute(new ComMove(map, roundSet, deliveryToMove, delivery, roundSet.getPreviousDelivery(deliveryToMove)));
-			mainView.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the delivery point " + delivery.getId() + " correctly");
 		}else {
 			cancel(mainView);
 			return;

@@ -94,11 +94,11 @@ public class StateModify extends StateDefault {
 		System.out.println("Delete " + deliverySelected.getId());
 		
 		listeDeCdes.ajoute(new ComDelete(map, deliveryRequest, roundSet, deliverySelected));
-		
+		mainView.showNotificationCheck("Delivery deleted", "The delivery point number " + deliverySelected.getId() + " has been deleted correctly");
+
 		/*boolean delete = mainView.displayPopUpConfirmation("Are you sure to delete this delivery?");
 		if(delete) {
 			listeDeCdes.ajoute(new ComDelete(map, deliveryRequest, roundSet, deliverySelected));
-			mainView.showNotificationCheck("Delivery deleted", "The delivery point number " + deliverySelected.getId() + " has been deleted correctly");
 		}else {
 			cancel(mainView);
 			return;

@@ -523,13 +523,13 @@ public class MainView implements Initializable {
 	}
 
 	public void showNotificationInformation(String title, String text) {
-		Notifications.create().darkStyle().title(title).text(text).hideAfter(Duration.seconds(2))
+		Notifications.create().darkStyle().title(title).text(text).hideAfter(Duration.seconds(3))
 				.position(Pos.TOP_RIGHT).owner(this.pane).showInformation();
 	}
 	
 	public void showNotificationCheck(String title, String text) {
 		Image img = new Image("/images/checked.png");
-		Notifications.create().darkStyle().title(title).text(text).graphic(new ImageView(img)).hideAfter(Duration.seconds(2))
+		Notifications.create().darkStyle().title(title).text(text).graphic(new ImageView(img)).hideAfter(Duration.seconds(3))
 		.position(Pos.TOP_RIGHT).owner(this.pane).show();
 	}
 
