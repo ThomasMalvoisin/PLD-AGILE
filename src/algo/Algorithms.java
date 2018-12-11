@@ -46,14 +46,15 @@ public class Algorithms {
 		
 		ArrayList<Integer> nbCandWhenChangingRound = new ArrayList<Integer>();
 		int nbDelivery = request.getRequestDeliveries().size();
-		for (int i = nbDeliveryMan; i > 0; i--) {
+		int nbRounds = Math.min(nbDeliveryMan,  cand.size());
+		for (int i = nbRounds; i > 0; i--) {
 			nbDelivery -= nbDelivery/i;
 			nbCandWhenChangingRound.add(nbDelivery);
 		}
 		//for (Integer i : nbCandWhenChangingRound) System.out.print(i + "  ");
 		//System.out.println();
 		
-		branchAndBound(reducedMap, visited, cand, 0.0, rounds, nbCandWhenChangingRound, request.getWarehouse(), Math.min(nbDeliveryMan-1, cand.size()-1));
+		branchAndBound(reducedMap, visited, cand, 0.0, rounds, nbCandWhenChangingRound, request.getWarehouse(), nbRounds - 1);
 
 	}
 	
