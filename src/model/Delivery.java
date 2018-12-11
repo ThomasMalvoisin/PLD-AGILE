@@ -14,6 +14,12 @@ public class Delivery {
 	private int id;
 	
 
+	/**
+	 * @param duration
+	 * @param arrivalTime
+	 * @param departureTime
+	 * @param adress
+	 */
 	public Delivery(int duration, Date arrivalTime, Date departureTime, Intersection adress) {
 		super();
 		this.duration = duration;
@@ -22,6 +28,11 @@ public class Delivery {
 		this.adress = adress;
 	}
 	
+	/**
+	 * Creates an identified delivery without the same id than another identified delivery
+	 * @param duration
+	 * @param adress
+	 */
 	public Delivery(int duration, Intersection adress) {
 		super();
 		this.duration = duration;
@@ -29,6 +40,10 @@ public class Delivery {
 		this.id = currentId++;
 	}
 	
+	/**
+	 * Creates an unidentified delivery with just a particular adress
+	 * @param adress
+	 */
 	public Delivery(Intersection adress) {
 		super();
 		this.duration = 0;
@@ -36,34 +51,61 @@ public class Delivery {
 		this.id = 0;
 	}
 	
+	/**
+	 * @return duration
+	 */
 	public int getDuration() {
 		return duration;
 	}
 
+	/**
+	 * @return arrivalTime
+	 */
 	public Date getArrivalTime() {
 		return arrivalTime;
 	}
 
+	/**
+	 * @return departureTime
+	 */
 	public Date getDepartureTime() {
 		return departureTime;
 	}
 	
+	/**
+	 * @return adress
+	 */
 	public Intersection getAdress() {
 		return adress;
 	}
 	
+	/**
+	 * @param arrivalTime
+	 */
 	public void setArrivalTime(Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 	
+	/**
+	 * @param departureTime
+	 */
 	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
 	}
 
+	/**
+	 * @return id
+	 */
 	public int getId() {
 		return id;
 	}
 	
+	/**
+	 * Equality test to a given delivery.
+	 * @param d
+	 * 		The delivery to test
+	 * @return true if both deliveries have the same id, false otherwise
+	 */
 	public boolean equals(Delivery d) {
 		if(d != null) {
 			return this.id == d.getId();
@@ -72,6 +114,12 @@ public class Delivery {
 		return false;
 	}
 
+	/**
+	 * Creates a string describing the delivery.
+	 * @param isFirst
+	 * 		Define if the delivery is a warehouse or not (true if it is)
+	 * @return a string describing the delivery
+	 */
 	public String toString (boolean isFirst) {
 		SimpleDateFormat sdfDate = new SimpleDateFormat("HH:mm:ss");
 		String a = "";

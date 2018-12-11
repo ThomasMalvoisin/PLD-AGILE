@@ -86,8 +86,8 @@ public class StateRoundCalculated extends StateDefault {
 		Thread calculate = new Thread(() -> {
 			try {
 				Algorithms.solveTSP(roundsTemp, map, delivReq, nbDeliveryMan);
-			} catch(ExceptionAlgo e) {
-				
+			} catch(Exception e) {
+				e.printStackTrace();
 			}
 		});
 		Thread display = new Thread(() -> {
