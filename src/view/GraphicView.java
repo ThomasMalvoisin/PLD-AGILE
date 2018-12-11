@@ -325,13 +325,15 @@ public class GraphicView implements Observer {
 	public void setDeliverySelected(Delivery d) {
 		for (Node n : deliveries.getChildren()) {
 			if (d != null && d.equals(n.getProperties().get("DELIVERY"))) {
-				((Circle) n).setFill(Color.AQUA);
-				((Circle) n).setRadius(7);
+//				((Circle) n).setFill(Color.AQUA);
+//				((Circle) n).setRadius(7);
+				n.getStyleClass().add("map-point-selected");
 			} else if (n.getProperties().get("DELIVERY") == null) {
 				((Circle) n).setFill(Color.FORESTGREEN);
 			} else {
-				((Circle) n).setFill(Color.RED);
-				((Circle) n).setRadius(5);
+//				((Circle) n).setFill(Color.RED);
+//				((Circle) n).setRadius(5);
+				n.getStyleClass().remove("map-point-selected");
 			}
 		}
 	}
@@ -339,7 +341,7 @@ public class GraphicView implements Observer {
 	public void setIntersectionSelected(Intersection i) {
 		for (Node n : notDeliveriesIntersections.getChildren()) {
 			if (i != null && i.equals(n.getProperties().get("INTERSECTION"))) {
-				System.out.println("Suu");
+				//System.out.println("Suu");
 				((Circle) n).getStyleClass().add("map-point-selected");
 //				((Circle) n).setFill(Color.AQUA);
 //				((Circle) n).setOpacity(1);
