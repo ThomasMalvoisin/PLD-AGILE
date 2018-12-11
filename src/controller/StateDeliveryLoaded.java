@@ -87,6 +87,7 @@ public class StateDeliveryLoaded extends StateDefault {
 		});
 		Thread display = new Thread(() -> {
 			Platform.runLater(() -> {
+				mainView.setLoader(true);
 				mainView.printRoundSet(map, roundSet);
 				mainView.printPotentielDeliveries(map, delivReq);
 			});
@@ -112,7 +113,7 @@ public class StateDeliveryLoaded extends StateDefault {
 					roundSet.copy(roundsTemp);
 				});
 			}
-
+			Platform.runLater(()-> mainView.setLoader(false));
 			Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 			Controller.setCurrentState(Controller.stateRoundCalculated);
 		});

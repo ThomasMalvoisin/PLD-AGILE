@@ -73,16 +73,29 @@
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <VBox fx:id="computeButton" alignment="CENTER" onMouseClicked="#clickRoundsCompute" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <StackPane fx:id="computeButtonLoader">
                                        <children>
-                                          <ImageView fx:id="computeImage" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../images/computePlay.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="70.0" text="Compute" />
+                                          <VBox fx:id="loader" alignment="CENTER" visible="false">
+                                             <children>
+                                                <ImageView fitHeight="68.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../images/c3c4d331234507.564a1d23db8f9.gif" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </VBox>
+                                          <VBox fx:id="computeButton" alignment="CENTER" onMouseClicked="#clickRoundsCompute" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                             <children>
+                                                <ImageView fx:id="computeImage" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../images/computePlay.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" prefHeight="18.0" prefWidth="70.0" text="Compute" />
+                                             </children>
+                                          </VBox>
                                        </children>
-                                    </VBox>
+                                    </StackPane>
                                     <VBox fx:id="deliveryMan" alignment="CENTER" prefHeight="48.0" prefWidth="95.0" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
                                           <ComboBox fx:id="deliveryManCombo" prefHeight="27.0" prefWidth="90.0">

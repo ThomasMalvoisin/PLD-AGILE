@@ -32,6 +32,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -120,6 +121,8 @@ public class MainView implements Initializable {
 	VBox exportButton;
 	@FXML
 	ImageView exportImage;
+	
+	
 
 	Controller controller;
 	ResizeListener rl;
@@ -244,11 +247,15 @@ public class MainView implements Initializable {
 		tv.printRoundSet(map, result);
 	}
 
-	public void setLoader(boolean toBePrinted) {
-		if (toBePrinted)
+	public void setLoader(boolean b) {
+		if(b) {
+			loader.setVisible(true);
 			loader.toFront();
-		else
-			loader.toBack();
+		}
+		else {
+			loader.setVisible(false);
+			computeButton.toFront();
+		}
 	}
 
 	public void setDeliverySelected(Delivery delivery) {
