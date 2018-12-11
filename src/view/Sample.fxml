@@ -226,7 +226,7 @@
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <VBox fx:id="exportButton1" alignment="CENTER" onMouseClicked="#clickExport" prefHeight="58.0" prefWidth="63.0" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <VBox alignment="CENTER" onMouseClicked="#zoomAuto" prefHeight="58.0" prefWidth="63.0" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
                                           <ImageView fitHeight="44.0" fitWidth="56.0" onMousePressed="#zoomAuto" pickOnBounds="true" preserveRatio="true">
                                              <image>
