@@ -68,7 +68,7 @@ public class StateMove extends StateDefault{
 				listeDeCdes.ajoute(new ComMove(map, result, deliveryToMove, delivery, result.getPreviousDelivery(deliveryToMove)));
 				mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse in the round " + indexRound + 1 + " correctly");
 			}else {
-				cancel(mv);
+				cancel(mv, result);
 				return;
 			}
 		}
@@ -79,7 +79,7 @@ public class StateMove extends StateDefault{
 				listeDeCdes.ajoute(new ComMove(map, result, deliveryToMove, delivery, result.getPreviousDelivery(deliveryToMove)));
 				mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse correctly");
 			}else {
-				cancel(mv);
+				cancel(mv, result);
 				return;
 			}
 		}

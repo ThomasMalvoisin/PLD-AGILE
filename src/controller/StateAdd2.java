@@ -48,7 +48,7 @@ public class StateAdd2 extends StateDefault {
 			listeDeCdes.ajoute(new ComAdd(map,delivReq, result, d, delivery));
 			mv.showNotificationCheck("Delivery added", "The new delivery point has been added correctly");
 		}else {
-			cancel(mv);
+			cancel(mv, result);
 			return;
 		}
 		Controller.stateRoundCalculated.setButtonsEnabled(mv);
@@ -73,11 +73,11 @@ public class StateAdd2 extends StateDefault {
 					listeDeCdes.ajoute(new ComAdd(map,delivReq, result, d, delBefore));
 					mv.showNotificationCheck("Delivery added", "The new delivery point has been added correctly");
 				}else {
-					cancel(mv);
+					cancel(mv, result);
 					return;
 				}
 			}else {
-				cancel(mv);
+				cancel(mv,result);
 				return;
 			}
 		}
@@ -91,7 +91,7 @@ public class StateAdd2 extends StateDefault {
 				listeDeCdes.ajoute(new ComAdd(map,delivReq, result, d, delBefore));
 				mv.showNotificationCheck("Delivery added", "The new delivery point has been added correctly");
 			}else {
-				cancel(mv);
+				cancel(mv, result);
 				return;
 			}
 			
