@@ -44,6 +44,7 @@ public class StateMove extends StateDefault{
 		/*boolean move = mainView.displayPopUpConfirmation("Are you sure to move this delivery?");
 		if(move) {
 			listeDeCdes.ajoute(new ComMove(map, roundSet, deliveryToMove, delivery, roundSet.getPreviousDelivery(deliveryToMove)));
+			mainView.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the delivery point " + delivery.getId() + " correctly");
 		}else {
 			cancel(mainView);
 			return;
@@ -64,6 +65,7 @@ public class StateMove extends StateDefault{
 				indexRound = indexRound-1;
 				delivery=result.getRounds().get(indexRound).getDeliveries().get(0);
 				listeDeCdes.ajoute(new ComMove(map, result, deliveryToMove, delivery, result.getPreviousDelivery(deliveryToMove)));
+				mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse in the round " + indexRound + 1 + " correctly");
 			}else {
 				cancel(mv);
 				return;
@@ -74,6 +76,7 @@ public class StateMove extends StateDefault{
 			if(move) {
 				delivery=result.getRounds().get(0).getDeliveries().get(0);
 				listeDeCdes.ajoute(new ComMove(map, result, deliveryToMove, delivery, result.getPreviousDelivery(deliveryToMove)));
+				mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse correctly");
 			}else {
 				cancel(mv);
 				return;

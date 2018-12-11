@@ -46,6 +46,7 @@ public class StateAdd2 extends StateDefault {
 		if(duration!=-1) {
 			Delivery d = new Delivery(duration, intersectionSelected); //TODO: permettre � l'utilisateur de saisir la dur�e
 			listeDeCdes.ajoute(new ComAdd(map,delivReq, result, d, delivery));
+			mv.showNotificationCheck("Delivery added", "The new delivery point has been added correctly");
 		}else {
 			cancel(mv);
 			return;
@@ -70,6 +71,7 @@ public class StateAdd2 extends StateDefault {
 					indexRound = indexRound-1;
 					Delivery delBefore = result.getRounds().get(indexRound).getDeliveries().get(0);
 					listeDeCdes.ajoute(new ComAdd(map,delivReq, result, d, delBefore));
+					mv.showNotificationCheck("Delivery added", "The new delivery point has been added correctly");
 				}else {
 					cancel(mv);
 					return;
@@ -87,6 +89,7 @@ public class StateAdd2 extends StateDefault {
 				d = new Delivery(duration, intersectionSelected);
 				Delivery delBefore = result.getRounds().get(indexRound).getDeliveries().get(0);
 				listeDeCdes.ajoute(new ComAdd(map,delivReq, result, d, delBefore));
+				mv.showNotificationCheck("Delivery added", "The new delivery point has been added correctly");
 			}else {
 				cancel(mv);
 				return;
