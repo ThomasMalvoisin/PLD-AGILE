@@ -326,13 +326,13 @@ public class GraphicView implements Observer {
 		for (Node n : deliveries.getChildren()) {
 			if (d != null && d.equals(n.getProperties().get("DELIVERY"))) {
 //				((Circle) n).setFill(Color.AQUA);
-//				((Circle) n).setRadius(7);
+				((Circle) n).setRadius(7);
 				n.getStyleClass().add("map-point-selected");
 			} else if (n.getProperties().get("DELIVERY") == null) {
 				((Circle) n).setFill(Color.FORESTGREEN);
 			} else {
 //				((Circle) n).setFill(Color.RED);
-//				((Circle) n).setRadius(5);
+				((Circle) n).setRadius(5);
 				n.getStyleClass().remove("map-point-selected");
 			}
 		}
