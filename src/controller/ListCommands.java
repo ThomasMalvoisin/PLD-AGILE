@@ -9,14 +9,17 @@ public class ListCommands {
 	private LinkedList<Command> list;
 	private int indexList;
 	
+	/**
+	 * ListCommands controller
+	 */
 	public ListCommands(){
 		indexList = -1;
 		list = new LinkedList<Command>();
 	}
 	
 	/**
-	 * Ajout de la commande c a la list this
-	 * @param c
+	 * Add new command to list this 
+	 * @param c command to add
 	 * @throws ExceptionAlgo 
 	 */
 	public void ajoute(Command c) throws ExceptionAlgo{
@@ -30,8 +33,9 @@ public class ListCommands {
 	        list.add(indexList, c);	  
     }
 	
-	 /* Annule temporairement la derniere commande ajoutee (cette commande pourra etre remise dans la liste avec redo)
-	 */
+	 /** 
+	  * Cancel last command added 
+	  * */
 	public void undo(){
 		if (indexList >= 0){
 			Command cde = list.get(indexList);
@@ -40,8 +44,8 @@ public class ListCommands {
 		}
 	}
 	
-	/**
-	 * Remet dans la liste la derniere commande annulee avec undo
+	/** Get back to the last command canceled
+	 * 
 	 */
 	public void redo(){
 		if (indexList < list.size()-1){
@@ -55,6 +59,9 @@ public class ListCommands {
 		}
 	}
 	
+	/** Get back to first command
+	 * 
+	 * */
 	public void discard(){
 		//int i = indiceCrt;
 		while(indexList>-1) {
@@ -63,7 +70,7 @@ public class ListCommands {
 	}
 	
 	/**
-	 * Supprime definitivement toutes les commandes de liste
+	 * Delete all commands
 	 */
 	   public void reset(){
 		   indexList = -1;

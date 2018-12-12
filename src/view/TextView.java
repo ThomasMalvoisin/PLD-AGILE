@@ -47,11 +47,21 @@ public class TextView implements Observer{
 	
 	private SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
 
+	/**
+	 * Create a textView control class with the given VBox text javafx component
+	 * @param txtArea
+	 */
 	public TextView(VBox txtArea) {
 		this.txtArea = txtArea;
 		deliveries = new ArrayList<Text>();
 	}
 
+	/**
+	 * Display a given delivery request in the text view
+	 * @param map
+	 * 	the current map is needed for the display
+	 * @param deliveryRequest
+	 */
 	public void printDeliveryRequest(CityMap map, DeliveryRequest deliveryRequest) {
 		clearTextView();
 		this.map = map;
@@ -71,6 +81,12 @@ public class TextView implements Observer{
 		txtArea.getChildren().add(titledPane);
 	}
 	
+	/**
+	 * Display a given round set in the text view
+	 * @param map
+	 * 	the current map is needed for the display
+	 * @param roundSet
+	 */
 	public void printRoundSet(CityMap map, RoundSet roundSet) {
 		clearTextView();
 		roundSet.addObserver(this);
@@ -120,7 +136,6 @@ public class TextView implements Observer{
 		
 	}
 		
-
 	private void addDeliveryPoint(CityMap map, Delivery d,VBox titledPane,Color color) {
 		
 		ArrayList<String> sectionNames = map.getIntersectionSectionNames(d.getAdress());
@@ -183,12 +198,19 @@ public class TextView implements Observer{
 		titledPane.getChildren().add(t);
 	}
 
+	/**
+	 * Clear all the content of the text view
+	 */
 	public void clearTextView() {
 		txtArea.getChildren().clear();
 		deliveries.clear();
 		selectedDelivery = null;
 	}
 	
+	/**
+	 * mark the given delivery as selected and display the selection
+	 * @param delivery
+	 */
 	public void setDeliverySelected(Delivery delivery) {
 		if(selectedDelivery != null) {
 			selectedDelivery.getStyleClass().remove("selected-delivery-text");
@@ -202,10 +224,17 @@ public class TextView implements Observer{
 		}
 	}
 	
+	/**
+	 * Add a given DeliveryPointListener to the textView
+	 * @param dpl
+	 */
 	public void setDeliveryPointsListener(DeliveryPointsListener dpl) {
 		this.dpl = dpl;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable o, Object a) {
 		printRoundSet(map, roundSet);

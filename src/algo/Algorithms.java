@@ -18,11 +18,11 @@ import model.RoundSet;
 
 public class Algorithms {
 
-	
 	/**
 	 * Computes the fastest path in the graph defined by map which starts from the intersection warehouse contained in the request, passes through each delivery points of the request and end in the warehouse and stores it in rounds.
 	 * If the number of delivery men (nbDeliveryMan) is greater than 1, computes the same number of Rounds in the RoundSet, and every Rounds have the same number of delivery points +-1.
-	 * At any points during the algorithm execution, the RoundSet rounds describe the best solution currently found.
+	 * At any points during the algorithm execution, the RoundSet rounds describes the best solution currently found.
+	 * Despite of the duration of the RoundSet and the array Rounds in the RoundSet, nothing in the RoundSet is modified.
 	 * 
 	 * @param rounds
 	 * 		Solution found by the algorithm
@@ -109,17 +109,28 @@ public class Algorithms {
 	}
 	
 	/**
+	 * Creates an array of Integer representing the position of the remaining delivery points in the cand array sorted by ascending order by it's bound value
+	 * (the estimated cost of the remaining best path starting from the delivery point, passing through every other delivery points, and ending
+	 * in the warehouse)
 	 * 
 	 * @param bikersSpeed
+	 * 		The biker speed
 	 * @param reducedMap
+	 * 		The shortest journeys matrix
 	 * @param visited
+	 * 		The already visited delivery points
 	 * @param cand
+	 * 		The remaining delivery points to visit
 	 * @param t
+	 * 		The duration of the whole partial path
 	 * @param bestSolution
+	 * 		The current best solution
 	 * @param nbCandWhenChangingRound
+	 * 		A list of depths (number of remaining points to visit) in which an artificial return to the warehouse is necessary (to create an another round, pass to an other delivery man)
 	 * @param warehouse
 	 * @param remainingReturnToWarehouse
-	 * @return
+	 * 		The remaining number of return to the warehouse (except the last one) to do
+	 * @return the ordered list
 	 */
 	private static ArrayList<Pair<Double, Integer>> orderedByBoundCand (double bikersSpeed, Map<Long, Map<Long, Journey>> reducedMap , ArrayList<Delivery> visited, ArrayList<Delivery> cand, double t, 
 			RoundSet bestSolution, ArrayList<Integer> nbCandWhenChangingRound, Intersection warehouse, int remainingReturnToWarehouse) {
@@ -156,6 +167,24 @@ public class Algorithms {
 		return sorted;
 	}
 	
+	/**
+	 * The recursive method called by solveTSP to calculate the shortest path needed.
+	 * @param reducedMap
+	 * 		The cityMap in which the computation is done
+	 * @param visited
+	 * 		The already visited delivery points
+	 * @param cand
+	 * 		The remaining delivery points to visit
+	 * @param t
+	 * 		The duration of the whole partial path
+	 * @param bestSolution
+	 * 		The current best solution
+	 *  @param nbCandWhenChangingRound
+	 * 		A list of depths (number of remaining points to visit) in which an artificial return to the warehouse is necessary (to create an another round, pass to an other delivery man)
+	 * @param warehouse
+	 * @param remainingReturnToWarehouse
+	 * 		The remaining number of return to the warehouse (except the last one) to do
+	 */
 	private static void branchAndBound (Map<Long, Map<Long, Journey>> reducedMap , ArrayList<Delivery> visited, ArrayList<Delivery> cand, double t, 
 			RoundSet bestSolution, ArrayList<Integer> nbCandWhenChangingRound, Intersection warehouse, int remainingReturnToWarehouse) {
 		
@@ -205,6 +234,21 @@ public class Algorithms {
 			visited.remove(visited.size()-1);
 	}
 	
+	/**
+	 * The evaluation method, which computes a lower bound of the cost of the optimal path, passing through all the remaining delivery points and warehouse.
+	 * @param reducedMap
+	 * 		The cityMap in which the computation is done
+	 * @param bikersSpeed
+	 * 		The bikers' speed
+	 * @param currentDelivery
+	 * 		The last delivery point visited in the partial path computed during the branch and bound
+	 * @param cand
+	 * 		The remaining delivery points to visit
+	 * @param warehouse
+	 * @param remainingReturnToWarehouse
+	 * 		The remaining number of return to the warehouse (except the last one) to do
+	 * @return A lower bound of the cost of the optimal path
+	 */
 	private static double boundMinSum (Map<Long, Map<Long, Journey>> reducedMap,double bikersSpeed, Delivery currentDelivery, ArrayList<Delivery> cand, Intersection warehouse, int remainingReturnToWarehouse) {	
 		
 		double result = 0.0;
@@ -232,6 +276,22 @@ public class Algorithms {
 		return result + bikersSpeed * (minToNextCand + remainingReturnToWarehouse * minToWarehouse);
 	}
 	
+	/**
+	 * The evaluation method, which computes a lower bound of the cost of the optimal path, passing through all the remaining delivery points and warehouse.
+	 * This method uses an implementation of the Munkres' algorithm in O(N^3) complexity
+	 * @param reducedMap
+	 * 		The cityMap in which the computation is done
+	 * @param bikersSpeed
+	 * 		The bikers' speed
+	 * @param currentDelivery
+	 * 		The last delivery point visited in the partial path computed during the branch and bound
+	 * @param cand
+	 * 		The remaining delivery points to visit
+	 * @param warehouse
+	 * @param remainingReturnToWarehouse
+	 * 		The remaining number of return to the warehouse (except the last one) to do
+	 * @return A lower bound of the cost of the optimal path
+	 */
 	private static double boundMunkres (Map<Long, Map<Long, Journey>> reducedMap, double bikersSpeed, Delivery currentDelivery, 
 			ArrayList<Delivery> cand, Intersection warehouse, int remainingReturnToWarehouse) {
 		
@@ -300,6 +360,34 @@ public class Algorithms {
 		return result;
 	}
 	
+	
+	/**
+	 * This is an open source implementation of the hungarian algorithm, which iteratively finds a perfect maximum matching in a complete bipartite graph in O(N^3) complexity.
+	 * We consider X vertices as the left side vertices, and Y vertices as the right side vertices.
+	 * For every arrays A (except munkresCosts), A[i] contains an information on the vertex of position i in the xVertices or yVertices arrays.
+	 * @author Lucas GROLEAZ
+	 * @param coupleX
+	 * 		The array of matched Y vertices with the corresponding X vertex
+	 * @param coupleY
+	 * 		The array of matched X vertices with the corresponding Y vertex
+	 * @param lx
+	 * 		The array of label of X vertices
+	 * @param ly
+	 * 		The array of label of Y vertices
+	 * @param slack
+	 * 		The array containing at all time during the algorithm the minimum for all x in setS of (lx[x]+ly[y]-munkresCosts[xVertices[x]][yVertices[y]]) for each Y vertices y in setT
+	 * @param slackx
+	 * 		The array containing the X vertex minimizing the value of slack[y] for each Y vertices y
+	 * @param maxMatch
+	 * 		The size (number of edges) of the current matching
+	 * @param nbVertices
+	 * @param munkresCosts
+	 * 		The matrix of duration of each shortest journeys from one delivery point/warehouse to another
+	 * @param xVertices
+	 * 		The array of ID of intersection of delivery points or warehouse for X vertices
+	 * @param yVertices
+	 * 		The array of ID of intersection of delivery points or warehouse for Y vertices
+	 */
 	private static void augment(ArrayList<Integer> coupleX, ArrayList<Integer> coupleY, ArrayList<Long> lx, ArrayList<Long> ly,
 								ArrayList<Long> slack, ArrayList<Integer> slackx, int maxMatch, int nbVertices,
 								Map<Long, Map<Long, Long>> munkresCosts, ArrayList<Long> xVertices, ArrayList<Long> yVertices) {

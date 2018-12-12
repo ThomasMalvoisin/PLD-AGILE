@@ -27,6 +27,9 @@ public class StateModify extends StateDefault {
 
 	private Delivery deliverySelected;
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#setButtonsEnabled(view.MainView)
+	 */
 	@Override
 	public void setButtonsEnabled(MainView mainView) {
 		mainView.setAddButtonEnable(false);
@@ -44,6 +47,9 @@ public class StateModify extends StateDefault {
 		mainView.setDeliveryManEnable(false);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#loadDeliveryRequest(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result) {
 		FileChooser fileChooser = new FileChooser();
@@ -73,6 +79,9 @@ public class StateModify extends StateDefault {
 		mainView.setZoomAutoButtonsEnable(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);
@@ -81,6 +90,9 @@ public class StateModify extends StateDefault {
 		mainView.setDeliverySelected(this.deliverySelected);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#selectDelivery(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Delivery, controller.ListCommands)
+	 */
 	@Override
 	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
 			Delivery delivery, ListCommands listeDeCdes) {
@@ -94,6 +106,9 @@ public class StateModify extends StateDefault {
 		Controller.setCurrentState(Controller.stateModify);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#delete(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, controller.ListCommands)
+	 */
 	@Override
 	public void delete(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
 			ListCommands listeDeCdes) {
@@ -118,6 +133,9 @@ public class StateModify extends StateDefault {
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#cancel(view.MainView, model.RoundSet)
+	 */
 	@Override
 	public void cancel(MainView mainView, RoundSet roundSet) {
 		mainView.setRoundSelected(roundSet, deliverySelected, false);
@@ -129,6 +147,9 @@ public class StateModify extends StateDefault {
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#move(view.MainView)
+	 */
 	@Override
 	public void move(MainView mainView) {
 		mainView.printMessage("Please select the delivery you want to put before...");
@@ -137,8 +158,10 @@ public class StateModify extends StateDefault {
 		Controller.setCurrentState(Controller.stateMove);
 	}
 
-	// methode appelee avant d'entrer dans l'etat this, pour definir le delivery
-	// selectionne
+	
+	/**Select a delivery
+	 * @param delivery
+	 */
 	protected void actionDeliverySelected(Delivery delivery) {
 		this.deliverySelected = delivery;
 		System.out.println(delivery.getAdress().getLatitude());

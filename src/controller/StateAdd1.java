@@ -10,6 +10,9 @@ import view.MainView;
 
 public class StateAdd1 extends StateDefault {
 	
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#setButtonsEnabled(view.MainView)
+	 */
 	@Override
 	public void setButtonsEnabled(MainView mainView) {
 		mainView.setAddButtonEnable(false);
@@ -28,6 +31,9 @@ public class StateAdd1 extends StateDefault {
 		mainView.setZoomAutoButtonsEnable(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);
@@ -36,6 +42,9 @@ public class StateAdd1 extends StateDefault {
 		mainView.printPotentielDeliveries(cityMap, deliveryRequest);
 	}
 	
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#selectIntersection(view.MainView, model.Intersection)
+	 */
 	@Override
 	public void selectIntersection(MainView mainView, Intersection i) {
 		mainView.printMessage("Please select the delivery you want to put before...");
@@ -45,6 +54,9 @@ public class StateAdd1 extends StateDefault {
 		Controller.setCurrentState(Controller.stateAdd2);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#cancel(view.MainView, model.RoundSet)
+	 */
 	@Override
 	public void cancel(MainView mainView, RoundSet roundSet) {
 		mainView.printMessage("Canceled ! Press Add to add a delivery or Select a delivery to delete or move it. ");
@@ -52,6 +64,9 @@ public class StateAdd1 extends StateDefault {
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 	
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#hoverIntersection(view.MainView, model.CityMap, model.Intersection)
+	 */
 	@Override 
 	public void hoverIntersection(MainView mv, CityMap map, Intersection inter) {
 		ArrayList<String> sectionNames = map.getIntersectionSectionNames(inter);
@@ -70,6 +85,9 @@ public class StateAdd1 extends StateDefault {
 		mv.printMessage(dlvP);
 	}
 	
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#exitIntersection(view.MainView)
+	 */
 	@Override
 	public void exitIntersection(MainView mv) {
 		mv.printMessage("Please select the point where you want to add a delivery... ");

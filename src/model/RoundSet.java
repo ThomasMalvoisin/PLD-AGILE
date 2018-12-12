@@ -13,11 +13,19 @@ public class RoundSet extends Observable {
 	protected Date departureTime;
 	protected Date arrivalTime;
 
+	/**
+	 * Default Constructor
+	 */
 	public RoundSet() {
 		rounds = new ArrayList<Round>();
 		totalLength=0;
 	}
 
+	/**
+	 * Create a roundSet from an ArrayList of round and with the given total length
+	 * @param rounds
+	 * @param totalLength
+	 */
 	public RoundSet(ArrayList<Round> rounds, double totalLength) {
 		super();
 		this.rounds = rounds;
@@ -25,38 +33,66 @@ public class RoundSet extends Observable {
 		totalLength=0;
 	}
 
+	/**
+	 * @return
+	 */
 	public ArrayList<Round> getRounds() {
 		return rounds;
 	}
 
+	/**
+	 * @param rounds
+	 */
 	public void setRounds(ArrayList<Round> rounds) {
 		this.rounds = rounds;
 	}
 
+	/**
+	 * @return
+	 */
 	public double getTotalLength() {
 		return totalLength;
 	}
 
+	/**
+	 * @param totalLength
+	 */
 	public void setTotalLength(double totalLength) {
 		this.totalLength = totalLength;
 	}
 
+	/**
+	 * @return
+	 */
 	public double getDuration() {
 		return duration;
 	}
 
+	/**
+	 * @param duration
+	 */
 	public void setDuration(double duration) {
 		this.duration = duration;
 	}
 
+	/**
+	 * @return
+	 */
 	public Date getDepartureTime() {
 		return departureTime;
 	}
 
+	/**
+	 * @param departureTime
+	 */
 	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
 	}
 
+	/**
+	 * Deep copy of roundSet
+	 * @param roundSet
+	 */
 	public void copy(RoundSet roundSet) {
 		rounds = new ArrayList<Round>(roundSet.rounds);
 		totalLength = roundSet.totalLength;
@@ -67,6 +103,12 @@ public class RoundSet extends Observable {
 		notifyObservers();
 	}
 
+	/**
+	 * Delete a delivery
+	 * @param map
+	 * @param d
+	 * @throws ExceptionAlgo
+	 */
 	public void deleteDelivery(CityMap map, Delivery d) throws ExceptionAlgo {
 		for (Round r : rounds) {
 			if (r.getDeliveries().contains(d)) {
@@ -79,6 +121,13 @@ public class RoundSet extends Observable {
 		}
 	}
 
+	/**
+	 * Add a delivery
+	 * @param map
+	 * @param d
+	 * @param deliveryBefore
+	 * @throws ExceptionAlgo
+	 */
 	public void addDelivery(CityMap map, Delivery d, Delivery deliveryBefore) throws ExceptionAlgo {
 		for (Round r : rounds) {
 			if (r.getDeliveries().contains(deliveryBefore)) {
@@ -90,6 +139,11 @@ public class RoundSet extends Observable {
 		}
 	}
 
+	/**
+	 * Return the delivery placed before the Delivery d in the RoundSet
+	 * @param d
+	 * @return
+	 */
 	public Delivery getPreviousDelivery(Delivery d) {
 		Delivery deliveryBefore;
 		for (Round r : rounds) {
@@ -102,6 +156,9 @@ public class RoundSet extends Observable {
 		return null;
 	}
 
+	/**
+	 * Calcul the total duration of the RoundSet 
+	 */
 	public void calculTime() {
 		duration = -1;
 		for (Round r : rounds) {
@@ -120,6 +177,9 @@ public class RoundSet extends Observable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString () {
 		String a  ="***** General information about Round Set ***** \n"; 
 		a+="\n";
@@ -138,6 +198,10 @@ public class RoundSet extends Observable {
 		return a;
 	}
 	
+	/**
+	 * Clear all the rounds of the RoundSet
+	 * Reset all the values of the RoundSet
+	 */
 	public void reset() {
 		rounds.clear();
 		totalLength=0;
@@ -145,6 +209,9 @@ public class RoundSet extends Observable {
 		departureTime=null;
 	}
 
+	/**
+	 * @return
+	 */
 	public Date getArrivalTime() {
 		return this.arrivalTime;
 	}

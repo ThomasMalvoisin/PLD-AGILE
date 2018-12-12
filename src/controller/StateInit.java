@@ -4,6 +4,9 @@ import view.MainView;
 
 public class StateInit extends StateDefault{
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#setButtonsEnabled(view.MainView)
+	 */
 	@Override
 	public void setButtonsEnabled(MainView mainView) {
 		mainView.setMapButtonEnable(true);

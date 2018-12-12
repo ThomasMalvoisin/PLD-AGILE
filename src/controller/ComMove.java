@@ -14,6 +14,14 @@ public class ComMove implements Command {
 	Delivery newBefore;
 	Delivery oldBefore;
 	
+	/**
+	 * Create command which move a delivery from one round to another
+	 * @param cityMap current cityMap
+	 * @param roundSet the roundSet to modify
+	 * @param delivery the delivery to move
+	 * @param newBefore the delivery before d before adding
+	 * @param oldBefore the delivery before d after adding
+	 */
 	public ComMove(CityMap cityMap, RoundSet roundSet, Delivery delivery, Delivery newBefore, Delivery oldBefore) {
 		super();
 		this.cityMap = cityMap;

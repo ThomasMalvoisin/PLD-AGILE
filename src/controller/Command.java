@@ -5,13 +5,13 @@ import algo.ExceptionAlgo;
 public interface Command {
 	
 	/**
-	 * Execute la commande this
-	 * @throws ExceptionAlgo 
+	 * Execute command this
+	 * @throws ExceptionAlgo when method add new delivery throws an exception
 	 */
 	void doCde() throws ExceptionAlgo;
 	
 	/**
-	 * Execute la commande inverse a this
+	 * Execute reverse command
 	 */
 	void undoCde();
 }

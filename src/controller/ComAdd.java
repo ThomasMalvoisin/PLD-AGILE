@@ -14,6 +14,14 @@ public class ComAdd implements Command {
 	Delivery d;
 	Delivery deliveryBefore;
 	
+	/**
+	 * Create command which add a new delivery to delivery request and roundSet
+	 * @param map the current cityMap
+	 * @param dr the delivery request to modify
+	 * @param rs the delivery request to modify
+	 * @param d the delivery to add
+	 * @param deliveryBefore the delivery before d 
+	 */
 	public ComAdd(CityMap map, DeliveryRequest dr, RoundSet rs, Delivery d, Delivery deliveryBefore) {
 		this.map=map;
 		this.dr=dr;
@@ -21,7 +29,6 @@ public class ComAdd implements Command {
 		this.d=d;	
 		this.deliveryBefore=deliveryBefore;
 	}
-	
 	
 	
 	@Override
@@ -34,7 +41,6 @@ public class ComAdd implements Command {
 	
 	@Override
 	public void undoCde() {
-		
 		try {
 			rs.deleteDelivery(map, d);
 			dr.deleteDelivery(d);

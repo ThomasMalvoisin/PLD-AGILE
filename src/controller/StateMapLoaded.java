@@ -21,6 +21,9 @@ import xml.ExceptionXML;
 
 public class StateMapLoaded extends StateDefault {
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#setButtonsEnabled(view.MainView)
+	 */
 	@Override
 	public void setButtonsEnabled(MainView mainView) {
 		mainView.setAddButtonEnable(false);
@@ -39,6 +42,9 @@ public class StateMapLoaded extends StateDefault {
 		mainView.setZoomAutoButtonsEnable(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#loadDeliveryRequest(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result) {
 		FileChooser fileChooser = new FileChooser();
@@ -67,6 +73,9 @@ public class StateMapLoaded extends StateDefault {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);

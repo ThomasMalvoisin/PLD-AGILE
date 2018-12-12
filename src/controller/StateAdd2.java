@@ -12,6 +12,9 @@ public class StateAdd2 extends StateDefault {
 
 	Intersection intersectionSelected;
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#setButtonsEnabled(view.MainView)
+	 */
 	@Override
 	public void setButtonsEnabled(MainView mainView) {
 		mainView.setAddButtonEnable(false);
@@ -31,6 +34,9 @@ public class StateAdd2 extends StateDefault {
 		mainView.setZoomAutoButtonsEnable(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);
@@ -40,6 +46,9 @@ public class StateAdd2 extends StateDefault {
 		mainView.setIntersectionSelected(intersectionSelected);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#selectDelivery(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Delivery, controller.ListCommands)
+	 */
 	@Override
 	public void selectDelivery(MainView mv, CityMap map, DeliveryRequest delivReq, RoundSet result, Delivery delivery,
 			ListCommands listeDeCdes) {
@@ -66,6 +75,9 @@ public class StateAdd2 extends StateDefault {
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#selectWarehouse(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Intersection, controller.ListCommands)
+	 */
 	@Override
 	public void selectWarehouse(MainView mv, CityMap map, DeliveryRequest delivReq, RoundSet result, Intersection i,
 			ListCommands listeDeCdes) {
@@ -126,6 +138,9 @@ public class StateAdd2 extends StateDefault {
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#cancel(view.MainView, model.RoundSet)
+	 */
 	@Override
 	public void cancel(MainView mainView, RoundSet roundSet) {
 		mainView.printMessage("Canceled ! Press Add to add a delivery or Select a delivery to delete or move it. ");
@@ -135,6 +150,10 @@ public class StateAdd2 extends StateDefault {
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 
+	/**
+	 * @param i
+	 * 		Intersection
+	 */
 	protected void actionSelect(Intersection i) {
 		this.intersectionSelected = i;
 	}

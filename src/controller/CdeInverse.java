@@ -9,6 +9,9 @@ import model.RoundSet;
 public class CdeInverse implements Command{
 	Command cmd;
 	
+	/** Create reverse command to command cmd
+	 * @param cmd
+	 */
 	public CdeInverse(Command cmd) {
 		this.cmd = cmd;
 	}

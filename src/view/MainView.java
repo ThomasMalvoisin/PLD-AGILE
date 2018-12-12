@@ -135,6 +135,9 @@ public class MainView implements Initializable {
 	GraphicView gv;
 	TextView tv;
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -160,6 +163,11 @@ public class MainView implements Initializable {
 
 	}
 
+	/**
+	 * This method is called once the fxml file is fully loaded and displayed
+	 * This method is used to initialize the key listeners on ctrl+Z, ctrl+ Y and right click
+	 * @param scene
+	 */
 	public void postInitialize(Scene scene) {
 
 		scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
@@ -187,74 +195,133 @@ public class MainView implements Initializable {
 		});
 	}
 
+	/**
+	 * This method is called when the user click on the Load Map Button
+	 */
 	public void clickLoadMap() {
 		controller.loadMap();
 	}
 
+	/**
+	 * This method is called when the user click on the Delete Button
+	 */
 	public void buttonDelete() {
 		controller.buttonDelete();
 	}
 
+	/**
+	 * This method is called when the user click on the Cancel Button
+	 */
 	public void buttonCancel() {
 		controller.buttonCancel();
 	}
 
+	/**
+	 * This method is called when the user click on the Delivery Request Loading Button
+	 */
 	public void clickLoadDeliveryRequest() {
 		controller.loadDeliveryRequest();
 	}
 
+	/**
+	 * This method is called when the user click on the Round Compute Button
+	 */
 	public void clickRoundsCompute() {
 		int nbDeliveryMan = deliveryManCombo.getValue();
 		controller.roundsCompute(nbDeliveryMan);
 	}
 
+	/**
+	 * This method is called when the user click on the Add Delivery Button
+	 */
 	public void clickAddDelivery() {
 		controller.add();
 	}
 
+	/**
+	 * This method is called when the user click on the Stop Compute Button
+	 */
 	public void clickStopAlgo() {
 		controller.stopAlgo();
 	}
 
+	/**
+	 * This method is called when the user click on the Undo Button
+	 */
 	public void undo() {
 		controller.undo();
 	}
 
+	/**
+	 * This method is called when the user click on the Redo Button
+	 */
 	public void redo() {
 		controller.redo();
 	}
 
+	/**
+	 * This method is called when the user click on the discard Button
+	 */
 	public void discardChanges() {
 		controller.discardChanges();
 	}
 
+	/**
+	 * This method is called when the user click on the Export Button
+	 */
 	public void clickExport() {
 		controller.export();
 	}
 
+	/**
+	 * This method is called when the user click on the Move Button
+	 */
 	public void clickMove() {
 		controller.buttonMove();
 	}
 
+	/**
+	 * Display city map on text and graphic view
+	 * @param map
+	 */
 	public void printCityMap(CityMap map) {
 		tv.clearTextView();
 		gv.drawCityMap(map);
 	}
 
+	/**
+	 * Display delivery request on graphic and text view
+	 * @param map
+	 * @param delivReq
+	 */
 	public void printDeliveryRequest(CityMap map, DeliveryRequest delivReq) {
 		gv.drawDeliveryRequest(delivReq);
 		tv.printDeliveryRequest(map, delivReq);
 	}
 
+	/**
+	 * Draw intersections on graphic view that are visible when the user hover the points
+	 * @param map
+	 * @param deliveryRequest
+	 */
 	public void printPotentielDeliveries(CityMap map, DeliveryRequest deliveryRequest) {
 		gv.drawIntersections(map, deliveryRequest);
 	}
 
+	/**
+	 * Display the computed round set on the graphic and text view
+	 * @param map
+	 * @param result
+	 */
 	public void printRoundSet(CityMap map, RoundSet result) {
 		gv.drawRoundSet(result);
 		tv.printRoundSet(map, result);
 	}
 
+	/**
+	 * Display the loader for in progress computing
+	 * @param b
+	 */
 	public void setLoader(boolean b) {
 		if(b) {
 			loader.setVisible(true);
@@ -266,19 +333,36 @@ public class MainView implements Initializable {
 		}
 	}
 
+	/**
+	 * Display highlighted delivery on text and graphic view
+	 * @param delivery
+	 */
 	public void setDeliverySelected(Delivery delivery) {
 		gv.setDeliverySelected(delivery);
 		tv.setDeliverySelected(delivery);
 	}
 
+	/**
+	 * Display highlighted intersection on text and graphic view
+	 * @param intersection
+	 */
 	public void setIntersectionSelected(Intersection intersection) {
 		gv.setIntersectionSelected(intersection);
 	}
 
+	/**
+	 * Display a message in the bottom info bar
+	 * @param string
+	 */
 	public void printMessage(String string) {
 		infoBar.setText(string);
 	}
 
+	/**
+	 * Create a blocking warning popup to inform user
+	 * @param header
+	 * @param content
+	 */
 	public void displayMessage(String header, String content) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Warning");
@@ -289,6 +373,12 @@ public class MainView implements Initializable {
 
 	}
 
+	/**
+	 * Display popup asking for a roundSet to choose
+	 * @param nbRounds
+	 * @param next
+	 * @return
+	 */
 	public int displayPopUpWarehouse(int nbRounds, boolean next) {
 		List<Integer> choices = new ArrayList<>();
 		for (int i = 0; i < nbRounds; i++) {
@@ -316,6 +406,11 @@ public class MainView implements Initializable {
 		return -1;
 	}
 
+	/**
+	 * Display popup add asking delivery duration
+	 * @param header
+	 * @return
+	 */
 	public int displayPopUpAdd(String header) {
 		int duration = -1;
 		TextInputDialog dialog = new TextInputDialog("60");
@@ -336,6 +431,11 @@ public class MainView implements Initializable {
 		return duration;
 	}
 
+	/**
+	 * Display popup asking confirmation
+	 * @param msg
+	 * @return
+	 */
 	public boolean displayPopUpConfirmation(String msg) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		ButtonType buttonCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
@@ -352,18 +452,19 @@ public class MainView implements Initializable {
 		}
 	}
 
-	public void zoomIn() {
-		gv.zoomIn();
-	}
 
-	public void zoomOut() {
-		gv.zoomOut();
-	}
-
+	/**
+	 * Method called when user click on Auto Zoom Button
+	 */
 	public void zoomAuto() {
 		gv.zoomAuto();
 	}
 
+	/**
+	 * Enable click on MapButton if b is true else disable click and set the image with gray scale
+	 * 
+	 * @param b
+	 */
 	public void setMapButtonEnable(boolean b) {
 		mapButton.setDisable(!b);
 
@@ -378,6 +479,10 @@ public class MainView implements Initializable {
 		}
 	}
 
+	/**
+	 * Enable click on DeliveryButton if b is true else disable click and set the image with gray scale
+	 * @param b
+	 */
 	public void setDeliveryButtonEnable(boolean b) {
 		deliveryButton.setDisable(!b);
 
@@ -392,6 +497,10 @@ public class MainView implements Initializable {
 		}
 	}
 
+	/**
+	 * Enable click on Compute Button if b is true else disable click and set the image with gray scale
+	 * @param b
+	 */
 	public void setComputeButtonEnable(boolean b) {
 		computeButton.setDisable(!b);
 
@@ -406,6 +515,10 @@ public class MainView implements Initializable {
 		}
 	}
 
+	/**
+	 * Enable click on Add Button if b is true else disable click and set the image with gray scale
+	 * @param b
+	 */
 	public void setAddButtonEnable(boolean b) {
 		addButton.setDisable(!b);
 
@@ -420,6 +533,10 @@ public class MainView implements Initializable {
 		}
 	}
 
+	/**
+	 * Enable click on Delete Button if b is true else disable click and set the image with gray scale
+	 * @param b
+	 */
 	public void setDeleteButtonEnable(boolean b) {
 		deleteButton.setDisable(!b);
 
@@ -434,6 +551,10 @@ public class MainView implements Initializable {
 		}
 	}
 
+	/**
+	 * Enable click on Move Button if b is true else disable click and set the image with gray scale
+	 * @param b
+	 */
 	public void setMoveButtonEnable(boolean b) {
 		moveButton.setDisable(!b);
 
@@ -448,6 +569,10 @@ public class MainView implements Initializable {
 		}
 	}
 
+	/**
+	 * Enable click on Cancel Button if b is true else disable click and set the image with gray scale
+	 * @param b
+	 */
 	public void setCancelButtonEnable(boolean b) {
 		cancelButton.setDisable(!b);
 
@@ -462,6 +587,10 @@ public class MainView implements Initializable {
 		}
 	}
 
+	/**
+	 * Enable click on Stop Button if b is true else disable click and set the image with gray scale
+	 * @param b
+	 */
 	public void setStopButtonEnable(boolean b) {
 		stopButton.setDisable(!b);
 
@@ -476,6 +605,10 @@ public class MainView implements Initializable {
 		}
 	}
 
+	/**
+	 * Enable click on Undo Button if b is true else disable click and set the image with gray scale
+	 * @param b
+	 */
 	public void setUndoButtonEnable(boolean b) {
 		undoButton.setDisable(!b);
 
@@ -490,6 +623,10 @@ public class MainView implements Initializable {
 		}
 	}
 
+	/**
+	 * Enable click on Redo Button if b is true else disable click and set the image with gray scale
+	 * @param b
+	 */
 	public void setRedoButtonEnable(boolean b) {
 		redoButton.setDisable(!b);
 
@@ -504,6 +641,10 @@ public class MainView implements Initializable {
 		}
 	}
 
+	/**
+	 * Enable click on Discard Button if b is true else disable click and set the image with gray scale
+	 * @param b
+	 */
 	public void setDiscardButtonEnable(boolean b) {
 		discardButton.setDisable(!b);
 
@@ -522,6 +663,10 @@ public class MainView implements Initializable {
 		gv.setRoundSelected(roundSet, delivery, flag);
 	}
   
+	/**
+	 * Enable click on Export Button if b is true else disable click and set the image with gray scale
+	 * @param b
+	 */
 	public void setExportButtonEnable(boolean b) {
 		exportButton.setDisable(!b);
 
@@ -536,6 +681,10 @@ public class MainView implements Initializable {
 		}
 	}
 	
+	/**
+	 * Enable click on Zoom Auto if b is true else disable click and set the image with gray scale
+	 * @param b
+	 */
 	public void setZoomAutoButtonsEnable(boolean b) {
 		zoomAutoButton.setDisable(!b);
 
@@ -550,6 +699,10 @@ public class MainView implements Initializable {
 		}
 	}
 
+	/**
+	 * Enable click on Delivery Man selection combo box if b is true else disable click
+	 * @param b
+	 */
 	public void setDeliveryManEnable(boolean b) {
 		deliveryMan.setDisable(!b);
 
@@ -560,6 +713,11 @@ public class MainView implements Initializable {
 				.position(Pos.TOP_RIGHT).owner(this.pane).showInformation();
 	}
 	
+	/**
+	 * Display feedback notification
+	 * @param title
+	 * @param text
+	 */
 	public void showNotificationCheck(String title, String text) {
 		Image img = new Image("/images/checked.png");
 		Notifications.create().darkStyle().title(title).text(text).graphic(new ImageView(img)).hideAfter(Duration.seconds(3))

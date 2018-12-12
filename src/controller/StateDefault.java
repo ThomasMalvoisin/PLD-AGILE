@@ -21,10 +21,16 @@ import xml.MapDeserializer;
 public class StateDefault implements State {
 
 	
+	/* (non-Javadoc)
+	 * @see controller.State#setButtonsEnabled(view.MainView)
+	 */
 	@Override
 	public void setButtonsEnabled(MainView mainView) {
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.State#loadMap(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void loadMap(MainView mainView, CityMap cityMap,DeliveryRequest delivReq, RoundSet result){
 		FileChooser fileChooser = new FileChooser();
@@ -49,72 +55,123 @@ public class StateDefault implements State {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.State#loadDeliveryRequest(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result){
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.State#roundsCompute(view.MainView, model.CityMap, model.DeliveryRequest, int, model.RoundSet, controller.ListCommands)
+	 */
 	@Override
 	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan, RoundSet roundSet, ListCommands listeDeCdes) {
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.State#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.State#selectDelivery(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Delivery, controller.ListCommands)
+	 */
 	@Override
 	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet, Delivery delivery, ListCommands listeDeCdes) {		
 	}
 	
+	/* (non-Javadoc)
+	 * @see controller.State#selectWarehouse(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Intersection, controller.ListCommands)
+	 */
 	@Override
 	public void selectWarehouse(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet, Intersection i, ListCommands listeDeCdes) {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.State#delete(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, controller.ListCommands)
+	 */
 	@Override
 	public void delete(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet, ListCommands listeDeCdes) {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.State#selectIntersection(view.MainView, model.Intersection)
+	 */
 	@Override
 	public void selectIntersection(MainView mv,Intersection i) {
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.State#add(view.MainView)
+	 */
 	@Override
 	public void add(MainView mv) {
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.State#cancel(view.MainView, model.RoundSet)
+	 */
 	@Override
-  public void cancel(MainView mainView, RoundSet roundSet) {
-  }
+	public void cancel(MainView mainView, RoundSet roundSet) {
+	}
   
-  @Override
+	/* (non-Javadoc)
+	 * @see controller.State#exportRoundSet(view.MainView, model.RoundSet)
+	 */
+	@Override
 	public void exportRoundSet(MainView mainView, RoundSet roundSet) {	
-  }
+	}
   
+	/* (non-Javadoc)
+	 * @see controller.State#undo(controller.ListCommands, view.MainView)
+	 */
 	@Override
 	public void undo(ListCommands listeDeCdes, MainView mainView) {
 	}
 	
-	@Override
+	/* (non-Javadoc)
+	 * @see controller.State#redo(controller.ListCommands, view.MainView)
+	 */
+	@Override		
 	public void redo(ListCommands listeDeCdes, MainView mainView) {
 	}
 	
+	/* (non-Javadoc)
+	 * @see controller.State#discardChanges(controller.ListCommands)
+	 */
 	@Override
 	public void discardChanges(ListCommands listeDeCdes) {
 	}
 	
+	/* (non-Javadoc)
+	 * @see controller.State#stopAlgo()
+	 */
 	@Override
 	public void stopAlgo() {
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.State#move(view.MainView)
+	 */
 	@Override
 	public void move(MainView mainView) {	
 	}
 	
+	/* (non-Javadoc)
+	 * @see controller.State#hoverIntersection(view.MainView, model.CityMap, model.Intersection)
+	 */
 	@Override
 	public void hoverIntersection(MainView mv, CityMap map, Intersection i) {	
 	}
 	
+	/* (non-Javadoc)
+	 * @see controller.State#exitIntersection(view.MainView)
+	 */
 	@Override
 	public void exitIntersection(MainView mv) {
 		

@@ -30,6 +30,9 @@ import xml.ExceptionXML;
 
 public class StateRoundCalculated extends StateDefault {
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#setButtonsEnabled(view.MainView)
+	 */
 	@Override
 	public void setButtonsEnabled(MainView mainView) {
 		mainView.setAddButtonEnable(true);
@@ -48,6 +51,9 @@ public class StateRoundCalculated extends StateDefault {
 		mainView.setZoomAutoButtonsEnable(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#loadDeliveryRequest(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result) {
 		FileChooser fileChooser = new FileChooser();
@@ -76,6 +82,9 @@ public class StateRoundCalculated extends StateDefault {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#roundsCompute(view.MainView, model.CityMap, model.DeliveryRequest, int, model.RoundSet, controller.ListCommands)
+	 */
 	@Override
 	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan,
 			RoundSet roundSet, ListCommands listeDeCdes) {
@@ -134,6 +143,9 @@ public class StateRoundCalculated extends StateDefault {
 		Controller.setCurrentState(Controller.stateRoundCalculating);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);
@@ -142,6 +154,9 @@ public class StateRoundCalculated extends StateDefault {
 		mainView.printPotentielDeliveries(cityMap, deliveryRequest);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#selectDelivery(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Delivery, controller.ListCommands)
+	 */
 	@Override
 	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
 			Delivery delivery, ListCommands listeDeCdes) {
@@ -156,6 +171,9 @@ public class StateRoundCalculated extends StateDefault {
 		Controller.setCurrentState(Controller.stateModify);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#add(view.MainView)
+	 */
 	@Override
 	public void add(MainView mv) {
 		mv.printMessage("Please select the point where you want to add a delivery... ");
@@ -163,20 +181,29 @@ public class StateRoundCalculated extends StateDefault {
 		Controller.setCurrentState(Controller.stateAdd1);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#undo(controller.ListCommands, view.MainView)
+	 */
 	@Override
 	public void undo(ListCommands listeDeCdes, MainView mainView) {
 		mainView.printMessage("");
 		listeDeCdes.undo();
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#redo(controller.ListCommands, view.MainView)
+	 */
 	@Override
 	public void redo(ListCommands listeDeCdes, MainView mainView) {
 		mainView.printMessage("");
 		listeDeCdes.redo();
 	}
 
-@Override
-public void exportRoundSet(MainView mainView, RoundSet roundSet) {
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#exportRoundSet(view.MainView, model.RoundSet)
+	 */
+	@Override
+	public void exportRoundSet(MainView mainView, RoundSet roundSet) {
 
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Export");
@@ -198,6 +225,9 @@ public void exportRoundSet(MainView mainView, RoundSet roundSet) {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#discardChanges(controller.ListCommands)
+	 */
 	@Override
 	public void discardChanges(ListCommands listeDeCdes) {
 		listeDeCdes.discard();

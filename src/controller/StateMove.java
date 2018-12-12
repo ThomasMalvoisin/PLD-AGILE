@@ -12,6 +12,9 @@ public class StateMove extends StateDefault{
 	
 	private Delivery deliveryToMove;
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#setButtonsEnabled(view.MainView)
+	 */
 	@Override
 	public void setButtonsEnabled(MainView mainView) {
 		mainView.setAddButtonEnable(false);
@@ -30,6 +33,9 @@ public class StateMove extends StateDefault{
 		mainView.setZoomAutoButtonsEnable(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);
@@ -37,6 +43,9 @@ public class StateMove extends StateDefault{
 		mainView.setDeliverySelected(this.deliveryToMove);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#selectDelivery(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Delivery, controller.ListCommands)
+	 */
 	@Override
 	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
 			Delivery delivery, ListCommands listeDeCdes) {
@@ -51,17 +60,13 @@ public class StateMove extends StateDefault{
 			mainView.displayMessage(null, "Cannot move this delivery!");
 			return;
 		}
-		/*boolean move = mainView.displayPopUpConfirmation("Are you sure to move this delivery?");
-		if(move) {
-			listeDeCdes.ajoute(new ComMove(map, roundSet, deliveryToMove, delivery, roundSet.getPreviousDelivery(deliveryToMove)));
-		}else {
-			cancel(mainView);
-			return;
-		}*/
 		Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 	
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#selectWarehouse(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Intersection, controller.ListCommands)
+	 */
 	@Override
 	public void selectWarehouse(MainView mv, CityMap map, DeliveryRequest delivReq, RoundSet result, Intersection i,  ListCommands listeDeCdes) {
 		mv.printMessage("");
@@ -110,6 +115,9 @@ public class StateMove extends StateDefault{
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#cancel(view.MainView, model.RoundSet)
+	 */
 	@Override
 	public void cancel(MainView mainView, RoundSet roundSet) {
 		this.deliveryToMove = null;
@@ -119,6 +127,9 @@ public class StateMove extends StateDefault{
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 	
+	/**Select a delivery
+	 * @param toMove
+	 */
 	public void actionDeliveriesSelected(Delivery toMove) {
 		this.deliveryToMove = toMove;
 	}

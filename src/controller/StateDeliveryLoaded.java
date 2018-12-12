@@ -25,6 +25,9 @@ import xml.ExceptionXML;
 
 public class StateDeliveryLoaded extends StateDefault {
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#setButtonsEnabled(view.MainView)
+	 */
 	@Override
 	public void setButtonsEnabled(MainView mainView) {
 		mainView.setAddButtonEnable(false);
@@ -43,6 +46,9 @@ public class StateDeliveryLoaded extends StateDefault {
 		mainView.setZoomAutoButtonsEnable(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#loadDeliveryRequest(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result) {
 		FileChooser fileChooser = new FileChooser();
@@ -71,6 +77,9 @@ public class StateDeliveryLoaded extends StateDefault {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#roundsCompute(view.MainView, model.CityMap, model.DeliveryRequest, int, model.RoundSet, controller.ListCommands)
+	 */
 	@Override
 	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan,
 			RoundSet roundSet, ListCommands listeDeCdes) {
@@ -145,12 +154,18 @@ public class StateDeliveryLoaded extends StateDefault {
 		Controller.setCurrentState(Controller.stateRoundCalculating);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);
 		mainView.printDeliveryRequest(cityMap, deliveryRequest);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#selectDelivery(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Delivery, controller.ListCommands)
+	 */
 	@Override
 	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
 			Delivery delivery, ListCommands listeDeCdes) {

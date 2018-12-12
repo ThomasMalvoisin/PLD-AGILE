@@ -13,6 +13,12 @@ public class ComDelete implements Command {
 	Delivery d;
 	Delivery deliveryBefore;
 	
+	/** Create command which delete a delivery from delivery request and roundSet
+	 * @param map the current city map
+	 * @param dr the delivery request to modify
+	 * @param rs the round set to modify
+	 * @param d the delivery to delete
+	 */
 	public ComDelete(CityMap map, DeliveryRequest dr, RoundSet rs, Delivery d) {
 		this.map=map;
 		this.dr=dr;

@@ -16,6 +16,14 @@ public class Round {
 	protected ArrayList<Delivery> deliveries;
 	protected List<Journey> journeys;
 
+	/**
+	 * Create a round with all the given components
+	 * @param duration
+	 * @param departureTime
+	 * @param arrivalTime
+	 * @param deliveries
+	 * @param journeys
+	 */
 	public Round(int duration, Date departureTime, Date arrivalTime, ArrayList<Delivery> deliveries,
 			List<Journey> journeys) {
 		super();
@@ -27,58 +35,103 @@ public class Round {
 		this.totalLength = 0;
 	}
 
+	/**
+	 * Create an empty round
+	 */
 	public Round() {
 		this.totalLength = 0;
 	}
 
+	/**
+	 * @return
+	 */
 	public double getDuration() {
 		return duration;
 	}
 
+	/**
+	 * @param duration
+	 */
 	public void setDuration(double duration) {
 		this.duration = duration;
 	}
 
+	/**
+	 * @return
+	 */
 	public Date getDepartureTime() {
 		return departureTime;
 	}
 
+	/**
+	 * @param departureTime
+	 */
 	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
 	}
 
+	/**
+	 * @return
+	 */
 	public Date getArrivalTime() {
 		return arrivalTime;
 	}
 
+	/**
+	 * @param arrivalTime
+	 */
 	public void setArrivalTime(Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
+	/**
+	 * @return
+	 */
 	public ArrayList<Delivery> getDeliveries() {
 		return deliveries;
 	}
 
+	/**
+	 * @param deliveries
+	 */
 	public void setDeliveries(ArrayList<Delivery> deliveries) {
 		this.deliveries = new ArrayList<Delivery>(deliveries);
 	}
 
+	/**
+	 * @return
+	 */
 	public List<Journey> getJourneys() {
 		return journeys;
 	}
 
+	/**
+	 * @param journeys
+	 */
 	public void setJourneys(List<Journey> journeys) {
 		this.journeys = journeys;
 	}
 
+	/**
+	 * @return
+	 */
 	public double getTotalLength() {
 		return totalLength;
 	}
 
+	/**
+	 * @param totalLength
+	 */
 	public void setTotalLength(double totalLength) {
 		this.totalLength = totalLength;
 	}
 
+	/**
+	 * Delete a delivery
+	 * @param map
+	 * @param d
+	 * @throws ExceptionAlgo
+	 */
 	public void deleteDelivery(CityMap map, Delivery d) throws ExceptionAlgo {
 
 		Intersection newStart = null;
@@ -119,6 +172,14 @@ public class Round {
 		}
 	}
 
+	/**
+	 * 
+	 * Add a delivery d to the Round and place it after the third parameter Delivery
+	 * @param map
+	 * @param d
+	 * @param deliveryBefore
+	 * @throws ExceptionAlgo
+	 */
 	public void addDelivery(CityMap map, Delivery d, Delivery deliveryBefore) throws ExceptionAlgo {
 		int deliveryBeforeIndex = deliveries.indexOf(deliveryBefore);
 		int journeyBetweenIndex = -1;
@@ -164,6 +225,9 @@ public class Round {
 		deliveries.add(deliveryBeforeIndex + 1, d);
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString () {
 		SimpleDateFormat sdfDate = new SimpleDateFormat("HH:mm:ss");
 		String a="Length of this round : "+Math.round(totalLength)/1000.0+" kilometer(s) \n";
@@ -203,6 +267,9 @@ public class Round {
 	
 	
 
+	/**
+	 * Compute the total duration of the round
+	 */
 	public void calculTime() {
 		long currentTime = departureTime.getTime();
 

@@ -11,6 +11,9 @@ public class StateRoundCalculating extends StateDefault {
 	Thread calculate;
 	Thread display;
 	
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#setButtonsEnabled(view.MainView)
+	 */
 	@Override
 	public void setButtonsEnabled(MainView mainView) {
 		mainView.setAddButtonEnable(false);
@@ -29,11 +32,17 @@ public class StateRoundCalculating extends StateDefault {
 		mainView.setZoomAutoButtonsEnable(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#stopAlgo()
+	 */
 	@Override
 	public void stopAlgo() {
 		calculate.stop();
 	}
 	
+	/* (non-Javadoc)
+	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
+	 */
 	@Override
 	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
 		mainView.printCityMap(cityMap);
@@ -42,6 +51,10 @@ public class StateRoundCalculating extends StateDefault {
 		mainView.printPotentielDeliveries(cityMap, deliveryRequest);
 	}
 	
+	/**
+	 * @param calculate
+	 * @param display
+	 */
 	protected void actionCalculate(Thread calculate, Thread display) {
 		this.calculate = calculate;
 		this.display = display;

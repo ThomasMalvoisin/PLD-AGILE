@@ -29,6 +29,7 @@ import model.Round;
 import model.RoundSet;
 import model.Section;
 
+
 public class GraphicView implements Observer {
 
 	Pane pane;
@@ -47,6 +48,10 @@ public class GraphicView implements Observer {
 
 	DeliveryPointsListener dpl;
 
+	/** 
+	 * Creates a graphic view, Affects a pane to the view and initializes the different groups of the view 
+	 * @param pane The pane to add to the graphic view
+	 */
 	public GraphicView(Pane pane) {
 		this.pane = pane;
 		this.deliveries = new Group();
@@ -69,6 +74,11 @@ public class GraphicView implements Observer {
 			
 	}
 
+	/** 
+	 * Sets an event on mouse dragging the view, translates the map to the mouse coordinates
+	 * @param mouseXPos abscissa of the mouse cursor
+	 * @param mouseYPos ordinate of the mouse cursor
+	 */
 	private void initDrag(double mouseXPos, double mouseYPos) {
 		pane.setOnMouseDragged(event -> {
 
@@ -79,10 +89,16 @@ public class GraphicView implements Observer {
 		});
 	}
 	
+	/** 
+	 * Clears the whole view
+	 */
 	public void clear() {
 		pane.getChildren().clear();
 	}
 
+	/** 
+	 * Removes the delivery request points from the view, also removes the rounds if existing
+	 */
 	public void clearDeliveryRequest() {
 		deliveries.getChildren().clear();
 		pane.getChildren().remove(deliveries);
@@ -93,6 +109,10 @@ public class GraphicView implements Observer {
 		pane.getChildren().remove(notDeliveriesIntersections);
 	}
 
+	/** 
+	 * Clears the view and draws the road sections of the city map
+	 * @param cityMap The city map
+	 */
 	public void drawCityMap(CityMap cityMap) {
 		clear();
 		this.map = cityMap;
@@ -101,6 +121,11 @@ public class GraphicView implements Observer {
 		}
 	}
 
+	/** 
+	 * Draws none visible intersections that are not deliveries, adds a listener on each intersection (the intersections will be used later to select an intersection)
+	 * @param cityMap The map on which print the delivery request
+	 * @param dr The delivery request to display
+	 */
 	public void drawIntersections(CityMap cityMap, DeliveryRequest dr) {
 		Map<Long, Intersection> listPotentialDeliveriesIntersections = cityMap.getNotDeliveriesIntersections(dr);
 		for (Entry<Long, Intersection> entry : listPotentialDeliveriesIntersections.entrySet()) {
@@ -115,6 +140,12 @@ public class GraphicView implements Observer {
 
 	}
 	
+	/** 
+	 * Converts a RoundSet object to a map of <section,List<color>> with all the sections 
+	 * of the round associated with the different colors passing by this section
+	 * @param rs The round set to convert
+	 * @return A map of <section,List<color>>
+	 */
 	public Map<Section, List<Color>> convertRoundSetToMap (RoundSet rs){
 		Map<Section, List<Color>> listeSection = new HashMap<Section, List<Color>>();
 		double arrowOpacity = 1.0;
@@ -164,6 +195,10 @@ public class GraphicView implements Observer {
 		return listeSection;
 	}
 
+	/** 
+	 * Draws the rounds from a RoundSet object (adds an observer on the roundSet) 
+	 * @param rs The round set to display
+	 */
 	public void drawRoundSet(RoundSet rs) {
 		drawDeliveryRequest(dr);
 		rs.addObserver(this);
@@ -171,6 +206,12 @@ public class GraphicView implements Observer {
 		Map<Section, List<Color>> listeSection = convertRoundSetToMap(rs);
 		drawRoundsFromMap(listeSection);
 	}
+	
+	/** 
+	 * Draws the rounds from a map of <section, color>, manages the case of multiple colors of the same section
+	 * by printing a section with different colors.
+	 * @param listeSection the map of <section, color> 
+	 */
 	void drawRoundsFromMap(Map<Section,List<Color>> listeSection) {
 		double x0, y0, x1, y1;
 		double size;
@@ -208,6 +249,10 @@ public class GraphicView implements Observer {
 		pane.getChildren().add(deliveriesIds);
 	}
 
+	/** 
+	 * Draws the warehouse and the delivery points of a delivery request (adds an observer on the delivery request)
+	 * @param deliveryRequest The delivery request to display
+	 */
 	public void drawDeliveryRequest(DeliveryRequest deliveryRequest) {
 		clearDeliveryRequest();
 		deliveryRequest.addObserver(this);
@@ -222,11 +267,20 @@ public class GraphicView implements Observer {
 	}
 
 	
+	/** 
+	 * Draws a section
+	 * @param sec The section to draw
+	 */
 	private void drawSection(Section sec) {
 		Line l = drawLine(geoToCoord(sec.getOrigin()), geoToCoord(sec.getDestination()), 1, Color.WHITE, 0, 1);
 		pane.getChildren().add(l);
 	}
 
+	/** 
+	 * Extracts coordinates from an intersection object
+	 * @param i The intersection
+	 * @return The coordinates of the intersection
+	 */
 	private double[] geoToCoord(Intersection i) {
 		double[] result = new double[2];
 		Bounds bounds = pane.getBoundsInLocal();
@@ -239,6 +293,15 @@ public class GraphicView implements Observer {
 		return result;
 	}
 
+	/** 
+	 * Creates line of a certain color, width and opacity  
+	 * @param departure Coordinates of the start of the line 
+	 * @param arrival Coordinates of the end of the line
+	 * @param width Width of the line
+	 * @param p Color of the line 
+	 * @param pacity Opacity of the line
+	 * @return The line
+	 */
 	private Line drawLine(double[] departure, double[] arrival, double width, Paint p, double delta, double opacity) {
 		Line l = new Line(departure[0] , departure[1] , arrival[0] , arrival[1] );
 		l.setOpacity(opacity);
@@ -247,6 +310,16 @@ public class GraphicView implements Observer {
 		
 		return l;
 	}
+	
+	/** 
+	 * Creates an arrow in the middle of a line of a certain color, width and opacity  
+	 * @param departure Coordinates of the start of the line 
+	 * @param arrival Coordinates of the end of the line
+	 * @param width Width of the arrow lines
+	 * @param p Color of the arrow 
+	 * @param opacity Opacity of the arrow
+	 * @return the two sections of line of the arrow created
+	 */
 	private Line[] drawArrow(double[] departure, double[] arrival, double width, Paint p, double opacity) {
 		//    D
 		//    |\
@@ -284,6 +357,10 @@ public class GraphicView implements Observer {
 	
 	
 
+	/** 
+	 * Draws a not visible intersection and adds a listener on it 
+	 * @param i The intersection to draw
+	 */
 	private void drawIntersectionPoint(Intersection i) {
 		Circle c = new Circle(geoToCoord(i)[0], geoToCoord(i)[1], 5);
 		c.setFill(Color.WHITE);
@@ -294,6 +371,10 @@ public class GraphicView implements Observer {
 		c.addEventHandler(MouseEvent.ANY, dpl);
 	}
 
+	/** 
+	 * Draws a delivery point of color red, adds a listener on it
+	 * @param d The delivery to draw
+	 */
 	public void drawDeliveryPoint(Delivery d) {
 //		drawPoint(geoToCoord(d.getAdress()),5, Color.RED, d);
 		double[] coord = geoToCoord(d.getAdress());
@@ -307,6 +388,10 @@ public class GraphicView implements Observer {
 		c.addEventHandler(MouseEvent.ANY, dpl);
 	}
 
+	/** 
+	 * Draws the circle of the warehouse of color green, adds a listener on it 
+	 * @param i The warehouse intersection
+	 */
 	public void drawWarehousePoint(Intersection i) {
 //		drawPoint(geoToCoord(i),8, Color.FORESTGREEN, null);
 		Circle c = makePoint(geoToCoord(i), 7, Color.FORESTGREEN);
@@ -314,6 +399,13 @@ public class GraphicView implements Observer {
 		c.addEventHandler(MouseEvent.ANY, dpl);
 	}
 
+	/** 
+	 * Creates a circle from coordinates, a radius and a color, and adds it to deliveries
+	 * @param point Table of the circle's coordinates 
+	 * @param radius The radius of the circle
+	 * @param p The color of the circle
+	 * @return The circle
+	 */
 	private Circle makePoint(double[] point, double radius, Paint p) {
 		Circle c = new Circle(point[0], point[1], radius);
 		c.setFill(p);
@@ -322,6 +414,10 @@ public class GraphicView implements Observer {
 		return c;
 	}
 
+	/** 
+	 * Sets the delivery selected by changing its color to aqua-blue and increasing its length
+	 * @param d The delivery to select
+	 */
 	public void setDeliverySelected(Delivery d) {
 		for (Node n : deliveries.getChildren()) {
 			if (d != null && d.equals(n.getProperties().get("DELIVERY"))) {
@@ -338,6 +434,10 @@ public class GraphicView implements Observer {
 		}
 	}
 
+	/** 
+	 * Sets the intersection selected by printing it in blue 
+	 * @param i The intersection object to select
+	 */
 	public void setIntersectionSelected(Intersection i) {
 		for (Node n : notDeliveriesIntersections.getChildren()) {
 			if (i != null && i.equals(n.getProperties().get("INTERSECTION"))) {
@@ -354,6 +454,11 @@ public class GraphicView implements Observer {
 		}
 	}
 
+	/** 
+	 * Adds a line to the rounds group
+	 * @param color The color of the line 
+	 * @param line The line to add
+	 */
 	public void addLineToRounds (Color color, Line line)
 	{
 		if (!rounds.containsKey(color)) {
@@ -364,11 +469,20 @@ public class GraphicView implements Observer {
 			rounds.get(color).getChildren().add(line);
 		}
 	}
+	
+	/** 
+	 * Removes the round of a certain color from the display pane
+	 * @param color The color of the round to clear from display
+	 */
 	public void clearRound(Color color)
 	{
 		rounds.get(color).getChildren().clear();
 		pane.getChildren().remove(rounds.get(color));
 	}
+	
+	/** 
+	 * Removes all the rounds from the display pane 
+	 */
 	public void clearRounds()
 	{
 		for(Entry<Color, Group> entry : rounds.entrySet())
@@ -378,6 +492,12 @@ public class GraphicView implements Observer {
 		}
 	}
 	
+	/** 
+	 * Sets a round of a delivery selected by highlighting it (increases its length and sends it to front) 
+	 * @param roundSet the current result round set 
+	 * @param delivery the delivery of the round to select or unselect
+	 * @param flag if true select the round, if false unselect it
+	 */
 	public void setRoundSelected(RoundSet roundSet, Delivery delivery, boolean flag) {
 		ArrayList<Round> rs = roundSet.getRounds();
 		int i = 0;
@@ -412,25 +532,9 @@ public class GraphicView implements Observer {
 		pane.getChildren().add(deliveries);
 	}
 	
-	public void zoomIn() {
-		
-		pane.setScaleX(pane.getScaleX() + 0.4);
-		pane.setScaleY(pane.getScaleY() + 0.4);
-		
-	}
-	
-	public void zoomOut() {
-		
-		if(pane.getScaleX() - 0.4 < 1) {
-			
-			return;
-		}
-		
-		
-		pane.setScaleX(pane.getScaleX() - 0.4);
-		pane.setScaleY(pane.getScaleY() - 0.4);
-	}
-	
+	/** 
+	 * Resets the initial zoom of the map
+	 */
 	public void zoomAuto() {
 		pane.setScaleX(1);
 		pane.setScaleY(1);
@@ -439,6 +543,12 @@ public class GraphicView implements Observer {
 		
 	}
 	
+	/** 
+	 * Zooms in or out on the point of coordinates (xFocus, yFocus) by zoomFactor
+	 * @param zoomFactor the zoom factor
+	 * @param xFocus abscissa of the point to focus on  
+	 * @param yFocus ordinate of the point to focus on  
+	 */
 	public void zoom(double zoomFactor, double xFocus, double yFocus) {
 		
 		if(pane.getScaleX() + zoomFactor < 1) {
@@ -454,10 +564,17 @@ public class GraphicView implements Observer {
 	}
 	
 	
+	/**
+	 * Applies the delivery points listener on this
+	 * @param dpl the DeliveryPointsListener object
+	 */
 	public void setDeliveryPointsListener(DeliveryPointsListener dpl) {
 		this.dpl = dpl;
 	}
 
+	/**
+	 * Method called by object observed by this each time they are modified
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		drawDeliveryRequest(dr);
