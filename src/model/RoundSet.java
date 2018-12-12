@@ -103,6 +103,7 @@ public class RoundSet extends Observable {
 	}
 
 	public void calculTime() {
+		duration = -1;
 		for (Round r : rounds) {
 			r.setDepartureTime(this.getDepartureTime());
 			r.calculTime();

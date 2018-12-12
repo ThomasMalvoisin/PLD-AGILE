@@ -262,8 +262,9 @@ public class CityMap{
 	 * @param request
 	 * 		The delivery request containing the points on which the computation will occur
 	 * @return a Map of Map of Journeys m, where m[i][j] is the shortest journey in the map to go from i to j, where i and j are the IDs of the address of the delivery points or the ID of the warehouse
+	 * @throws ExceptionAlgo 
 	 */
-	public Map<Long, Map<Long, Journey>> GetShortestJourneys (DeliveryRequest request) {
+	public Map<Long, Map<Long, Journey>> GetShortestJourneys (DeliveryRequest request) throws ExceptionAlgo {
 			//Map<origin,Map<destination,path>>
 		  	Map<Long, Map<Long, Journey>> reducedMap = new HashMap<Long, Map<Long, Journey>>();
 			ArrayList<Intersection> intersectionList = new ArrayList<Intersection>();
@@ -276,7 +277,6 @@ public class CityMap{
 				//System.out.println(i.getId());
 			
 				reducedMap.put(i.getId(), dijkstraOneToN(i, intersectionList));
-				
 				
 			}
 			return reducedMap;
