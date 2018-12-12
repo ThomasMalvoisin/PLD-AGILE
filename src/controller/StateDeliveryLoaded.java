@@ -57,6 +57,8 @@ public class StateDeliveryLoaded extends StateDefault {
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
 				mainView.printDeliveryRequest(cityMap, deliveryRequest);
 				result.reset();
+				mainView.printMessage("Delivery Request Loaded ! You can now choose the number of delivery men and compute the rounds.");
+				mainView.showNotificationCheck("Delivery Request", "A delivery request has been loaded successfully !");
 				Controller.stateDeliveryLoaded.setButtonsEnabled(mainView);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
@@ -122,17 +124,22 @@ public class StateDeliveryLoaded extends StateDefault {
 					roundSet.reset();
 					mainView.setLoader(false);
 					mainView.displayMessage("Unable to calculate rounds", "This delivery request contains unreachable delivery point");
+					mainView.printMessage("Please load another delivery request and try again..");
 				});
 				Controller.stateDeliveryLoaded.setButtonsEnabled(mainView);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			}
 			else {
-        Platform.runLater(()-> mainView.setLoader(false));
-			  Controller.stateRoundCalculated.setButtonsEnabled(mainView);
+				Platform.runLater(()->{
+					mainView.setLoader(false);
+					mainView.printMessage("Press Add to add a delivery or Select a delivery to delete or move it.");
+				});
+        		Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 				Controller.setCurrentState(Controller.stateRoundCalculated);
 			}
 
 		});
+		Platform.runLater(()->mainView.printMessage("Calculating..."));
 		Controller.stateRoundCalculating.actionCalculate(calculate, display);
 		Controller.stateRoundCalculating.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculating);

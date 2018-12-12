@@ -44,7 +44,8 @@ public class StateMove extends StateDefault{
 
 		try {
 			listeDeCdes.ajoute(new ComMove(map, roundSet, deliveryToMove, delivery, roundSet.getPreviousDelivery(deliveryToMove)));
-      mainView.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the delivery point " + delivery.getId() + " correctly");
+			mainView.printMessage("Delivery moved ! Press Add to add a delivery or Select a delivery to delete or move it. ");
+			mainView.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the delivery point " + delivery.getId() + " correctly");
 		} catch (ExceptionAlgo e) {
 			cancel(mainView, roundSet);	
 			mainView.displayMessage(null, "Cannot move this delivery!");
@@ -74,7 +75,8 @@ public class StateMove extends StateDefault{
 				delivery=result.getRounds().get(indexRound).getDeliveries().get(0);
 				try {
 					listeDeCdes.ajoute(new ComMove(map, result, deliveryToMove, delivery, result.getPreviousDelivery(deliveryToMove)));
-          mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse in the round " + indexRound + 1 + " correctly");
+					mv.printMessage("Delivery moved ! Press Add to add a delivery or Select a delivery to delete or move it. ");
+					mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse in the round " + indexRound + 1 + " correctly");
 				} catch (ExceptionAlgo e) {
 					cancel(mv, result);	
 					mv.displayMessage(null, "Cannot move this delivery!");
@@ -91,7 +93,8 @@ public class StateMove extends StateDefault{
 				delivery=result.getRounds().get(0).getDeliveries().get(0);
 				try {
 					listeDeCdes.ajoute(new ComMove(map, result, deliveryToMove, delivery, result.getPreviousDelivery(deliveryToMove)));
-          mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse correctly");
+					mv.printMessage("Delivery moved ! Press Add to add a delivery or Select a delivery to delete or move it. ");
+					mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse correctly");
 				} catch (ExceptionAlgo e) {
 					cancel(mv, result);	
 					mv.displayMessage(null, "Cannot move this delivery!");
@@ -109,9 +112,9 @@ public class StateMove extends StateDefault{
 
 	@Override
 	public void cancel(MainView mainView, RoundSet roundSet) {
-	  mainView.printMessage("");
 		this.deliveryToMove = null;
 		mainView.setDeliverySelected(null);
+		mainView.printMessage("Canceled ! Press Add to add a delivery or Select a delivery to delete or move it. ");
 		Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}

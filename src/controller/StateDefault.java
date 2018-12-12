@@ -38,6 +38,8 @@ public class StateDefault implements State {
 				mainView.printCityMap(cityMap);
 				delivReq.reset();
 				result.reset();
+				mainView.printMessage("Map Loaded ! Please load a delivery request or load another map.");
+				mainView.showNotificationCheck("Map Loaded", "A map has been loaded successfully !");
 				Controller.stateMapLoaded.setButtonsEnabled(mainView);
 				Controller.setCurrentState(Controller.stateMapLoaded);
 			} catch (ParserConfigurationException | SAXException | IOException | ExceptionXML e) {
@@ -90,11 +92,11 @@ public class StateDefault implements State {
   }
   
 	@Override
-	public void undo(ListCommands listeDeCdes) {
+	public void undo(ListCommands listeDeCdes, MainView mainView) {
 	}
 	
 	@Override
-	public void redo(ListCommands listeDeCdes) {
+	public void redo(ListCommands listeDeCdes, MainView mainView) {
 	}
 	
 	@Override

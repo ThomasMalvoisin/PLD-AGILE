@@ -53,6 +53,8 @@ public class StateMapLoaded extends StateDefault {
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
 				mainView.printDeliveryRequest(cityMap, deliveryRequest);
 				result.reset();
+				mainView.printMessage("Delivery Request Loaded ! You can now choose the number of delivery men and compute the rounds.");
+				mainView.showNotificationCheck("Delivery Request", "A delivery request has been loaded successfully !");
 				Controller.stateDeliveryLoaded.setButtonsEnabled(mainView);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML

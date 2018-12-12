@@ -32,9 +32,9 @@ public interface State {
 
 	public void delete(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet, ListCommands listeDeCdes);
 	
-	public void undo(ListCommands listeDeCdes);
+	public void undo(ListCommands listeDeCdes, MainView mainView);
 	
-	public void redo(ListCommands listeDeCdes);
+	public void redo(ListCommands listeDeCdes, MainView mainView);
 	
 	public void cancel(MainView mainView, RoundSet roundSet);
   

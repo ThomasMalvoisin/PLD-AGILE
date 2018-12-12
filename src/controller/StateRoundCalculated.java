@@ -62,6 +62,8 @@ public class StateRoundCalculated extends StateDefault {
 				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
 				mainView.printDeliveryRequest(cityMap, deliveryRequest);
 				result.reset();
+				mainView.printMessage("Delivery Request Loaded ! You can now choose the number of delivery men and compute the rounds.");
+				mainView.showNotificationCheck("Delivery Request", "A delivery request has been loaded successfully !");
 				Controller.stateDeliveryLoaded.setButtonsEnabled(mainView);
 				Controller.setCurrentState(Controller.stateDeliveryLoaded);
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
@@ -119,10 +121,14 @@ public class StateRoundCalculated extends StateDefault {
 					roundSet.copy(roundsTemp);
 				});
 			}
-			Platform.runLater(()-> mainView.setLoader(false));
+			Platform.runLater(()->{
+					mainView.setLoader(false);
+					mainView.printMessage("Press Add to add a delivery or Select a delivery to delete or move it.");
+			});
 			Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 			Controller.setCurrentState(Controller.stateRoundCalculated);
 		});
+		Platform.runLater(()->mainView.printMessage("Calculating..."));
 		Controller.stateRoundCalculating.actionCalculate(calculate, display);
 		Controller.stateRoundCalculating.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculating);
@@ -144,6 +150,7 @@ public class StateRoundCalculated extends StateDefault {
 
 		mainView.setDeliverySelected(delivery);
 		mainView.setRoundSelected(roundSet, delivery, true);
+		mainView.printMessage("You can Delete or Move this delivery. Press Cancel or right click to cancel.");
 		Controller.stateModify.actionDeliverySelected(delivery);
 		Controller.stateModify.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateModify);
@@ -157,12 +164,14 @@ public class StateRoundCalculated extends StateDefault {
 	}
 
 	@Override
-	public void undo(ListCommands listeDeCdes) {
+	public void undo(ListCommands listeDeCdes, MainView mainView) {
+		mainView.printMessage("");
 		listeDeCdes.undo();
 	}
 
 	@Override
-	public void redo(ListCommands listeDeCdes) {
+	public void redo(ListCommands listeDeCdes, MainView mainView) {
+		mainView.printMessage("");
 		listeDeCdes.redo();
 	}
 
@@ -181,6 +190,7 @@ public void exportRoundSet(MainView mainView, RoundSet roundSet) {
 				fw = new FileWriter(file);
 				fw.write(roundSet.toString());
 				fw.close();
+				mainView.showNotificationCheck("File Exported", "The round set has been exported successfully !");
 			} catch (IOException e) {
 				mainView.displayMessage("Error occured", "An error occured. Please, try again");
 				e.printStackTrace();

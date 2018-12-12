@@ -47,7 +47,7 @@ public class StateAdd1 extends StateDefault {
 
 	@Override
 	public void cancel(MainView mainView, RoundSet roundSet) {
-		mainView.printMessage("");
+		mainView.printMessage("Canceled ! Press Add to add a delivery or Select a delivery to delete or move it. ");
 		Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}

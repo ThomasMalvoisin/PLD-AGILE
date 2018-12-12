@@ -79,11 +79,11 @@ public class Controller {
 	}
 	
 	public void undo(){
-		currentState.undo(listCdes);
+		currentState.undo(listCdes, mv);
 	}
 
 	public void redo(){
-		currentState.redo(listCdes);
+		currentState.redo(listCdes, mv);
 	}
 	
 	public void discardChanges(){
