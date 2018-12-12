@@ -33,14 +33,11 @@ public class Algorithms {
 	 * @param nbDeliveryMan
 	 * 		The number of delivery men
 	 */
-	public static void solveTSP (RoundSet rounds, CityMap map , DeliveryRequest request, int nbDeliveryMan) {
+	public static void solveTSP (RoundSet rounds, CityMap map , DeliveryRequest request, int nbDeliveryMan) throws ExceptionAlgo {
 		
-		Map<Long, Map<Long, Journey>> reducedMap = null;
-		try {
-			reducedMap = map.GetShortestJourneys(request);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Map<Long, Map<Long, Journey>> reducedMap;
+		
+		reducedMap = map.GetShortestJourneys(request);
 
 		
 		ArrayList<Delivery> visited = new ArrayList<Delivery>();

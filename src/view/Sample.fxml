@@ -73,6 +73,18 @@
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
+                                 	<VBox fx:id="deliveryMan" alignment="CENTER" prefHeight="48.0" prefWidth="95.0" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                       <children>
+                                          <ComboBox fx:id="deliveryManCombo" prefHeight="27.0" prefWidth="90.0">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin></ComboBox>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="90.0" text="Delivery Man">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin></Label>
+                                       </children>
+                                    </VBox>
                                     <StackPane fx:id="computeButtonLoader">
                                        <children>
                                           <VBox fx:id="loader" alignment="CENTER" visible="false">
@@ -96,18 +108,6 @@
                                           </VBox>
                                        </children>
                                     </StackPane>
-                                    <VBox fx:id="deliveryMan" alignment="CENTER" prefHeight="48.0" prefWidth="95.0" style="-fx-cursor: hand;" styleClass="toolbar-card">
-                                       <children>
-                                          <ComboBox fx:id="deliveryManCombo" prefHeight="27.0" prefWidth="90.0">
-                                             <VBox.margin>
-                                                <Insets top="10.0" />
-                                             </VBox.margin></ComboBox>
-                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="90.0" text="Delivery Man">
-                                             <VBox.margin>
-                                                <Insets top="10.0" />
-                                             </VBox.margin></Label>
-                                       </children>
-                                    </VBox>
                                     <VBox fx:id="stopButton" alignment="CENTER" onMouseClicked="#clickStopAlgo" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
                                           <ImageView fx:id="stopImage" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
@@ -239,9 +239,9 @@
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <VBox alignment="CENTER" onMouseClicked="#zoomAuto" prefHeight="58.0" prefWidth="63.0" style="-fx-cursor: hand;" styleClass="toolbar-card">
+                                    <VBox fx:id="zoomAutoButton" alignment="CENTER" onMouseClicked="#zoomAuto" prefHeight="58.0" prefWidth="63.0" style="-fx-cursor: hand;" styleClass="toolbar-card">
                                        <children>
-                                          <ImageView fitHeight="44.0" fitWidth="56.0" onMousePressed="#zoomAuto" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="zoomAutoImage" fitHeight="44.0" fitWidth="56.0" onMousePressed="#zoomAuto" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../images/zoomauto.png" />
                                              </image>

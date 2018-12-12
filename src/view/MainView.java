@@ -36,6 +36,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import model.CityMap;
 import model.Delivery;
@@ -122,7 +123,10 @@ public class MainView implements Initializable {
 	@FXML
 	ImageView exportImage;
 	
-	
+	@FXML
+	VBox zoomAutoButton;
+	@FXML
+	ImageView zoomAutoImage;
 
 	Controller controller;
 	ResizeListener rl;
@@ -169,6 +173,10 @@ public class MainView implements Initializable {
 				controller.redo();
 
 			}
+		});
+		
+		scene.getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, event -> {
+			controller.stopAlgo();
 		});
 
 		pane.setOnMouseClicked(event -> {
@@ -525,6 +533,20 @@ public class MainView implements Initializable {
 			ColorAdjust desaturate = new ColorAdjust();
 			desaturate.setSaturation(-1);
 			exportImage.setEffect(desaturate);
+		}
+	}
+	
+	public void setZoomAutoButtonsEnable(boolean b) {
+		zoomAutoButton.setDisable(!b);
+
+		if (b) {
+			ColorAdjust desaturate = new ColorAdjust();
+			desaturate.setSaturation(0);
+			zoomAutoImage.setEffect(desaturate);
+		} else {
+			ColorAdjust desaturate = new ColorAdjust();
+			desaturate.setSaturation(-1);
+			zoomAutoImage.setEffect(desaturate);
 		}
 	}
 

@@ -26,6 +26,7 @@ public class StateRoundCalculating extends StateDefault {
 		mainView.setDiscardButtonEnable(false);
 		mainView.setExportButtonEnable(false);
 		mainView.setDeliveryManEnable(false);
+		mainView.setZoomAutoButtonsEnable(true);
 	}
 
 	@Override

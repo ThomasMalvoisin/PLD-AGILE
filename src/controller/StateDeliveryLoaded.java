@@ -40,6 +40,7 @@ public class StateDeliveryLoaded extends StateDefault {
 		mainView.setDiscardButtonEnable(false);
 		mainView.setExportButtonEnable(false);
 		mainView.setDeliveryManEnable(true);
+		mainView.setZoomAutoButtonsEnable(true);
 	}
 
 	@Override
@@ -80,6 +81,7 @@ public class StateDeliveryLoaded extends StateDefault {
 		Thread calculate = new Thread(() -> {
 			try {
 				Algorithms.solveTSP(roundsTemp, map, delivReq, nbDeliveryMan);
+
 			} catch (Exception e) {
 				//System.out.println("exception-- "+roundsTemp.getRounds().size());
 				e.printStackTrace();

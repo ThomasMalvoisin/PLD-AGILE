@@ -17,8 +17,8 @@ public class StateMove extends StateDefault{
 		mainView.setAddButtonEnable(false);
  		mainView.setComputeButtonEnable(false);
  		mainView.setDeleteButtonEnable(false);
- 		mainView.setMapButtonEnable(true);
- 		mainView.setDeliveryButtonEnable(true);
+ 		mainView.setMapButtonEnable(false);
+ 		mainView.setDeliveryButtonEnable(false);
 		mainView.setCancelButtonEnable(true);
 		mainView.setMoveButtonEnable(false);
 		mainView.setStopButtonEnable(false);
@@ -27,6 +27,7 @@ public class StateMove extends StateDefault{
 		mainView.setDiscardButtonEnable(false);
 		mainView.setExportButtonEnable(false);
 		mainView.setDeliveryManEnable(false);
+		mainView.setZoomAutoButtonsEnable(true);
 	}
 
 	@Override

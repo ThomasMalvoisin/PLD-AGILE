@@ -11,6 +11,7 @@ public class RoundSet extends Observable {
 	protected double totalLength;
 	protected double duration;
 	protected Date departureTime;
+	protected Date arrivalTime;
 
 	public RoundSet() {
 		rounds = new ArrayList<Round>();
@@ -113,6 +114,7 @@ public class RoundSet extends Observable {
 			this.totalLength += r.getTotalLength();
 			if(duration==-1 || r.getDuration() > this.duration) {
 				this.duration = r.getDuration();
+				this.arrivalTime = r.getArrivalTime();
 			}
 		}
 	}
@@ -140,6 +142,10 @@ public class RoundSet extends Observable {
 		totalLength=0;
 		duration=0;
 		departureTime=null;
+	}
+
+	public Date getArrivalTime() {
+		return this.arrivalTime;
 	}
 }
 

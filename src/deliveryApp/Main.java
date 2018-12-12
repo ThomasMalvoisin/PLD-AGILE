@@ -18,9 +18,9 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/style/application.css").toExternalForm());
 			MainView mv = (MainView)loader.getController();
-			mv.postInitialize(scene);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			mv.postInitialize(scene);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

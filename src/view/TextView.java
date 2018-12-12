@@ -77,12 +77,6 @@ public class TextView implements Observer{
 		this.roundSet=roundSet;
 		this.map = map;
 		
-		/*Text warehousePane = new Text();
-		warehousePane.setText("Warehouse ");
-		warehousePane.setFill(Color.FORESTGREEN);
-		warehousePane.getStyleClass().add("delivery-text");
-		txtArea.getChildren().add(warehousePane);*/
-		
 		ArrayList<Round> rounds = roundSet.getRounds();
 		int r =  0;
 		for(Round round : rounds) {
@@ -95,6 +89,24 @@ public class TextView implements Observer{
 					if(i != 0) {
 						addDeliveryPoint(map, d,titledPaneContent,colors[r]);
 						titledPaneContent.getChildren().add(new Separator());
+					} else {
+						if(r == 0) {
+							VBox warehousePane = new VBox();
+							Intersection warehouse = d.getAdress();
+							addWarehouse(map, warehouse, warehousePane);
+							
+							String desc = "                      Departure : " + df.format(roundSet.getDepartureTime());
+							
+							desc +=  "\n                      ";
+							desc += "Duration  : " + (int)roundSet.getDuration()/60000 + " min";
+							desc +=  "\n                      ";
+							desc += "Arrival   : " + df.format(roundSet.getArrivalTime());
+							
+							Text warehouseDescription = new Text(desc);
+							warehouseDescription.setFill(Color.FORESTGREEN);
+							warehousePane.getChildren().add(warehouseDescription);
+							txtArea.getChildren().add(warehousePane);
+						}
 					}
 					i++;
 				}

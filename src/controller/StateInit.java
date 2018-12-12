@@ -19,6 +19,7 @@ public class StateInit extends StateDefault{
 		mainView.setDiscardButtonEnable(false);
 		mainView.setExportButtonEnable(false);
 		mainView.setDeliveryManEnable(false);
+		mainView.setZoomAutoButtonsEnable(false);
 	}
 	
 }

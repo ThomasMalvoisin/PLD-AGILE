@@ -32,42 +32,17 @@ public class StateModify extends StateDefault {
 		mainView.setAddButtonEnable(false);
  		mainView.setComputeButtonEnable(false);
  		mainView.setDeleteButtonEnable(true);
- 		mainView.setMapButtonEnable(true);
- 		mainView.setDeliveryButtonEnable(true);
+ 		mainView.setMapButtonEnable(false);
+ 		mainView.setDeliveryButtonEnable(false);
 		mainView.setCancelButtonEnable(true);
 		mainView.setMoveButtonEnable(true);
 		mainView.setStopButtonEnable(false);
-		mainView.setUndoButtonEnable(true);
-		mainView.setRedoButtonEnable(true);
-		mainView.setDiscardButtonEnable(true);
+		mainView.setUndoButtonEnable(false);
+		mainView.setRedoButtonEnable(false);
+		mainView.setDiscardButtonEnable(false);
 		mainView.setExportButtonEnable(false);
 		mainView.setDeliveryManEnable(false);
-	}
-
-	@Override
-	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open a delivery request");
-		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
-		File file = fileChooser.showOpenDialog(new Stage());
-
-		if (file != null) {
-			int temp = Delivery.currentId;
-			try {
-				Delivery.currentId = 1;
-				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
-				mainView.printDeliveryRequest(cityMap, deliveryRequest);
-				result.reset();
-				Controller.stateDeliveryLoaded.setButtonsEnabled(mainView);
-				Controller.setCurrentState(Controller.stateDeliveryLoaded);
-			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException | ExceptionXML
-					| ParseException e) {
-				Delivery.currentId = temp;
-				mainView.displayMessage("Unable to load delivery request",
-						"Please choose a valid delivery request file. Make sure that all the delivery point's locations are available in the current loaded map !");
-				e.printStackTrace();
-			}
-		}
+		mainView.setZoomAutoButtonsEnable(true);
 	}
 
 	@Override
