@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="controller.StateMapLoaded" project="Delivery" 
+    file="/Delivery/src/controller/StateMapLoaded.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1147" y="166"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="controller.Controller" project="Delivery" 
+    file="/Delivery/src/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="773" y="387"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="controller.ComMove" project="Delivery" 
+    file="/Delivery/src/controller/ComMove.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="450" y="366"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="controller.ComAdd" project="Delivery" file="/Delivery/src/controller/ComAdd.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="471" y="596"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="controller.StateModify" project="Delivery" 
+    file="/Delivery/src/controller/StateModify.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1895" y="460"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="controller.ComDelete" project="Delivery" 
+    file="/Delivery/src/controller/ComDelete.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="698" y="795"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="controller.ListCommands" project="Delivery" 
+    file="/Delivery/src/controller/ListCommands.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="571" y="-83"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="controller.CdeInverse" project="Delivery" 
+    file="/Delivery/src/controller/CdeInverse.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="412" y="33"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="controller.StateRoundCalculated" project="Delivery" 
+    file="/Delivery/src/controller/StateRoundCalculated.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1298" y="465"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="controller.StateDefault" project="Delivery" 
+    file="/Delivery/src/controller/StateDefault.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1742" y="-137"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="11" language="java" name="controller.Command" project="Delivery" 
+    file="/Delivery/src/controller/Command.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="550" y="181"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="12" language="java" name="controller.StateMove" project="Delivery" 
+    file="/Delivery/src/controller/StateMove.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2199" y="777"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="13" language="java" name="controller.State" project="Delivery" 
+    file="/Delivery/src/controller/State.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="934" y="-147"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="14" language="java" name="controller.StateDeliveryLoaded" project="Delivery" 
+    file="/Delivery/src/controller/StateDeliveryLoaded.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1711" y="181"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="controller.StateInit" project="Delivery" 
+    file="/Delivery/src/controller/StateInit.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2343" y="398"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="controller.StateRoundCalculating" project="Delivery" 
+    file="/Delivery/src/controller/StateRoundCalculating.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2197" y="203"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="controller.StateAdd2" project="Delivery" 
+    file="/Delivery/src/controller/StateAdd2.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1610" y="774"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="controller.StateAdd1" project="Delivery" 
+    file="/Delivery/src/controller/StateAdd1.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1112" y="741"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="19">    
+    <bendpoint x="1019" y="617"/>    
+    <bendpoint x="2150" y="616"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="20" name="stateInit">        
+        <position height="19" width="53" x="2242" y="444"/>      
+      </attribute>      
+      <multiplicity id="21" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <bendpoint x="787" y="641"/>    
+    <bendpoint x="900" y="641"/>    
+    <bendpoint x="900" y="856"/>    
+    <bendpoint x="1311" y="856"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="23" name="stateAdd2">        
+        <position height="19" width="65" x="1248" y="837"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="25">    
+    <bendpoint x="2341" y="342"/>    
+    <bendpoint x="2424" y="342"/>    
+    <bendpoint x="2423" y="1"/>    
+    <bendpoint x="2052" y="0"/>    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <generalization id="26">    
+    <bendpoint x="1106" y="637"/>    
+    <bendpoint x="2459" y="632"/>    
+    <bendpoint x="2457" y="-17"/>    
+    <bendpoint x="2052" y="-16"/>    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="27">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="28" name="list">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="29" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="30">    
+    <bendpoint x="1298" y="317"/>    
+    <bendpoint x="2391" y="315"/>    
+    <bendpoint x="2390" y="38"/>    
+    <bendpoint x="2045" y="38"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="31">    
+    <bendpoint x="776" y="654"/>    
+    <bendpoint x="876" y="654"/>    
+    <bendpoint x="876" y="880"/>    
+    <bendpoint x="1864" y="884"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="32" name="stateMove">        
+        <position height="19" width="67" x="1899" y="878"/>      
+      </attribute>      
+      <multiplicity id="33" minimum="0" maximum="1">        
+        <position height="17" width="26" x="1899" y="848"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="34">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <realization id="35">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <generalization id="36">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="37">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="38" name="cmd">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="39" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="40">    
+    <bendpoint x="2194" y="666"/>    
+    <bendpoint x="2498" y="667"/>    
+    <bendpoint x="2493" y="-59"/>    
+    <bendpoint x="2052" y="-57"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="41">    
+    <bendpoint x="1022" y="603"/>    
+    <bendpoint x="1582" y="603"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="42" name="stateModify">        
+        <position height="19" width="73" x="1567" y="562"/>      
+      </attribute>      
+      <multiplicity id="43" minimum="0" maximum="1">        
+        <position height="17" width="26" x="1634" y="580"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="44">    
+    <bendpoint x="657" y="680"/>    
+    <bendpoint x="660" y="223"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <generalization id="45">    
+    <bendpoint x="1607" y="655"/>    
+    <bendpoint x="2476" y="654"/>    
+    <bendpoint x="2475" y="-36"/>    
+    <bendpoint x="2051" y="-35"/>    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="46">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="47" name="stateRoundCalculated">        
+        <position height="19" width="129" x="913" y="428"/>      
+      </attribute>      
+      <multiplicity id="48" minimum="0" maximum="1">        
+        <position height="17" width="26" x="1017" y="407"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <bendpoint x="903" y="273"/>    
+    <bendpoint x="1403" y="273"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="50" name="stateDeliveryLoaded">        
+        <position height="19" width="121" x="1290" y="255"/>      
+      </attribute>      
+      <multiplicity id="51" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <bendpoint x="905" y="302"/>    
+    <bendpoint x="1963" y="299"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="53" name="stateRoundCalculating">        
+        <position height="19" width="132" x="1838" y="281"/>      
+      </attribute>      
+      <multiplicity id="54" minimum="0" maximum="1">        
+        <position height="17" width="26" x="1982" y="290"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="56" name="listCdes">        
+        <position height="19" width="51" x="566" y="15"/>      
+      </attribute>      
+      <multiplicity id="57" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="58">    
+    <bendpoint x="1896" y="328"/>    
+    <bendpoint x="2405" y="327"/>    
+    <bendpoint x="2406" y="19"/>    
+    <bendpoint x="2045" y="18"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <realization id="59">    
+    <bendpoint x="620" y="473"/>    
+    <bendpoint x="619" y="234"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <generalization id="60">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="61">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="62" name="currentState">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="63" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="65" name="stateAdd1">        
+        <position height="19" width="65" x="948" y="630"/>      
+      </attribute>      
+      <multiplicity id="66" minimum="0" maximum="1">        
+        <position height="17" width="26" x="1019" y="632"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="67">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="68">    
+    <bendpoint x="896" y="250"/>    
+    <bendpoint x="1146" y="250"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="69" name="stateMapLoaded">        
+        <position height="19" width="101" x="1042" y="231"/>      
+      </attribute>      
+      <multiplicity id="70" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="71">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

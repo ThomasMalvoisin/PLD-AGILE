@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="algo" project="Delivery" file="/Delivery/src/algo" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="79" width="143" x="962" y="280"/>    
+    <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="2" language="java" name="controller" project="Delivery" file="/Delivery/src/controller" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="334" width="481" x="433" y="26"/>    
+    <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="3" language="java" name="model" project="Delivery" file="/Delivery/src/model" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="315" width="464" x="813" y="415"/>    
+    <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="4" language="java" name="view" project="Delivery" file="/Delivery/src/view" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="287" width="465" x="86" y="413"/>    
+    <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="5" language="java" name="xml" project="Delivery" file="/Delivery/src/xml" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="206" width="306" x="961" y="33"/>    
+    <display autosize="false" stereotype="false" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="6" language="java" name="controller.StateDefault" project="Delivery" 
+    file="/Delivery/src/controller/StateDefault.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="830" y="173"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="controller.StateMapLoaded" project="Delivery" 
+    file="/Delivery/src/controller/StateMapLoaded.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="673" y="218"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="controller.Controller" project="Delivery" 
+    file="/Delivery/src/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="507" y="174"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="9" language="java" name="controller.State" project="Delivery" 
+    file="/Delivery/src/controller/State.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="829" y="95"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="10" language="java" name="controller.StateDeliveryLoaded" project="Delivery" 
+    file="/Delivery/src/controller/StateDeliveryLoaded.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="679" y="263"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="controller.StateInit" project="Delivery" 
+    file="/Delivery/src/controller/StateInit.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="672" y="174"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="controller.StateRoundCalculated" project="Delivery" 
+    file="/Delivery/src/controller/StateRoundCalculated.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="677" y="302"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="model.Section" project="Delivery" file="/Delivery/src/model/Section.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1213" y="507"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="model.Delivery" project="Delivery" file="/Delivery/src/model/Delivery.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1054" y="612"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="model.Round" project="Delivery" file="/Delivery/src/model/Round.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1058" y="707"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="model.CityMap" project="Delivery" file="/Delivery/src/model/CityMap.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="882" y="472"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="model.Journey" project="Delivery" file="/Delivery/src/model/Journey.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1232" y="623"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="model.DeliveryRequest" project="Delivery" 
+    file="/Delivery/src/model/DeliveryRequest.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="890" y="580"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="model.RoundSet" project="Delivery" file="/Delivery/src/model/RoundSet.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="890" y="683"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="model.Intersection" project="Delivery" 
+    file="/Delivery/src/model/Intersection.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1054" y="510"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="view.DeliveryPointsListener" project="Delivery" 
+    file="/Delivery/src/view/DeliveryPointsListener.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="180" y="549"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="view.GraphicView" project="Delivery" file="/Delivery/src/view/GraphicView.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="410" y="649"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="view.MainView" project="Delivery" file="/Delivery/src/view/MainView.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="393" y="500"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="view.ResizeListener" project="Delivery" 
+    file="/Delivery/src/view/ResizeListener.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="174" y="498"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="view.TextView" project="Delivery" file="/Delivery/src/view/TextView.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="350" y="566"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="algo.Algorithms" project="Delivery" file="/Delivery/src/algo/Algorithms.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1038" y="332"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="xml.MapDeserializer" project="Delivery" 
+    file="/Delivery/src/xml/MapDeserializer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1113" y="93"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="xml.ExceptionXML" project="Delivery" file="/Delivery/src/xml/ExceptionXML.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1110" y="201"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="xml.DeliveryRequestDeserializer" project="Delivery" 
+    file="/Delivery/src/xml/DeliveryRequestDeserializer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1116" y="147"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <association id="30">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="31" name="dpl"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="33">    
+    <bendpoint x="508" y="95"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="34" name="currentState"/>      
+      <multiplicity id="35" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="36">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="37" name="adress"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="39">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="40" name="dr"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="42">    
+    <bendpoint x="560" y="434"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="43" name="result"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="45">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="46">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="47" name="rs"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="49">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="50" name="stateInit"/>      
+      <multiplicity id="51" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="52">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="53" name="tv"/>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="56" name="controller"/>      
+      <multiplicity id="57" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="58">    
+    <bendpoint x="579" y="263"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="59" name="stateDeliveryLoaded"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="61">    
+    <bendpoint x="568" y="217"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="62" name="stateMapLoaded"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <realization id="64">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="65">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="66" name="intersections"/>      
+      <multiplicity id="67" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="68">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="69" name="rounds"/>      
+      <multiplicity id="70" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="71">    
+    <bendpoint x="789" y="263"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <generalization id="72">    
+    <bendpoint x="771" y="217"/>    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="73">    
+    <bendpoint x="573" y="420"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="74" name="delivReq"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="77" name="origin"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="79">    
+    <bendpoint x="1268" y="523"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="80" name="origin"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="83" name="dpl"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="85">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="86" name="journeys"/>      
+      <multiplicity id="87" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="89" name="rl"/>      
+      <multiplicity id="90" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="92" name="requestDeliveries"/>      
+      <multiplicity id="93" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="94">    
+    <bendpoint x="588" y="405"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="95" name="map"/>      
+      <multiplicity id="96" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="97">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="98" name="destination"/>      
+      <multiplicity id="99" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="101" name="warehouse"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="103">    
+    <bendpoint x="565" y="302"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="104" name="stateRoundCalculated"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="106">    
+    <bendpoint x="259" y="523"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="107" name="gv"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="109">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="110" name="sectionList"/>      
+      <multiplicity id="111" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="112">    
+    <bendpoint x="69" y="550"/>    
+    <bendpoint x="70" y="167"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="113" name="controller"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="116" name="deliveries"/>      
+      <multiplicity id="117" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="118">    
+    <bendpoint x="173" y="172"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="119" name="controller"/>      
+      <multiplicity id="120" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="121">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="122" name="dr"/>      
+      <multiplicity id="123" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="124">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="125" name="map"/>      
+      <multiplicity id="126" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="127">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="128" name="mv"/>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="130">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="131" name="dpl"/>      
+      <multiplicity id="132" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="133">    
+    <bendpoint x="831" y="301"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="134">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="135" name="map"/>      
+      <multiplicity id="136" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+    sort-features="false" accessors="true" visibility="false">    
+    <attributes public="false" package="false" protected="false" private="false" static="false"/>    
+    <operations public="false" package="false" protected="false" private="false" static="false"/>  
+  </classifier-display>  
+  <association-display labels="false" multiplicity="false"/>
+</class-diagram>
