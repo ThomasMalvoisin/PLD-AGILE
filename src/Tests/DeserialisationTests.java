@@ -75,7 +75,7 @@ public class DeserialisationTests {
 	// Node without attribute id
 	@Test
 	public void InValideTest3() throws ParserConfigurationException, SAXException, IOException, ExceptionXML, URISyntaxException {
-		CityMap mapCree = new CityMap();
+		new CityMap();
 		File file = new File (getClass().getResource("planInvalid3.xml").toURI());
 
 		thrown.expect(NumberFormatException.class);
@@ -86,7 +86,7 @@ public class DeserialisationTests {
 	// Longueur is negative
 	@Test
 	public void InValideTest4() throws ParserConfigurationException, SAXException, IOException, ExceptionXML, URISyntaxException {
-		CityMap mapCree = new CityMap();
+		new CityMap();
 		File file = new File (getClass().getResource("planInvalid4.xml").toURI());
 		thrown.expect(ExceptionXML.class);
 		MapDeserializer.load (file);

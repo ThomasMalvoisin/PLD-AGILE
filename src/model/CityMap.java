@@ -11,8 +11,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import algo.ExceptionAlgo;
-import javafx.scene.paint.Color;
-
 import java.util.Map.Entry;
 import java.util.Iterator;
 
@@ -179,7 +177,7 @@ public class CityMap{
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public boolean equals(Object obj) {
 		
