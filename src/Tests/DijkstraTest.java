@@ -115,7 +115,7 @@ public class DijkstraTest {
 		theorique.put(id6, j6);
 		
 		if(theorique.size() != dijkstra.size()) {
-			   fail("map de taille différente");
+			   fail("map de taille diffÃ©rente");
 			   
 	   }
 		Set keysSections = theorique.keySet();
@@ -128,7 +128,7 @@ public class DijkstraTest {
 		   List<Section> list_sec = theorique.get(key).getSectionList();
 		   for(Section s : list_sec) {
 			   if(dijkstra.get(key).getSectionList().indexOf(s)==-1) {
-				   fail("liste de Section non égale");
+				   fail("liste de Section non Ã©gale");
 				}
 		   }
 		}
@@ -136,7 +136,7 @@ public class DijkstraTest {
 	}
 	
 	
-	@Test 	//Point isolé dans la liste d'intersection
+	@Test 	//Point isolÃ© dans la liste d'intersection
 	public void DijkstraOneToNTestIsole1 () throws ExceptionAlgo {
 		ArrayList<Intersection> intersectionList = new ArrayList<Intersection>();
 		intersectionList.add(inter1);
@@ -147,7 +147,7 @@ public class DijkstraTest {
 	}
 	
 	
-	@Test 	//Point de départ isolé
+	@Test 	//Point de dÃ©part isolÃ©
 	public void DijkstraOneToNTestIsole2 () throws ExceptionAlgo {
 		ArrayList<Intersection> intersectionList = new ArrayList<Intersection>();
 		intersectionList.add(inter1);
