@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import algo.ExceptionAlgo;
+import javafx.scene.paint.Color;
 
 import java.util.Map.Entry;
 import java.util.Iterator;
@@ -182,37 +183,68 @@ public class CityMap{
 	@Override
 	public boolean equals(Object obj) {
 		
-		CityMap cityMap = (CityMap)obj;
-		if (intersections.size() != cityMap.intersections.size() ||  cityMap.cityMapSections.size() != cityMapSections.size())
+		//test size of two maps
+		CityMap map12 = (CityMap)obj;
+		if (intersections.size() != map12.intersections.size() ||  map12.cityMapSections.size() != cityMapSections.size())
 		{
 			return false;
 		}
 		
+		
+		//test intersections map
 		Set keysIntersections = intersections.keySet();
 		Iterator it_inter = keysIntersections.iterator();
 		while (it_inter.hasNext()){
 		   Object key = it_inter.next(); 
-		   if(!intersections.get(key).equals(cityMap.intersections.get(key))) {
+		   if(!intersections.get(key).equals(map12.intersections.get(key))) {
 			   return false;
 		   }
 		}
 		
+		//test sections map
 		Set keysSections = cityMapSections.keySet();
-		Iterator it_sec = keysSections.iterator();
+		Iterator<Intersection> it_sec = keysSections.iterator();
+		Intersection key ;
+		
 		while (it_sec.hasNext()){
-		   Object key = it_sec.next(); 
-		   if(cityMapSections.get(key).size() != cityMap.cityMapSections.get(key).size()) {
-			   return false;
-		   }
-		   List<Section> list_sec = cityMapSections.get(key);
-		   for(Section s : list_sec) {
-			   if(cityMap.cityMapSections.get(key).indexOf(s)==-1) {
+			key = (Intersection) it_sec.next(); 
+			
+			boolean found = false;
+			List<Section> listeSections= null;
+			
+			for (Entry<Intersection, List<Section>> entry : map12.cityMapSections.entrySet()) {
+				if(entry.getKey().equals(key)) {
+					found=true;
+					listeSections = entry.getValue();
+					break;
+				}
+			}
+		   
+			if( found) {
+			   if(cityMapSections.get(key).size() != listeSections.size()) {
 				   return false;
 			   }
-		   }
-		}		
+
+			   List<Section> list_sec = cityMapSections.get(key);
+			   for(Section s : list_sec) {
+				   boolean foundSection = false;
+				   for (Section sect : listeSections) {
+					   if(s.equals(sect)) {
+						   foundSection=true;
+						   break;
+					   }
+				   }
+				   if(!foundSection) {
+					   return false;
+				   }
+			   }
+			}else{
+				return false;
+			}
+		}
 		return true;
 	}
+	
 	
 	/**
 	 * Copy a CityMap.

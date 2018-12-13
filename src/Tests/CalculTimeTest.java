@@ -26,7 +26,7 @@ class CalculTimeTest {
 
 			// Creation of deliveries
 			ArrayList<Delivery> deliveries = new ArrayList<Delivery>();
-			deliveries.add(new Delivery(0, null)); // warehouse
+			deliveries.add(new Delivery(null)); // warehouse
 			long Adate1Expected = startTime.getTime();
 			long Ddate1Expected = startTime.getTime();
 			deliveries.add(new Delivery(60, null)); // 1
@@ -83,7 +83,7 @@ class CalculTimeTest {
 
 			roundSet.calculTime();
 
-			assertEquals(Adate1Expected, deliveries.get(0).getArrivalTime().getTime());
+			assertEquals(Adate1Expected+round.getDuration(), deliveries.get(0).getArrivalTime().getTime());
 			assertEquals(Adate2Expected, deliveries.get(1).getArrivalTime().getTime());
 			assertEquals(Adate3Expected, deliveries.get(2).getArrivalTime().getTime());
 			assertEquals(Adate4Expected, deliveries.get(3).getArrivalTime().getTime());
@@ -91,7 +91,7 @@ class CalculTimeTest {
 			assertEquals(Ddate2Expected, deliveries.get(1).getDepartureTime().getTime());
 			assertEquals(Ddate3Expected, deliveries.get(2).getDepartureTime().getTime());
 			assertEquals(Ddate4Expected, deliveries.get(3).getDepartureTime().getTime());
-			assertEquals(Adate1Expected2, deliveries2.get(0).getArrivalTime().getTime());
+			assertEquals(Adate1Expected2+round2.getDuration(), deliveries2.get(0).getArrivalTime().getTime());
 			assertEquals(Adate2Expected2, deliveries2.get(1).getArrivalTime().getTime());
 			assertEquals(Adate3Expected2, deliveries2.get(2).getArrivalTime().getTime());
 			assertEquals(Ddate1Expected2, deliveries2.get(0).getDepartureTime().getTime());

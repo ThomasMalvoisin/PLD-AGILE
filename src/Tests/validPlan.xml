@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<reseau>
+<noeud id="1" latitude="41" longitude="51.51"/>
+<noeud id="2" latitude="42" longitude="52.51"/>
+<noeud id="3" latitude="43" longitude="53.51"/>
+<noeud id="4" latitude="44" longitude="54.51"/>
+<troncon destination="2" longueur="69.979805" nomRue="Rue Danton" origine="1"/>
+<troncon destination="3" longueur="130" nomRue="Rue de l'Abondance" origine="2"/>
+<troncon destination="2" longueur="131" nomRue="Rue de l'Abondance" origine="3"/>
+<troncon destination="4" longueur="132" nomRue="Avenue Lacassagne" origine="3"/>
+<troncon destination="4" longueur="133" nomRue="Rue Sainte-Anne de Baraban" origine="2"/>
+<troncon destination="2" longueur="134" nomRue="Rue Sainte-Anne de Baraban" origine="4"/>
+</reseau>
