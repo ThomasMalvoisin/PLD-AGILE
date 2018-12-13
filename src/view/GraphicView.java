@@ -19,7 +19,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.scene.transform.Scale;
 import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
@@ -64,14 +63,12 @@ public class GraphicView implements Observer {
 	        
 	    });
 		
-		
 		pane.setOnMousePressed(event ->{
 			double mouseXPos = event.getX();
 			double mouseYPos = event.getY();
 			
 			initDrag(mouseXPos,mouseYPos);
-		});
-			
+		});			
 	}
 
 	/** 
@@ -224,7 +221,6 @@ public class GraphicView implements Observer {
 			for(int m = 0; m<size; m++) {
 				for(int l = 0; l<size; l++){
 					Line line = new Line(x0 + l* (x1-x0)/size, y0 + l* (y1-y0)/size, x0 + (l+1)*(x1-x0)/size, y0 + (l+1)*(y1-y0)/size);
-					//System.out.println(("(x0,y0) = (" + x0 +", " +  y0 + " )  and (x1,y1) = (" +  + x1 +", " +  y1 + " )  from : (" + (x0 + l* (x1-x0)/size) + ", " + (y0 + l* (y1-y0)/size)) + ")  To (" + (x0 + (l+1)* (x1-x0)/size) + ", " + ( y0 + (l+1)*(y1-y0)/size) + ")");
 					line.setStroke(entry.getValue().get(m));
 					line.setStrokeWidth(3);
 					if (m == l)
@@ -236,7 +232,6 @@ public class GraphicView implements Observer {
 					}
 					addLineToRounds(entry.getValue().get(m),line);
 				}
-				System.out.println("");
 			}
 		}
 		for(Entry<Color, Group> entry : rounds.entrySet())
@@ -258,7 +253,7 @@ public class GraphicView implements Observer {
 		deliveryRequest.addObserver(this);
 		this.dr = deliveryRequest;
 		drawWarehousePoint(deliveryRequest.getWarehouse());
-
+		
 		for (Delivery d : deliveryRequest.getRequestDeliveries()) {
 			drawDeliveryPoint(d);
 		}
@@ -286,8 +281,6 @@ public class GraphicView implements Observer {
 		Bounds bounds = pane.getBoundsInLocal();
 		result[0] = ((i.getLongitude() - map.getLongitudeMin()) * bounds.getMaxX())
 				/ (map.getLongitudeMax() - map.getLongitudeMin());
-		// result[1] = ((i.getLatitude() - map.latitudeMin) *
-		// bounds.getMaxY())/(map.latitudeMax-map.latitudeMin);
 		result[1] = ((-i.getLatitude() + map.getLatitudeMax()) * bounds.getMaxY())
 				/ (map.getLatitudeMax() - map.getLatitudeMin());
 		return result;
@@ -376,7 +369,7 @@ public class GraphicView implements Observer {
 	 * @param d The delivery to draw
 	 */
 	public void drawDeliveryPoint(Delivery d) {
-//		drawPoint(geoToCoord(d.getAdress()),5, Color.RED, d);
+		
 		double[] coord = geoToCoord(d.getAdress());
 		Circle c = makePoint(coord, 5, Color.RED);
 		Text t = new Text(d.getId() + "");
@@ -393,7 +386,7 @@ public class GraphicView implements Observer {
 	 * @param i The warehouse intersection
 	 */
 	public void drawWarehousePoint(Intersection i) {
-//		drawPoint(geoToCoord(i),8, Color.FORESTGREEN, null);
+
 		Circle c = makePoint(geoToCoord(i), 7, Color.FORESTGREEN);
 		c.getProperties().put("WAREHOUSE", i);
 		c.addEventHandler(MouseEvent.ANY, dpl);
@@ -407,6 +400,7 @@ public class GraphicView implements Observer {
 	 * @return The circle
 	 */
 	private Circle makePoint(double[] point, double radius, Paint p) {
+		
 		Circle c = new Circle(point[0], point[1], radius);
 		c.setFill(p);
 		c.getStyleClass().add("map-point");
@@ -421,13 +415,11 @@ public class GraphicView implements Observer {
 	public void setDeliverySelected(Delivery d) {
 		for (Node n : deliveries.getChildren()) {
 			if (d != null && d.equals(n.getProperties().get("DELIVERY"))) {
-//				((Circle) n).setFill(Color.AQUA);
 				((Circle) n).setRadius(7);
 				n.getStyleClass().add("map-point-selected");
 			} else if (n.getProperties().get("DELIVERY") == null) {
 				((Circle) n).setFill(Color.FORESTGREEN);
 			} else {
-//				((Circle) n).setFill(Color.RED);
 				((Circle) n).setRadius(5);
 				n.getStyleClass().remove("map-point-selected");
 			}
@@ -441,10 +433,7 @@ public class GraphicView implements Observer {
 	public void setIntersectionSelected(Intersection i) {
 		for (Node n : notDeliveriesIntersections.getChildren()) {
 			if (i != null && i.equals(n.getProperties().get("INTERSECTION"))) {
-				//System.out.println("Suu");
 				((Circle) n).getStyleClass().add("map-point-selected");
-//				((Circle) n).setFill(Color.AQUA);
-//				((Circle) n).setOpacity(1);
 			} else {
 				((Circle) n).setFill(Color.WHITE);
 				((Circle) n).setOpacity(0);

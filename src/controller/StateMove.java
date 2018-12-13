@@ -37,9 +37,9 @@ public class StateMove extends StateDefault{
 	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
 	 */
 	@Override
-	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
-		mainView.printCityMap(cityMap);
-		mainView.printRoundSet(cityMap, roundSet);
+	public void refreshView(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet) {
+		mainView.printCityMap(map);
+		mainView.printRoundSet(map, roundSet);
 		mainView.setDeliverySelected(this.deliveryToMove);
 	}
 
@@ -47,14 +47,19 @@ public class StateMove extends StateDefault{
 	 * @see controller.StateDefault#selectDelivery(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Delivery, controller.ListCommands)
 	 */
 	@Override
-	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
+	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet,
 			Delivery delivery, ListCommands listeDeCdes) {
 		mainView.printMessage("");
 
 		try {
-			listeDeCdes.ajoute(new ComMove(map, roundSet, deliveryToMove, delivery, roundSet.getPreviousDelivery(deliveryToMove)));
-			mainView.printMessage("Delivery moved ! Press Add to add a delivery or Select a delivery to delete or move it. ");
-			mainView.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the delivery point " + delivery.getId() + " correctly");
+			if (!delivery.equals(deliveryToMove)){
+				listeDeCdes.ajoute(new ComMove(map, roundSet, deliveryToMove, delivery, roundSet.getPreviousDelivery(deliveryToMove)));
+				mainView.printMessage("Delivery moved ! Press Add to add a delivery or Select a delivery to delete or move it. ");
+				mainView.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the delivery point " + delivery.getId() + " correctly");
+			}else {
+				mainView.printMessage("Please select another delivery than the one you want to move.");
+				return;
+			}
 		} catch (ExceptionAlgo e) {
 			cancel(mainView, roundSet);	
 			mainView.displayMessage(null, "Cannot move this delivery!");
@@ -68,49 +73,49 @@ public class StateMove extends StateDefault{
 	 * @see controller.StateDefault#selectWarehouse(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Intersection, controller.ListCommands)
 	 */
 	@Override
-	public void selectWarehouse(MainView mv, CityMap map, DeliveryRequest delivReq, RoundSet result, Intersection i,  ListCommands listeDeCdes) {
-		mv.printMessage("");
+	public void selectWarehouse(MainView mainView, CityMap map, DeliveryRequest delivReq, RoundSet result, Intersection i,  ListCommands listeDeCdes) {
+		mainView.printMessage("");
 		int resultSetSize = result.getRounds().size();
 		int indexRound ;
 		Delivery delivery;
 		if(resultSetSize>1) {
-			 indexRound = mv.displayPopUpWarehouse(resultSetSize, false);
+			 indexRound = mainView.displayPopUpWarehouse(resultSetSize, false);
 			if( indexRound !=-1 ) {
 				indexRound = indexRound-1;
 				delivery=result.getRounds().get(indexRound).getDeliveries().get(0);
 				try {
 					listeDeCdes.ajoute(new ComMove(map, result, deliveryToMove, delivery, result.getPreviousDelivery(deliveryToMove)));
-					mv.printMessage("Delivery moved ! Press Add to add a delivery or Select a delivery to delete or move it. ");
-					mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse in the round " + indexRound + 1 + " correctly");
+					mainView.printMessage("Delivery moved ! Press Add to add a delivery or Select a delivery to delete or move it. ");
+					mainView.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse in the round " + indexRound + 1 + " correctly");
 				} catch (ExceptionAlgo e) {
-					cancel(mv, result);	
-					mv.displayMessage(null, "Cannot move this delivery!");
+					cancel(mainView, result);	
+					mainView.displayMessage(null, "Cannot move this delivery!");
 					return;
 				}
 			}else {
-				cancel(mv, result);
+				cancel(mainView, result);
 				return;
 			}
 		}
 		else {
-			boolean move = mv.displayPopUpConfirmation("Are you sure to move this delivery?");
+			boolean move = mainView.displayPopUpConfirmation("Are you sure to move this delivery?");
 			if(move) {
 				delivery=result.getRounds().get(0).getDeliveries().get(0);
 				try {
 					listeDeCdes.ajoute(new ComMove(map, result, deliveryToMove, delivery, result.getPreviousDelivery(deliveryToMove)));
-					mv.printMessage("Delivery moved ! Press Add to add a delivery or Select a delivery to delete or move it. ");
-					mv.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse correctly");
+					mainView.printMessage("Delivery moved ! Press Add to add a delivery or Select a delivery to delete or move it. ");
+					mainView.showNotificationCheck("Delivery moved", "The delivery point " + deliveryToMove.getId() + " has been moved after the warehouse correctly");
 				} catch (ExceptionAlgo e) {
-					cancel(mv, result);	
-					mv.displayMessage(null, "Cannot move this delivery!");
+					cancel(mainView, result);	
+					mainView.displayMessage(null, "Cannot move this delivery!");
 					return;
 				}
 			}else {
-				cancel(mv, result);
+				cancel(mainView, result);
 				return;
 			}
 		}
-		Controller.stateRoundCalculated.setButtonsEnabled(mv);
+		Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 		
 	}

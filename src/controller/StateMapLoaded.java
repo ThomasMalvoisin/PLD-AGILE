@@ -8,7 +8,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import javafx.scene.canvas.Canvas;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.CityMap;
@@ -46,7 +45,7 @@ public class StateMapLoaded extends StateDefault {
 	 * @see controller.StateDefault#loadDeliveryRequest(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
 	 */
 	@Override
-	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result) {
+	public void loadDeliveryRequest(MainView mainView, CityMap map, DeliveryRequest request, RoundSet result) {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open a delivery request");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Delivery Request XML", "*.xml"));
@@ -56,8 +55,8 @@ public class StateMapLoaded extends StateDefault {
 			int temp = Delivery.currentId;
 			try {
 				Delivery.currentId = 1;
-				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
-				mainView.printDeliveryRequest(cityMap, deliveryRequest);
+				request.copy(DeliveryRequestDeserializer.Load(map, file));
+				mainView.printDeliveryRequest(map, request);
 				result.reset();
 				mainView.printMessage("Delivery Request Loaded ! You can now choose the number of delivery men and compute the rounds.");
 				mainView.showNotificationCheck("Delivery Request", "A delivery request has been loaded successfully !");
@@ -77,8 +76,8 @@ public class StateMapLoaded extends StateDefault {
 	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
 	 */
 	@Override
-	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
-		mainView.printCityMap(cityMap);
+	public void refreshView(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet) {
+		mainView.printCityMap(map);
 	}
 
 }

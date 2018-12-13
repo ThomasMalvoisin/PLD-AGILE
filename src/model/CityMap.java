@@ -8,10 +8,8 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import algo.Algorithms;
 import algo.ExceptionAlgo;
 
 import java.util.Map.Entry;
@@ -180,6 +178,7 @@ public class CityMap{
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
+	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean equals(Object obj) {
 		
@@ -211,9 +210,7 @@ public class CityMap{
 				   return false;
 			   }
 		   }
-		}
-		
-		
+		}		
 		return true;
 	}
 	
@@ -230,7 +227,6 @@ public class CityMap{
 		latitudeMax = map.latitudeMax;
 		longitudeMax = map.longitudeMax;
 	}
-
 
 	public Map<Long, Intersection> getNotDeliveriesIntersections(DeliveryRequest dr)
 	{
@@ -265,7 +261,6 @@ public class CityMap{
 	 * @throws ExceptionAlgo 
 	 */
 	public Map<Long, Map<Long, Journey>> GetShortestJourneys (DeliveryRequest request) throws ExceptionAlgo {
-			//Map<origin,Map<destination,path>>
 		  	Map<Long, Map<Long, Journey>> reducedMap = new HashMap<Long, Map<Long, Journey>>();
 			ArrayList<Intersection> intersectionList = new ArrayList<Intersection>();
 			for (Delivery d : request.getRequestDeliveries()) {
@@ -274,10 +269,8 @@ public class CityMap{
 			intersectionList.add(request.getWarehouse());
 	
 			for (Intersection i : intersectionList) {
-				//System.out.println(i.getId());
 			
-				reducedMap.put(i.getId(), dijkstraOneToN(i, intersectionList));
-				
+				reducedMap.put(i.getId(), dijkstraOneToN(i, intersectionList));	
 			}
 			return reducedMap;
 	}
@@ -325,9 +318,7 @@ public class CityMap{
 			// toute une composante connexe
 			Long currStartId = pQueue.poll();
 
-			//System.out.println(currStartId);
 			Intersection currentIntersection = getIntersectionById(currStartId);
-			//System.out.println(currentIntersection);
 			unreachedTargetPoints.remove(currentIntersection);
 			
 			for (Section s : getCityMapSections().get(currentIntersection)) {

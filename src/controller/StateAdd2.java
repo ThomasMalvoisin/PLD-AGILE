@@ -9,7 +9,7 @@ import model.RoundSet;
 import view.MainView;
 
 public class StateAdd2 extends StateDefault {
-
+	
 	Intersection intersectionSelected;
 
 	/* (non-Javadoc)
@@ -38,11 +38,10 @@ public class StateAdd2 extends StateDefault {
 	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
 	 */
 	@Override
-	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
-		mainView.printCityMap(cityMap);
-		// mainView.printDeliveryRequest(cityMap, deliveryRequest);
-		mainView.printRoundSet(cityMap, roundSet);
-		mainView.printPotentielDeliveries(cityMap, deliveryRequest);
+	public void refreshView(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet) {
+		mainView.printCityMap(map);
+		mainView.printRoundSet(map, roundSet);
+		mainView.printPotentielDeliveries(map, request);
 		mainView.setIntersectionSelected(intersectionSelected);
 	}
 
@@ -50,28 +49,27 @@ public class StateAdd2 extends StateDefault {
 	 * @see controller.StateDefault#selectDelivery(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Delivery, controller.ListCommands)
 	 */
 	@Override
-	public void selectDelivery(MainView mv, CityMap map, DeliveryRequest delivReq, RoundSet result, Delivery delivery,
+	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest delivReq, RoundSet result, Delivery delivery,
 			ListCommands listeDeCdes) {
-		mv.printMessage("");
-		int duration;
-		duration = mv.displayPopUpAdd(null);
+		mainView.printMessage("");
+		int duration = mainView.displayPopUpAdd(null);
 		if (duration != -1) {
-			Delivery d = new Delivery(duration, intersectionSelected); // TODO: permettre � l'utilisateur de saisir la
-																		// dur�e
+			Delivery d = new Delivery(duration, intersectionSelected);
 			try {
 				listeDeCdes.ajoute(new ComAdd(map, delivReq, result, d, delivery));
-				mv.showNotificationCheck("Delivery added", "The new delivery point has been added correctly");
+				mainView.showNotificationCheck("Delivery added", "The new delivery point has been added correctly");
+				mainView.printMessage("Delivery added ! Press Add to add another delivery or Select a delivery to delete or move it.");
 			} catch (ExceptionAlgo e) {
 				e.printStackTrace();
-				cancel(mv, result);
-				mv.displayMessage(null, "Cannot add this delivery, this point is not reachable");
+				cancel(mainView, result);
+				mainView.displayMessage(null, "Cannot add this delivery, this point is not reachable");
 				return;
 			}
 		} else {
-			cancel(mv, result);
+			cancel(mainView, result);
 			return;
 		}
-		Controller.stateRoundCalculated.setButtonsEnabled(mv);
+		Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 
@@ -79,62 +77,58 @@ public class StateAdd2 extends StateDefault {
 	 * @see controller.StateDefault#selectWarehouse(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Intersection, controller.ListCommands)
 	 */
 	@Override
-	public void selectWarehouse(MainView mv, CityMap map, DeliveryRequest delivReq, RoundSet result, Intersection i,
+	public void selectWarehouse(MainView mainView, CityMap map, DeliveryRequest delivReq, RoundSet result, Intersection i,
 			ListCommands listeDeCdes) {
-		mv.printMessage("");
+		mainView.printMessage("");
 		int resultSetSize = result.getRounds().size();
-		int duration;
+		int duration, indexRound;
 		Delivery d;
-		int indexRound;
 		if (resultSetSize > 1) {
-			indexRound = mv.displayPopUpWarehouse(resultSetSize, true);
+			indexRound = mainView.displayPopUpWarehouse(resultSetSize, true);
 			if (indexRound != -1) {
-				duration = mv.displayPopUpAdd(null);
+				duration = mainView.displayPopUpAdd(null);
 				if (duration != -1) {
 					d = new Delivery(duration, intersectionSelected);
 					indexRound = indexRound - 1;
 					Delivery delBefore = result.getRounds().get(indexRound).getDeliveries().get(0);
 					try {
 						listeDeCdes.ajoute(new ComAdd(map, delivReq, result, d, delBefore));
-						mv.showNotificationCheck("Delivery added", "The new delivery point has been added correctly");
+						mainView.showNotificationCheck("Delivery added", "The new delivery point has been added correctly");
 					} catch (ExceptionAlgo e) {
 						e.printStackTrace();
-						cancel(mv, result);
-						mv.displayMessage(null, "Cannot add this delivery, this point is not reachable");
+						cancel(mainView, result);
+						mainView.displayMessage(null, "Cannot add this delivery, this point is not reachable");
 						return;
 					}
 				} else {
-					cancel(mv, result);
+					cancel(mainView, result);
 					return;
 				}
 			} else {
-				cancel(mv, result);
+				cancel(mainView, result);
 				return;
 			}
 		} else if (resultSetSize == 1) {
-
-			duration = mv.displayPopUpAdd(null);
+			duration = mainView.displayPopUpAdd(null);
 			if (duration != -1) {
 				indexRound = 0;
 				d = new Delivery(duration, intersectionSelected);
 				Delivery delBefore = result.getRounds().get(indexRound).getDeliveries().get(0);
 				try {
 					listeDeCdes.ajoute(new ComAdd(map, delivReq, result, d, delBefore));
-					mv.showNotificationCheck("Delivery added", "The new delivery point has been added correctly");
+					mainView.showNotificationCheck("Delivery added", "The new delivery point has been added correctly");
 				} catch (ExceptionAlgo e) {
-					cancel(mv, result);
+					cancel(mainView, result);
 					e.printStackTrace();
-					mv.displayMessage(null, "Cannot add this delivery, this point is not reachable");
+					mainView.displayMessage(null, "Cannot add this delivery, this point is not reachable");
 					return;
 				}
 			} else {
-				cancel(mv, result);
+				cancel(mainView, result);
 				return;
 			}
-
 		}
-
-		Controller.stateRoundCalculated.setButtonsEnabled(mv);
+		Controller.stateRoundCalculated.setButtonsEnabled(mainView);
 		Controller.setCurrentState(Controller.stateRoundCalculated);
 	}
 

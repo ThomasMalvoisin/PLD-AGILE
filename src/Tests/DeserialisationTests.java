@@ -7,11 +7,8 @@ import xml.MapDeserializer;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
-
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -42,19 +39,6 @@ public class DeserialisationTests {
 		
 		CityMap mapCree = new CityMap();
 		
-		/*mapCree.addIntersection(inter3);
-		mapCree.addIntersection(inter1);
-		mapCree.addIntersection(inter2);
-		mapCree.addIntersection(inter4);
-		mapCree.addSection(new Section (inter3, inter4, "Avenue Lacassagne",132));
-		mapCree.addSection(new Section (inter4, inter2, "Rue Sainte-Anne de Baraban", 133));
-		mapCree.addSection(new Section (inter2, inter3, "Rue de l'Abondance" , 130));
-		mapCree.addSection(new Section (inter2, inter4, "Rue Sainte-Anne de Baraban", 134));
-		mapCree.addSection(new Section (inter1, inter2, "Rue Danton", 69.979805));
-
-		mapCree.addSection(new Section (inter3, inter2, "Rue de l'Abondance",131));
-		*/
-		
 		File file = new File ("C:\\Users\\Samuel GOY\\Documents\\PLD AGILE\\Xml\\TestValide1.xml");
 		try {
 			mapCree = MapDeserializer.load ( file);
@@ -67,7 +51,6 @@ public class DeserialisationTests {
 	// xml file first node is 'ville'
 	@Test
 	public void InValideTest1() throws ParserConfigurationException, SAXException, IOException, ExceptionXML {
-		//CityMap mapCree = new CityMap();
 		File file = new File ("C:\\Users\\Samuel GOY\\Documents\\PLD AGILE\\Xml\\TestInvalide1.xml");
 		thrown.expect(ExceptionXML.class);
 		MapDeserializer.load ( file);
@@ -78,35 +61,30 @@ public class DeserialisationTests {
 	// Section with no existing intersection
 	@Test
 	public void InValideTest2() throws ParserConfigurationException, SAXException, IOException, ExceptionXML {
-		//CityMap mapCree = new CityMap();
 		File file = new File ("C:\\Users\\Samuel GOY\\Documents\\PLD AGILE\\Xml\\TestInvalide2.xml");
 		thrown.expect(ExceptionXML.class);
 		MapDeserializer.load( file);
 		
 	}
 	
-	// Noeud without attribute id
+	// Node without attribute id
 	@Test
 	public void InValideTest3() throws ParserConfigurationException, SAXException, IOException, ExceptionXML {
-		CityMap mapCree = new CityMap();
+		new CityMap();
 		File file = new File ("C:\\Users\\Samuel GOY\\Documents\\PLD AGILE\\Xml\\TestInvalide3.xml");
 		thrown.expect(NumberFormatException.class);
 		MapDeserializer.load (file);
 		
 	}
 	
-	// Longueur is negative
+	// Length is negative
 		@Test
 		public void InValideTest4() throws ParserConfigurationException, SAXException, IOException, ExceptionXML {
-			CityMap mapCree = new CityMap();
+			new CityMap();
 			File file = new File ("C:\\Users\\Samuel GOY\\Documents\\PLD AGILE\\Xml\\TestInvalide4.xml");
 			thrown.expect(ExceptionXML.class);
 			MapDeserializer.load (file);
 			
 		}
-
-	
-	
-
 	
 }

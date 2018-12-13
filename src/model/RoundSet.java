@@ -1,6 +1,5 @@
 package model;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
@@ -165,8 +164,6 @@ public class RoundSet extends Observable {
 			r.setDepartureTime(this.getDepartureTime());
 			r.calculTime();
 		}
-		
-		//this.duration = rounds.get(0).getDuration();
 		
 		for(Round r : rounds) {
 			this.totalLength += r.getTotalLength();

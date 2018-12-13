@@ -1,20 +1,14 @@
 package algo;
 
-import java.io.DataOutput;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Random;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
 import javafx.util.Pair;
 import model.CityMap;
 import model.Delivery;
-import model.Journey;
 
 public class Clustering {
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public static ArrayList<ArrayList<Delivery>> cluster(CityMap map , ArrayList<Delivery> deliveries, int k){
 		ArrayList<ArrayList<Delivery>> clusters = new ArrayList<ArrayList<Delivery>>();
 		if(k == 1) {
@@ -28,25 +22,16 @@ public static ArrayList<ArrayList<Delivery>> cluster(CityMap map , ArrayList<Del
 		ArrayList<Pair<Double,Double>> prevCentroids = new ArrayList<>() ;
 
 		while(!centroids.equals(prevCentroids)) {
-//			for(int it = 0 ; it<10 ; it++){
 			clusters = new ArrayList<ArrayList<Delivery>>();
 			for(int  i = 0 ; i< k; i++) {
 				clusters.add(new ArrayList<Delivery>());
 			}
 			for(Delivery delivery: deliveries) {
 				int cl = getClosestCluster(centroids, delivery);
-				System.out.println("closest "+ cl);
 				clusters.get(cl).add(delivery);
 			}
 			prevCentroids = centroids ;
 			centroids = computeCentroids(clusters);
-//			System.out.println("Clustering result");
-//			for(ArrayList<Delivery> cluster : clusters) {
-//				System.out.println(" ###### cluster ###### ");
-//				for(Delivery delivery: cluster) {
-//					System.out.println(delivery.getAdress().getLatitude() + "," + delivery.getAdress().getLongitude());
-//				}
-//			}
 		}
 		
 		clusters.sort((cl2, cl1) -> Integer.compare(cl1.size(),cl2.size()));
@@ -66,6 +51,7 @@ public static ArrayList<ArrayList<Delivery>> cluster(CityMap map , ArrayList<Del
 		return res;
 	}
 
+	@SuppressWarnings("unchecked")
 	private static Pair<Double,Double> computeClusterCentroid(ArrayList<Delivery> cluster){
 		double x = 0;
 	    double y = 0;
@@ -83,11 +69,12 @@ public static ArrayList<ArrayList<Delivery>> cluster(CityMap map , ArrayList<Del
 	    y = y / k;
 	    z = z / k;
 	    
-	    Pair p =  new Pair<Double,Double>(Math.toDegrees(Math.atan2(z, Math.sqrt(x * x + y * y))),Math.toDegrees(Math.atan2(y, x)));
-	    System.out.println("centroid at :" +  p.getKey() +" " + p.getValue());
+	    @SuppressWarnings("rawtypes")
+		Pair p =  new Pair<Double,Double>(Math.toDegrees(Math.atan2(z, Math.sqrt(x * x + y * y))),Math.toDegrees(Math.atan2(y, x)));
 	    return p;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static int getClosestCluster(ArrayList<Pair<Double,Double>> centroids, Delivery delivery) {
 		int res = -1 ;
 		double min = Double.MAX_VALUE;
@@ -101,7 +88,6 @@ public static ArrayList<ArrayList<Delivery>> cluster(CityMap map , ArrayList<Del
 		return res;
 	}
 	
-	//Pair<lat,long>
 	private static double getDistance(Pair<Double,Double> p0, Pair<Double,Double> p) {
 		double lat0 = p0.getKey();
 		double lng0 = p0.getValue();
@@ -113,6 +99,7 @@ public static ArrayList<ArrayList<Delivery>> cluster(CityMap map , ArrayList<Del
 	    return deglen*Math.sqrt(x*x + y*y);
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static Pair<Double,Double> getRandomCentroid(ArrayList<Delivery> deliveries) {
 		double latitudeMin = deliveries.stream()
 				.mapToDouble(del -> del.getAdress().getLatitude())
@@ -131,11 +118,4 @@ public static ArrayList<ArrayList<Delivery>> cluster(CityMap map , ArrayList<Del
 		double randomLng = longitudeMin + (longitudeMax - longitudeMin)* r.nextDouble();
 		return new Pair(randomLat,randomLng);
 	}
-
-//	public static ArrayList<ArrayList<Delivery>> sameSizeCluster(CityMap map , ArrayList<Delivery> deliveries, int k){
-//			TODO
-//		ArrayList<ArrayList<Delivery>> clusters = cluster(map, deliveries, k);
-//		ArrayList<Pair<Double,Double>> centroids = computeCentroids(clusters);
-//		
-//	}
 }

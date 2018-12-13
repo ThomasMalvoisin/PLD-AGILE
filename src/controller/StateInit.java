@@ -24,5 +24,4 @@ public class StateInit extends StateDefault{
 		mainView.setDeliveryManEnable(false);
 		mainView.setZoomAutoButtonsEnable(false);
 	}
-	
 }

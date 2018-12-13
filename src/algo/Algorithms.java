@@ -78,7 +78,6 @@ public class Algorithms {
 	private static void updateBestSolution (Map<Long, Map<Long, Journey>> reducedMap, ArrayList<Delivery> visited, ArrayList<Delivery> cand, double t, RoundSet bestSolution, Intersection warehouse) {
 		visited.add(cand.get(0));
 		bestSolution.setDuration(t);
-		System.out.println("New bestSolution : ");
 		
 		Round currentRound = null;
 		ArrayList<Journey> currentWay = null;
@@ -97,9 +96,7 @@ public class Algorithms {
 			}
 			currentWay.add(reducedMap.get(visited.get(i).getAdress().getId()).get(visited.get(i+1).getAdress().getId()));
 			currentDeliveries.add(visited.get(i));
-			System.out.print(visited.get(i).getAdress().getId() + " ");
 		}
-		System.out.println(visited.get(visited.size()-1).getAdress().getId());
 		currentWay.add(reducedMap.get(visited.get(visited.size()-1).getAdress().getId()).get(warehouse.getId()));
 		currentDeliveries.add(visited.get(visited.size()-1));
 		currentRound.setJourneys(currentWay);

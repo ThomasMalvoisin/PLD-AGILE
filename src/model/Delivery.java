@@ -2,7 +2,6 @@ package model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//TODO : devra être observable
 public class Delivery {
 	
 	public static int currentId = 1;

@@ -3,11 +3,10 @@ package controller;
 import algo.ExceptionAlgo;
 import model.CityMap;
 import model.Delivery;
-import model.DeliveryRequest;
 import model.RoundSet;
 
 public class ComMove implements Command {
-
+	
 	CityMap cityMap;
 	RoundSet roundSet;
 	Delivery delivery;
@@ -35,7 +34,6 @@ public class ComMove implements Command {
 	public void doCde() throws ExceptionAlgo {
 			roundSet.deleteDelivery(cityMap, delivery);
 			roundSet.addDelivery(cityMap, delivery, newBefore);
-			
 	}
 
 	@Override
@@ -46,7 +44,5 @@ public class ComMove implements Command {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
-
 }

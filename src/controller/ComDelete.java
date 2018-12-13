@@ -7,6 +7,7 @@ import model.DeliveryRequest;
 import model.RoundSet;
 
 public class ComDelete implements Command {
+	
 	CityMap map;
 	DeliveryRequest dr;
 	RoundSet rs;
@@ -27,8 +28,6 @@ public class ComDelete implements Command {
 		deliveryBefore= rs.getPreviousDelivery(d);
 	}
 	
-	
-	
 	@Override
 	public void doCde() throws ExceptionAlgo {
 		rs.deleteDelivery(map, d);
@@ -43,7 +42,5 @@ public class ComDelete implements Command {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
-
 }

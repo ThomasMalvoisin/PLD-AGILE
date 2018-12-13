@@ -80,6 +80,7 @@ public class DijkstraTest {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
+	@SuppressWarnings("rawtypes")
 	@Test
 	public void DijkstraOneToNTest() throws ExceptionAlgo {
 		
@@ -136,25 +137,25 @@ public class DijkstraTest {
 	}
 	
 	
-	@Test 	//Point isolé dans la liste d'intersection
+	@Test 	
 	public void DijkstraOneToNTestIsole1 () throws ExceptionAlgo {
 		ArrayList<Intersection> intersectionList = new ArrayList<Intersection>();
 		intersectionList.add(inter1);
 		intersectionList.add(inter5);
 		intersectionList.add(interIsole);
 		thrown.expect(ExceptionAlgo.class);
-		Map<Long, Journey> dijkstra = map.dijkstraOneToN (inter1, intersectionList);
+		map.dijkstraOneToN (inter1, intersectionList);
 	}
 	
 	
-	@Test 	//Point de départ isolé
+	@Test 	
 	public void DijkstraOneToNTestIsole2 () throws ExceptionAlgo {
 		ArrayList<Intersection> intersectionList = new ArrayList<Intersection>();
 		intersectionList.add(inter1);
 		intersectionList.add(inter5);
 		intersectionList.add(inter6);
 		thrown.expect(ExceptionAlgo.class);
-		Map<Long, Journey> dijkstra = map.dijkstraOneToN (interIsole, intersectionList);
+		map.dijkstraOneToN (interIsole, intersectionList);
 	}
 	
 	

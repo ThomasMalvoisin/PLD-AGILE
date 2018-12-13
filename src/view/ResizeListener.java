@@ -4,6 +4,7 @@ import controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
+@SuppressWarnings("rawtypes")
 public class ResizeListener implements ChangeListener{
 	Controller controller;
 	

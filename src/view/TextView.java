@@ -2,30 +2,13 @@ package view;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
-import javax.swing.border.TitledBorder;
-
-import org.omg.CORBA.TIMEOUT;
-
-import com.sun.javafx.scene.traversal.WeightedClosestCorner;
-
-import javafx.event.ActionEvent;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import model.CityMap;
 import model.Delivery;
@@ -33,7 +16,6 @@ import model.DeliveryRequest;
 import model.Intersection;
 import model.Round;
 import model.RoundSet;
-import model.Section;
 
 public class TextView implements Observer{
 	private DeliveryPointsListener dpl;
@@ -177,7 +159,6 @@ public class TextView implements Observer{
 	
 	
 	private void addWarehouse(CityMap map, Intersection warehouse,VBox titledPane) {
-		//String dlvP = "Warehouse :" + warehouse.getLatitude() + " , " + warehouse.getLongitude() + ")\n";
 		ArrayList<String> sectionNames = map.getIntersectionSectionNames(warehouse);
 		String dlvP = "\n Warehouse " + " :\n" ;
 		dlvP = dlvP +  "                      ";
@@ -193,7 +174,6 @@ public class TextView implements Observer{
 			i++;
 		}
 		Text t = new Text(dlvP);
-		//store this one ?
 		t.setFill(Color.FORESTGREEN);
 		titledPane.getChildren().add(t);
 	}

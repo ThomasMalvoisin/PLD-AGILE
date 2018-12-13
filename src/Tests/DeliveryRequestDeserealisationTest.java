@@ -2,7 +2,6 @@ package Tests;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,7 +31,6 @@ public class DeliveryRequestDeserealisationTest {
 			File file_map = new File ("C:\\Users\\ismai\\Desktop\\4IF\\PLD-Agile\\fichiersXML2018\\petitPlan.xml");
 			map = MapDeserializer.load (file_map);
 			File file_deliveryReq = new File ("C:\\Users\\ismai\\Desktop\\4IF\\PLD-Agile\\fichiersXML2018\\invalide-dl-petit.xml");
-			//DeliveryRequest deliverRequest = new DeliveryRequest();
 			thrown.expect(ExceptionXML.class);
 			DeliveryRequestDeserializer.Load(map, file_deliveryReq);
 			

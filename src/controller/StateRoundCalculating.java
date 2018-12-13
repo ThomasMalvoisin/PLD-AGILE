@@ -1,13 +1,12 @@
 package controller;
 
-import deliveryApp.Main;
 import model.CityMap;
 import model.DeliveryRequest;
-import model.Intersection;
 import model.RoundSet;
 import view.MainView;
 
 public class StateRoundCalculating extends StateDefault {
+	
 	Thread calculate;
 	Thread display;
 	
@@ -35,6 +34,7 @@ public class StateRoundCalculating extends StateDefault {
 	/* (non-Javadoc)
 	 * @see controller.StateDefault#stopAlgo()
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	public void stopAlgo() {
 		calculate.stop();
@@ -44,11 +44,10 @@ public class StateRoundCalculating extends StateDefault {
 	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
 	 */
 	@Override
-	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
-		mainView.printCityMap(cityMap);
-		//mainView.printDeliveryRequest(cityMap, deliveryRequest);
-		mainView.printRoundSet(cityMap, roundSet);
-		mainView.printPotentielDeliveries(cityMap, deliveryRequest);
+	public void refreshView(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet) {
+		mainView.printCityMap(map);
+		mainView.printRoundSet(map, roundSet);
+		mainView.printPotentielDeliveries(map, request);
 	}
 	
 	/**

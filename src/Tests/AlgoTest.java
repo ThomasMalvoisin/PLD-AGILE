@@ -3,15 +3,12 @@ import model.CityMap;
 import model.Intersection;
 import model.Journey;
 import model.Section;
-import xml.ExceptionXML;
-import algo.Algorithms;
 import algo.ExceptionAlgo;
 
 import java.lang.Long;
 
 import static org.junit.Assert.fail;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,13 +16,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.xml.sax.SAXException;
 
 public class AlgoTest {
 	
@@ -33,6 +26,7 @@ public class AlgoTest {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
+	@SuppressWarnings({ "rawtypes" })
 	@Test
 	public void DijkstraOneToNTest() throws ExceptionAlgo {
 		CityMap map =new CityMap();
@@ -54,7 +48,6 @@ public class AlgoTest {
 		Section section35=new Section (inter3, inter5, "Avenue Lacassagne",2);
 		Section section34=new Section (inter3, inter4, "Rue Sainte-Anne de Baraban", 3);
 		Section section46=new Section (inter4, inter6, "Rue46", 3);
-		Section section56=new Section (inter5, inter6, "Rue56", 5);
 		
 		map.addSection(section12);
 		map.addSection(section13);
@@ -139,7 +132,6 @@ public class AlgoTest {
 		Section section35=new Section (inter3, inter5, "Avenue Lacassagne",2);
 		Section section34=new Section (inter3, inter4, "Rue Sainte-Anne de Baraban", 3);
 		Section section46=new Section (inter4, inter6, "Rue46", 3);
-		Section section56=new Section (inter5, inter6, "Rue56", 5);
 		
 		map.addSection(section12);
 		map.addSection(section13);
@@ -155,7 +147,6 @@ public class AlgoTest {
 		intersectionList.add(interIsole);
 		
 		thrown.expect(ExceptionAlgo.class);
-		Map<Long, Journey> dijkstra = map.dijkstraOneToN (inter1, intersectionList);
 	}
 	
 	
@@ -182,7 +173,6 @@ public class AlgoTest {
 		Section section35=new Section (inter3, inter5, "Avenue Lacassagne",2);
 		Section section34=new Section (inter3, inter4, "Rue Sainte-Anne de Baraban", 3);
 		Section section46=new Section (inter4, inter6, "Rue46", 3);
-		Section section56=new Section (inter5, inter6, "Rue56", 5);
 		
 		map.addSection(section12);
 		map.addSection(section13);
@@ -198,10 +188,6 @@ public class AlgoTest {
 		intersectionList.add(inter6);
 		
 		thrown.expect(ExceptionAlgo.class);
-		Map<Long, Journey> dijkstra = map.dijkstraOneToN (interIsole, intersectionList);
 	}
-	
-	
-	
-	
+
 }

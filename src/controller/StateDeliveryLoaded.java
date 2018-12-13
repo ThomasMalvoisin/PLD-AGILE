@@ -3,21 +3,15 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
-
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.xml.sax.SAXException;
-
 import algo.Algorithms;
-import algo.ExceptionAlgo;
 import javafx.application.Platform;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.CityMap;
 import model.Delivery;
 import model.DeliveryRequest;
-import model.Intersection;
 import model.RoundSet;
 import view.MainView;
 import xml.DeliveryRequestDeserializer;
@@ -50,7 +44,7 @@ public class StateDeliveryLoaded extends StateDefault {
 	 * @see controller.StateDefault#loadDeliveryRequest(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
 	 */
 	@Override
-	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result) {
+	public void loadDeliveryRequest(MainView mainView, CityMap map, DeliveryRequest request, RoundSet result) {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open a delivery request");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
@@ -60,8 +54,8 @@ public class StateDeliveryLoaded extends StateDefault {
 			int temp = Delivery.currentId;
 			try {
 				Delivery.currentId = 1;
-				deliveryRequest.copy(DeliveryRequestDeserializer.Load(cityMap, file));
-				mainView.printDeliveryRequest(cityMap, deliveryRequest);
+				request.copy(DeliveryRequestDeserializer.Load(map, file));
+				mainView.printDeliveryRequest(map, request);
 				result.reset();
 				mainView.printMessage("Delivery Request Loaded ! You can now choose the number of delivery men and compute the rounds.");
 				mainView.showNotificationCheck("Delivery Request", "A delivery request has been loaded successfully !");
@@ -81,20 +75,19 @@ public class StateDeliveryLoaded extends StateDefault {
 	 * @see controller.StateDefault#roundsCompute(view.MainView, model.CityMap, model.DeliveryRequest, int, model.RoundSet, controller.ListCommands)
 	 */
 	@Override
-	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan,
+	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest request, int nbDeliveryMan,
 			RoundSet roundSet, ListCommands listeDeCdes) {
 
 		listeDeCdes.reset();
 
 		RoundSet roundsTemp = new RoundSet();
-		roundsTemp.setDepartureTime(delivReq.getStartTime());
+		roundsTemp.setDepartureTime(request.getStartTime());
 	
 		Thread calculate = new Thread(() -> {
 			try {
-				Algorithms.solveTSP(roundsTemp, map, delivReq, nbDeliveryMan);
+				Algorithms.solveTSP(roundsTemp, map, request, nbDeliveryMan);
 
 			} catch (Exception e) {
-				//System.out.println("exception-- "+roundsTemp.getRounds().size());
 				e.printStackTrace();
 			}
 			
@@ -103,13 +96,12 @@ public class StateDeliveryLoaded extends StateDefault {
 			Platform.runLater(() -> {
 				mainView.setLoader(true);
 				mainView.printRoundSet(map, roundSet);
-				mainView.printPotentielDeliveries(map, delivReq);
+				mainView.printPotentielDeliveries(map, request);
 			});
 
 			double duration = roundsTemp.getDuration();
 			while (calculate.isAlive()) {
 				if (roundsTemp.getDuration() < duration || duration == 0.0) {
-					System.out.println(duration);
 					duration = roundsTemp.getDuration();
 					Platform.runLater(() -> {
 						roundSet.copy(roundsTemp);
@@ -128,7 +120,6 @@ public class StateDeliveryLoaded extends StateDefault {
 				});
 			}			
 			if(duration==0 ) {
-				System.out.println("erreur");
 				Platform.runLater(() -> {
 					roundSet.reset();
 					mainView.setLoader(false);
@@ -158,20 +149,17 @@ public class StateDeliveryLoaded extends StateDefault {
 	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
 	 */
 	@Override
-	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
-		mainView.printCityMap(cityMap);
-		mainView.printDeliveryRequest(cityMap, deliveryRequest);
+	public void refreshView(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet) {
+		mainView.printCityMap(map);
+		mainView.printDeliveryRequest(map, request);
 	}
 
 	/* (non-Javadoc)
 	 * @see controller.StateDefault#selectDelivery(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Delivery, controller.ListCommands)
 	 */
 	@Override
-	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet,
+	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet,
 			Delivery delivery, ListCommands listeDeCdes) {
-		// TODO : changement dans l'ihm en appelant des fonctions de mainView : afficher
-		// un message à l'utilisateur pour lui dire quoi faire
-
 		mainView.setDeliverySelected(delivery);
 	}
 	

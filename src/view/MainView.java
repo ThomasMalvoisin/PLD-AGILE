@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import org.controlsfx.control.Notifications;
 
 import controller.Controller;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -29,13 +28,8 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import model.CityMap;
@@ -138,6 +132,7 @@ public class MainView implements Initializable {
 	/* (non-Javadoc)
 	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -206,14 +201,14 @@ public class MainView implements Initializable {
 	 * This method is called when the user click on the Delete Button
 	 */
 	public void buttonDelete() {
-		controller.buttonDelete();
+		controller.delete();
 	}
 
 	/**
 	 * This method is called when the user click on the Cancel Button
 	 */
 	public void buttonCancel() {
-		controller.buttonCancel();
+		controller.cancel();
 	}
 
 	/**
@@ -270,14 +265,14 @@ public class MainView implements Initializable {
 	 * This method is called when the user click on the Export Button
 	 */
 	public void clickExport() {
-		controller.export();
+		controller.exportRoundSet();
 	}
 
 	/**
 	 * This method is called when the user click on the Move Button
 	 */
 	public void clickMove() {
-		controller.buttonMove();
+		controller.move();
 	}
 
 	/**
@@ -349,6 +344,28 @@ public class MainView implements Initializable {
 	public void setIntersectionSelected(Intersection intersection) {
 		gv.setIntersectionSelected(intersection);
 	}
+	
+	/**
+	 * Display the given round as selected
+	 * @param roundSet
+	 * @param delivery
+	 * @param flag
+	 */
+	public void setRoundSelected(RoundSet roundSet, Delivery delivery, boolean flag) {
+		gv.setRoundSelected(roundSet, delivery, flag);
+	}
+	
+	/**
+	 * Display feedback notification
+	 * @param title
+	 * @param text
+	 */
+	public void showNotificationCheck(String title, String text) {
+		Image img = new Image("/images/checked.png");
+		Notifications.create().darkStyle().title(title).text(text).graphic(new ImageView(img)).hideAfter(Duration.seconds(3))
+		.position(Pos.TOP_RIGHT).owner(this.pane).show();
+	}
+	
 
 	/**
 	 * Display a message in the bottom info bar
@@ -658,10 +675,6 @@ public class MainView implements Initializable {
 			discardImage.setEffect(desaturate);
 		}
 	}
-
-	public void setRoundSelected(RoundSet roundSet, Delivery delivery, boolean flag) {
-		gv.setRoundSelected(roundSet, delivery, flag);
-	}
   
 	/**
 	 * Enable click on Export Button if b is true else disable click and set the image with gray scale
@@ -706,22 +719,6 @@ public class MainView implements Initializable {
 	public void setDeliveryManEnable(boolean b) {
 		deliveryMan.setDisable(!b);
 
-	}
-
-	public void showNotificationInformation(String title, String text) {
-		Notifications.create().darkStyle().title(title).text(text).hideAfter(Duration.seconds(3))
-				.position(Pos.TOP_RIGHT).owner(this.pane).showInformation();
-	}
-	
-	/**
-	 * Display feedback notification
-	 * @param title
-	 * @param text
-	 */
-	public void showNotificationCheck(String title, String text) {
-		Image img = new Image("/images/checked.png");
-		Notifications.create().darkStyle().title(title).text(text).graphic(new ImageView(img)).hideAfter(Duration.seconds(3))
-		.position(Pos.TOP_RIGHT).owner(this.pane).show();
 	}
 
 }

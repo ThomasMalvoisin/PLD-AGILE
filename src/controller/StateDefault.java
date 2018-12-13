@@ -20,7 +20,6 @@ import xml.MapDeserializer;
 
 public class StateDefault implements State {
 
-	
 	/* (non-Javadoc)
 	 * @see controller.State#setButtonsEnabled(view.MainView)
 	 */
@@ -32,7 +31,7 @@ public class StateDefault implements State {
 	 * @see controller.State#loadMap(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
 	 */
 	@Override
-	public void loadMap(MainView mainView, CityMap cityMap,DeliveryRequest delivReq, RoundSet result){
+	public void loadMap(MainView mainView, CityMap map, DeliveryRequest request, RoundSet result){
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open a map");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(" MAP XML", "*.xml"));
@@ -40,9 +39,9 @@ public class StateDefault implements State {
 
 		if (file != null) {
 			try {
-				cityMap.copy(MapDeserializer.load(file));
-				mainView.printCityMap(cityMap);
-				delivReq.reset();
+				map.copy(MapDeserializer.load(file));
+				mainView.printCityMap(map);
+				request.reset();
 				result.reset();
 				mainView.printMessage("Map Loaded ! Please load a delivery request or load another map.");
 				mainView.showNotificationCheck("Map Loaded", "A map has been loaded successfully !");
@@ -59,35 +58,35 @@ public class StateDefault implements State {
 	 * @see controller.State#loadDeliveryRequest(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
 	 */
 	@Override
-	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result){
+	public void loadDeliveryRequest(MainView mainView, CityMap map, DeliveryRequest request, RoundSet result){
 	}
 
 	/* (non-Javadoc)
 	 * @see controller.State#roundsCompute(view.MainView, model.CityMap, model.DeliveryRequest, int, model.RoundSet, controller.ListCommands)
 	 */
 	@Override
-	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan, RoundSet roundSet, ListCommands listeDeCdes) {
+	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest request, int nbDeliveryMan, RoundSet roundSet, ListCommands listeDeCdes) {
 	}
 
 	/* (non-Javadoc)
 	 * @see controller.State#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
 	 */
 	@Override
-	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
+	public void refreshView(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet) {
 	}
 
 	/* (non-Javadoc)
 	 * @see controller.State#selectDelivery(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Delivery, controller.ListCommands)
 	 */
 	@Override
-	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet, Delivery delivery, ListCommands listeDeCdes) {		
+	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet, Delivery delivery, ListCommands listeDeCdes) {		
 	}
 	
 	/* (non-Javadoc)
 	 * @see controller.State#selectWarehouse(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, model.Intersection, controller.ListCommands)
 	 */
 	@Override
-	public void selectWarehouse(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet, Intersection i, ListCommands listeDeCdes) {
+	public void selectWarehouse(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet, Intersection i, ListCommands listeDeCdes) {
 		
 	}
 
@@ -95,7 +94,7 @@ public class StateDefault implements State {
 	 * @see controller.State#delete(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet, controller.ListCommands)
 	 */
 	@Override
-	public void delete(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet, ListCommands listeDeCdes) {
+	public void delete(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet, ListCommands listeDeCdes) {
 		
 	}
 
@@ -103,14 +102,14 @@ public class StateDefault implements State {
 	 * @see controller.State#selectIntersection(view.MainView, model.Intersection)
 	 */
 	@Override
-	public void selectIntersection(MainView mv,Intersection i) {
+	public void selectIntersection(MainView mainView,Intersection i) {
 	}
 
 	/* (non-Javadoc)
 	 * @see controller.State#add(view.MainView)
 	 */
 	@Override
-	public void add(MainView mv) {
+	public void add(MainView mainView) {
 	}
 
 	/* (non-Javadoc)
@@ -166,15 +165,13 @@ public class StateDefault implements State {
 	 * @see controller.State#hoverIntersection(view.MainView, model.CityMap, model.Intersection)
 	 */
 	@Override
-	public void hoverIntersection(MainView mv, CityMap map, Intersection i) {	
+	public void hoverIntersection(MainView mainView, CityMap map, Intersection i) {	
 	}
 	
 	/* (non-Javadoc)
 	 * @see controller.State#exitIntersection(view.MainView)
 	 */
 	@Override
-	public void exitIntersection(MainView mv) {
-		
+	public void exitIntersection(MainView mainView) {	
 	}
-	
 }

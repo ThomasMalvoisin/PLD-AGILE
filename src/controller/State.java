@@ -23,72 +23,74 @@ public interface State {
 	 * 		View
 	 * @param cityMap
 	 * 		City Map
-	 * @param delivReq
+	 * @param request
 	 * 		Delivery Request
-	 * @param result
-	 * 		Result
+	 * @param roundSet
+	 * 		Result round set
 	 */
-	public void loadMap(MainView mainView, CityMap cityMap, DeliveryRequest delivReq, RoundSet result);
+	public void loadMap(MainView mainView, CityMap cityMap, DeliveryRequest request, RoundSet roundSet);
 
 	/**
 	 * Load the delivery request
 	 * @param mainView
 	 * @param cityMap
-	 * @param deliveryRequest
-	 * @param result
+	 * @param request
+	 * @param roundSet
 	 */
-	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet result);
+	public void loadDeliveryRequest(MainView mainView, CityMap cityMap, DeliveryRequest request, RoundSet roundSet);
 
 	/**
 	 * Compute Rounds 
 	 * @param mainView
 	 * @param map
-	 * @param delivReq
+	 * @param request
 	 * @param nbDeliveryMan
 	 * @param roundSet
 	 * @param listeDeCdes
 	 * 		List of Command for undo/Redo
 	 */
-	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest delivReq, int nbDeliveryMan, RoundSet roundSet, ListCommands listeDeCdes);
+	public void roundsCompute(MainView mainView, CityMap map, DeliveryRequest request, int nbDeliveryMan, RoundSet roundSet, ListCommands listeDeCdes);
 
-	
 	/**
-	 * Refresh the view
-	 * @param mainView
-	 * @param cityMap
-	 * @param deliveryRequest
-	 * @param roundSet
+	 * Stop the algorithm
 	 */
-	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet);
+	public void stopAlgo();
 
+	/**
+	 * Bring out this intersection
+	 * @param mainView
+	 * @param map
+	 * @param i
+	 */
+	public void hoverIntersection(MainView mainView,CityMap map,Intersection i) ;
+	
+	/** 
+	 * Not bring out any intersection on the mainview
+	 * @param mainView
+	 */
+	public void exitIntersection(MainView mainView) ;
+	
 	/**
 	 * Select a delivery 
 	 * @param mainView
 	 * @param map
-	 * @param deliveryRequest
+	 * @param request
 	 * @param roundSet
 	 * @param delivery
 	 * @param listeDeCdes
 	 */
-	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet, Delivery delivery, ListCommands listeDeCdes);
+	public void selectDelivery(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet, Delivery delivery, ListCommands listeDeCdes);
 
 	/** 
 	 * Select Warehouse 
 	 * @param mainView
 	 * @param map
-	 * @param deliveryRequest
+	 * @param request
 	 * @param roundSet
 	 * @param i
 	 * @param listeDeCdes
 	 */
-	public void selectWarehouse(MainView mainView, CityMap map, DeliveryRequest deliveryRequest, RoundSet roundSet, Intersection i, ListCommands listeDeCdes);
-	
-	/**
-	 * Add a delivery
-	 * @param mv
-	 * 		Main Wiew
-	 */
-	public void add(MainView mv);
+	public void selectWarehouse(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet, Intersection i, ListCommands listeDeCdes);
 	
 	/**
 	 * Select a Intersection
@@ -96,22 +98,37 @@ public interface State {
 	 * @param i
 	 * 		Intersection
 	 */
+	
 	public void selectIntersection(MainView mainView, Intersection i);
-
 	/**
-	 * Stop the algorithm
+	 * Add a delivery
+	 * @param mainView
+	 * 		The Main View
 	 */
-	public void stopAlgo();
+	public void add(MainView mainView);
 
 	/** 
 	 * Delete a delivery
 	 * @param mainView
 	 * @param cityMap
-	 * @param deliveryRequest
+	 * @param request
 	 * @param roundSet
 	 * @param listeDeCdes
 	 */
-	public void delete(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet, ListCommands listeDeCdes);
+	public void delete(MainView mainView, CityMap cityMap, DeliveryRequest request, RoundSet roundSet, ListCommands listeDeCdes);
+	
+	/**
+	 * Move a delivery in a new round
+	 * @param mainView
+	 */
+	public void move(MainView mainView);
+	
+	/** 
+	 * Cancel the modification
+	 * @param mainView
+	 * @param roundSet
+	 */
+	public void cancel(MainView mainView, RoundSet roundSet);
 	
 	/** 
 	 * Undo modification
@@ -126,13 +143,6 @@ public interface State {
 	 * @param mainView
 	 */
 	public void redo(ListCommands listeDeCdes, MainView mainView);
-	
-	/** 
-	 * Cancel the modification that it's do
-	 * @param mainView
-	 * @param roundSet
-	 */
-	public void cancel(MainView mainView, RoundSet roundSet);
   
 	/**
 	 * Discard all changes
@@ -146,25 +156,13 @@ public interface State {
 	 * @param roundSet
 	 */
 	public void exportRoundSet(MainView mainView, RoundSet roundSet);
-
+	
 	/**
-	 * Move a delivery in a new round
+	 * Refresh the view
 	 * @param mainView
+	 * @param cityMap
+	 * @param request
+	 * @param roundSet
 	 */
-	public void move(MainView mainView);
-	
-	/**
-	 * Bring out this intersection
-	 * @param mv
-	 * @param map
-	 * @param i
-	 */
-	public void hoverIntersection(MainView mv,CityMap map,Intersection i) ;
-	
-	/** 
-	 * Not bring out any intersection on the mainview
-	 * @param mv
-	 */
-	public void exitIntersection(MainView mv) ;
-	
+	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest request, RoundSet roundSet);
 }

@@ -35,11 +35,10 @@ public class StateAdd1 extends StateDefault {
 	 * @see controller.StateDefault#refreshView(view.MainView, model.CityMap, model.DeliveryRequest, model.RoundSet)
 	 */
 	@Override
-	public void refreshView(MainView mainView, CityMap cityMap, DeliveryRequest deliveryRequest, RoundSet roundSet) {
-		mainView.printCityMap(cityMap);
-		//mainView.printDeliveryRequest(cityMap, deliveryRequest);
-		mainView.printRoundSet(cityMap,roundSet);
-		mainView.printPotentielDeliveries(cityMap, deliveryRequest);
+	public void refreshView(MainView mainView, CityMap map, DeliveryRequest request, RoundSet roundSet) {
+		mainView.printCityMap(map);
+		mainView.printRoundSet(map, roundSet);
+		mainView.printPotentielDeliveries(map, request);
 	}
 	
 	/* (non-Javadoc)
@@ -68,7 +67,7 @@ public class StateAdd1 extends StateDefault {
 	 * @see controller.StateDefault#hoverIntersection(view.MainView, model.CityMap, model.Intersection)
 	 */
 	@Override 
-	public void hoverIntersection(MainView mv, CityMap map, Intersection inter) {
+	public void hoverIntersection(MainView mainView, CityMap map, Intersection inter) {
 		ArrayList<String> sectionNames = map.getIntersectionSectionNames(inter);
 		String dlvP ="Add a new delivery at : ";
 		int i = 0;
@@ -82,14 +81,14 @@ public class StateAdd1 extends StateDefault {
 			dlvP +=  name;
 			i++;
 		}
-		mv.printMessage(dlvP);
+		mainView.printMessage(dlvP);
 	}
 	
 	/* (non-Javadoc)
 	 * @see controller.StateDefault#exitIntersection(view.MainView)
 	 */
 	@Override
-	public void exitIntersection(MainView mv) {
-		mv.printMessage("Please select the point where you want to add a delivery... ");
+	public void exitIntersection(MainView mainView) {
+		mainView.printMessage("Please select the point where you want to add a delivery... ");
 	}
 }

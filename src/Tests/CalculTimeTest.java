@@ -10,14 +10,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import model.CityMap;
 import model.Delivery;
-import model.DeliveryRequest;
-import model.Intersection;
 import model.Journey;
 import model.Round;
 import model.RoundSet;
-import model.Section;
 
 class CalculTimeTest {
 

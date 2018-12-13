@@ -6,6 +6,7 @@ import algo.ExceptionAlgo;
 import controller.Command;
 
 public class ListCommands {
+	
 	private LinkedList<Command> list;
 	private int indexList;
 	
@@ -26,7 +27,6 @@ public class ListCommands {
 			c.doCde();
 			int i = indexList+1;
 	        while(i<list.size()){
-	        	System.out.println(i);
 	        	list.remove(i);
 	        }
 	        indexList++;
@@ -63,7 +63,6 @@ public class ListCommands {
 	 * 
 	 * */
 	public void discard(){
-		//int i = indiceCrt;
 		while(indexList>-1) {
 			undo();
 		}
@@ -76,5 +75,4 @@ public class ListCommands {
 		   indexList = -1;
 	        list.clear();  
 	    }
-
 }

@@ -10,20 +10,12 @@ import model.Section;
 import algo.Algorithms;
 import algo.ExceptionAlgo;
 
-import java.lang.Long;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -239,11 +231,10 @@ public class TSPTests {
 	
 	private void compare(RoundSet roundSet, RoundSet roundSet2) {
 		assert(roundSet.getDuration()==roundSet2.getDuration());
-		//assert(roundSet.getTotalLength()==roundSet2.getTotalLength());
+
 		assert(roundSet.getRounds().size()==roundSet2.getRounds().size());
 		for(int i=0 ; i<roundSet.getRounds().size() ; i++) {
-			//assert(roundSet.getRounds().get(i).getTotalLength()==roundSet2.getRounds().get(i).getTotalLength());
-		   //	assert(roundSet.getRounds().get(i).getDuration()==roundSet2.getRounds().get(i).getDuration());
+
 			assert(roundSet.getRounds().get(i).getDeliveries().size() == roundSet2.getRounds().get(i).getDeliveries().size());
 			for(int j=0 ; j<roundSet.getRounds().get(i).getDeliveries().size() ; j++) {
 				assert(roundSet.getRounds().get(i).getDeliveries().get(j).getAdress().equals(roundSet2.getRounds().get(i).getDeliveries().get(j).getAdress()));
